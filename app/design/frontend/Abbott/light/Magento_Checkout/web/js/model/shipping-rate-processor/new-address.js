@@ -20,8 +20,24 @@ define([
         getRates: function (address) {
             var cache, serviceUrl, payload;
             var self = this;
+            
+            // Validate address has minimum required data before proceeding
+            if (!address || !address.countryId) {
+                console.warn('Shipping address missing required data, skipping rate estimation');
+                shippingService.isLoading(false);
+                return;
+            }
+            
             shippingService.isLoading(true);
-            cache = rateRegistry.get(address.getCacheKey());
+            
+            // Safely get cache key - if address doesn't have getCacheKey method or it fails, cache will be undefined
+            try {
+                cache = address.getCacheKey ? rateRegistry.get(address.getCacheKey()) : undefined;
+            } catch (e) {
+                console.warn('Failed to get cache key for address:', e);
+                cache = undefined;
+            }
+            
             serviceUrl = resourceUrlManager.getUrlForEstimationShippingMethodsForNewAddress(quote);
             payload = JSON.stringify({
                     address: {
@@ -49,7 +65,7 @@ define([
             );
 
             if (cache) {
-                if(address.regionId != "undefined" && address.postcode != null){
+                if(address.regionId !== undefined && address.regionId !== null && address.postcode != null){
                     shippingService.getRestrictedQuoteData(quote, address.regionId, address.street);
                 }
                 shippingService.setShippingRates(cache);
@@ -59,7 +75,7 @@ define([
                     serviceUrl, payload, false
                 ).done(function (result) {
                     rateRegistry.set(address.getCacheKey(), result);
-                    if(result == "" && address.regionId != "undefined" && address.postcode != null){
+                    if(result == "" && address.regionId !== undefined && address.regionId !== null && address.postcode != null){
                         shippingService.getRestrictedQuoteData(quote, address.regionId, address.street);
                     }
                     shippingService.setShippingRates(result);
