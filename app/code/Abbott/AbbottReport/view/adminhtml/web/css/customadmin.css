@@ -1,0 +1,3 @@
+._has-datepicker + .ui-datepicker-trigger{
+    font-size: 0 !important;
+}

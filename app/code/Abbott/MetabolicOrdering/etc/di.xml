@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+<preference for="Abbott\MetabolicOrdering\Api\Data\MetabolicSearchResultsInterface" 
+             type="Abbott\MetabolicOrdering\Model\MetabolicSearchResult"/>
+<preference for="Abbott\MetabolicOrdering\Api\MetabolicOrderingRepositoryInterface" type="Abbott\MetabolicOrdering\Model\MetabolicOrderingRepository"/>
+
+<preference for="Abbott\MetabolicOrdering\Api\Data\MetabolicInterface" type="Abbott\MetabolicOrdering\Model\Data\Metabolic"/>
+
+ <type name='Magento\Sales\Block\Adminhtml\Order\Create\Items\Grid'>
+    <plugin name='order_item_restrict_plugin' type='Abbott\MetabolicOrdering\Plugin\Order\Create\Items'/>
+ </type>
+<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+    <arguments>
+        <argument name="collections" xsi:type="array">
+            <item name="metabolic_ordering_customer_listing_data_source" xsi:type="string">MetabolicOrderingCollection</item>
+        </argument>
+    </arguments>
+</type>
+<virtualType name="MetabolicOrderingCollection" type="Abbott\MetabolicOrdering\Ui\DataProvider\Customer\Listing\Collection">
+    <arguments>
+        <argument name="mainTable" xsi:type="string">metabolic_ordering</argument>
+        <argument name="resourceModel" xsi:type="string">Abbott\MetabolicOrdering\Model\ResourceModel\Metabolic
+         </argument>
+    </arguments>
+</virtualType>   
+ <type name='Magento\Sales\Block\Adminhtml\Order\Create\Search'>
+        <plugin name='addclass_button' type='Abbott\MetabolicOrdering\Plugin\Order\Create\Search'/>
+ </type>   
+</config>
+

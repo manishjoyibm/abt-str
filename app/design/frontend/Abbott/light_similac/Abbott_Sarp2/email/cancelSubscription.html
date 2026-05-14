@@ -1,0 +1,49 @@
+<!--@subject {{trans "Your"}} {{var storeName}} {{trans "Subscription Cancellation"}} @-->
+<!--@vars {
+"var profileIncrementId":"Profile Id",
+"var created_at_formatted":"Order Created At (datetime)",
+"var url": "url",
+"var store": "Store",
+"var storePhone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var store.id":"Store ID",
+"var storeName":"Store Name",
+"var customerEmail":"Customer Email",
+"var customerName":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro bg-white" style="padding-bottom: 15px;">
+        <td style="padding: 25px 20px 0 20px;">
+        <p class="mb25"><b>{{trans "Dear %name," name=$customerName}}</b></p>
+        <p class="mb25"><b>{{trans "Your subscription profile #"}}{{var profileIncrementId}}</b></p>
+        <p class="mb25">{{trans "Placed on "}}{{var created_at_formatted}}</p>
+        <p class="padding-left-right-20">{{trans "Subscription Profile Updates:"}}</p>
+        <p class="mb25">{{trans "Your subscription profile has been cancelled."}}</p>
+        <p class="mb25">{{trans "Kind regards,"}}</p>
+        <p class="mb25">{{trans "%store_name.com" store_name=$store.getFrontendName()}}
+           <a href="{{customVar code=similac_contactus_url}}">{{trans"Customer Service Team"}}</a>
+           {{depend store_phone}} {{trans '<a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}
+        </p>
+      </td>
+    </tr>
+</table>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td class="pb0">
+            <table border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="action-btn-container" style="border: 20px solid #f5a12f">
+                        <a class="action-btn similac-block" href="{{var url}}" target="_blank">{{trans "view your account >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

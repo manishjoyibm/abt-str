@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" sortOrder="20" translate="label">
+            <label>Abbott</label>
+        </tab>
+        <section id="abbott_awslambda" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Aws Lambda Api</label>
+            <tab>abbott</tab>
+            <resource>Magento_Config::config</resource>
+            <group id="api"  showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Aws Lambda Configuration Settings</label>                
+                <field id="enable" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Aws Lambda API</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_debug" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Aws Lambda Debug</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_customer_creation" translate="label" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Customer Creation on Checkout using Lambda API</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="appid" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="3" translate="label" type="text">
+                    <label>App Id</label>
+                </field>
+                <field id="uid" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="4" translate="label" type="text">
+                    <label>UID</label>
+                </field>
+                <field id="accesskey" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="5" translate="label" type="obscure">
+                    <label>Access Key</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="posturl" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="6" translate="label" type="text">
+                    <label>Post Url</label>
+                </field>
+                <field id="get_profile_url" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="9" translate="label" type="text">
+                    <label>Get Profile API Url</label>
+                </field>
+                <field id="deactivate_profile_url" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="9" translate="label" type="text">
+                    <label>Deactivate Profile API Url</label>
+                </field>
+				<field id="x_origin_secret" showInDefault="1" showInWebsite="1" showInStore="0" sortOrder="9" translate="label" type="text">
+                    <label>X-ORIGIN-SECRET For API</label>
+                </field>
+				
+            </group>
+        </section>
+    </system>
+</config>

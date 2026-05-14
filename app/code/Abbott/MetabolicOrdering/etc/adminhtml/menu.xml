@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Abbott_MetabolicOrdering::metabolic" title="Metabolic Ordering" module="Abbott_MetabolicOrdering" sortOrder="50"  resource="Abbott_MetabolicOrdering::menu"/>
+        <add id="Abbott_MetabolicOrdering::metabolicordering" title="Metabolic Ordering" module="Abbott_MetabolicOrdering" sortOrder="10" action="metabolic_ordering/index/index" resource="Abbott_MetabolicOrdering::menu" parent="Abbott_MetabolicOrdering::metabolic"/>
+    </menu>
+</config>
+

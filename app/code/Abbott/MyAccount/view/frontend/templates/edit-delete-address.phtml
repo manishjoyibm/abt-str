@@ -1,0 +1,29 @@
+<script type="text/javascript">
+require(['jquery', 'jquery/ui'], function($){
+
+  jQuery(document).ready( function() {
+
+    window.dataLayer = window.dataLayer || [];
+
+    jQuery('.delete').click(function(){
+       window.dataLayer.push({
+            event: "ga-custom-events",
+            eventCategory: "manage-address",
+            eventAction: "click",
+            eventLabel: "manage-address_delete"
+        });
+    });
+
+    jQuery('.edit').click(function(){
+       window.dataLayer.push({
+        event: "ga-custom-events",
+        eventCategory: "edit-address",
+        eventAction: "click",
+        eventLabel: "edit-address"
+      });
+    });
+
+  });
+
+});
+</script>

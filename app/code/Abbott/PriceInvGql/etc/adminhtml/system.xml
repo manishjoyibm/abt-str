@@ -1,0 +1,87 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="aboott_message" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Message Settings</label>
+            <tab>abbott</tab>
+            <resource>Abbott_MyAccount::config_myaccount</resource>
+            <group id="product_page" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Pages</label>
+                <field id="group_message_groups" translate="label" type="multiselect" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Group Message Groups</label>
+                    <comment>The group message that can be set up in product will be displayed for the following groups</comment>
+                    <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+                </field>
+            </group>
+            <group id="progressive_plan_error_message" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Progressive Plan Product Pages</label>
+                <field id="message_for_product_detail" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Detail Progressive Error Message</label>
+                    <comment>This message will be displayed when user has an active subscription</comment>
+                </field>
+            </group>
+			<group id="ssm_progressive_plan_error_message" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Page (For SSM User)</label>
+                <field id="ssm_message_for_prg_product_detail" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Detail Progressive Subscription Message</label>
+                    <comment>This message will be displayed when ssm user don't have an active subscription</comment>
+                </field>
+				<field id="ssm_message_for_product_detail" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Detail 10% Subscription Message (For SSM User)</label>
+                    <comment>This message will be displayed when ssm user don't have an active subscription</comment>
+                </field>
+				<field id="non_ssm_message_for_prg_product_detail" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Detail Progressive Subscription Message (For Non SSM User)</label>
+                    <comment>This message will be displayed for non ssm user with progessive product option</comment>
+                </field>
+				<field id="guest_message_for_prg_product_detail" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Detail Progressive Subscription Message (For Guest User)</label>
+                    <comment>This message will be displayed for guest user with progessive product option</comment>
+                </field>
+				<field id="non_ssm_message_for_product_detail" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Detail 10% Subscription Message (For Non SSM User)</label>
+                    <comment>This message will be displayed for non ssm user with 10% product option</comment>
+                </field>
+				<field id="guest_message_for_product_detail" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Detail 10% Subscription Message (For Guest User)</label>
+                    <comment>This message will be displayed for guest user with 10% product option</comment>
+                </field>
+            </group>
+			<group id="minicart_error_message" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Minicart (For SSM User)</label>
+                <field id="ssm_message_for_prg_minicart" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minicart Progressive Subscription Message</label>
+                    <comment>This message will be displayed when ssm user don't have an active subscription</comment>
+                </field>
+				<field id="ssm_message_for_minicart" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minicart 10% Subscription Message (For SSM User)</label>
+                    <comment>This message will be displayed when ssm user don't have an active subscription</comment>
+                </field>
+				<field id="non_ssm_message_for_prg_minicart" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minicart Progressive Subscription Message (For Non SSM User)</label>
+                    <comment>This message will be displayed for non ssm user with progessive product option</comment>
+                </field>
+				<field id="guest_message_for_prg_minicart" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minicart Progressive Subscription Message (For Guest User)</label>
+                    <comment>This message will be displayed for guest user with progessive product option</comment>
+                </field>
+				<field id="non_ssm_message_for_minicart" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minicart 10% Subscription Message (For Non SSM User)</label>
+                    <comment>This message will be displayed for non ssm user with 10% product option</comment>
+                </field>
+				<field id="guest_message_for_minicart" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Minicart 10% Subscription Message (For Guest User)</label>
+                    <comment>This message will be displayed for guest user with 10% product option</comment>
+                </field>
+            </group>
+			<group id="cart_error_message" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cart Page Message</label>
+				<field id="non_ssm_message_for_cart" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Redirect Url For Cart Error (For Non SSM User)</label>
+                    <comment>User will be redirected to entered page</comment>
+                </field>
+			</group>
+        </section>
+
+    </system>
+</config>

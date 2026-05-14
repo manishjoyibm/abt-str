@@ -1,0 +1,13 @@
+<tr class="totals-tax">
+    <th data-bind="text: titleNew" class="mark" scope="row"></th>
+    <td data-bind="attr: {'data-th': title}" class="amount">
+        <!-- ko if: isCalculated() -->
+            <span class="price"
+                  data-bind="text: getValue()"></span>
+        <!-- /ko -->
+        <!-- ko ifnot: isCalculated() -->
+            <span class="not-calculated"
+                  data-bind="text: getValue()"></span>
+        <!-- /ko -->
+    </td>
+</tr>

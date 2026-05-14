@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Abbott\AbbottReport\Api\Data\AbbottExportInfoInterface" type="Abbott\AbbottReport\Model\AbbottExportInfo" />
+    <preference for="Magento\Logging\Model\Processor" type="Abbott\AbbottReport\Model\Processor" />
+    <preference for="Magento\Logging\Observer\AdminSessionLoginSuccessObserver" type="Abbott\AbbottReport\Observer\AdminSessionLoginSuccessObserver" />
+    <preference for="Magento\Logging\Observer\AdminSessionLoginFailedObserver" type="Abbott\AbbottReport\Observer\AdminSessionLoginFailedObserver" />
+    <preference for="Magento\Logging\Observer\AdminLogin" type="Abbott\AbbottReport\Observer\AdminLogin" />
+
+    <type name="Abbott\AbbottReport\Logger\AuditLogHandler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Abbott\AbbottReport\Logger\AuditLogger">
+        <arguments>
+            <argument name="name" xsi:type="string">AuditReportLog</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Abbott\AbbottReport\Logger\AuditLogHandler</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

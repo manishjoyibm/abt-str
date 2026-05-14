@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="aw_sarp2_email_settings_successful_billing_email_template" label="Successful Billing Email" file="billing_successful.html" type="html" module="Aheadworks_Sarp2" area="frontend"/>
+    <template id="aw_sarp2_email_settings_failed_billing_email_template" label="Failed Billing Email" file="billing_failed.html" type="html" module="Aheadworks_Sarp2" area="frontend"/>
+    <template id="aw_sarp2_email_settings_upcoming_billing_email_template" label="Next Billing Email" file="next_billing.html" type="html" module="Aheadworks_Sarp2" area="frontend"/>
+</config>

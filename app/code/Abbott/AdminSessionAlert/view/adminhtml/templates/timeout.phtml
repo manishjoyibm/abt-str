@@ -1,0 +1,21 @@
+<?php
+$viewModel = $block->getViewModel();
+$timeout = $viewModel->getAdminSessionTimeout();
+$loggedIn = $viewModel->isLoggedIn();
+$warningTimeout = $viewModel->getWarningTimeOut();
+$isEnabled = $viewModel->isEnabled();
+?>
+
+<script type="text/x-magento-init">{
+"*":{
+     "Abbott_AdminSessionAlert/js/session-warning":
+        {
+            "enabled": <?= $isEnabled ? 'true':'false' ?>,
+            "sessionTimeout": <?=  $loggedIn ? (int)$timeout : 0; ?>,
+            "warningTimeout": <?= $warningTimeout ? $warningTimeout : 60; ?>,
+            "pingUrl":<?= json_encode($block->escapeUrl($block->getUrl('adminsessionalert/session/ping')));
+            ?>
+        }
+    }
+ }
+ </script>

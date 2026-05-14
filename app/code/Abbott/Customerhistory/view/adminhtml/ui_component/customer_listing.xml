@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Admin customer grid column for "Last Logoff At"
+  @category Abbott
+  @package  Abbott_Customerhistory
+-->
+<!-- Add "Last Logoff At" with timezone-aware Date column -->
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <columns name="customer_columns">
+        <column name="last_logoff_at"
+                class="Magento\Ui\Component\Listing\Columns\Date"
+                component="Magento_Ui/js/grid/columns/date">
+            <settings>
+                <label translate="true">Last Logoff At</label>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <!-- Keep timezone conversion on so UTC is rendered in store TZ -->
+                <timezone>true</timezone>
+                <!-- Optional custom format:
+                <dateFormat>yyyy-MM-dd HH:mm:ss</dateFormat>
+                -->
+            </settings>
+        </column>
+    </columns>
+</listing>

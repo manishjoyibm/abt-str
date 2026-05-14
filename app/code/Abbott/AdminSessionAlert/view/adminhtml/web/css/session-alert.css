@@ -1,0 +1,21 @@
+.custom-session-alert {
+    font-size: 15px;
+    line-height: 1.6;
+    padding: 10px;
+}
+
+#session-timer {
+    color: red;
+    font-weight: bold;
+    font-size: 18px;
+}
+.custom-button {
+    font-size: 14px;
+    padding: 6px 12px;
+    border-radius: 4px;
+}
+
+button.action-primary.custom-button {
+    background: #00517b !important;
+    border-color: #00517b !important;
+}

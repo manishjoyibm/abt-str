@@ -1,0 +1,35 @@
+{
+    "aggregated_product_subscription": {
+        "column": {
+            "id": true,
+            "period": true,
+            "store_id": true,
+            "product_id": true,
+            "product_name": true,
+            "subscriber_count": true,
+            "active_subscriber": true,
+            "suspended_subscriber": true,
+            "cancel_subscriber": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "aggregated_customer_subscription": {
+        "column": {
+            "id": true,
+            "period": true,
+            "store_id": true,
+            "customer_id": true,
+            "customer_name": true,
+            "customer_email": true,
+            "subscriber_count": true,
+            "active_subscriber": true,
+            "suspended_subscriber": true,
+            "cancel_subscriber": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

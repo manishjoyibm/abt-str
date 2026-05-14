@@ -1,0 +1,102 @@
+ <!--@subject {{trans "%store_name : New Return #%increment_id" store_name=$store.frontend_name increment_id=$rma.increment_id}} @-->
+<!--@vars {
+"store url=\"customer\/account\/\"":"Customer Account URL",
+"template config_path=\"design\/email\/footer_template\"":"Email Footer Template",
+"template config_path=\"design\/email\/header_template\"":"Email Header Template",
+"var logo_alt":"Email Logo Image Alt",
+"var logo_url":"Email Logo Image URL",
+"var item_collection":"Items Collection",
+"var return_address|raw":"Return Address",
+"var created_at_formatted_1":"Return Created At (datetime)",
+"var rma.increment_id":"Return Id",
+"layout handle=\"magento_rma_email_rma_items\" collection=$item_collection":"Return Items Collection",
+"var rma_data.status_label":"Return Status",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var store.frontend_name":"Store Name",
+"var supportEmail": "Support Email",
+"var rma_id":"Rma Id",
+"store url=\"\"":"Store URL"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 15px 20px;background: #BFE6F7;">
+      <h1 class="return-heading" style="margin-bottom: 0;padding: 0;"><b style="font-family: Arial, sans-serif, serif, EmojiFont; font-size: 20px; text-align: left;">Return Request</b></h1>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 20px;">
+      <p class="mb25"><b>{{trans "Dear %name," name=$order_data.customer_name}}</b></p>
+      <p class="mb25">{{trans "Your return request has been received."}}</p>
+      <p class="mb25">{{trans "We recommend returning your purchase using a trackable shipping method, as we cannot be responsible for returns that do not make it to our warehouse. Please note that your return must be received at our warehouse within 60 days of delivery in order to be eligible for return. Additionally, shipping charges on your original order cannot be refunded."}}</p>
+      <p class="mb25">{{trans "In order to expedite processing, please print and include a copy of this email with your product return."}}</p>
+      <p class="mb25">
+          {{trans
+              "Your Return #%increment_id"
+              increment_id=$rma.increment_id
+          }}
+      </p>
+      <p class="mb25">{{trans "Requested on %created_at" created_at=$created_at_formatted_1}}</p>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 15px 20px;background: #BFE6F7;">
+      <h1 class="return-heading" style="font-family: Arial, sans-serif, serif, EmojiFont;margin-bottom: 0;padding: 0; font-size: 20px; text-align: left;"><b style="font-family: Arial, sans-serif, serif, EmojiFont; font-size: 20px; text-align: left;">{{trans "Shipping and Return"}}</b></h1>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 20px;">
+      <table class="order-details" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+              <td class="address-details" style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">
+                  <h3 class="light-blue">{{trans "Shipping Info"}}</h3>
+                  <p>{{var formattedShippingAddress|raw}}</p>
+              </td>
+              <td class="address-details" style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">
+                  <h3 class="light-blue">{{trans "Return Info"}}</h3>
+                  <p>{{var return_address|raw}}</p>
+              </td>
+          </tr>
+      </table>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 15px 20px;background: #BFE6F7;">
+      <h1 class="return-heading" style="font-family: Arial, sans-serif, serif, EmojiFont;margin-bottom: 0;padding: 0; font-size: 20px; text-align: left;"><b style="font-family: Arial, sans-serif, serif, EmojiFont; font-size: 20px; text-align: left;">{{trans "Item Details"}}</b></h1>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 15px;">
+        {{layout handle="magento_rma_email_rma_items" rma_id=$rma_id}}
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 15px 20px;">
+      <p class="mb25">{{trans "If you have any questions about your return, please contact %store_name.com " store_name=$store.frontend_name}} <br>
+      {{trans "Customer Service at "}}
+      {{depend store_phone}}
+         {{trans '%store_phone.' store_phone=$store_phone |raw}}
+      {{/depend}}
+      {{trans "Our representatives are available Monday through Friday, 9AM - 6PM EST"}}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table border="0" cellspacing="0" cellpadding="0" style="background-color:white;width:100%;border-collapse:collapse;">
+        <tbody>
+          <tr>
+                <td valign="top" style="padding: 30pt 0px 30pt 0px;">
+                    <p align="center" style="font-size:11pt;font-family:Calibri,sans-serif;text-align:center;margin:0;">
+                        <span style="font-size: 12pt; font-family: Helvetica Neue, serif, EmojiFont; line-height: 13.5pt;"><a href="{{customVar code=abbottstore_url}}" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="background-color:rgb(0, 156, 222);border: 20px solid rgb(0, 156, 222); color: #ffffff;text-decoration: none;"><b><span style="font-size: 13.5pt; font-family: Arial, sans-serif, serif, EmojiFont; text-transform: uppercase;">
+                                        {{trans "shop now >"}}</span></b></a></span></p>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

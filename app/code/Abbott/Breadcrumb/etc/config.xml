@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <websites>
+        <similac_website>
+            <my_account>
+                <breadcrumbs>
+                    <breadcrumbs_enabled>1</breadcrumbs_enabled>
+                </breadcrumbs>
+            </my_account>
+        </similac_website>
+    </websites>
+     <stores>
+        <similac>
+            <my_account>
+                <breadcrumbs>
+                    <breadcrumbs_enabled>1</breadcrumbs_enabled>
+                </breadcrumbs>
+            </my_account>
+        </similac>
+    </stores>
+</config>

@@ -1,0 +1,7 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add action="abbott_hartehanks/hartehank/index" id="Abbott_Hartehanks::harteHankLog" module="Abbott_Hartehanks" parent="Abbott_WorkdayFeed::system_abbott" resource="Abbott_Hartehanks::harteHankLog" sortOrder="30" title="HH Inventory Log" translate="title"/>
+		<add action="abbott_hartehanks/hhplaceorder/index" id="Abbott_Hartehanks::abbott_hartehanks_hhplaceorder" module="Abbott_Hartehanks" parent="Abbott_WorkdayFeed::system_abbott" resource="Abbott_Hartehanks::hhPlaceOrderLog" sortOrder="40" title="HH PlaceOrder Log"/>
+	</menu>
+</config>

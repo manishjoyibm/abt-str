@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Magento_Checkout::css/checkoutcustom.css"/>
+    </head>
+    <body>
+      <referenceBlock name="checkout.root">
+          <arguments>
+              <argument name="jsLayout" xsi:type="array">
+                  <item name="components" xsi:type="array">
+                      <item name="checkout" xsi:type="array">
+                          <item name="children" xsi:type="array">
+                              <item name="sidebar" xsi:type="array">
+                                  <item name="children" xsi:type="array">
+                                    <item name="summary" xsi:type="array">
+                                        <item name="children" xsi:type="array">
+                                          <item name="cart_items" xsi:type="array">
+                                            <item name="config" xsi:type="array">
+                                              <item name="componentDisabled" xsi:type="boolean">true</item>
+                                            </item>
+                                          </item>
+                                          <item name="totals" xsi:type="array">
+                                            <item name="children" xsi:type="array">
+                                              <item name="subtotal" xsi:type="array">
+                                                <item name="config" xsi:type="array">
+                                                    <item name="title" xsi:type="string" translate="true">Subtotal</item>
+                                                </item>
+                                              </item>
+                                            </item>
+                                          </item>
+                                        </item>
+                                    </item>
+                                    <item name="cart_items" xsi:type="array">
+                                        <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/cart-items</item>
+                                        <item name="displayArea" xsi:type="string">cart_items</item>
+                                        <item name="children" xsi:type="array">
+                                            <item name="details" xsi:type="array">
+                                                <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/item/details</item>
+                                                <item name="children" xsi:type="array">
+                                                    <item name="thumbnail" xsi:type="array">
+                                                        <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/item/details/thumbnail</item>
+                                                        <item name="displayArea" xsi:type="string">before_details</item>
+                                                    </item>
+                                                    <item name="subtotal" xsi:type="array">
+                                                        <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/item/details/subtotal</item>
+                                                        <item name="displayArea" xsi:type="string">after_details</item>
+                                                    </item>
+                                                    <item name="message" xsi:type="array">
+                                                        <item name="component" xsi:type="string">Magento_Checkout/js/view/summary/item/details/message</item>
+                                                        <item name="displayArea" xsi:type="string">item_message</item>
+                                                    </item>
+                                                </item>
+                                            </item>
+                                        </item>
+                                      </item>
+                                  </item>
+                              </item>
+                              <item name="steps" xsi:type="array">
+                                  <item name="children" xsi:type="array">
+                                      <item name="shipping-step" xsi:type="array">
+                                          <item name="children" xsi:type="array">
+                                              <item name="shippingAddress" xsi:type="array">
+                                                  <item name="config" xsi:type="array">
+                                                      <item name="popUpForm" xsi:type="array">
+                                                          <item name="options" xsi:type="array">
+                                                              <item name="buttons" xsi:type="array">
+                                                                    <item name="save" xsi:type="array">
+                                                                        <item name="text" xsi:type="string" translate="true">Save Address</item>
+                                                                    </item>
+                                                              </item>
+                                                          </item>
+                                                      </item>
+                                                  </item>
+                                              </item>
+                                          </item>
+                                      </item>
+                                  </item>
+                              </item>
+                          </item>
+                      </item>
+                  </item>
+              </argument>
+          </arguments>
+      </referenceBlock>
+      <referenceBlock name="custom.header" remove="true"/>
+      <referenceContainer name="page.wrapper">
+          <container name="checkout.custom.header" htmlClass="checkoutHeaderSection" htmlTag="section" htmlId="checkout_custom_top_header" before="main.content">
+              <block
+                class="Magento\Framework\View\Element\Template"
+                name="checkoutcustomheader" before="-"
+                template="Magento_Theme::header/pedialyte_checkout_header.phtml">
+              </block>
+          </container>
+      </referenceContainer>
+      <referenceContainer name="checkout.header.container" remove="true"/>
+      <referenceBlock name="custom.footer" remove="true"/>
+      <referenceBlock name="css-header" remove="true"/>
+      <referenceContainer name="content">
+            <block
+                class="Magento\Framework\View\Element\Template"
+                name="checkout.cart.custom"
+                template="Abbott_ShoppingCart::checkout/freeshipping_checkout.phtml"
+                ifconfig="pedialyte_configuration/settings/show_shipping_progress_bar">
+              <arguments>
+                 <argument name="view_model" xsi:type="object">Abbott\ShoppingCart\ViewModel\Shipping</argument>
+              </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

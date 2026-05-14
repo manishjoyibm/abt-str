@@ -1,0 +1,21 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+ */
+
+/* @var $block \Aheadworks\Sarp2\Block\Email\Order\Items */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    /** @var \Magento\Sales\Model\Order $order */
+    $order = $block->getOrder();
+?>
+<?php if ($order): ?>
+    <ul style="list-style: none;">
+    <?php foreach ($order->getAllItems() as $item): ?>
+        <?php echo $block->getItemHtml($item) ?>
+    <?php endforeach; ?>
+    </ul>
+<?php endif; ?>

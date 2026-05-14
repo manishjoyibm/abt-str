@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <pedialyte_configuration>
+            <settings>
+                <enable>0</enable>
+            </settings>
+        </pedialyte_configuration>
+    </default>
+    <websites>
+        <pedialyte_website>
+            <onetrust>
+                <general>
+                    <enabled>0</enabled>
+                </general>
+            </onetrust>
+            <trustarc_cookie_preference>
+                <trustarc_cm>
+                    <trustarc_cm_id>7tz4ir</trustarc_cm_id>
+                </trustarc_cm>
+            </trustarc_cookie_preference>
+            <pedialyte_cart_discount>
+                <discount_settings>
+                    <enable_savings_display>1</enable_savings_display>
+                    <savings_label>Total Savings</savings_label>
+                </discount_settings>
+            </pedialyte_cart_discount>
+        </pedialyte_website>
+    </websites>
+</config>

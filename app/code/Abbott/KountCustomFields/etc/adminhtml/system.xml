@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="kount360" translate="label" type="text" sortOrder="400" showInDefault="1" showInWebsite="1" showInStore="0">
+            <group id="account" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <field id="channel" translate="label comment" type="text" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Channel</label>
+                    <validate>validate-length maximum-length-8</validate>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="zero_dollar_enabled" translate="label comment" type="select" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enabled Zero Dollar Website</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>Enable or disable the zero dollar website store wide.</comment>
+                </field>
+                <field id="zero_dollar_website" translate="label comment" type="text" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Zero Dollar Website ID</label>
+                    <validate>validate-length maximum-length-8</validate>
+                    <depends>
+                        <field id="zero_dollar_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="free_shipping_amount" translate="label comment" type="text" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Free Shipping Amount</label>
+                    <comment>The Shipping amount for Free Shipping (7.95).</comment>
+                    <validate>validate-number</validate>
+                    <depends>
+                        <field id="zero_dollar_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

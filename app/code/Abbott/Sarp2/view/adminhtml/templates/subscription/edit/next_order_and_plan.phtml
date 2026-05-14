@@ -1,0 +1,144 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+ */
+
+/** @var $block \Abbott\Sarp2\Block\Adminhtml\Subscription\Edit\NextOrderAndPlan */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $profile = $block->getProfile();
+    $planDefinition = $profile->getProfileDefinition();
+    $profieItem = $block->getProfileItem(); 
+    $nextOccDate = $block->getNextPaymentDate();
+    $minQty = preg_replace('/\D/', '', $profieItem->getData('cans_y') ?? "");
+    $maxQty = preg_replace('/\D/', '', $profieItem->getData('cans_x') ?? "");
+    $index = 0;
+foreach($profile->getItems() as $profileDataItem){  
+?>
+<section class="admin__page-section next-order-and-plan">    
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo $block->escapeHtml(__('Subscription Plan')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item">
+            <div class="admin__page-section-item-title">
+                <span class="title">
+                    <a href="<?php echo $block->escapeUrl($block->getPlanEditUrl($profile->getPlanId())) ?>"><?php echo $block->escapeHtml($profile->getPlanName()) ?></a>
+                </span>
+            </div>
+            <div class="admin__page-section-item-content">
+                <table class="admin__table-secondary subscription-plan_details">
+                    <tbody>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Number of Payments')) ?>:</th>
+                            <td>
+                                <?php if ($planDefinition->getTotalBillingCycles() > 0): ?>
+                                    <?php /* @noEscape */ echo $planDefinition->getTotalBillingCycles() ?>
+                                <?php else: ?>
+                                    <?php echo $block->escapeHtml(__('Infinite')) ?>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Product')) ?>:</th>
+                            <td>
+                               
+                                    <?php echo  $profileDataItem->getName() ?>
+                                 
+                            </td>
+                        </tr>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Repeat')) ?>:</th>
+                            <td><?php echo $block->escapeHtml($block->formatRepeatValue($profile)) ?></td>
+                        </tr>
+                        <tr>
+                            <?php
+                                $orderAdminDate = $block->formatDate(
+                                    $block->getAdminDate($profile->getStartDate()),
+                                    \IntlDateFormatter::MEDIUM
+                                );
+                            ?>
+                            <th><?php echo $block->escapeHtml(__('Start')) ?>:</th>
+                            <td><?php /* @noEscape */ echo $orderAdminDate ?></td>
+                        </tr>
+                        
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Next Payment')) ?>:</th>
+                            <td><?php  echo $nextOccDate;  ?></td>
+                        </tr>                         
+                        <?php if ($planDefinition->getIsTrialPeriodEnabled() && $profile->getTrialSubtotal()): ?>
+                            <tr>
+                                <th><?php echo $block->escapeHtml(__('Trial Period')) ?>:</th>
+                                <td><?php echo $block->escapeHtml(__($planDefinition->getTrialTotalBillingCycles() > 1 ? '%1 payments' : '%1 payment', $planDefinition->getTrialTotalBillingCycles())) ?></td>
+                            </tr>
+                        <?php endif; ?>
+                        <?php if($profile->getStoreId() == 3) { ?>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Qty')) ?></th>
+                            <td>
+                                <a id="minus" href="#">-</a>
+                                <input type="text" id="cansQtytxt" name="changed_qty[<?php echo $profileDataItem->getItemId()?>]" readonly="true" size="3" value="<?php echo floatval($profileDataItem->getQty()) ?>" />
+                                <a id="plus" href="#">+</a>
+                                <br/>
+                                <?php if ($minQty && $maxQty): ?>
+                                    <span>Min: <?=$minQty?>, Max: <?=$maxQty?>
+                                <?php endif;?>
+                            </td>                
+                        </tr>
+                        <?php } else {   ?>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Qty')) ?></th>
+                            <td>
+                                <input type="text" id="cansQtytxt" name="changed_qty[<?php echo $profileDataItem->getItemId()?>]"  size="3" value="<?php echo floatval($profileDataItem->getQty()) ?>" />
+                            </td>                
+                        </tr>
+                        <?php } 
+                        if(!$index) {  
+                        ?>
+                        <tr>
+                            <th><?php echo $block->escapeHtml(__('Next occurring date')) ?>:</th>
+                            <td><input type="text" class="input-text hasDatepicker"  id="next-occ-date"  name="next-occ-date" /></td>
+                        </tr>
+                        <?php } ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</section>
+<?php  $index++; }  ?>
+
+
+<script type="text/javascript">
+require([ 'jquery', 'domReady!',  'mage/mage', 'mage/calendar'], function($){
+    var valueElement = $('#cansQtytxt');
+    function incrementValue(e){
+        var canX = "<?php echo $minQty; ?>";
+        var canY = "<?php echo $maxQty; ?>";
+        var incremetnVal = Math.max(parseInt(valueElement.val()) + e.data.increment, 0);
+        if(parseInt(incremetnVal) < parseInt(canX)){
+            return false;
+        }
+        if(parseInt(incremetnVal) > parseInt(canY)){
+            return false;
+        }
+        valueElement.val(incremetnVal);
+        return false;
+    }
+    $('#plus').bind('click', {increment: 1}, incrementValue);
+    $('#minus').bind('click', {increment: -1}, incrementValue);
+
+    $('#next-occ-date').calendar({
+        dateFormat: 'mm/dd/yy',
+        changeYear: true,
+        changeMonth: true,
+        yearRange: '2017:2030',
+        buttonText: 'Select Date',
+        minDate: 0     
+    });
+
+});
+</script>

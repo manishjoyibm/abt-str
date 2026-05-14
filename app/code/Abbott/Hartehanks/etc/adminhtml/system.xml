@@ -1,0 +1,262 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="abbott" sortOrder="20" translate="label">
+			<label>Abbott</label>
+		</tab>
+		<section id="hartehanks" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>HarteHanks Integration</label>
+			<tab>abbott</tab>
+			<resource>Abbott_Hartehanks::config_hartehanks</resource>
+				<group id="hartehanks" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+					<label>HarteHanks Settings</label>
+					<field id="days_saved" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+							<label>Days Saved In Log</label>
+					</field>
+					<field id="time_limit" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+							<label>Time Interval for Place Orders Sync (minutes)</label>
+							<comment>Buyers Remorse time.</comment>
+					</field>
+					<field id="retry_time_limit_1" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="0" showInStore="0">
+							<label>Time Interval for Retry One Place Orders Sync (minutes)</label>
+							<comment>Time limit for Retry 1.</comment>
+					</field>
+					<field id="retry_time_limit_2" translate="label" type="text" sortOrder="22" showInDefault="1" showInWebsite="0" showInStore="0">
+							<label>Time Interval for Retry Two Place Orders Sync (minutes)</label>
+							<comment>Time limit for Retry 2.</comment>
+					</field>
+					<field id="retry_time_limit_3" translate="label" type="text" sortOrder="23" showInDefault="1" showInWebsite="0" showInStore="0">
+							<label>Time Interval for Retry Three Place Orders Sync (minutes)</label>
+							<comment>Time limit for Retry 3.</comment>
+					</field>
+					<field id="time_limit_find_order" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="0" showInStore="0">
+							<label>Time Interval for Find Orders Sync (minutes)</label>
+							<comment>Check the order status(Backordered, Complete).</comment>
+					</field>
+					<field id="days_limit_find_order" translate="label" type="text" sortOrder="25" showInDefault="1" showInWebsite="0" showInStore="0">
+							<label>Days Lookup(days)</label>
+							<comment>FindOrder from Date.</comment>
+					</field>
+					<field id="username" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label" type="text">
+						<label>User Name</label>
+					</field>
+					<field id="password" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="40" translate="label" type="obscure">
+						<label>Password</label>
+						<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					</field>
+					<field id="is_debug_enabled" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0">
+						 <label>Enable Debug</label>
+						 <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+						 <comment>Save the value to Yes to debug the HH web service request and response.</comment>
+					</field>
+
+                    <field id="is_advance_debug_enabled" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Enable Advance Debug</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Save the value to Yes to debug the HH web service request and response.</comment>
+                    </field>
+					<field id="order_collection_size" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="50" translate="label" type="text">
+						<label>HarteHank PlaceOrder Payload</label>
+						<comment>Max orders to be sent in each HH request is 20(Empty/zero or value greater than 20 is set to default value 10).</comment>
+					</field>
+					<field id="findorder_collection_size" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="50" translate="label" type="text">
+						<label>HarteHank FindOrder Payload</label>
+					</field>
+					<field id="endpoint" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="50" translate="label" type="text">
+						<label>EndPoint</label>
+					</field>
+					<field id="account_code" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="60" translate="label" type="text">
+						<label>Account Code</label>
+					</field>
+					<field id="sent" translate="label" sortOrder="99" showInDefault="1" showInWebsite="0" showInStore="0">
+							<label></label>
+							<frontend_model>Abbott\Hartehanks\Block\Adminhtml\System\Config\Button</frontend_model>
+					</field>
+                    <field id="braintree_cancel_order_message" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Braintree Error Message</label>
+                        <comment>Braintree Error message after authorization of expire for Order Cancellation.</comment>
+                    </field>
+				</group>
+				<group id="hartehanks_placeorder" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="15" translate="label">
+					<label>HarteHank PlaceOrder Settings</label>
+					<field id="is_test_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+						 <label>Enable PlaceOrder Test</label>
+						 <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+						 <comment>Save the value to Yes,instantly send PlaceOrder Service to HH from System->Abbott Feed->HH PlaceOrder Log.</comment>
+					</field>
+					<field id="increment_id" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="20" translate="label" type="textarea">
+						<label>Order Number</label>
+						<depends><field id="is_test_enabled">1</field></depends>
+						<comment>Enter comma separated values.</comment>
+					</field>
+                    <field id="default_username" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default Username</label>
+                        <comment>Default username sent over to HarteHanks in Place Order request.</comment>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="default_email" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default Email</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="default_phone" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default Phone</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="default_firstname" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default First Name</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="default_lastname" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default Last Name</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="default_company" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default Company</label>
+                    </field>
+
+                    <field id="default_address1" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default Address1</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="default_address2" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default Address2</label>
+                    </field>
+
+                    <field id="default_city" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default City</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="default_state" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default State</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="default_zip" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default Zip</label>
+                        <validate>required-entry</validate>
+                    </field>
+
+                    <field id="default_country" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="100" translate="label" type="text">
+                        <label>Place Order Request Default Country</label>
+                        <validate>required-entry</validate>
+                    </field>
+                    <field id="lock_orders" translate="label" type="select" sortOrder="110" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Enable Lock Orders</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Save the value to Yes,to restrict cancellation of order while syncing to HH.</comment>
+                    </field>
+                    <field id="process_via_queue" translate="label" type="select" sortOrder="120" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Process Orders Via Queue</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Process Orders via RabbitMQ.</comment>
+                    </field>
+				</group>
+				<group id="hartehanks_findorder" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="15" translate="label">
+					<label>HarteHank FindOrder Settings</label>
+					<field id="findOrder_test" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+						 <label>Enable FindOrder Test</label>
+						 <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+						 <comment>Save the value to Yes,instantly send FindOrder Service for Single the above Order.</comment>
+					</field>
+					<field id="increment_id" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="20" translate="label" type="textarea">
+						<label>Order Number</label>
+						<depends><field id="findOrder_test">1</field></depends>
+						<comment>Enter comma separated values.</comment>
+					</field>
+                    <field id="txn_check" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                        <label>Enable Payment Transaction Check</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>If Enabled this will check order 'void' payment transaction and skip that order if found</comment>
+                    </field>
+                    <field id="process_via_queue" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="0">
+                        <label>Process Orders Via Queue</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                        <comment>Process Orders via RabbitMQ.</comment>
+                    </field>
+				</group>
+				<group id="hartehank_email_template" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="20" translate="label">
+					<label>HH Email Settings</label>
+					<field id="is_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						 <label>Enable Mails</label>
+						 <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+					</field>
+					<field id="receiver_email" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+							<label>Receiver Email</label>
+							<comment>Please provide the values separeted by commas ex: test1@example.com,test2@example.com</comment>
+					</field>
+					<field id="email_template" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+							<label>HH Inventory Email Template</label>
+							<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+					</field>
+					<field id="hartehank_placeorder_template" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+							<label>HH PlaceOrder Email Template</label>
+							<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+					</field>
+				</group>
+				<group id="hh_cron" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label">
+					<label>HarteHank Cron Settings</label>
+					<field id="fo_cron_enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>FindOrder Service Cron</label>
+					<source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+					<comment>If enable, FindOrder Service is called via Cron.</comment>
+					</field>
+					<field id="fo_cron_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Cron Expression for FindOrder Service</label>
+							<depends><field id="fo_cron_enable">1</field></depends>
+							<comment>Ex.(*/30 * * * *)Please make sure there is space between each star(*).</comment>
+					</field>
+					<field id="po_cron_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+						<label>Cron Expression for PlaceOrder Service</label>
+						<comment>Ex.(*/30 * * * *)Please make sure there is space between each star(*).</comment>
+					</field>
+				</group>
+			<group id="hh_smartpost_skus" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="40" translate="label">
+				<label>Smartpost SKUs</label>
+				<field id="smart_post_sku" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>SKUs</label>
+					<comment>Enter comma separated values.</comment>
+				</field>
+			</group>
+		</section>
+		<section id="hartehanks_inventory" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1"
+                 showInStore="1">
+	            <class>separator-top</class>
+	            <label>Hartehanks Inventory Management</label>
+				<tab>abbott</tab>
+				<resource>Abbott_Hartehanks::config_hartehanks</resource>
+	            <group id="general" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1"
+	                   showInStore="1">
+	                <label>Configuration</label>
+	                <field id="enable" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+	                       showInWebsite="1" showInStore="1">
+	                    <label>Enable</label>
+	                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+	                </field>
+	                <field id="enable_test" translate="label comment" type="select" sortOrder="10" showInDefault="1"
+	                       showInWebsite="1" showInStore="1">
+	                    <label>Enable Testing</label>
+	                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+	                </field>
+	                <field id="order_status" translate="label" type="multiselect" sortOrder="50" showInDefault="1" showInWebsite="0" showInStore="0">
+						<label>Order Status</label>
+						<source_model>Abbott\Hartehanks\Model\Config\Multiselect</source_model>
+					</field>
+					<field id="days" translate="label" type="text" sortOrder="100" showInDefault="1" showInWebsite="0" showInStore="0">
+						<label>Consider Days</label>
+					</field>
+					<field id="custom_file_upload" translate="label" type="Magento\Config\Block\System\Config\Form\Field\File" sortOrder="6" showInDefault="1" showInWebsite="1" >
+			            <label>Upload custom file</label>
+			            <backend_model>Magento\Config\Model\Config\Backend\File</backend_model>
+			            <upload_dir config="system" scope_info="1">test</upload_dir>
+			        </field>
+	            </group>
+        </section>
+	</system>
+</config>

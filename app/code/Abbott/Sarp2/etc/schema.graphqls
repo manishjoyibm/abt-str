@@ -1,0 +1,21 @@
+input CartItemInput {
+    sku: String!
+    quantity: Float!
+    aw_sarp2_subscription_type: Int
+}
+
+type Mutation {
+  changeProduct(input: ProductInput!): ProductOutput @resolver(class: "\\Abbott\\Sarp2\\Model\\Resolver\\ReplaceSubscriptionProduct") @doc(description:"Replace Subscription Product")
+}
+
+input ProductInput {
+    profile_id: Int @doc(description: "The profile Id")
+    old_sku: String @doc(description: "The old sku which needs to be replace")
+    sku: String @doc(description: "The new sku")
+    qty: Int @doc(description: "Quantity for the new product")
+}
+	
+type ProductOutput {
+    status: Boolean @doc(description: "Indicates product api status")
+    message: String @doc(description: "Relative message as per the change product status")
+}

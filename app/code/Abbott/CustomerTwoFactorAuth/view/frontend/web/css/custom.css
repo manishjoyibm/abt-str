@@ -1,0 +1,227 @@
+/* #resent-hide{
+    display:none
+} */
+.customer-account-login .modal-popup .modal-inner-wrap .modal-header {
+    background: #ffffff;
+    padding: 30px 25px 10px;
+    border-bottom: 0;
+    color: #002a3a;
+    font-weight: 400;
+    line-height: 1.5;
+}
+.customer-account-login .modal-popup .modal-inner-wrap .modal-header .modal-title {
+    font-family: BrandonText-Medium,Trebuchet MS,Arial,sans-serif;
+	margin: 0;
+	padding: 0;
+	font-size: 20px;
+	line-height: 30px;
+	font-weight: 500;
+}
+.customer-account-login .modal-popup .modal-inner-wrap .modal-footer {
+    padding: 5px 6px;
+}
+.customer-account-login .modal-popup .modal-inner-wrap .modal-content .modal-body-content .verify-otp-wrapper {
+	margin-top: 16px;
+}
+.customer-account-login .modal-popup .modal-inner-wrap .modal-content .modal-body-content .verify-otp-wrapper .control {
+	margin: 8px 0 16px;
+}
+.customer-account-login .resend-link-class a {
+	font-weight: 400;
+	font-family: BrandonText-Medium,Trebuchet MS,Arial,sans-serif;
+	text-decoration: none;
+}
+.customer-account-login .resend-link-class a.disabledLink {
+    color: #6c757d;
+    pointer-events: none;
+	opacity: 1;
+}
+.customer-account-login .modal-popup .modal-inner-wrap .modal-content .modal-body-content .verify-otp-wrapper .control .otp {
+    border: 1px solid #5c5c5c;
+    border-radius: 4px;
+    font-style: normal;
+}
+.customer-account-login .modal-popup .modal-inner-wrap .modal-content .twofa_auth-modal-container{
+    font-size: 14px;
+    line-height: 1.625rem;
+    color: #002a3a;
+	padding: 0;
+	font-family: BrandonText-Regular, Trebuchet MS, Arial, sans-serif;
+}
+.customer-account-login .modal-popup .modal-inner-wrap .modal-content .twofa_auth-modal-container label.otp-label {
+	font-weight: 400;
+	font-size: 16px;
+	margin: 0;
+}
+.customer-account-login .modal-slide .modal-inner-wrap {
+    height: unset;
+    width: 500px;
+    padding: 0;
+    border-radius: 8px;
+}
+.customer-account-login .modal-popup .modal-title{
+    border-bottom: unset;
+}
+.customer-account-login .modal-slide .modal-header, .modal-slide .modal-content, .modal-slide .modal-footer {
+    padding: 0 1rem 1rem;
+}
+.customer-account-login .resend-link a:hover{
+    text-decoration: none;
+}
+
+.customer-account-login .modal-slide.modal-popup .modal-header .modal-title{
+    color:#002a3a;
+    text-transform: inherit;
+}
+.customer-account-login .modal-slide.modal-popup .modal-content{
+    margin: 0;
+	padding: 0 25px;
+	border: none;
+}
+
+.customer-account-login .modal-slide.modal-popup .modal-content .otp-required {
+    color: #e4002b;
+    font-size: 1.2rem;
+    margin: 0 0 0 5px;
+}
+.customer-loginsecurity-enable .actions-toolbar {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    max-width: 42%;
+    justify-content: space-between;
+}
+.customer-loginsecurity-disable .actions-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    max-width: 300px;
+    justify-content: space-between;
+}
+
+.customer-loginsecurity-enable .save-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.customer-loginsecurity-enable .timer {
+    display: inline-block;
+    width: 12%;
+}
+
+.customer-loginsecurity-disable .actions-toolbar:before, .customer-loginsecurity-disable .actions-toolbar:after, .customer-loginsecurity-enable .actions-toolbar:before, .customer-loginsecurity-enable .actions-toolbar:after {
+    content: unset;
+}
+.otp-message-container p, .otp-expiry-message-container p {margin:0;}
+.otp-message-container .error {
+    color: #e4002b;
+    font-size: small;
+}
+
+.otp-error-message-container .error {
+    color: #e4002b;
+    font-size: small;
+    color: red;
+}
+
+.customer-account-login .modal-popup .verify-otp-wrapper .control .mage-error {
+    border-color: #e4002b !important;
+    color: #e4002b;
+}
+
+.customer-loginsecurity-enable .error-msg {
+    color: #e4002b;
+}
+
+.customer-account-login .modal-popup.modal-slide .modal-footer {
+    border-top : unset !important;
+    display: none;
+}
+
+.disabledLink {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+    text-decoration: none;
+}
+label.otp-label {
+    color: #002a3a;
+    font-weight: 600;
+}
+.customer-account-login a {
+    font-weight: 600;
+}
+.modal-popup .modal-inner-wrap .modal-header .action-close {
+	margin: 20px;
+	padding: 0;
+}
+.modal-popup .modal-inner-wrap .modal-header .action-close:before {
+	color: #000;
+}
+.customer-account-login .verify-otp-btn {
+	background-color: #323232;
+    padding: 8px 25px;
+    border-radius: 20px;
+    color: #fff;
+    border: 0;
+    font-size: 14px;
+    font-weight: 700;
+    font-family: Poppins, sans-serif;
+    text-transform: uppercase;
+	margin: 24px 0;
+	height: 37px;
+}
+.customer-account-login .verify-otp-btn[disabled], .customer-account-login .verify-otp-btn[disabled]:active, .customer-account-login .verify-otp-btn[disabled]:focus, .customer-account-login .verify-otp-btn[disabled]:hover {
+	background-color: #e0e0e0;
+    border-color: #d6d6d6;
+    opacity: .65;
+    color: #6c757d;
+}
+div#clockdiv {
+    display: inline;
+}
+div#clockdiv span {
+    font-size: 14px;
+	color : #002A3A;
+	font-weight: 400;
+}
+div#email-message {
+    margin: 5px 0;
+}
+
+.account .field.required {
+    margin: 0 0 10px;
+}
+
+.account div#resent-hide {
+    font-size: 14px;
+}
+.account .success-enabled {
+    color: green;
+    font-weight: 800;
+    font-size: 20px;
+}
+.customer-account-login .modal-slide._show, .modal-popup._show
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.otp-message-container p.error {
+  color: #d32f2f; 
+}
+@media (max-width: 767px) {
+	.modal-popup.modal-slide {
+		left: unset;
+	}	
+	.customer-account-login .modal-slide .modal-inner-wrap {
+		width: 90%;
+		margin: 0 auto;
+	}
+	.customer-account-login .modal-slide.modal-popup .modal-header .modal-title {
+		font-size: 17px;
+		line-height: 25.5px;
+	}
+}

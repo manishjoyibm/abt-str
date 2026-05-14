@@ -1,0 +1,4 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+<template id="database_backup_configuration_error_template" label="DB backup exception occur email" file="database_backup_error_template.html" type="html" module="Abbott_DatabaseBackup" area="frontend"/>
+</config>

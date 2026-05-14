@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+
+    <template id="abbott_metabolic_expiry_template"
+              label="Abbott - Metabolic Expiry Reminder"
+              file="expiry_notice.phtml"
+              type="html"
+              module="Abbott_MetabolicOrdering"
+              area="frontend"/>
+
+    <template id="abbott_metabolic_threshold_template"
+              label="Abbott - Metabolic Qty Threshold"
+              file="threshold_notice.phtml"
+              type="html"
+              module="Abbott_MetabolicOrdering"
+              area="frontend"/>
+
+</config>

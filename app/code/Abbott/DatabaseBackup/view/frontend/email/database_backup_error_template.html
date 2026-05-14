@@ -1,0 +1,9 @@
+<!--@subject {{trans "Abbottstore - DB Backup Error Alert!!"}} @-->
+{{template config_path="design/email/header_template"}}
+<table>
+    <caption>Exception details</caption>
+    <th id="backup_error">Exception details</th>
+    <tr>Hello All,</tr>
+    <tr>{{trans "Exception occured: %templateVar." templateVar=$templateVar}}</tr>
+</table>
+{{template config_path="design/email/footer_template"}}

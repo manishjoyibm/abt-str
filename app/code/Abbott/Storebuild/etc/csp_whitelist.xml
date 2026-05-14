@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+               xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="font-src">
+            <values>
+                <value id="pedialyte" type="host">pedialyte.com</value>
+                <value id="*_pedialyte" type="host">*.pedialyte.com</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="pedialyte" type="host">pedialyte.com</value>
+                <value id="*_pedialyte" type="host">*.pedialyte.com</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="pedialyte" type="host">pedialyte.com</value>
+                <value id="*_pedialyte" type="host">*.pedialyte.com</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="pedialyte" type="host">pedialyte.com</value>
+                <value id="*_pedialyte" type="host">*.pedialyte.com</value>
+            </values>
+        </policy>
+        <policy id="script-src">
+            <values>
+                <value id="pedialyte" type="host">pedialyte.com</value>
+                <value id="*_pedialyte" type="host">*.pedialyte.com</value>
+                <value id="static" type="host">sc-static.net</value>
+                <value id="*_static" type="host">*.sc-static.net</value>
+                <value id="googleadservices" type="host">googleadservices.com</value>
+                <value id="*_googleadservices" type="host">*.googleadservices.com</value>
+                <value id="google-analytics" type="host">google-analytics.com</value>
+                <value id="*_google-analytics" type="host">*.google-analytics.com</value>
+                <value id="googletagmanager" type="host">googletagmanager.com</value>
+                <value id="*_googletagmanager" type="host">*.googletagmanager.com</value>
+                <value id="googletagmanager" type="host">googletagmanager.com</value>
+                <value id="*_googletagmanager" type="host">*.googletagmanager.com</value>
+                <value id="paypal" type="host">paypal.com</value>
+                <value id="*_paypal" type="host">*.paypal.com</value>
+                <value id="googleapis" type="host">googleapis.com</value>
+                <value id="*_googleapis" type="host">*.googleapis.com</value>
+                <value id="vimeo" type="host">vimeo.com</value>
+                <value id="*_vimeo" type="host">*.vimeo.com</value>
+                <value id="trustarc" type="host">trustarc.com</value>
+                <value id="*_trustarc" type="host">*.trustarc.com</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

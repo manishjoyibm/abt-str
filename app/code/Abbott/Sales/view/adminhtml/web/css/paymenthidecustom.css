@@ -1,0 +1,17 @@
+.display-none,
+.order-billing-method-summary,
+.order-billing-method-summary .action-default {
+    display: none;
+}
+
+.display-block {
+    display: block;
+}
+
+.admin__page-section-content .order-shipping-method{
+    float: left;
+    }
+    
+.admin__page-section-content .order-billing-method{
+      float: right;
+      }

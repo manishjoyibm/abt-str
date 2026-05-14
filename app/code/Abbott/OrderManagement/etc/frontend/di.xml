@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Sales\CustomerData\LastOrderedItems" type="Abbott\OrderManagement\CustomerData\LastOrderedItems" />
+    <preference for="Magento\InventorySales\Model\IsProductSalableCondition\BackOrderNotifyCustomerCondition" type="Abbott\OrderManagement\Model\IsProductSalableCondition\CustomBackOrderNotifyCustomerCondition" />
+    <preference for="Magento\Sales\Controller\Order\Reorder" type="Abbott\OrderManagement\Controller\Order\Reorder" />
+    <preference for="Magento\Rma\Model\ResourceModel\Item" type="Abbott\OrderManagement\Model\ResourceModel\Item" />
+    <preference for="Magento\Sales\Block\Order\Info" type="Abbott\OrderManagement\Block\Order\Info"/>
+</config>

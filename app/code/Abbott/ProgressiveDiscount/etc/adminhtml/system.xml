@@ -1,0 +1,38 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="110">
+            <label>Abbott</label>
+        </tab>
+        <section id="progressive_subscription_settings" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Progressive Subscription Settings</label>
+            <tab>abbott</tab>
+            <resource>Abbott_MyAccount::config_myaccount</resource>
+            <group id="progressive_subscription" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cart And Checkout</label>
+                <field id="restrict_cart_checkout" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Restrict Product Addition</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>This option is used to restrict Reorder, Recent order, Cancel order and Restrict product on cart and checkout</comment>
+                </field>
+            </group>
+        </section>
+        <section id="aboott_message" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Message Settings</label>
+            <tab>abbott</tab>
+            <resource>Abbott_MyAccount::config_myaccount</resource>
+            <group id="progressive_subscription" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cart And Checkout Message</label>
+                <field id="message_for_active_subscription" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Active Subscription</label>
+                    <comment>This message will be displayed when user has an active subscription</comment>
+                </field>
+                 <field id="message_for_multiple_progressive_product_in_cart" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Progressive Product In Cart</label>
+                    <comment>This message will be displayed when user trying to add multiple progressive product to cart</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

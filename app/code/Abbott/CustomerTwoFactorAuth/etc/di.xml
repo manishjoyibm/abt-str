@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\Data\OtpInterface" type="Abbott\CustomerTwoFactorAuth\Model\Otp" />
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\GenerateOtpInterface" type="Abbott\CustomerTwoFactorAuth\Model\GenerateOtp" />
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\Data\OtpSearchResultsInterface" type="Abbott\CustomerTwoFactorAuth\Model\OtpSearchResults" />
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\OtpRepositoryInterface" type="Abbott\CustomerTwoFactorAuth\Model\OtpRepository" />
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\SendMessageInterface" type="Abbott\CustomerTwoFactorAuth\Model\SendMessage" />
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\OtpManagerInterface" type="Abbott\CustomerTwoFactorAuth\Model\Api\OtpManager"/>
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\SendAndSaveOtpRequestInterface" type="Abbott\CustomerTwoFactorAuth\Model\Api\SendAndSaveOtpRequest"/>
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\VerifyOtpRequestInterface" type="Abbott\CustomerTwoFactorAuth\Model\Api\VerifyOtpRequest"/>
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\GetCustomerAttributeInterface" type="Abbott\CustomerTwoFactorAuth\Model\Api\GetCustomerAttribute"/>
+    
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\SendAndSaveOtpInterface" 
+    type="Abbott\CustomerTwoFactorAuth\Model\Api\OtpManager"/>
+
+    <preference for="Abbott\CustomerTwoFactorAuth\Api\Data\SendAndSaveOtpResponseInterface" 
+    type="Abbott\CustomerTwoFactorAuth\Model\Api\SendAndSaveOtpResponse"/>
+    
+    <virtualType name="CustomerTwoFactorAuth" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="error" xsi:type="object">Abbott\CustomerTwoFactorAuth\Logger\Handler\ErrorHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Abbott\CustomerTwoFactorAuth\Model\SendMessage">
+        <arguments>
+            <argument name="logger" xsi:type="object">CustomerTwoFactorAuth</argument>
+        </arguments>
+    </type>
+    <type name="Abbott\CustomerTwoFactorAuth\Model\Api\OtpManager">
+        <arguments>
+            <argument name="logger" xsi:type="object">CustomerTwoFactorAuth</argument>
+        </arguments>
+    </type>
+    <type name="Abbott\CustomerTwoFactorAuth\Helper\Email">
+        <arguments>
+            <argument name="logger" xsi:type="object">CustomerTwoFactorAuth</argument>
+        </arguments>
+    </type>
+</config>

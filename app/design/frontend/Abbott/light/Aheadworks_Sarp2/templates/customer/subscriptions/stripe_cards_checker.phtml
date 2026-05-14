@@ -1,0 +1,18 @@
+<?php
+
+/* @var $block \Aheadworks\Sarp2\Block\Customer\StripeCardsChecker */
+
+// @codingStandardsIgnoreFile
+?>
+<script type="text/x-magento-init">
+    {
+        ".stripe-payments .saved-cards": {
+            "awSarp2StripeCardsChecker": {
+                "elementSelector": ".delete-card",
+                "confirmPopupClass": "confirm aw-sarp2__subscription-confirm",
+                "confirmPopupMessage": "<?= $block->escapeHtml(__('This card is used for paying for one or more subscriptions. If you continue, these subscriptions will stop.')) ?>",
+                "subscriptionTokens": <?= /* @noEscape */ \Laminas\Json\Json::encode($block->getActiveSubscriptionTokens()) ?>
+            }
+        }
+    }
+</script>

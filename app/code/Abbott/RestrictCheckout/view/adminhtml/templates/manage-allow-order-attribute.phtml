@@ -1,0 +1,13 @@
+<?php
+ /**
+ * @var $block \Abbott\RestrictCheckout\Block\Adminhtml\ManageAttribute
+ */
+
+if(!$block->getIsAllowed()): ?>
+    <style>
+        [data-index = allow_order_limit] {
+        display: none;
+    }
+    </style>
+<?php endif; ?>
+

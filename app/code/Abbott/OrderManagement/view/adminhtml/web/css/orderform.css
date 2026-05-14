@@ -1,0 +1,55 @@
+#p_method_aw_sarp_braintree_recurring + label {
+    display: none;
+}
+.admin__field.field-add-gift-card {
+    display: none;
+}
+.admin__field.field.field-prefix {
+    display: none;
+}
+.admin__field.field.field-suffix {
+    display: none;
+}
+.admin__field.field.field-cclink_id {
+    display: none;
+}
+.admin__field.field.field-middlename {
+    display: none;
+}
+.admin__field.field.field-fax {
+    display: none;
+}
+.admin__field.field-vat-number {
+    display: none;
+}
+div#order-sidebar_wishlist {
+    display: none;
+}
+div#order-sidebar_compared {
+    display: none;
+}
+div#order-sidebar_pcompared {
+    display: none;
+}
+tr.giftwrapping.row-totals {
+    display: none;
+}
+section.admin__page-section.order-gift-options {	
+    display: none;
+}
+.order-discounts .admin_checkout_message{
+    color: #228B22;
+    font-weight: bold;
+    font-size: 13px;
+    margin-top: 11px;
+}
+
+.order-discounts .abbott_custom_checkbox{
+    margin-top: 5px;
+}
+.order-discounts .abbott_checkbox{
+    height: 12px;
+    margin-top: 13px;
+    width: 17px;
+    margin-right: 3px;
+}

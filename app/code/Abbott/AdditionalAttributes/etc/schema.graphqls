@@ -1,0 +1,181 @@
+type Query {
+    products (
+        search: String @doc(description: "Performs a full-text search using the specified key words."),
+        filter: ProductAttributeFilterInput @doc(description: "Identifies which product attributes to search for and return."),
+        pageSize: Int = 20 @doc(description: "Specifies the maximum number of results to return at once. This attribute is optional."),
+        currentPage: Int = 1 @doc(description: "Specifies which page of results to return. The default value is 1."),
+        sort: ProductAttributeSortInput @doc(description: "Specifies which attributes to sort on, and whether to return the results in ascending or descending order.")
+        profile_id: Int @doc(description: "Specifies Profile id of customer subscription.")
+    ): Products
+    @resolver(class: "Abbott\\SmileSearch\\Rewrite\\Magento\\CatalogGraphQl\\Model\\Resolver\\Products") @doc(description: "The products query searches for products that match the criteria specified in the search and filter attributes.") @cache(cacheIdentity: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\Identity")
+    category (
+     id: Int @doc(description: "Id of the category.")
+    ): CategoryTree
+    @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\CategoryTree") @doc(description: "The category query searches for categories that match the criteria specified in the search and filter attributes.") @deprecated(reason: "Use 'categoryList' query instead of 'category' query") @cache(cacheIdentity: "Magento\\CatalogGraphQl\\Model\\Resolver\\Category\\CategoryTreeIdentity")
+    categoryList(
+    filters: CategoryFilterInput @doc(description: "Identifies which Category filter inputs to search for and return.")
+    ): [CategoryTree] @doc(description: "Returns an array of categories based on the specified filters.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\CategoryList") @cache(cacheIdentity: "Magento\\CatalogGraphQl\\Model\\Resolver\\Category\\CategoriesIdentity")
+}
+
+interface ProductInterface @typeResolver(class: "Magento\\CatalogGraphQl\\Model\\ProductInterfaceTypeResolverComposite") @doc(description: "The ProductInterface contains attributes that are common to all types of products. Note that descriptions may not be available for custom and EAV attributes.") {
+    id: Int @doc(description: "The ID number assigned to the product.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\EntityIdToId")
+    name: String @doc(description: "The product name. Customers use this name to identify the product.")
+    sku: String @doc(description: "A number or code assigned to a product to identify the product, options, price, and manufacturer.")
+    description: ComplexTextValue @doc(description: "Detailed information about the product. The value can include simple HTML tags.") @resolver(class: "\\Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\ProductComplexTextAttribute")
+    short_description: ComplexTextValue @doc(description: "A short description of the product. Its use depends on the theme.") @resolver(class: "\\Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\ProductComplexTextAttribute")
+    special_price: Float @doc(description: "The discounted price of the product.")
+    special_from_date: String @doc(description: "The beginning date that a product has a special price.")
+    special_to_date: String @doc(description: "The end date that a product has a special price.")
+    attribute_set_id: Int @doc(description: "The attribute set assigned to the product.")
+    meta_title: String @doc(description: "A string that is displayed in the title bar and tab of the browser and in search results lists.")
+    meta_keyword: String @doc(description: "A comma-separated list of keywords that are visible only to search engines.")
+    meta_description: String @doc(description: "A brief overview of the product for search results listings, maximum 255 characters.")
+    image: ProductImage @doc(description: "The relative path to the main image on the product page.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\ProductImage")
+    small_image: ProductImage @doc(description: "The relative path to the small image, which is used on catalog pages.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\ProductImage")
+    thumbnail: ProductImage @doc(description: "The relative path to the product's thumbnail image.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\ProductImage")
+    new_from_date: String @doc(description: "The beginning date for new product listings, and determines if the product is featured as a new product.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\NewFromTo")
+    new_to_date: String @doc(description: "The end date for new product listings.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\NewFromTo")
+    tier_price: Float @deprecated(reason: "Use price_tiers for product tier price information.") @doc(description: "The price when tier pricing is in effect and the items purchased threshold has been reached.")
+    options_container: String @doc(description: "If the product has multiple options, determines where they appear on the product page.")
+    created_at: String @doc(description: "Timestamp indicating when the product was created.")
+    updated_at: String @doc(description: "Timestamp indicating when the product was updated.")
+    country_of_manufacture: String @doc(description: "The product's country of origin.")
+    type_id: String @doc(description: "One of simple, virtual, bundle, downloadable, grouped, or configurable.") @deprecated(reason: "Use __typename instead.")
+    websites: [Website] @doc(description: "An array of websites in which the product is available.") @deprecated(reason: "The field should not be used on the storefront.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\Websites")
+    product_links: [ProductLinksInterface] @doc(description: "An array of ProductLinks objects.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\BatchProductLinks")
+    media_gallery_entries: [MediaGalleryEntry] @deprecated(reason: "Use product's `media_gallery` instead") @doc(description: "An array of MediaGalleryEntry objects.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\MediaGalleryEntries")
+    categories: [CategoryInterface] @doc(description: "The categories assigned to a product.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Categories") @cache(cacheIdentity: "Magento\\CatalogGraphQl\\Model\\Resolver\\Category\\CategoriesIdentity")
+    price: Float @doc(description: "A ProductPrices object, indicating the price of an item.") @resolver(class: "Abbott\\AdditionalAttributes\\Model\\Resolver\\Product\\Price")
+    price_range: PriceRange! @doc(description: "A PriceRange object, indicating the range of prices for the product") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\PriceRange")
+    gift_message_available: String @doc(description: "Indicates whether a gift message is available.")
+    manufacturer: Int @doc(description: "A number representing the product's manufacturer.")
+    canonical_url: String @doc(description: "Relative canonical URL. This value is returned only if the system setting 'Use Canonical Link Meta Tag For Products' is enabled") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\CanonicalUrl")
+    media_gallery: [MediaGalleryInterface] @doc(description: "An array of Media Gallery objects.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\MediaGallery")
+    cans: Cans @doc(description: "The price for can_x including the number of cans.") @resolver(class: "Abbott\\AdditionalAttributes\\Model\\Resolver\\Product\\CansPrices")
+    stockdata: Stockdata @doc(description: "Inventory info provide available quantity of an item along with backorder information.")@resolver(class: "Abbott\\AdditionalAttributes\\Model\\Resolver\\Product\\Qty")
+    product_flavor: String @doc(description: "Return current Product Flavor of the Product")
+    product_form: String @doc(description:"return current Product form of the Products")
+    case_of_product: String @doc(description: "Case of Product")
+    size_or_weight: String @doc(description: "Size or weight of product")
+    subscription_details: SubscriptionDetails @doc(description: "Gives array of subscription details")@resolver(class: "Abbott\\AdditionalAttributes\\Model\\Resolver\\Product\\Subscription")
+    stock_status: String @doc(description: "Inventory info provide available quantity of an item along with backorder information.")@resolver(class: "Abbott\\AdditionalAttributes\\Model\\Resolver\\Product\\StockStatus")
+    aem_url: String @doc(description: "AEM Url")
+    dam_images: String @doc(description: "DAM Images")
+    brand: String @doc(description: "Brand assigned to product")
+    metabolic_state: String @doc(description: "Product Metabolic state")
+    subscription_price: Float @resolver (class: "\\Abbott\\AdditionalAttributes\\Model\\Resolver\\Product\\SubscriptionPrice")
+    need_state: String @doc(description: "Gives Product need_state")
+}
+
+type SubscriptionDetails implements ProductInterface {
+    option_label: String @doc(description: "Gives subscription option label")
+    option_id: String @doc(description: "Gives subscription option value")
+}
+
+type Stockdata implements ProductInterface @doc(description: "Inventory info provide available quantity of an item along with backorder information."){
+    qty: Int @doc(description: "Available qty, Indicating the available quanity of an item. ")
+    backorder: Int @doc(description:"backorder yes or no, Indiacating backorder is yes or no.")
+    status: String @doc(description: "This states whether a product stock status is in stock or out of stock or back order")
+    custom_order_on_call: Int @doc(description: "Order on call value as per the metabolic ordering table. ") 
+}
+
+type Cans implements ProductInterface @doc(description: "The ProductPrices object contains the regular price of an item, as well as its minimum and maximum prices. Only composite products, which include bundle, configurable, and grouped products, can contain a minimum and maximum price."){
+    cans_x_price: Float @doc(description: "The price for can_x including the number of cans.")
+    cans_x_number: Int @doc(description: "The count cans in can_x.")
+    cans_x_price_discount: Float @doc(description: "The price for can_x including the number of cans including discount.")
+    cans_y_price: Float @doc(description: "The price for can_y including the number of cans.")
+    cans_y_number: Int @doc(description: "The count cans in can_y.")
+    cans_y_price_discount: Float @doc(description: "The price for can_y including the number of cans including discount.")
+}
+
+type Products @doc(description: "The Products object is the top-level object returned in a product search.") {
+    items: [ProductInterface] @doc(description: "An array of products that match the specified search criteria.")
+    page_info: SearchResultPageInfo @doc(description: "An object that includes the page_info and currentPage values specified in the query.")
+    total_count: Int @doc(description: "The number of products returned.")
+    filters: [LayerFilter] @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\LayerFilters") @doc(description: "Layered navigation filters array.") @deprecated(reason: "Use aggregations instead")
+    aggregations: [Aggregation] @doc(description: "Layered navigation aggregations.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Aggregations")
+    sort_fields: SortFields @doc(description: "An object that includes the default sort field and all available sort fields.") @resolver(class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Category\\SortFields")
+    search_suggestion: [SearchSuggestion] @doc(description: "An array of search terms and suggestion with count")
+    search_result_message: String @doc(description: "Search result message based on search. ")
+    }
+
+type SearchSuggestion @doc(description: "An array of search terms and suggestion with count"){
+    queryText: String @doc(description: "Search suggestion based on search. ")
+    resultsCount: Int @doc(description:"Available result count for specific search suggestion.")
+}
+
+input ProductFilterInput @doc(description: "ProductFilterInput is deprecated, use @ProductAttributeFilterInput instead. ProductFilterInput defines the filters to be used in the search. A filter contains at least one attribute, a comparison operator, and the value that is being searched for.") {
+    name: FilterTypeInput @doc(description: "The product name. Customers use this name to identify the product.")
+    sku: FilterTypeInput @doc(description: "A number or code assigned to a product to identify the product, options, price, and manufacturer.")
+    flavors: FilterTypeInput @doc(description: "The product flavor. Customers use this to make their choice of flavor.")
+    cases: FilterTypeInput @doc(description: "The sizes of cases available into the product.")
+    forms: FilterTypeInput @doc(description: "The form of products like liquid, solid or powder")
+    description: FilterTypeInput @doc(description: "Detailed information about the product. The value can include simple HTML tags.")
+    short_description: FilterTypeInput @doc(description: "A short description of the product. Its use depends on the theme.")
+    price: FilterTypeInput @doc(description: "The price of an item.")
+    special_price: FilterTypeInput @doc(description: "The discounted price of the product. Do not include the currency code.")
+    special_from_date: FilterTypeInput @doc(description: "The beginning date that a product has a special price.")
+    special_to_date: FilterTypeInput @doc(description: "The end date that a product has a special price.")
+    weight: FilterTypeInput @doc(description: "The weight of the item, in units defined by the store.")
+    manufacturer: FilterTypeInput @doc(description: "A number representing the product's manufacturer.")
+    meta_title: FilterTypeInput @doc(description: "A string that is displayed in the title bar and tab of the browser and in search results lists.")
+    meta_keyword: FilterTypeInput @doc(description: "A comma-separated list of keywords that are visible only to search engines.")
+    meta_description: FilterTypeInput @doc(description: "A brief overview of the product for search results listings, maximum 255 characters.")
+    image: FilterTypeInput @doc(description: "The relative path to the main image on the product page.")
+    small_image: FilterTypeInput @doc(description: "The relative path to the small image, which is used on catalog pages.")
+    thumbnail: FilterTypeInput @doc(description: "The relative path to the product's thumbnail image.")
+    tier_price: FilterTypeInput @doc(description: "The price when tier pricing is in effect and the items purchased threshold has been reached.")
+    news_from_date: FilterTypeInput @doc(description: "The beginning date for new product listings, and determines if the product is featured as a new product.")
+    news_to_date: FilterTypeInput @doc(description: "The end date for new product listings.")
+    custom_layout_update: FilterTypeInput @doc(description: "XML code that is applied as a layout update to the product page.")
+    min_price: FilterTypeInput @doc(description:"The numeric minimal price of the product. Do not include the currency code.")
+    max_price: FilterTypeInput @doc(description:"The numeric maximal price of the product. Do not include the currency code.")
+    category_id: FilterTypeInput @doc(description: "Category ID the product belongs to.")
+    options_container: FilterTypeInput @doc(description: "If the product has multiple options, determines where they appear on the product page.")
+    required_options: FilterTypeInput @doc(description: "Indicates whether the product has required options.")
+    has_options: FilterTypeInput @doc(description: "Indicates whether additional attributes have been created for the product.")
+    image_label: FilterTypeInput @doc(description: "The label assigned to a product image.")
+    small_image_label: FilterTypeInput @doc(description: "The label assigned to a product's small image.")
+    thumbnail_label: FilterTypeInput @doc(description: "The label assigned to a product's thumbnail image.")
+    created_at: FilterTypeInput @doc(description: "Timestamp indicating when the product was created.")
+    updated_at: FilterTypeInput @doc(description: "Timestamp indicating when the product was updated.")
+    country_of_manufacture: FilterTypeInput @doc(description: "The product's country of origin.")
+    custom_layout: FilterTypeInput @doc(description: "The name of a custom layout.")
+    gift_message_available: FilterTypeInput @doc(description: "Indicates whether a gift message is available.")
+    or: ProductFilterInput @doc(description: "The keyword required to perform a logical OR comparison.")
+}
+
+input ProductAttributeFilterInput @doc(description: "ProductAttributeFilterInput defines the filters to be used in the search. A filter contains at least one attribute, a comparison operator, and the value that is being searched for.") {
+    flavors: FilterTypeInput @doc(description: "The product flavor. Customers use this to make their choice of flavor.")
+    cases: FilterTypeInput @doc(description: "The sizes of cases available into the product.")
+    forms: FilterTypeInput @doc(description: "The form of products like liquid, solid or powder")
+    sku: FilterTypeInput @doc(description: "A number or code assigned to a product to identify the product, options, price, and manufacturer.")
+}
+
+input ProductAttributeSortInput @doc(description: "ProductAttributeSortInput specifies the attribute to use for sorting search results and indicates whether the results are sorted in ascending or descending order. It's possible to sort products using searchable attributes with enabled 'Use in Filter Options' option")
+{
+    relevance: SortEnum @doc(description: "Sort by the search relevance score (default).")
+    position: SortEnum @doc(description: "Sort by the position assigned to each product.")
+    product_sold_qty: SortEnum @doc(description: "Sort by top selling.")
+}
+
+type Aggregation @doc(description: "A bucket that contains information for each filterable option (such as price, category ID, and custom attributes).") {
+    count: Int @doc(description: "The number of options in the aggregation group.")
+    label: String @doc(description: "The aggregation display name.")
+    attribute_code: String! @doc(description: "Attribute code of the aggregation group.")
+    options: [AggregationOption] @doc(description: "Array of options for the aggregation.")
+}
+
+interface AggregationOptionInterface @typeResolver(class: "Magento\\CatalogGraphQl\\Model\\AggregationOptionTypeResolverComposite") {
+    count: Int @doc(description: "The number of items that match the aggregation option.")
+    label: String @doc(description: "Aggregation option display label.")
+    value: String! @doc(description: "The internal ID that represents the value of the option.")
+}
+
+type AggregationOption implements AggregationOptionInterface {
+
+}
+
+interface CategoryInterface  {
+        active_status: Boolean @doc(description: "Custom Category Status") @resolver(class: "Abbott\\AdditionalAttributes\\Model\\Resolver\\CategoryTree") @doc(description: "To get the Category status in the Graphql using custom attribute")
+    }

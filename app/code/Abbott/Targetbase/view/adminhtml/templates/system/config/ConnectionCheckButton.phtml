@@ -1,0 +1,30 @@
+<script>
+require([
+    'jquery',
+    'prototype',
+], function(jQuery){
+    function createFile() {
+        params = {
+        };
+
+        new Ajax.Request('<?= $escaper->escapeUrl($block->getAjaxUrl())?>', {
+            loaderArea:     true,
+            asynchronous:   true,
+            parameters:     params,
+            onSuccess: function(transport) {
+                jQuery('#collect_result_connection').text(transport.responseText);
+            }
+        });
+    }
+
+    jQuery('#tb_connection_check').click(function () {
+        createFile();
+    });
+});
+</script>
+
+<?= $block->getButtonHtml() ?>
+
+<div>
+    <span id="collect_result_connection"></span>
+</div>

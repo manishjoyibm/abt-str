@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="110">
+            <label>Abbott</label>
+        </tab>
+        <section id="my_account" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>My Account</label>
+            <tab>abbott</tab>
+            <resource>Abbott_MyAccount::config_myaccount</resource>
+            <group id="contact_preferences" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Contact Preferences</label>
+                <field id="contact_preferences_subscribed" translate="label" type="textarea" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscribed Customers</label>
+                </field>
+                <field id="contact_preferences_not_subscribed" translate="label" type="textarea" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Unsubscribed Customers</label>
+                </field>
+            </group>
+			<group id="redirect_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Redirect Settings</label>
+		<field id="is_login_redirect_enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Login Page Redirect</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+		<field id="aem_login_page" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AEM Login Page To Redirect</label>
+                </field>
+	        <field id="aem_registration_page" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AEM New Customer Page To Redirect</label>
+                </field>
+		<field id="is_no_subscription_redirect_enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable No Subscriptions Page Redirect</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="is_no_orders_redirect_enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable No Orders Page Redirect</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="aem_no_order_page" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AEM No Order Page To Redirect</label>
+		    </field>
+            <field id="aem_no_subscription_page" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AEM No Subscription Page To Redirect</label>
+		    </field>
+	    <field id="aem_join_ssm_on_checkout_page" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+    		<label>AEM JOIN STRONGMOMS Page To Redirect</label>
+	    </field>
+            <field id="aem_no_home_page" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>AEM No Home Page To Redirect</label>
+		    </field>
+            
+            <field id="empty_cart_url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Empty Cart Url</label>
+		    </field> 
+            <field id="checkout_terms_url" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Terms url on checkout page</label>
+            </field>
+            </group>
+			<group id="my_account_general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Account Links Manager Setting</label>
+                <field id="active" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="action" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Action</label>
+                    <source_model>Abbott\MyAccount\Model\Config\Source\Action</source_model>
+                </field>
+
+                <field id="link_sections" translate="label" type="multiselect" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Dashboard Section</label>
+                    <source_model>Abbott\MyAccount\Model\Config\Source\Accountlink</source_model>
+                </field>
+				<field id="disable_password" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Forgot and Reset Password</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="reset_gigya_password_api_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reset Gigya Password API Url</label>
+                </field>
+                <field id="aem_app_id" translate="label" type="text" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reset Gigya Password App Id</label>
+                </field>
+                <field id="mbo_reset_gigya_password_api_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Reset Gigya Password API Url for MBO</label>
+                </field>           
+            </group>
+             <group id="customer_login" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>MBO Customer Setting</label>
+                <field id="disable_inline_email" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Disable Customer Email Edit</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+             </group>       
+            
+            <group id="disposable_email_domain_restriction" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Disposable Email Domains Restriction</label>                
+                <field id="enable_disposable_email_domain_restriction" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Disposable Email Domains Restriction</label>
+                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="restricted_domain_list" translate="label" type="textarea" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>List Of Disposable Email Domains</label>
+                    <comment>Enter disposble email domian coma(,) seprated.</comment>
+                </field>
+                <field id="disposable_email_domain_error_message" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error Message</label>
+                </field>
+
+            </group>
+            <group id="googleanalytics" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Google Analytics</label>
+                <field id="ga_enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Google Analytics</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+			<group id="product" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Product Settings</label>
+                <field id="product_attribute" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Enable Layered Navigation Changes</label>
+                <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+		    </field>
+            </group>
+        </section>
+        <section id="customer">
+            <group id="address">
+                <field id="street_lines" showInDefault="1" showInWebsite="1" showInStore="1"></field>
+            </group>
+        </section>
+    </system>
+</config>

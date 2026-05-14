@@ -1,0 +1,43 @@
+{
+    "apollo_targetbase": {
+        "column": {
+            "entity_id": true,
+            "store_id": true,
+            "customer_id": true,
+            "contact_preference": true,
+            "is_registration": true,
+            "is_address_change": true,
+            "order_id": true,
+            "status": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "apollo_targetbase_order": {
+        "column": {
+            "entity_id": true,
+            "store_id": true,
+            "customer_id": true,
+            "order_type": true,
+            "order_id": true,
+            "created_at": true,
+            "coupon_code": true,
+            "payment_method": true,
+            "tax_amount": true,
+            "shipping_amount": true,
+            "grand_total": true,
+            "product_brand": true,
+            "product_sku": true,
+            "product_name": true,
+            "product_qty_ordered": true,
+            "product_price": true,
+            "is_complete": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

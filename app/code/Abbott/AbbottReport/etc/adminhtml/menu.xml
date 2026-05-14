@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Abbott_AbbottReport::abbott_reports" title="Abbott Reports" module="Abbott_AbbottReport" sortOrder="50" resource="Abbott_AbbottReport::abbott_reports" />
+        <add id="Abbottstore_Reports::report_sales" title="Sales Report" module="Abbott_AbbottReport" sortOrder="10" parent="Abbott_AbbottReport::abbott_reports" action="abbottreport/report/salesreport" resource="Abbott_AbbottReport::report_sales"/>
+       	<add id="Abbottstore_Reports::report_gratis" title="Gratis Report" module="Abbott_AbbottReport" sortOrder="20" parent="Abbott_AbbottReport::abbott_reports" action="abbottreport/report/gratis" resource="Abbott_AbbottReport::report_gratis"/>
+	    <add id="Abbottstore_Reports::report_tax" title="Tax Detailed Report" module="Abbott_AbbottReport" sortOrder="30" parent="Abbott_AbbottReport::abbott_reports" action="abbottreport/report/tax" resource="Abbott_AbbottReport::report_promo"/>
+	    <add id="Abbottstore_Reports::report_promo" title="Promo Detailed Report" module="Abbott_AbbottReport" sortOrder="40" parent="Abbott_AbbottReport::abbott_reports" action="abbottreport/report/promo" resource="Abbott_AbbottReport::report_tax"/>
+	    <add id="Abbottstore_Reports::report_product_subscription" title="Product Subscription Report" module="Abbott_AbbottReport" sortOrder="50" parent="Abbott_AbbottReport::abbott_reports" action="abbottreport/report/productsubscription" resource="Abbott_AbbottReport::report_product_subscription"/>
+	    <add id="Abbottstore_Reports::report_customer_subscription" title="Customer Subscription Report" module="Abbott_AbbottReport" sortOrder="60" parent="Abbott_AbbottReport::abbott_reports" action="abbottreport/report/customersubscription" resource="Abbott_AbbottReport::report_customer_subscription"/>
+    </menu>
+</config>

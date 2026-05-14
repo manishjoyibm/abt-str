@@ -1,0 +1,48 @@
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
+<div class="thankyou-wrapper">
+  <div class="checkout-page-title-wrapper thank-you-page">
+    <div class="icon_thank_you_01">
+      <img src="<?php echo $this->getViewFileUrl('Magento_Checkout::images/icon_01.svg'); ?>" />
+    </div>
+    <h1 class="page-title">Thank you for your purchase</h1>
+  </div>
+  <div class="checkout-success">
+      <?php if ($block->getOrderId()) :?>
+          <?php if ($block->getCanViewOrder()) :?>
+              <p><?= $block->escapeHtml(__('Your order number is: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeUrl($block->getViewOrderUrl()), $block->getOrderId())), ['a', 'strong']) ?></p>
+          <?php  else :?>
+              <p><?= $block->escapeHtml(__('Your order number is: <span>%1</span>.', $block->getOrderId()), ['span']) ?></p>
+          <?php endif;?>
+              <p><?= $block->escapeHtml(__('We\'ll email you an order confirmation with details and tracking info')) ?></p>
+      <?php endif;?>
+      <?php if ($block->isSSM()) { ?>
+            <div class="actions-toolbar">
+                <div class="primary">
+                    <a class="action primary continue" href="<?= $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl() ?>"><span><?= $block->escapeHtml(__('Continue Shopping')) ?></span></a>
+                </div>
+            </div>
+        <?php } else { ?>
+              <p class="success_note">Join Similac Rewards for up to $400 in benefits and support throughout your journey</p>
+            <div class="actions-toolbar">
+                <div class="primary">
+                  <a class="action primary continue" href="<?= $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl().$this->helper('Abbott\MyAccount\Helper\Data')->getRedirectConfig('aem_join_ssm_on_checkout_page') ?>">
+                    <span><?= $block->escapeHtml(__('JOIN SIMILAC REWARDS')) ?></span>
+                  </a>
+                </div>
+            </div>
+        <?php } ?>
+      </div>
+  <?= $block->getAdditionalInfoHtml() ?>
+</div>
+<script type="text/javascript">
+require(['jquery', 'jquery/ui'], function($){	
+	   	$.ajax({
+            url: "/delaycustomer/customer/update",
+            type: "POST",
+            showLoader: false,
+            cache: false,
+            success: function(data){
+            }
+        });
+	});
+</script>

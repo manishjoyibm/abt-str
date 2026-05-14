@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" sortOrder="20" translate="label">
+            <label>Abbott</label>
+        </tab>
+        <section id="abbott_disable_gq_api" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Disable API</label>
+            <tab>abbott</tab>
+            <resource>Magento_Config::config</resource>
+            <group id="grpahql_api"  showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Disable GraphQl API's</label>                
+                <field id="enable_create_customer" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Create Customer API</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="enable_isemail_available" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>IsEMailAvailable API</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>   
+
+                 <field id="enable_sendemailto_friend" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>SendEmailToFriend API</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>  
+                
+            </group>
+        </section>
+    </system>
+</config>

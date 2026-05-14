@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceContainer name="content">
+          <referenceBlock name="aw_sarp2.customer.subscriptions.edit.plan">
+              <action method="setTemplate">
+                  <argument name="path" xsi:type="string">Aheadworks_Sarp2::customer/subscriptions/edit/plan.phtml</argument>
+              </action>
+          </referenceBlock>
+        </referenceContainer>
+    </body>
+</page>

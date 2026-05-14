@@ -1,0 +1,12 @@
+<?php
+use Abbott\OrderManagement\Helper\Data;
+use Magento\Sales\Block\Order\Info;
+
+?>
+<?php /** @var $block Info */ ?>
+
+<span class="order-status">
+    <?= $block->escapeHtml(
+    $this->helper(Data::class)->getOrderStatus($block->getOrder()->getStatusLabel())
+    ) ?>
+</span>

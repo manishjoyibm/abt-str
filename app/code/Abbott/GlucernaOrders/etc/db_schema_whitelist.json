@@ -1,0 +1,25 @@
+{
+    "apollo_glucerna_subscription_plans": {
+        "column": {
+            "managesubscription_id": true,
+            "plan_code": true,
+            "plan_name": true,
+            "plan_label": true,
+            "trial_period": true,
+            "plan_value": true,
+            "plan_price": true,
+            "plan_shipping_rate": true,
+            "is_trial_plan": true,
+            "is_default_plan": true,
+            "is_active_plan": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "eav_attribute_option_value": {
+        "column": {
+            "value": true
+        }
+    }
+}

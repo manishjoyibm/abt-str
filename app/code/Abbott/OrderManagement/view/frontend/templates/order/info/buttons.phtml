@@ -1,0 +1,80 @@
+<?php
+$viewModel = $block->getData('view_model');
+$bufferTime = $this->helper(\Abbott\OrderManagement\Helper\Data::class)->getTime();
+$is_enable = $this->helper(\Abbott\OrderManagement\Helper\Data::class)->getEnable();
+?>
+<div class="actions">
+    <?php $_order = $block->getOrder() ?>
+    <?php if ($this->helper('Magento\Sales\Helper\Reorder')->canReorder($_order->getEntityId()) && !$this->helper(\Abbott\OrderManagement\Helper\Data::class)->getIsTrial($_order)) : ?>
+        <?php if ($viewModel->getOrderOnCall($_order)) { ?>
+            <a href="#" data-post='<?php
+            /* @escapeNotVerified */ echo
+            $this->helper(\Magento\Framework\Data\Helper\PostHelper::class)
+                ->getPostData($block->getReorderUrl($_order))
+            ?>' class="action order">
+                <span><?php /* @escapeNotVerified */ echo __('Reorder') ?></span>
+            </a>
+        <?php } ?>
+    <?php endif ?>
+    <a class="action print"
+       href="<?php /* @escapeNotVerified */ echo $block->getPrintUrl($_order) ?>"
+       onclick="this.target = '_blank';">
+        <span><?php /* @escapeNotVerified */ echo __('Print Order') ?></span>
+    </a>
+    <?php
+    $orderCreatedTime = $_order->getCreatedAt();
+    $currentTime = $this->helper(\Abbott\OrderManagement\Helper\Data::class)->getCurrentDate();
+    $timeDiffInSeconds = strtotime($currentTime) - strtotime($orderCreatedTime);
+    ?>
+    <?php if ($is_enable == 1 && ($_order->getStatusLabel() == 'Pending' || $_order->getStatusLabel() == 'Processing') && $timeDiffInSeconds < $bufferTime) : ?>
+        <a class="action cancel" href="javascript:void(0);">
+            <span><?php /* @escapeNotVerified */ echo __('Cancel') ?></span>
+        </a>
+        <div style="display:none;" class="popup-form">
+            <form class="form cancel-order"
+                  action="<?php /* @escapeNotVerified */ echo $this->helper(\Abbott\OrderManagement\Helper\Data::class)->getFormAction($_order); ?>"
+                  method="post">
+                <div class="fieldset">
+                    <div class="field note no-label order-q"><?php /* @escapeNotVerified */ echo __('Are you sure you want to cancel this order?') ?><br>
+                        <span class="order-id"><?php /* @escapeNotVerified */ echo __('Order #') ?><?php /* @escapeNotVerified */ echo $_order->getRealOrderId() ?></span></div>
+                </div>
+            </form>
+        </div>
+        <script type = 'text/javascript'>
+            require(
+                [
+                    'jquery',
+                    'Magento_Ui/js/modal/modal'
+                ],
+                function (
+                    $,
+                    modal
+                ) {
+                    var options = {
+                        type: 'popup',
+                        buttons: [{
+                            text: $.mage.__('Yes'),
+                            class: 'btn-yes',
+                            click: function () {
+                                $('.cancel-order').submit();
+                            }
+                        }, {
+                            text: $.mage.__('No'),
+                            class: 'btn-no',
+                            click: function () {
+                                this.closeModal();
+                            }
+                        }]
+                    };
+
+                    var popup = modal(options, $('.popup-form'));
+                    $(".cancel").on('click', function () {
+                        $(".popup-form").modal("openModal");
+                    });
+
+                }
+            );
+        </script>
+    <?php endif ?>
+    <?php echo $block->getChildHtml(); ?>
+</div>

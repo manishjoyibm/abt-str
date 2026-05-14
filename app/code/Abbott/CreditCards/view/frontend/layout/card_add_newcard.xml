@@ -1,0 +1,29 @@
+<?xml version="1.0" ?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+	<update handle="customer_account"/>
+	<body>
+		<referenceBlock name="customer_account_navigation">
+			<action method="setActive">
+				<argument name="path" xsi:type="string">vault/cards/listaction</argument>
+			</action>
+		</referenceBlock>
+		<referenceContainer name="content">
+			<block class="Abbott\CreditCards\Block\Address\Edit" name="cc.add.newcard" template="Abbott_CreditCards::add/new.phtml" cacheable="false">
+				<container name="form.my.credit.card.recaptcha">
+					<block class="Magento\ReCaptchaUi\Block\ReCaptcha" name="recaptcha" after="-" template="Magento_ReCaptchaFrontendUi::recaptcha.phtml" ifconfig="recaptcha_frontend/type_for/mycreditcardform">
+						<arguments>
+							<argument name="recaptcha_for" xsi:type="string">mycreditcardform</argument>
+							<argument name="jsLayout" xsi:type="array">
+								<item name="components" xsi:type="array">
+									<item name="recaptcha" xsi:type="array">
+										<item name="component" xsi:type="string">Abbott_CreditCards/js/reCaptchaPaypalCustom</item>
+									</item>
+								</item>
+							</argument>
+						</arguments>
+					</block>
+				</container>
+			</block>
+		</referenceContainer>
+	</body>
+</page>

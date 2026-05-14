@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="page.main.title" remove="true"/>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Sarp2\Block\Checkout\Onepage\Success" name="checkout.success" template="Magento_Checkout::success.phtml" cacheable="false">
+                <container name="order.success.additional.info" label="Order Success Additional Info">
+                    <block class="Aheadworks\Sarp2\Block\Checkout\Onepage\Success" name="onepage.success.aw_sarp2_profiles_info" template="Aheadworks_Sarp2::checkout/success/profiles_info.phtml"/>
+                </container>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

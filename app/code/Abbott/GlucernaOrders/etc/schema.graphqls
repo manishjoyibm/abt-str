@@ -1,0 +1,47 @@
+type Query {
+    subscription (
+        sku: String @doc(description: "Sku Id of the product")
+        customer_email: String @doc(description:"Customer Email if customer is logged in")
+    ): Subscription @resolver(class: "Abbott\\GlucernaOrders\\Model\\Resolver\\GlucernaOrders") @doc(description: "It provides the inventory details of the product.")
+}
+
+type Subscription {
+    trial_eligible: String @doc(description: "Gives whether the customer is eligible for trial or not")
+    flavors: [FlavorDetails] @doc(description: "Gives different flavor combinations")
+    combinations: [Combinations] @doc(description: "Gives different flavor combinations")
+}
+
+type Combinations {
+    combination: String @doc(description: "Gives product combinations")
+    plans : [PlanDetails] @doc(description: "Gives the plan details")
+}
+
+type PlanDetails {
+    plan: String @doc(description: "Gives plan type")
+    product_id: Int @doc(description: "Gives the product Id")
+    sku: String @doc(description: "Sku Id of the subscription product")
+    name: String @doc(description: "Name of the subscription product")
+    aw_sarp2_subscription_type: Int @doc(description: "Subscription option id")
+    delivery_split: [DeliverySplit] @doc(description: "Gives the delivery split quantity")
+    price: Float @doc(description: "Gives the subscription product price")
+    subscription_msg: String @doc(description: "Gives the monthly subscription message")
+    subscription_sku: String @doc(description: "Gives the subscription sku for the trial sku")
+    is_trial: String @doc(description: "Gives whether the product is trial or not")
+    trial_period: Int @doc(description: "Gives the trial period of the product")
+    trial_price: Float @doc(description: "Gives the price for trial products")
+    original_price: Float @doc(description: "Gives the strikeoff price for trial products")
+    shipping_price: Float @doc(description: "Gives the shipping price for products")
+    plan_qty: Int @doc(description: "Gives the product qty of the plan")
+    backorders: String @doc(description: "Gives Backorder value and product qty")
+    qty: Int @doc(description: "Gives Quantity of product")
+}
+
+type DeliverySplit {
+    split_qty: String @doc(description: "split qty")
+    split_flavor: String @doc(description: "product flavor")
+}
+
+type FlavorDetails {
+    flavor: String @doc(description: "Gives base flavor")
+    backorder_message: String @doc(description: "Gives backorder message for the flavor")
+}

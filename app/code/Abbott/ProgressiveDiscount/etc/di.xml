@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Aheadworks\Sarp2\Api\ProfileRepositoryInterface">
+        <plugin name="profileInfo" type="Abbott\ProgressiveDiscount\Plugin\ProfileRepositoryInterfacePlugin"/>
+    </type>
+    <preference for="Abbott\ProgressiveDiscount\Api\Data\ManageMonthlySubscriptionsSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Abbott\ProgressiveDiscount\Api\Data\ManageMonthlySubscriptionsnterface" type="Abbott\ProgressiveDiscount\Model\ManageMonthlySubscriptions" />
+
+    <preference for="Abbott\ProgressiveDiscount\Api\ManageMonthlySubscriptionsRepositoryInterface" type="Abbott\ProgressiveDiscount\Model\ManageMonthlySubscriptionsRepository" />
+    <preference for="Abbott\ProgressiveDiscount\Api\ManageDiscountCodesRepositoryInterface" type="Abbott\ProgressiveDiscount\Model\ManageDiscountCodesRepository"/>
+    <preference for="Abbott\ProgressiveDiscount\Api\Data\ManageDiscountCodesInterface" type="Abbott\ProgressiveDiscount\Model\Data\ManageDiscountCodes"/>
+    <preference for="Abbott\ProgressiveDiscount\Api\Data\ManageDiscountCodesSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+    <preference for="Aheadworks\Sarp2\Model\Profile\ToOrder" type="Abbott\ProgressiveDiscount\Model\Profile\ToOrder"/>
+    <preference for="Aheadworks\Sarp2\Engine\Profile\PaymentsInfo\Provider" type="Abbott\ProgressiveDiscount\Engine\Profile\PaymentsInfo\Provider"/>
+    <preference for="Magento\Checkout\Controller\Cart\Add" type="Abbott\ProgressiveDiscount\Controller\Cart\Add"/>
+    <preference for="Magento\Sales\Block\Order\Totals" type="Abbott\ProgressiveDiscount\Block\Order\Totals"/>
+    <preference for="Aheadworks\Sarp2\Model\Profile\Item\ToOrderItem" type="Abbott\ProgressiveDiscount\Model\Profile\Item\ToOrderItem"/>
+    <preference for="Aheadworks\Sarp2\Model\Profile\ToMergedOrder" type="Abbott\ProgressiveDiscount\Model\Profile\ToMergedOrder"/>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="abbott_progressivediscount_progressivediscount_listing_data_source" xsi:type="string">Abbott\ProgressiveDiscount\Model\ResourceModel\ManageMonthlySubscriptions\Grid\Collection</item>
+           </argument>
+        </arguments>
+    </type>
+    <type name="Abbott\ProgressiveDiscount\Model\ResourceModel\ManageMonthlySubscriptions\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">manage_monthly_subscription</argument>
+            <argument name="eventPrefix" xsi:type="string">monthly_subscriptions_collection</argument>
+            <argument name="eventObject" xsi:type="string">monthly_subscriptions_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Abbott\ProgressiveDiscount\Model\ResourceModel\ManageMonthlySubscriptions</argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Abbott\ProgressiveDiscount\Api\Data\ManageMonthlySubscriptionsInterface" xsi:type="string">Abbott\ProgressiveDiscount\Api\ManageMonthlySubscriptionsRepositoryInterface</item>
+             </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Abbott\ProgressiveDiscount\Api\Data\ManageMonthlySubscriptionsInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">manage_monthly_subscription</item>
+                    <item name="identifierField" xsi:type="string">row_id</item>
+                </item>
+           </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Abbott\ProgressiveDiscount\Api\Data\ManageMonthlySubscriptionsInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+           </argument>
+        </arguments>
+    </type>
+    <virtualType name="Abbott\ProgressiveDiscount\Model\Api\SearchCriteria\CollectionProcessor\ManageMonthlySubscriptionsFilterProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="customFilters" xsi:type="array">
+                <item name="store_id" xsi:type="object">Abbott\ProgressiveDiscount\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\ManageMonthlySubscriptionsStoreFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Abbott\ProgressiveDiscount\Model\Api\SearchCriteria\ManageMonthlySubscriptionsCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Abbott\ProgressiveDiscount\Model\Api\SearchCriteria\CollectionProcessor\ManageMonthlySubscriptionsFilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Abbott\ProgressiveDiscount\Model\ManageMonthlySubscriptionsRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Abbott\ProgressiveDiscount\Model\Api\SearchCriteria\ManageMonthlySubscriptionsCollectionProcessor</argument>
+        </arguments>
+    </type>
+    <virtualType name="Abbott\ProgressiveDiscount\Model\ResourceModel\ManageDiscountCodes\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">manage_discount_rules</argument>
+            <argument name="resourceModel" xsi:type="string">Abbott\ProgressiveDiscount\Model\ResourceModel\ManageDiscountCodes\Collection</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="abbott_progressivediscount_managediscountcodes_listing_data_source" xsi:type="string">Abbott\ProgressiveDiscount\Model\ResourceModel\ManageDiscountCodes\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Magento\SalesRule\Model\Rule\Condition\Product" type="Abbott\ProgressiveDiscount\Model\Rule\Condition\Product" />
+    <type name="Magento\SalesRule\Model\Rule\Condition\Product">
+        <plugin name="itemActionCondition" type="Abbott\ProgressiveDiscount\Model\Rule\Condition\ProductAction"/>
+    </type>
+</config>

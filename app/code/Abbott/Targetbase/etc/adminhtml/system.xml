@@ -1,0 +1,168 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="abbott" sortOrder="20" translate="label">
+			<label>Abbott</label>
+		</tab>
+		<section id="targetbase_integration" showInDefault="1" sortOrder="10" translate="label">
+			<label>Targetbase Integration</label>
+			<tab>abbott</tab>
+			<resource>Abbott_Targetbase::config_section_targetbase</resource>
+			<group id="targetbase" showInDefault="1" sortOrder="10" translate="label">
+				<label>Targetbase Settings</label>
+				<field id="targetbase_order_filename" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Targetbase Order Filename</label>
+				</field>
+				<field id="targetbase_customer_filename" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Targetbase Customer Filename</label>
+				</field>
+				<field id="targetbase_folder_order" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+					<label>Targetbase in folder(Order)</label>
+					<comment>Trailing / at end is required, folder is inside var folder</comment>
+				</field>
+				<field id="targetbase_archive_folder_order" showInDefault="1" sortOrder="13" translate="label" type="text">
+					<label>Targetbase in Archive folder(Order)</label>
+					<comment>Trailing / at end is required, folder is inside var folder</comment>
+				</field>
+
+				<field id="targetbase_folder_customer" showInDefault="1" sortOrder="14" translate="label" type="text">
+					<label>Targetbase in folder(Customer)</label>
+					<comment>Trailing / at end is required, folder is inside var folder</comment>
+				</field>
+				<field id="targetbase_archive_folder_customer" showInDefault="1" sortOrder="15" translate="label" type="text">
+					<label>Targetbase in Archive folder(Customer)</label>
+					<comment>Trailing / at end is required, folder is inside var folder</comment>
+				</field>
+				<field id="targetbase_sftp_archive_folder_order" showInDefault="1" sortOrder="16" translate="label" type="text">
+					<label>Targetbase in SFTP Archive folder(Order)</label>
+					<comment> / at front and end is required, folder is in SFTP location</comment>
+				</field>
+                <field id="targetbase_sftp_archive_folder_customer" showInDefault="1" sortOrder="16" translate="label" type="text">
+                    <label>Targetbase in SFTP Archive folder(Customer)</label>
+                    <comment> / at front and end is required, folder is in SFTP location</comment>
+                </field>
+				<field id="targetbase_archive_folder_deldays" showInDefault="1" sortOrder="16" translate="label" type="text">
+					<label>Delete From Archive After Days</label>
+					<comment/>
+				</field>
+				<field id="targetbase_sftp_host" showInDefault="1" sortOrder="17" translate="label" type="text">
+					<label>Targetbase in SFTP HOST</label>
+					<comment/>
+				</field>
+				<field id="targetbase_sftp_port" showInDefault="1" sortOrder="18" translate="label" type="text">
+					<label>Targetbase in SFTP port</label>
+					<comment/>
+				</field>
+				<field id="targetbase_sftp_username" showInDefault="1" sortOrder="19" translate="label" type="text">
+					<label>Targetbase in SFTP Username</label>
+					<comment/>
+				</field>
+
+                <field id="targetbase_sftp_private_key" showInDefault="1" sortOrder="20" translate="label" type="textarea">
+					<label>Targetbase SFTP Private Key</label>
+					<comment/>
+				</field>
+
+                <field id="targetbase_sftp_private_password" showInDefault="1" sortOrder="20" translate="label" type="obscure">
+                    <label>Targetbase SFTP Private Key Password</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+
+				<field id="targetbase_pgp_public_key" translate="label" type="textarea" sortOrder="21" showInDefault="1">
+					<label>Targetbase in PGP Public Key</label>
+					<backend_model>Abbott\Targetbase\Model\Config\Backend\Publickey</backend_model>
+				</field>
+				<field id="targetbase_pgp_private_key" translate="label" type="textarea" sortOrder="22" showInDefault="1">
+					<label>Targetbase in PGP Private Key</label>
+					<comment>This is for decryption purpose. To check the encrypted file , before sent to Targetbase SFTP location. Can be used in QA or Staging Environment</comment>
+					<backend_model>Abbott\Targetbase\Model\Config\Backend\Privatekey</backend_model>
+				</field>
+				<field id="targetbase_pgp_public_keyname" showInDefault="1" sortOrder="23" translate="label" type="obscure">
+					<label>Targetbase in PGP Public Keyname</label>
+					<comment/>
+					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+				</field>
+				<field id="targetbase_pgp_passphrase" showInDefault="1" sortOrder="24" translate="label" type="obscure">
+					<label>Targetbase in PGP Passphrase</label>
+					<comment/>
+					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+				</field>
+				<field id="targetbase_last_order_file" showInDefault="1" sortOrder="25" translate="label" type="text">
+					<label>Last Order File Synced</label>
+					<frontend_model>Abbott\Targetbase\Block\System\Config\SyncFileField</frontend_model>
+					<can_be_empty>1</can_be_empty>
+					<comment/>
+				</field>
+				<field id="targetbase_last_customer_file" showInDefault="1" sortOrder="26" translate="label" type="text">
+					<label>Last Customer File Synced</label>
+					<frontend_model>Abbott\Targetbase\Block\System\Config\SyncFileField</frontend_model>
+					<can_be_empty>1</can_be_empty>
+					<comment/>
+				</field>
+                <field id="targetbase_onetime" showInDefault="1" sortOrder="27" translate="label" type="select">
+                    <label>One Time Data Sync</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>One time data sync after apollo launch</comment>
+                </field>
+                <field id="targetbase_onetime_date" showInDefault="1" sortOrder="28" translate="label" type="date">
+                    <label>One Time Data Sync Date</label>
+                    <frontend_model>Abbott\Targetbase\Block\Adminhtml\System\Config\Date</frontend_model>
+                    <comment>One time data sync after apollo launch Date</comment>
+                    <depends>
+                        <field id="targetbase_integration/targetbase/targetbase_onetime">1</field>
+                    </depends>
+                </field>
+                <field id="targetbase_filecreate_expr" translate="label" type="text" sortOrder="29" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Expression for TargetBase File Create</label>
+                    <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                </field>
+                <field id="targetbase_filesync_expr" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Expression for TargetBase File Sync</label>
+                    <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                </field>
+				<field id="timeout" showInDefault="1" sortOrder="18" translate="label" type="text">
+					<label>SFTP Connection Timeout</label>
+					<comment>Timeout in Seconds, Ex. 30.</comment>
+				</field>
+			</group>
+			<group id="targetbase_file_configuration" showInDefault="1" sortOrder="20" translate="label">
+				<label>Targetbase File Settings</label>
+				<field id="targetbase_file_create_button" translate="Create File" type="button" sortOrder="27" showInDefault="1">
+					<label>Create Targetbase Files</label>
+					<frontend_model>Abbott\Targetbase\Block\System\Config\Button</frontend_model>
+				</field>
+				<field id="targetbase_file_sync_button" translate="Sync File" type="button" sortOrder="28" showInDefault="1">
+					<label>Sync Targetbase Files</label>
+					<frontend_model>Abbott\Targetbase\Block\System\Config\SyncButton</frontend_model>
+				</field>
+				<field id="targetbase_file_decrypt_button" translate="Sync File" type="button" sortOrder="29" showInDefault="1">
+					<label>Targetbase Files Decrypt</label>
+					<frontend_model>Abbott\Targetbase\Block\System\Config\DecryptButton</frontend_model>
+				</field>
+				<field id="targetbase_connection_check_button" translate="Connection Check" type="button" sortOrder="30" showInDefault="1">
+					<label>Targetbase SFTP connection Check</label>
+					<frontend_model>Abbott\Targetbase\Block\System\Config\ConnectionCheckButton</frontend_model>
+				</field>
+			</group>
+			<group id="targetbase_email_template" showInDefault="1" sortOrder="30" translate="label">
+				<label>Targetbase Email Settings</label>
+				<field id="is_enabled" translate="label" type="select" sortOrder="30" showInDefault="1" >
+					<label>Enable Mails</label>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="receiver_email" translate="label" type="textarea" sortOrder="31" showInDefault="1" >
+					<label>Receiver Email</label>
+					<comment>Please provide the values separeted by commas ex: test1@example.com,test2@example.com</comment>
+				</field>
+				<field id="email_template" translate="label" type="select" sortOrder="32" showInDefault="1" canRestore="1">
+					<label>Targetbase Email Template</label>
+					<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+				</field>
+				<field id="report_email_template" translate="label" type="select" sortOrder="32" showInDefault="1" canRestore="1">
+					<label>Targetbase Report Email Template</label>
+					<source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+				</field>
+			</group>
+		</section>
+	</system>
+</config>

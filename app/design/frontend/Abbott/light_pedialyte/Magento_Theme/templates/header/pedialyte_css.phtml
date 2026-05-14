@@ -1,0 +1,30 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl().'etc.clientlibs/abbott-platform/clientlibs/clientlib-themes/theme4.min.css'?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl().'etc.clientlibs/an/pedialyte_com/clientlibs/clientlib-pedialyte_com-site.min.css'?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl().'etc.clientlibs/abbott-platform/clientlibs/clientlib-site.min.css'?>">
+<?php
+/**
+ *  @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+    $baseUrl = $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl();
+    $abbottStoreLibsUrl = $baseUrl.'etc.clientlibs/an/pedialyte_com/clientlibs/clientlib-pedialyte_com-site.min.js';
+    $abbottStoreLibsUrlPreload = $baseUrl.'etc.clientlibs/an/pedialyte_com/clientlibs/clientlib-pedialyte_com-site-preload.min.js';
+    $abbottStoreLibsSite = $baseUrl.'etc.clientlibs/abbott-platform/clientlibs/clientlib-site.min.js';
+
+$scriptString = <<<script
+    require(["jquery","js/jquery.cookie.min"],function(jQuery) {
+        $ = jQuery;
+    });
+    script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+<?= /* @noEscape */ $secureRenderer->renderStyleAsTag('font-size:100%', 'html') ?>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "<?php echo $abbottStoreLibsUrl ?>": "",
+        "<?php echo $abbottStoreLibsUrlPreload ?>": "",
+        "<?php echo $abbottStoreLibsSite ?>": ""
+    }
+}
+</script>
+

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!--
+  Frontend event observers
+  @category Abbott
+  @package  Abbott_Customerhistory
+-->
+<!-- Only the timeout detector; explicit logout is handled by core -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+
+<!-- Session logout -->
+    <event name="controller_action_predispatch">
+        <observer name="abbott_customerhistory_session_timeout"
+            instance="Abbott\Customerhistory\Observer\SessionTimeoutToCustomerLog"/>
+    </event>
+
+    
+<!-- Explicit logout -->
+    <event name="customer_logout">
+        <observer name="abbott_explicit_logout_to_customer_log"
+                  instance="Abbott\Customerhistory\Observer\ExplicitLogoutToCustomerLog"/>
+    </event>
+
+</config>
+

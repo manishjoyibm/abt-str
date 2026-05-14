@@ -1,0 +1,56 @@
+<?php
+/**
+ * @var \Abbott\CustomerTwoFactorAuth\Block\Customer\LoginSecurity $block
+ */
+?>
+<div class="block block-addresses-list">
+    <div class="block-title"><strong><?= $escaper->escapeHtml(__('Two Factor Authentication')); ?></strong></div>
+    <div class="block-content">
+        <?php if ($block->isCustomerTwoFAEnabled()): ?>
+            <p class="empty">
+            <?= $escaper->escapeHtml(__('Status')); ?>:
+            <strong class="success-enabled">
+                <?php echo $escaper->escapeHtml(__('Enabled')); ?>
+            </strong>        
+            </p>
+        <?php else: ?>
+            <p class="empty">
+            <?= $escaper->escapeHtml(__('Status')); ?>:
+            <strong>
+                <?php echo $escaper->escapeHtml(__('Disabled'))?>
+            </strong>        </p>
+            <div class="empty message warning">
+                <span>
+                    <?= $escaper->escapeHtml(__('To enhance account security, you can enable two factor authentication for an extra layer of verification on the login page.')); ?>
+                </span>
+            </div>
+        <?php endif; ?>
+    </div>
+</div>
+
+<div class="actions-toolbar">
+    <div class="primary">
+        <?php if ($block->isCustomerTwoFAEnabled()): ?>
+            <a href="<?= $escaper->escapeHtmlAttr($block->getUrl('*/*/disable')); ?>"
+               alt=""
+               class="action primary add"
+            >
+                <span><?= $escaper->escapeHtml(__('Disable')); ?></span>
+            </a>
+        <?php else: ?>
+            <a href="<?= $escaper->escapeHtmlAttr($block->getUrl('*/*/enable')); ?>"
+               alt=""
+               class="action primary add"
+            >
+                <span><?= $escaper->escapeHtml(__('Enable')); ?></span>
+            </a>
+        <?php endif; ?>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Abbott_CustomerTwoFactorAuth/js/twofactorauth": {}
+        }
+    }
+</script>

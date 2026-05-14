@@ -1,0 +1,33 @@
+type Mutation {
+    processQrCode(input: QrCodeInput!): QrCode @resolver(class: "Abbott\\GPAS\\Model\\Resolver\\ProcessQrCode") @doc(description: "Process QR Code")
+}
+input QrCodeInput {
+    code: String @doc(description: "QR Code value")
+    lat: String @doc(description: "Location Latitude")
+    long: String @doc(description: "Location Longitude")
+}
+type QrCode @doc(description: "QrCode contains information about QrCode"){
+    id: Int @doc(description: "The ID assigned to the qrcode object")
+    code: String @doc(description: "QR Code value")
+    additional_information: QrCodeAdditionalInformation @doc(description: "Additional Information")
+}
+
+type QrCodeAdditionalInformation @doc(description: "Additional Information") {
+    hcp: HcpAdditionalInformation @doc(description: "HCP Information")
+}
+
+type HcpAdditionalInformation @doc(description: "HCP Information") {
+    name: String @doc(description: "HCP name")
+    number: String @doc(description: "HCP number")
+    phoneNumber: String @doc(description: "HCP phone number")
+    address: HcpAddress @doc(description: "HCP address")
+}
+
+type HcpAddress @doc( description: "HCP Address" ) {
+    address1: String @doc(description: "Address 1")
+    address2: String @doc(description: "Address 2")
+    city: String @doc(description: "City")
+    state: String @doc(description: "State")
+    countryCode: String @doc(description: "Country Code")
+    postCode: String @doc(description: "Post Code")
+}

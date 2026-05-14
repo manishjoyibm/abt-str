@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <global_optout_settings>
+            <global_optout_sftp>
+                <host>qyzzcwjj2wjmq.2.dev.ent.magento.cloud</host>
+                <port>2221</port>
+                <username>GlobalOptOut</username>
+            </global_optout_sftp>            
+            <global_optout_crons>
+              <glopt_enabled>0</glopt_enabled>
+              <sync_expr>0 17 * * 5</sync_expr>               
+            </global_optout_crons>
+        </global_optout_settings>
+    </default>
+</config>

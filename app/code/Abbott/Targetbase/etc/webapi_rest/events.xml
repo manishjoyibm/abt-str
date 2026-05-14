@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success_custom">
+        <observer name="targetbase_customer_registration_logging" instance="Abbott\Targetbase\Observer\TargetbaseCustomerRegistration" />
+    </event>
+</config>

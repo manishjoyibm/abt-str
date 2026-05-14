@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Abbott_Chargeback::abbott_chargeback_log" title="Chargeback Integration" translate="title" module="Abbott_Chargeback" sortOrder="80" parent="Abbott_WorkdayFeed::system_abbott" action="abbott_chargeback/chargeback/index" resource="Abbott_Chargeback::Chargeback"/>
+    </menu>
+</config>

@@ -1,0 +1,18 @@
+<?php echo $block->getLayout()->createBlock(\Magento\Cms\Block\Block::class)->setBlockId('pedialyte_footer')->toHtml();
+
+$dataHelper = $this->helper('Abbott\CustomerTransistion\Helper\Data');
+$viewModelCookiePref = $block->getData('cp_view_model');
+$cmId = $viewModelCookiePref->getCmId();
+$baseURL = $dataHelper->getFailureUrl();
+$failureUrl = $baseURL."content/experience-fragments/an/pedialytecom/english/footer/checkout/jcr:content/root.plain.html";
+$scriptString = <<<script
+    require(["jquery","jquery/ui"],function(jQuery) {
+            jQuery(document).ready(function() {
+                jQuery("#footer-set").load("$failureUrl");
+            });
+        });
+
+    script;
+?>
+<input type="hidden" id="cmpidField" name="cmpid" value="<?php echo $cmId;?>">
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

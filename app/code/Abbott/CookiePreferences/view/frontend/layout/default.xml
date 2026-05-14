@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="require.js" template="Magento_Theme::html/head.phtml">
+            <block name="require.js.orig" class="Magento\Framework\View\Element\Template"
+                   template="Magento_Theme::page/js/require_js.phtml"/>
+            <arguments>
+                <argument name="cp_view_model" xsi:type="object">Abbott\CookiePreferences\ViewModel\CookiePrefViewModel</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

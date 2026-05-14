@@ -1,0 +1,111 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+use Avalara\AvaTax\Plugin\Model\Quote\GrandTotalDetailsSorter;
+
+// @codingStandardsIgnoreFile
+
+?>
+<?php
+$_order = $block->getOrder();
+$_source = $block->getSource();
+$_fullInfo = $this->helper('Magento\Tax\Helper\Data')->getCalculatedTaxes($_source);
+global $taxIter;
+$taxIter++;
+$customDuty = false;
+?>
+<?php if ($_fullInfo): ?>
+    <?php foreach ($_fullInfo as $info): ?>
+        <?php
+        $amount = $info['tax_amount'];
+        $title = $info['title'];
+        ?>
+        <?php if ($title === GrandTotalDetailsSorter::CUSTOMS_RATE_TITLE): ?>
+            <?php $customDuty = $info; ?>
+            <?php if ($block->displayFullSummary()): ?>
+                <tr class="totals tax details details-<?= /* @escapeNotVerified */
+                $taxIter ?> <?= ($block->getIsPlaneMode()) ? ' plane' : '' ?>">
+                    <td <?= /* @escapeNotVerified */
+                    $block->getLabelProperties() ?>>
+                        <?= $block->escapeHtml($title) ?>
+                        <br/>
+                    </td>
+                    <td <?= /* @escapeNotVerified */
+                    $block->getValueProperties() ?> rowspan="1">
+                        <?= /* @escapeNotVerified */
+                        $_order->formatPrice($amount) ?>
+                    </td>
+                </tr>
+            <?php endif; ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>
+
+
+<?php if ($block->displayFullSummary() && $_fullInfo && !$block->getIsPlaneMode()): ?>
+<tr class="totals-tax-summary">
+<?php elseif ($block->displayFullSummary() && $_fullInfo && $block->getIsPlaneMode()): ?>
+<tr class="totals-tax-summary plane">
+<?php else: ?>
+<tr class="totals-tax">
+    <?php endif; ?>
+    <div class="tax">
+            <?php if ($block->displayFullSummary()): ?>
+                <div class="detailed"><?= /* @escapeNotVerified */
+                    __('Tax') ?></div>
+            <?php else: ?>
+                <?php if ($customDuty): ?>
+                    <?= /* @escapeNotVerified */
+                    __('Import Fees') ?>
+                <?php else: ?>
+                    <div class="mark"> 
+                        <strong><?= $block->escapeHtml(__('Tax')) ?></strong> 
+                    </div>
+                <?php endif; ?>
+            <?php endif; ?>
+        <div class="amount">
+            <?php if ($block->displayFullSummary() && $customDuty): ?>
+                <strong><?= /* @escapeNotVerified */
+                $_order->formatPrice($_source->getTaxAmount() - $customDuty['tax_amount']) ?></strong>
+            <?php else: ?>
+                <strong><?= /* @escapeNotVerified */
+                $_order->formatPrice($_source->getTaxAmount()) ?></strong>
+            <?php endif; ?>
+        </div>
+    </div>
+</tr>
+
+
+<?php if ($_fullInfo && $block->displayFullSummary()): ?>
+    <?php foreach ($_fullInfo as $info): ?>
+        <?php
+        $percent = $info['percent'];
+        $amount = $info['tax_amount'];
+        $baseAmount = $info['base_tax_amount'];
+        $title = $info['title'];
+        ?>
+        <?php if ($title !== GrandTotalDetailsSorter::CUSTOMS_RATE_TITLE): ?>
+            <tr class="totals tax details details-<?= /* @escapeNotVerified */
+            $taxIter ?> <?= ($block->getIsPlaneMode()) ? ' plane' : '' ?>">
+                <td <?= /* @escapeNotVerified */
+                $block->getLabelProperties() ?>>
+                    <?= $block->escapeHtml($title) ?>
+                    <!-- BEGIN EDIT -->
+                    <?php if (!is_null($percent)): ?>
+                        <!-- END EDIT -->
+                        (<?= (float)$percent ?>%)
+                    <?php endif; ?>
+                    <br/>
+                </td>
+                <td <?= /* @escapeNotVerified */
+                $block->getValueProperties() ?> rowspan="1">
+                    <?= /* @escapeNotVerified */
+                    $_order->formatPrice($amount) ?>
+                </td>
+            </tr>
+        <?php endif; ?>
+    <?php endforeach; ?>
+<?php endif; ?>

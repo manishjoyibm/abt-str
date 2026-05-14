@@ -1,0 +1,35 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+echo $block->getLayout()->createBlock(\Magento\Cms\Block\Block::class)->setBlockId('similac_checkout_header')->toHtml(); 
+$dataHelper = $this->helper('Abbott\CustomerTransistion\Helper\Data');
+$accountHelper = $this->helper('Abbott\MyAccount\Helper\Data');
+
+$domain = $accountHelper->getCookieRedirect();
+$failureUrl = $dataHelper->getFailureUrl(). "content/experience-fragments/an/similac/global/en/header/checkout/jcr:content/root/header.plain.html?v=".$dataHelper->getAemJsVersion();
+$scriptString = <<<script
+require(["jquery","jquery/ui","jquery/jquery.cookie","jquery/jquery-storageapi"],function(jQuery) {
+	storage = jQuery.initNamespaceStorage('mage-cache-storage').localStorage;
+	if (jQuery.cookie('abt_mage_sessid') == "yes")
+	{
+		var data = jQuery.initNamespaceStorage('mage-cache-storage').localStorage.get('checkout-data');
+		if(data){
+			data.newCustomerShippingAddress = null;
+			data.shippingAddressFromData = null;
+			jQuery.initNamespaceStorage('mage-cache-storage').localStorage.set('checkout-data',data);
+	 	}
+        jQuery.cookie("abt_mage_sessid", 
+			"null", { 
+			path: "/",
+			domain: "$domain"
+		});
+	}
+
+    jQuery(document).ready(function() {
+        jQuery("#header_checkout").load("$failureUrl");
+    });
+});
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>

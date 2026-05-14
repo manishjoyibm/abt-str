@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                <resource id="Magento_Backend::stores">
+                    <resource id="Magento_Backend::stores_settings">
+                        <resource id="Magento_Config::config">
+                            <resource id="Abbott_CustomerTransition::config_myaccount" title="Customer Transition Configuration" translate="title" sortOrder="60" />
+                        </resource>
+                    </resource>
+                </resource>
+                <resource id="Abbott_ProgressiveDiscount::discount_engine" sortOrder="10" title="Discount Engine">
+                    <resource id="Abbott_ProgressiveDiscount::manage_subscription" sortOrder="10" title="Manage Subscription Month" />
+                    <resource id="Abbott_ProgressiveDiscount::manage_discount_codes" sortOrder="20" title="Manage Discount Codes">
+                        <resource id="Abbott_ProgressiveDiscount::save" sortOrder="10" title="Save Manage Discount Codes" />
+                        <resource id="Abbott_ProgressiveDiscount::delete" sortOrder="20" title="Delete Manage Discount Codes" />
+                    </resource>
+                </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

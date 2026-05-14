@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\CustomerData\Cart">
+        <plugin name="awSarp2CartCustomerData" type="Aheadworks\Sarp2\CustomerData\Plugin\Cart" sortOrder="100"/>
+    </type>
+    <type name="Magento\InstantPurchase\Controller\Button\PlaceOrder">
+        <plugin name="awSarp2InstantPurchasePlaceOrder" type="Aheadworks\Sarp2\Controller\Plugin\InstantPurchase\Button\PlaceOrder"/>
+    </type>
+    <type name="Magento\Paypal\Observer\AddPaypalShortcutsObserver">
+        <plugin name="awSarp2PaypalShortcuts" type="Aheadworks\Sarp2\Model\Payment\Paypal\Plugin\PaypalShortcuts" sortOrder="100"/>
+    </type>
+    <type name="PayPal\Braintree\Block\Paypal\Button">
+        <plugin name="awSarp2BraintreePaypalButton" type="Aheadworks\Sarp2\Block\Plugin\Braintree\Paypal\Button"/>
+    </type>
+    <type name="Magento\Customer\Block\Address\Edit">
+        <plugin name="awSarp2" type="Aheadworks\Sarp2\Plugin\Block\AddressEditPlugin"/>
+    </type>
+    <type name="Magento\Customer\Controller\Address\FormPost">
+        <plugin name="awSarp2" type="Aheadworks\Sarp2\Plugin\Controller\AddressFormPostPlugin"/>
+    </type>
+
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="aw_sarp2_checkout_config_provider" xsi:type="object">Aheadworks\Sarp2\Model\Checkout\ConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

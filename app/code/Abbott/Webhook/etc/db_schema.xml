@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="apollo_webhook" resource="default" engine="innodb" comment="Event Hook Table">
+    <column xsi:type="smallint" name="webhook_id" nullable="false" comment="Row ID" identity="true" unsigned="false"/>
+    <column xsi:type="text" name="event_name" nullable="false" comment="Event Name"/>
+    <column xsi:type="text" name="path" nullable="false" comment="Path"/>
+    <column xsi:type="datetime" name="created_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Creation Time"/>
+    <column xsi:type="datetime" name="updated_at" nullable="false" default="CURRENT_TIMESTAMP" on_update="true" comment="Modification Time"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+      <column name="webhook_id"/>
+    </constraint>
+  </table>
+</schema>

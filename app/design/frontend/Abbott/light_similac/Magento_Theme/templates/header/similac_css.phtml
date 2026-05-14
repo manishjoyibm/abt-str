@@ -1,0 +1,17 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl().'etc.clientlibs/abbott/clientlibs/clientlib-similac.min.css'?>">
+<?php
+    $baseUrl = $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl();
+    $similacStoreLibsUrl = $baseUrl.'etc.clientlibs/abbott/clientlibs/clientlib-similac.min.js';
+?>
+<script>
+    require(["jquery","js/jquery.cookie.min"],function(jQuery) {
+        $ = jQuery;
+    });
+</script>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "<?php echo $similacStoreLibsUrl ?>": ""
+    }
+}
+</script>

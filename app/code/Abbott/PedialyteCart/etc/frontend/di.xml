@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="show_shipping_progress_bar" xsi:type="object">Abbott\PedialyteCart\Model\CheckoutConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Quote\Model\Quote\Address\TotalCollector">
+        <arguments>
+            <argument name="totals" xsi:type="array">
+                <item name="pdl_discount" xsi:type="string">Abbott\PedialyteCart\Model\Total\Quote\Discount</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Address\Total">
+        <arguments>
+            <argument name="totalModels" xsi:type="array">
+                <item name="pdl_discount" xsi:type="string">Abbott\PedialyteCart\Model\Total\Quote\Discount</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

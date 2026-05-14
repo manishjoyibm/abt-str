@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+ */
+
+// @codingStandardsIgnoreFile
+/* @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\Braintree\PayPal */
+/* @var $token \Aheadworks\Sarp2\Api\Data\PaymentTokenInterface */
+/* @var $tokenDetails array */
+?>
+<div class="braintree-paypal wrapper">
+    <div class="payer-email">
+        <span><?= $block->escapeHtml($block->getPayerEmail($tokenDetails)) ?></span>
+    </div>
+    <div class="payment-type">
+        <img src="<?= /* @noEscape */ $block->getIconUrl() ?>"
+             width="<?= /* @noEscape */ $block->getIconWidth() ?>"
+             height="<?= /* @noEscape */ $block->getIconHeight() ?>"
+        >
+    </div>
+</div>

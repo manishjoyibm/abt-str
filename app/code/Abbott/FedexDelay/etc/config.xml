@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <fedex_settings>
+            <fedex_delay_configuration>
+                <is_delayed>0</is_delayed>
+                <delay_message>Please note, FedEx is currently experiencing delays, which may impact delivery times.</delay_message>
+            </fedex_delay_configuration>
+        </fedex_settings>
+    </default>
+</config>

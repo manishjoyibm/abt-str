@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Quote\Model\QuoteRepository\SaveHandler" type="Abbott\Quote\Model\QuoteRepository\SaveHandler"/>
+    <type name="Magento\Quote\Model\ShippingAddressManagement">
+        <plugin name="beforeShippingAddressManagement" type="Abbott\Quote\Plugin\Model\ShippingAddressManagementPlugin" />
+    </type>
+    <type name="Magento\Quote\Model\Quote">
+        <plugin name="beforeQuotePlugin" type="Abbott\Quote\Plugin\Model\QuotePlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\QuoteManagement">
+        <plugin name="beforeQuoteManagementPlugin" type="Abbott\Quote\Plugin\Model\QuoteManagementPlugin" />
+    </type>
+
+    <type name="Magento\Quote\Model\Quote\Item\Compare">
+        <plugin name="afterQuoteComparePlugin" type="Abbott\Quote\Plugin\Model\Quote\Item\ComparePlugin" />
+    </type>
+</config>

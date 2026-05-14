@@ -1,0 +1,94 @@
+<?php
+    $profile = $block->getProfile();
+    $shippingAddress = $profile->getShippingAddress();
+    $newAddressTitle = __('+ New Address');
+    $saveAddressTitle = __('Save Address');
+?>
+<div class="aw-sarp2__address-form">
+    <fieldset class="fieldset">
+        <legend class="legend">
+            <span><?= $block->escapeHtml(__('Current Address')) ?></span>
+        </legend>
+        <div class="aw-sarp2__current-address">
+            <?php if ($shippingAddress): ?>
+                <?= /* @noEscape */ $block->getFormattedAddress($shippingAddress) ?>
+            <?php else: ?>
+                <?= /* @noEscape */ $block->escapeHtml(__('Not Selected')) ?>
+            <?php endif; ?>
+        </div>
+    </fieldset>
+    <form class="form validate"
+          action="<?= $block->escapeUrl($block->getSaveUrl($profile->getProfileId())) ?>"
+          method="post"
+          id="form-validate"
+          data-mage-init='{"validation":{}}'>
+        <fieldset class="fieldset">
+            <?= $block->getBlockHtml('formkey') ?>
+            <div class="field customer-address required">
+                <select id="customer_address_id"
+                        title="<?= $block->escapeHtml(__('Customer Address')) ?>"
+                        name="customer_address_id"
+                        class="validate-select">
+                    <?php foreach ($block->getCustomerAddress() as $addressId => $address): ?>
+                        <option value="<?= /* @noEscape */ $addressId ? : '' ?>">
+                            <?= $block->escapeHtml($address) ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <button type="submit"
+                    class="action primary"
+                    title="<?= $block->escapeHtml($saveAddressTitle) ?>">
+                <span><?= $block->escapeHtml($saveAddressTitle) ?></span>
+            </button>
+        </fieldset>
+    </form>
+</div>
+<div class="actions-toolbar">
+    <button data-role="aw-sarp2-add-address"
+            type="button"
+            class="action secondary new-address"
+            title="<?= $block->escapeHtml($newAddressTitle) ?>">
+        <span><?= $block->escapeHtml($newAddressTitle) ?></span>
+    </button>
+</div>
+<div id="popup-mpdal" style="display:none;">
+<?php echo $this->getLayout()->createBlock("Magento\Customer\Block\Address\Edit")->setTemplate("Abbott_Sarp2::customer/subscriptions/edit/edit.phtml")->toHtml();  ?>
+</div>
+
+
+<script>
+require(
+            [
+                'jquery',
+                'Magento_Ui/js/modal/modal'
+            ],
+
+            function(
+                $,
+                modal
+            ) {
+                var options = {
+                    type: 'popup',
+                    responsive: true,
+                    innerScroll: true,
+                    title: 'New Address',
+                    buttons: [{
+                        text: $.mage.__('Continue'),
+                        class: '',
+                        click: function () {
+                            this.closeModal();
+                        }
+                    }],
+                    opened: function($Event) {
+                    $(".modal-footer").hide();                }
+                };
+
+                var popup = modal(options, $('#popup-mpdal'));
+                $(".new-address").on('click',function(){
+                    $("#popup-mpdal").modal("openModal");
+                });
+
+            }
+        );
+</script>

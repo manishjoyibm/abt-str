@@ -1,0 +1,15 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="abbott_chargeback_log" comment="abbott_chargeback_log Table" engine="innodb" resource="default">
+        <column name="chargeback_id" comment="Chargeback Id" identity="true" nullable="false" padding="10" unsigned="true" xsi:type="bigint"/>
+        <column name="order_id" comment="Chargeback Id" nullable="false" xsi:type="varchar"/>
+        <column name="status" comment="Status" nullable="false" xsi:type="varchar"/>
+        <column name="message" comment="Message" nullable="false" xsi:type="varchar"/>
+        <column name="created_at" comment="Created At" default="CURRENT_TIMESTAMP" nullable="false" xsi:type="timestamp"/>
+        <column name="updated_at" comment="Updated At" default="CURRENT_TIMESTAMP" on_update="true" nullable="false" xsi:type="timestamp"/>
+        <column name="chargeback_data" comment="Data" nullable="false" xsi:type="text"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="chargeback_id"/>
+        </constraint>
+    </table>
+</schema>

@@ -1,0 +1,31 @@
+<?php
+/** @var \Magento\Sales\Block\Adminhtml\Order\Create\Items $block */
+/** @var \Abbott\Pndp\ViewModel\CheckPndp $pndp */
+?>
+<div class="admin__page-section-title">
+    <strong class="title"><?= $escaper->escapeHtml($block->getHeaderText()) ?></strong>
+    <div class="actions">
+        <?= $block->getButtonsHtml() ?>
+    </div>
+</div>
+<?= $block->getChildHtml() ?>
+
+<?php
+$pndp = $block->getData('pndp');
+$pndpMsg = $pndp->checkPndpItem();
+if (!empty($pndpMsg)) {
+    ?>
+    <section id="order-pndp-product" class="admin__page-section test-field">
+        <div class="admin__page-section-title">
+            <span class="title">Product Information</span>
+        </div>
+        <div class="admin__page-section-content">
+            <label class="admin__field-label" for="pndp_msg"> <?= $escaper->escapeHtml($pndpMsg) ?></label>
+        </div>
+        <div class="admin__field admin__field-option">
+            <input name="pndp_msg_checkbox" type="checkbox"
+             id="order-pndp_msg_checkbox" value="1" class="admin__control-checkbox" required>
+            <label for="order-pndp_msg_checkbox" class="admin__field-label">I confirm</label>
+        </div>
+    </section>
+<?php } ?>

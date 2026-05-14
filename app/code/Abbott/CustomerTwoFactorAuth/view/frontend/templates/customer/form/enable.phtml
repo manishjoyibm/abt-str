@@ -1,0 +1,73 @@
+<?php
+/**
+ * @var \Abbott\CustomerTwoFactorAuth\Block\Customer\LoginSecurity $block
+ */
+?>
+
+<form class="form form-edit-account" action="<?= $escaper->escapeUrl($block->getUrl('*/*/enablepost')); ?>"
+      method="post" id="form-validate" autocomplete="off" data-mage-init='{"validation": {}}'>
+    <fieldset class="fieldset info">
+        <?= $block->getBlockHtml('formkey'); ?>
+        <legend class="legend">
+            <span><?= $escaper->escapeHtml(__('Enable Two Factor Authentication')); ?></span>
+        </legend><br>
+        <div class="field required" id="email-message"></div>
+        <div class="field required">
+            <label class="label" for="otp-token">
+                <span><?= $escaper->escapeHtml(__('6-digit Auth Code')); ?></span>
+            </label>
+            <div class="control">
+                <input type="text" id="otp-token" name="otp-token"
+                       title="<?= $escaper->escapeHtmlAttr(__('OTP')); ?>"
+                       class="input-text required-entry" data-validate="{required:true}"
+                       data-mage-init='{"mage/trim-input":{}}'>
+            </div>
+        </div>
+
+        <div class="resend-link-class" id="resent-hide">
+        <?= $escaper->escapeHtml(__('Didn\'t receive your code? Check your spam folder or')); ?>
+                <a href="#" class="action save disabledLink" title="Resend" id="resend-button">
+                    <span><?= $escaper->escapeHtml(__('click here to resend a new code')); ?></span>
+                </a>
+         <div class="timer">
+            <div id="clockdiv">
+                <!-- Show no. of minutes -->
+                <span class="minutes" id="minute">00 :</span>
+                <!-- Show seconds -->
+                <span class="seconds" id="second">00</span>
+            </div>
+        </div>
+        </div>
+        
+    </fieldset>
+
+    <fieldset class="fieldset info"></fieldset>
+
+    <div class="actions-toolbar">
+        <div id="cancel-div">
+            <a class="action" id="cancel" href="<?= $escaper->escapeUrl($block->getUrl('*/*')); ?>">
+                <span>&larr; <?= $escaper->escapeHtml(__('Back')); ?></span>
+            </a>
+        </div>
+        <div class="save-group">
+            <div id="save-div">
+                <button type="submit" class="action save-otp primary" title="Save" id="send-button" disabled>
+                    <span><?= $escaper->escapeHtml(__('Submit')); ?></span>
+                </button>
+            </div>
+        </div>
+    </div>
+</form>
+
+<script type="text/x-magento-init">
+    {
+       "*": {
+            "Abbott_CustomerTwoFactorAuth/js/expirytime": {},
+            "Abbott_CustomerTwoFactorAuth/js/enable-twofa":{
+                "expiryLimit" : <?= /* @noEscape */ json_encode($block->getEndTime()); ?>,
+                "sendUrl" : "<?= $escaper->escapeUrl($block->getUrl().'customer/loginsecurity/send') ?>"
+            }
+        }
+    }
+</script>
+

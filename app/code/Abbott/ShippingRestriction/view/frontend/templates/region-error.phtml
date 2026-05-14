@@ -1,0 +1,32 @@
+<?php
+$region_id = $block->getRegionId();
+$regionName = $block->getRegionNameById($region_id);
+$error = null;
+$items = $block->loadQuoteItems();
+$message = "<h4 class='ship-error-msg'>" . $escaper->escapeHtml(__("One ore more
+products in your cart does not ship to $regionName")) . "<h4>\n\n";
+$message .= "<ul class='ship-error-msg'>";
+foreach ($items as $item) {
+    $productSku = $item->getSku();
+    $productName = $item->getName();
+    $selectedStates = $item->getProduct()->getResource()->getAttributeRawValue(
+        $item->getProduct()->getId(),
+        'abbott_shipping_restriction',
+        $block->getStoreId()
+    );
+    if ($selectedStates) {
+        $explodeStates = explode(",", $selectedStates);
+        if ($selectedStates && in_array($region_id, $explodeStates)) {
+            $error = true;
+            $message .= "<li>" . $productName . " (" . $productSku . ")" . "</li>";
+
+        }
+    }
+}
+$message .= "</ul>\n";
+$message .= "<h4 class='ship-error-msg'>" . $escaper->escapeHtml(__("Please remove
+this product from cart, or change your shipping your shipping address to proceed.")) . "
+<h4>\n";
+if ($error) {
+    echo $message;
+}

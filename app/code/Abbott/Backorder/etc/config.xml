@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+            <additional_info>
+                <showdata>
+                    <backorder>1</backorder>
+                    <size>1</size>
+                    <falvour>1</falvour>
+                </showdata>  
+                <backorder_email>
+                    <enabled>0</enabled>          <!-- Disabled by default -->
+                    <allowed_store_views>1</allowed_store_views>
+                    <days_threshold>2</days_threshold> <!-- Default threshold -->
+                    <email_template>backorder_email</email_template> <!-- Default template -->
+                    <sender>general</sender>
+                    <cron_expression>0 0 * * *</cron_expression>
+                </backorder_email>      
+            </additional_info>
+    </default>
+    <stores>
+        <abbott>
+            <additional_info>
+                <showdata>
+                    <backorder>1</backorder>
+                    <size>1</size>
+                    <falvour>1</falvour>
+                </showdata>        
+            </additional_info>
+        </abbott>
+        <glucerna>
+            <additional_info>
+                <showdata>
+                    <backorder>0</backorder>
+                    <size>0</size>
+                    <falvour>0</falvour>
+                </showdata>        
+            </additional_info>
+        </glucerna>
+        <new_similac>
+            <additional_info>
+                <showdata>
+                    <backorder>0</backorder>
+                    <size>0</size>
+                    <falvour>0</falvour>
+                </showdata>        
+            </additional_info>
+        </new_similac>
+    </stores>    
+</config>

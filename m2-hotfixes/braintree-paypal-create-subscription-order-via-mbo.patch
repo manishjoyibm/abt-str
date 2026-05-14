@@ -1,0 +1,13 @@
+diff --git a/vendor/paypal/module-braintree-core/Gateway/Request/Level23ProcessingDataBuilder.php b/vendor/paypal/module-braintree-core/Gateway/Request/Level23ProcessingDataBuilder.php
+index 2832b5228..3b1e41e84 100644
+--- a/vendor/paypal/module-braintree-core/Gateway/Request/Level23ProcessingDataBuilder.php
++++ b/vendor/paypal/module-braintree-core/Gateway/Request/Level23ProcessingDataBuilder.php
+@@ -175,7 +175,7 @@ class Level23ProcessingDataBuilder implements BuilderInterface
+             }
+         }
+
+-        $baseDiscountAmount = $this->numberToString(abs($order->getBaseDiscountAmount()), 2);
++        $baseDiscountAmount = $this->numberToString(abs((float)$order->getBaseDiscountAmount()), 2);
+         if ($isPayPalMethod) {
+             /**
+              * Adds credit (refund or discount) kind as LineItems for the

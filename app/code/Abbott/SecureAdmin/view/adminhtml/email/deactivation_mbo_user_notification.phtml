@@ -1,0 +1,13 @@
+<!--@subject {{trans "Action Required: AbbottStore Magento Account Inactivity" }} @-->
+<!--@vars {
+"var name":"Customer Name",
+"var url":"Reset Password URL"
+} @-->
+<p style="font-family:Calibri; font-size:16px;text-transform: capitalize;">Dear {{var name}},</p>
+
+<p style="font-family:Calibri; font-size:16px;">
+Please note that you have not logged into your AbbottStore Magento account in the past <b> {{var notloggeddays}} days</b>. 
+If no login activity occurs within the next <b>{{var passwordNotificationDays}} days</b>, your account will be deactivated.
+If you believe this notification was sent in error, or if you need assistance, please contact our Customer Service Team at <b>1-800-258-7677</b>.
+To keep your account active, please <a href="{{var url}}">log in</a> as soon as possible.</p>
+<!-- End mail body bottom Content -->

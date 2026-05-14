@@ -1,0 +1,33 @@
+{
+    "apollo_inbound_feed": {
+        "column": {
+            "feed_id": true,
+            "file_name": true,
+            "created_at": true,
+            "updated_at": true,
+            "status": true,
+            "message": true,
+            "type": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "apollo_inbound_workday_idx": {
+        "column": {
+            "row_id": true,
+            "upi": true,
+            "record_status": true,
+            "data": true,
+            "status": true,
+            "message": true,
+            "feed_id": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "APOLLO_INBOUND_WORKDAY_IDX_FEED_ID_APOLLO_INBOUND_FEED_FEED_ID": true
+        }
+    }
+}

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <payment>
+            <braintree_paypal>
+                <group>braintree_group</group>
+                <payment_location>checkout</payment_location>
+                <button_location_cart_type_paypal_show>0</button_location_cart_type_paypal_show>
+                <button_location_cart_type_paylater_show>0</button_location_cart_type_paylater_show>
+                <button_location_cart_type_credit_show>0</button_location_cart_type_credit_show>
+
+                <button_location_checkout_type_paypal_show>1</button_location_checkout_type_paypal_show>
+                <button_location_checkout_type_credit_show>0</button_location_checkout_type_credit_show>
+                <button_location_checkout_type_paylater_show>0</button_location_checkout_type_paylater_show>
+
+                <button_location_productpage_type_paypal_show>0</button_location_productpage_type_paypal_show>
+                <button_location_productpage_type_paylater_show>0</button_location_productpage_type_paylater_show>
+                <button_location_productpage_type_credit_show>0</button_location_productpage_type_credit_show>
+
+                <button_location_cart_type_messaging_show>0</button_location_cart_type_messaging_show>
+                <button_location_checkout_type_messaging_show>0</button_location_checkout_type_messaging_show>
+                <button_location_productpage_type_messaging_show>0</button_location_productpage_type_messaging_show>
+                <group>braintree_group</group>
+            </braintree_paypal>
+            <braintree>
+                <send_line_items>0</send_line_items>
+            </braintree>
+        </payment>
+    </default>
+</config>

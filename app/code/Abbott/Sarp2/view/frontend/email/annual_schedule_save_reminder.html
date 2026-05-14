@@ -1,0 +1,84 @@
+<!--@subject {{trans "Annual Schedule & Save Reminder"}} @-->
+<!--
+Variables available:
+- customer_name
+- items_table_html (already rendered table rows)
+- account_url
+- cancel_info_url
+- contact_url
+-->
+
+{{template config_path="design/email/header_template"}}
+
+<table class="subscription_email" style="background-color:white;width:100%;border-collapse:collapse;">
+    <tr>
+        <td class="esd-structure es-p20t es-p30r es-p30l" align="left"
+            style="background-color: #BFE6F7;height: 30px;">
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="540" class="esd-container-frame" align="center"
+                            valign="top">
+                            <table cellpadding="0" cellspacing="0" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td align="left" class="esd-block-text"
+                                            style="padding: 10px 20px;">
+                                            <p
+                                                style="margin: 0;font-size: 13.5pt;
+                                                font-family: Arial, sans-serif, serif, EmojiFont;
+                                                text-transform: uppercase;font-weight: bold;">
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+
+    <tr class="email-intro bg-white">
+        <td style="padding: 20px;">
+            <p class="mb15" style="margin-top: 0; margin-bottom: 25px; font-family: Georgia,serif,sans-serif,Open Sans,Helvetica Neue,Helvetica,Arial; font-size: 11pt;">
+               <strong>{{trans "Dear %name," name=$customer_name}}</strong> 
+            </p>
+            <p style="margin-top: 0; margin-bottom: 25px; font-family: Georgia,serif,sans-serif,Open Sans,Helvetica Neue,Helvetica,Arial; font-size: 11pt;">{{trans "Thank you for your business as a Schedule & Save user over the last year. As a reminder, your Schedule & Save plan details are listed below."}}</p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <p class="mb15"></p>
+            <!-- Rendered items table -->
+            {{var items_table_html|raw}}
+        </td>
+    </tr>
+    <tr>
+        <td style="padding: 0 20px;">
+            <p class="mb25"></p>
+            <p style="margin-top: 0; margin-bottom: 25px; font-family: Georgia,serif,sans-serif,Open Sans,Helvetica Neue,Helvetica,Arial; font-size: 11pt;">
+                {{trans "If you no longer want to receive future shipments, your Schedule & Save Subscription can be canceled by logging in to your account at"}}
+                <a href="{{var account_url}}" target="_blank">{{var account_url}}</a>.
+            </p>
+
+            <p style="margin-top: 0; margin-bottom: 25px; font-family: Georgia,serif,sans-serif,Open Sans,Helvetica Neue,Helvetica,Arial; font-size: 11pt;">
+                {{trans "Your subscription will renew automatically until you fail to pay or you cancel your subscription via your My Account settings online or by following the instructions found here:"}}
+                <a href="{{var cancel_info_url}}" target="_blank">{{var cancel_info_url}}</a>.
+            </p>
+
+            <p style="margin-top: 0; margin-bottom: 25px; font-family: Georgia,serif,sans-serif,Open Sans,Helvetica Neue,Helvetica,Arial; font-size: 11pt;">
+                For additional questions or concerns and to contact Customer Service,
+                <a href="{{customVar code=abbott_contactus_url}}" target="_blank">click here</a>.
+            </p>
+            <p style="margin-top: 0; margin-bottom: 25px; font-family: Georgia,serif,sans-serif,Open Sans,Helvetica Neue,Helvetica,Arial; font-size: 11pt;">
+                Once again, thank you for your business with AbbottStore.
+            </p>
+            <p class="mb15" style="margin-top: 0; margin-bottom: 25px; font-family: Georgia,serif,sans-serif,Open Sans,Helvetica Neue,Helvetica,Arial; font-size: 11pt;" >{{trans "Kind regards,"}}</p>
+            <p class="mb25">{{trans "%store_name.com" store_name=$store.frontend_name}}
+               <a href="{{customVar code=abbott_contactus_url}}">{{trans"Customer Service Team"}}</a>
+               {{depend store_phone}} {{trans '<a href="tel:%store_phone">(%store_phone, 9AM–6PM ET, Mon–Fri)</a>' store_phone=$store_phone |raw}}{{/depend}}
+            </p>
+   
+{{template config_path="design/email/footer_template"}}

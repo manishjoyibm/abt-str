@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <status_setting>
+            <settings>
+                <enable>1</enable>
+                <payment_method>checkmo</payment_method>
+                <store_view>1</store_view>
+            </settings>
+            <days>
+                <number>45</number>
+            </days>
+            <cron>
+                <enable>1</enable>
+                <cron_expression>0 0 * * *</cron_expression>
+            </cron>
+        </status_setting>
+    </default>
+</config>

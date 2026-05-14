@@ -1,0 +1,1921 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Aheadworks\Sarp2\Api\Data\PlanInterface" type="Aheadworks\Sarp2\Model\Plan" />
+    <preference for="Aheadworks\Sarp2\Api\Data\PlanDefinitionInterface" type="Aheadworks\Sarp2\Model\Plan\Definition" />
+    <preference for="Aheadworks\Sarp2\Api\Data\PlanTitleInterface" type="Aheadworks\Sarp2\Model\Plan\Title" />
+    <preference for="Aheadworks\Sarp2\Api\Data\PlanSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\Sarp2\Api\Data\ProfileOrderSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\Sarp2\Api\Data\ProfileInterface" type="Aheadworks\Sarp2\Model\Profile" />
+    <preference for="Aheadworks\Sarp2\Api\Data\ProfileSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\Sarp2\Api\Data\ProfileItemInterface" type="Aheadworks\Sarp2\Model\Profile\Item" />
+    <preference for="Aheadworks\Sarp2\Api\Data\ProfileAddressInterface" type="Aheadworks\Sarp2\Model\Profile\Address" />
+    <preference for="Aheadworks\Sarp2\Api\Data\ProfileOrderInterface" type="Aheadworks\Sarp2\Model\Profile\Order" />
+    <preference for="Aheadworks\Sarp2\Api\Data\PrePaymentInfoInterface" type="Aheadworks\Sarp2\Model\Profile\PrePaymentInfo" />
+    <preference for="Aheadworks\Sarp2\Api\Data\PaymentTokenInterface" type="Aheadworks\Sarp2\Model\Payment\Token" />
+    <preference for="Aheadworks\Sarp2\Api\Data\PaymentTokenSearchResultsInterface" type="Magento\Framework\Api\SearchResults" />
+    <preference for="Aheadworks\Sarp2\Api\Data\SubscriptionOptionInterface" type="Aheadworks\Sarp2\Model\Product\Subscription\Option" />
+    <preference for="Aheadworks\Sarp2\Api\Data\ScheduledPaymentInfoInterface" type="Aheadworks\Sarp2\Model\Profile\ScheduledPaymentInfo" />
+    <preference for="Aheadworks\Sarp2\Api\PlanRepositoryInterface" type="Aheadworks\Sarp2\Model\PlanRepository" />
+    <preference for="Aheadworks\Sarp2\Api\ProfileRepositoryInterface" type="Aheadworks\Sarp2\Model\ProfileRepository" />
+    <preference for="Aheadworks\Sarp2\Api\ProfileManagementInterface" type="Aheadworks\Sarp2\Model\ProfileManagement" />
+    <preference for="Aheadworks\Sarp2\Api\ProfileItemRepositoryInterface" type="Aheadworks\Sarp2\Model\Profile\ItemRepository" />
+    <preference for="Aheadworks\Sarp2\Api\ProfileAddressRepositoryInterface" type="Aheadworks\Sarp2\Model\Profile\AddressRepository" />
+    <preference for="Aheadworks\Sarp2\Api\ProfileOrderRepositoryInterface" type="Aheadworks\Sarp2\Model\Profile\OrderRepository" />
+    <preference for="Aheadworks\Sarp2\Api\PaymentTokenRepositoryInterface" type="Aheadworks\Sarp2\Model\Payment\TokenRepository" />
+    <preference for="Aheadworks\Sarp2\Api\SubscriptionOptionRepositoryInterface" type="Aheadworks\Sarp2\Model\Product\Subscription\OptionRepository" />
+    <preference for="Aheadworks\Sarp2\Api\SubscriptionPriceCalculationInterface" type="Aheadworks\Sarp2\Model\Product\Subscription\PriceCalculation" />
+    <preference for="Aheadworks\Sarp2\Api\PaymentInfoManagementInterface" type="Aheadworks\Sarp2\Model\PaymentInfoManagement" />
+    <preference for="Aheadworks\Sarp2\Api\GuestPaymentInfoManagementInterface" type="Aheadworks\Sarp2\Model\GuestPaymentInfoManagement" />
+
+    <preference for="Aheadworks\Sarp2\Engine\EngineInterface" type="Aheadworks\Sarp2\Engine\Payment\Engine" />
+    <preference for="Aheadworks\Sarp2\Engine\Profile\SchedulerInterface" type="Aheadworks\Sarp2\Engine\Profile\Scheduler" />
+    <preference for="Aheadworks\Sarp2\Engine\Profile\PaymentsInfo\ProviderInterface" type="Aheadworks\Sarp2\Engine\Profile\PaymentsInfo\Provider" />
+    <preference for="Aheadworks\Sarp2\Engine\Notification\NotifierInterface" type="Aheadworks\Sarp2\Engine\Notification\Notifier" />
+    <preference for="Aheadworks\Sarp2\Api\Exception\CouldNotScheduleExceptionInterface" type="Aheadworks\Sarp2\Engine\Exception\CouldNotScheduleException" />
+    <preference for="Aheadworks\Sarp2\Api\Exception\OperationIsNotSupportedExceptionInterface" type="Aheadworks\Sarp2\Engine\Exception\OperationIsNotSupportedException" />
+
+    <preference for="Aheadworks\Sarp2\Engine\LoggerInterface" type="Aheadworks\Sarp2\Engine\Logger" />
+    <preference for="Aheadworks\Sarp2\Engine\Payment\Engine\LoggerInterface" type="Aheadworks\Sarp2\Engine\Payment\Engine\Logger" />
+
+    <type name="Magento\Catalog\Model\ProductTypes\ConfigInterface">
+        <plugin name="awSarp2ProductTypeConfig" type="Aheadworks\Sarp2\Model\Product\Type\Plugin\Config"/>
+    </type>
+    <type name="Magento\Catalog\Helper\Product\Configuration">
+        <plugin name="awSarp2ProductConfiguration" type="Aheadworks\Sarp2\Model\Product\Configuration\Plugin\Generic\Configuration"/>
+    </type>
+    <type name="Magento\Catalog\Model\Product\Type\Simple">
+        <plugin name="awSarp2ProductTypeSimple" type="Aheadworks\Sarp2\Model\Product\Type\Plugin\Type\Simple"/>
+    </type>
+    <type name="Magento\Downloadable\Model\Product\Type">
+        <plugin name="awSarp2ProductTypeDownloadable" type="Aheadworks\Sarp2\Model\Product\Type\Plugin\Type\Downloadable"/>
+    </type>
+    <type name="Magento\Catalog\Model\Product\Type\Virtual">
+        <plugin name="awSarp2ProductTypeVirtual" type="Aheadworks\Sarp2\Model\Product\Type\Plugin\Type\Virtual"/>
+    </type>
+    <type name="Magento\ConfigurableProduct\Model\Product\Type\Configurable">
+        <plugin name="awSarp2ProductTypeConfigurable" type="Aheadworks\Sarp2\Model\Product\Type\Plugin\Type\Configurable"/>
+    </type>
+    <type name="Magento\GroupedProduct\Model\Product\Type\Grouped">
+        <plugin name="awSarp2ProductTypeGrouped" type="Aheadworks\Sarp2\Model\Product\Type\Plugin\Type\Grouped"/>
+    </type>
+    <type name="Magento\Bundle\Model\Product\Type">
+        <plugin name="awSarp2ProductTypeBundle" type="Aheadworks\Sarp2\Model\Product\Type\Plugin\Type\Bundle"/>
+    </type>
+    <type name="Magento\Quote\Api\CartRepositoryInterface">
+        <plugin name="awSarp2CartRepository" type="Aheadworks\Sarp2\Model\Quote\Plugin\QuoteRepository"/>
+    </type>
+    <type name="Magento\Quote\Api\CartTotalRepositoryInterface">
+        <plugin name="awSarp2CartTotalsRepository" type="Aheadworks\Sarp2\Model\Quote\Plugin\TotalRepository"/>
+    </type>
+    <type name="Magento\Checkout\Model\Session">
+        <plugin name="awSarp2CheckoutSession" type="Aheadworks\Sarp2\Model\Checkout\Plugin\Session"/>
+    </type>
+    <type name="Magento\Checkout\Model\Session\SuccessValidator">
+        <plugin name="awSarp2CheckoutSuccessValidator" type="Aheadworks\Sarp2\Model\Checkout\Plugin\SuccessValidator"/>
+    </type>
+    <type name="Magento\Sales\Model\Order\Item">
+        <plugin name="awSarp2OrderItemOptions" type="Aheadworks\Sarp2\Model\Sales\Order\Item\Plugin\ProductOptions"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote\TotalsCollector">
+        <plugin name="awSarp2TotalsCollector" type="Aheadworks\Sarp2\Model\Quote\Plugin\TotalsCollector" />
+    </type>
+    <type name="Magento\Multishipping\Helper\Data">
+        <plugin name="awSarp2Multishipping" type="Aheadworks\Sarp2\Model\Checkout\Plugin\Multishipping" />
+    </type>
+    <type name="PayPal\Braintree\Model\Paypal\Helper\QuoteUpdater">
+        <plugin name="awSarp2BraintreePaypalQuoteUpdater" type="Aheadworks\Sarp2\Model\Payment\Paypal\Plugin\QuoteUpdater"/>
+    </type>
+
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Aheadworks\Sarp2\Api\Data\PlanInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">aw_sarp2_plan</item>
+                    <item name="identifierField" xsi:type="string">plan_id</item>
+                </item>
+                <item name="Aheadworks\Sarp2\Api\Data\ProfileInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">aw_sarp2_profile</item>
+                    <item name="identifierField" xsi:type="string">profile_id</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="aw_sarp2_plan_listing_data_source" xsi:type="string">Aheadworks\Sarp2\Model\ResourceModel\Plan\Grid\Collection</item>
+                <item name="aw_sarp2_subscription_listing_data_source" xsi:type="string">Aheadworks\Sarp2\Model\ResourceModel\Profile\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="AwSarp2GridFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\Sarp2\Model\ResourceModel\Plan\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aw_sarp2_plan</argument>
+            <argument name="eventPrefix" xsi:type="string">aw_sarp2_plan_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">plan_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aheadworks\Sarp2\Model\ResourceModel\Plan</argument>
+        </arguments>
+    </type>
+    <virtualType name="AwSarp2PlanGridDataProvider" type="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Aheadworks\Sarp2\Model\ResourceModel\Plan\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">AwSarp2GridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\Sarp2\Model\ResourceModel\Profile\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">aw_sarp2_profile</argument>
+            <argument name="eventPrefix" xsi:type="string">aw_sarp2_subscription_grid_collection</argument>
+            <argument name="eventObject" xsi:type="string">subscription_grid_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Aheadworks\Sarp2\Model\ResourceModel\Profile</argument>
+        </arguments>
+    </type>
+    <virtualType name="AwSarp2SubscriptionGridDataProvider" type="Aheadworks\Sarp2\Ui\DataProvider\DataProviderExtended">
+        <arguments>
+            <argument name="collection" xsi:type="object" shared="false">Aheadworks\Sarp2\Model\ResourceModel\Profile\Collection</argument>
+            <argument name="filterPool" xsi:type="object" shared="false">AwSarp2GridFilterPool</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\Sarp2\Model\Plan\PostDataProcessor\Composite">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="entityId" xsi:type="object">Aheadworks\Sarp2\Model\Plan\PostDataProcessor\EntityId</item>
+                <item name="definition" xsi:type="object">Aheadworks\Sarp2\Model\Plan\PostDataProcessor\Definition</item>
+                <item name="titles" xsi:type="object">Aheadworks\Sarp2\Model\Plan\PostDataProcessor\Titles</item>
+                <item name="reminder" xsi:type="object">Aheadworks\Sarp2\Model\Plan\PostDataProcessor\Reminder</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Sarp2\Model\ResourceModel\Profile">
+        <arguments>
+            <argument name="saveHandlers" xsi:type="array">
+                <item name="0" xsi:type="object">Aheadworks\Sarp2\Model\ResourceModel\Profile\ItemHandler</item>
+                <item name="1" xsi:type="object">Aheadworks\Sarp2\Model\ResourceModel\Profile\AddressHandler</item>
+                <item name="3" xsi:type="object">Aheadworks\Sarp2\Model\ResourceModel\Profile\OrderHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Magento\Payment\Model\Checks\ZeroTotal">
+        <plugin name="awSarp2ZeroTotalChecker" type="Aheadworks\Sarp2\Model\Payment\Checks\Plugin\ZeroTotal"/>
+    </type>
+    <type name="Magento\Payment\Model\Checks\TotalMinMax">
+        <plugin name="awSarp2TotalMinMaxChecker" type="Aheadworks\Sarp2\Model\Payment\Checks\Plugin\TotalMinMax"/>
+    </type>
+
+    <virtualType name="BraintreeAuthorizationHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="aw_sarp2_vault_details" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Response\VaultDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BraintreeVaultResponseHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="aw_sarp2_vault_details" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Response\VaultDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BraintreePayPalResponseHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="aw_sarp2_vault_details" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Response\PayPal\VaultDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BraintreePayPalVaultResponseHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="aw_sarp2_vault_details" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Response\PayPal\VaultDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BraintreePayPalAuthorizeRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="aw_sarp2_vault" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Request\PayPal\VaultDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BraintreeAuthorizeRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="aw_sarp2_vault" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Request\PayPal\VaultDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwBamboraApacResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="aw_sarp2_vault_details" xsi:type="string">Aheadworks\Sarp2\Gateway\BamboraApac\Response\VaultDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AuthorizenetAcceptjsAuthorizationHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="aw_sarp2_profile_details" xsi:type="string">Aheadworks\Sarp2\Gateway\AuthorizenetAcceptjs\Response\ProfileDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Payment methods facade configuration -->
+    <virtualType name="AwSarp2BraintreeRecurringFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="string">aw_sarp_braintree_recurring</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form\Cc</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AwSarp2BraintreeRecurringHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">BraintreeValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2BraintreeRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreePayPalRecurringFacade" type="AwSarp2BraintreeRecurringFacade">
+        <arguments>
+            <argument name="code" xsi:type="string">aw_sarp_braintree_paypal_recurring</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AwSarp2BraintreePayPalRecurringHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">BraintreePayPalValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2BraintreePayPalRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="string">aw_sarp_aw_bambora_apac_recurring</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form</argument>
+            <argument name="infoBlockType" xsi:type="string">Aheadworks\BamboraApac\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AwBamboraApacValueHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">AwBamboraApacValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2AwBamboraApacRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2StripePaymentsRecurringFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="string">aw_sarp_stripe_payments_recurring</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form\Cc</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">StripePaymentsValueHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">StripePaymentsValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2StripePaymentsRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringFacade" type="AuthorizenetAcceptjsFacade">
+        <arguments>
+            <argument name="code" xsi:type="string">aw_sarp_authorizenet_acceptjs_recurring</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2AuthorizenetAcceptjsRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\Sarp2\Gateway\AuthorizenetAcceptjs\ProfileAdapter">
+        <arguments>
+            <argument name="commandPool" xsi:type="object">AwSarp2AuthorizenetAcceptjsProfileCommandPool</argument>
+        </arguments>
+    </type> -->
+
+    <virtualType name="AwSarp2BraintreeRecurringHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">BraintreeConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreePayPalRecurringHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">BraintreePayPalConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2BraintreeRecurringCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2BraintreeRecurringAuthorizeCommand</item>
+                <item name="sale" xsi:type="string">AwSarp2BraintreeRecurringSaleCommand</item>
+                <item name="capture" xsi:type="string">AwSarp2BraintreeRecurringCaptureStrategyCommand</item>
+                <item name="settlement" xsi:type="string">AwSarp2BraintreeRecurringCaptureCommand</item>
+                <item name="vault_capture" xsi:type="string">AwSarp2BraintreeRecurringCaptureCommand</item>
+                <item name="void" xsi:type="string">BraintreeVoidCommand</item>
+                <item name="refund" xsi:type="string">BraintreeRefundCommand</item>
+                <item name="cancel" xsi:type="string">BraintreeVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreePayPalRecurringCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2BraintreePayPalRecurringAuthorizeCommand</item>
+                <item name="sale" xsi:type="string">AwSarp2BraintreePayPalRecurringSaleCommand</item>
+                <item name="capture" xsi:type="string">AwSarp2BraintreePayPalRecurringCaptureStrategyCommand</item>
+                <item name="settlement" xsi:type="string">AwSarp2BraintreeRecurringCaptureCommand</item>
+                <item name="void" xsi:type="string">BraintreeVoidCommand</item>
+                <item name="refund" xsi:type="string">BraintreeRefundCommand</item>
+                <item name="cancel" xsi:type="string">BraintreeVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2AwBamboraApacRecurringAuthorizeCommand</item>
+                <item name="sale" xsi:type="string">AwSarp2AwBamboraApacRecurringSaleCommand</item>
+                <item name="capture" xsi:type="string">AwSarp2AwBamboraApacRecurringCaptureStrategyCommand</item>
+                <item name="vault_capture" xsi:type="string">AwSarp2AwBamboraApacRecurringVaultCaptureCommand</item>
+                <item name="settlement" xsi:type="string">AwSarp2AwBamboraApacRecurringCaptureCommand</item>
+                <item name="refund" xsi:type="string">AwBamboraApacRefundCommand</item>
+                <item name="void" xsi:type="string">AwBamboraApacVoidStrategyCommand</item>
+                <item name="cancel" xsi:type="string">AwBamboraApacVoidStrategyCommand</item>
+                <item name="void_command" xsi:type="string">AwBamboraApacVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2StripePaymentsRecurringCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2StripePaymentsRecurringAuthorizeCommand</item>
+                <item name="sale" xsi:type="string">AwSarp2StripePaymentsRecurringSaleCommand</item>
+                <item name="capture" xsi:type="string">AwSarp2StripePaymentsRecurringCaptureStrategyCommand</item>
+                <item name="settlement" xsi:type="string">AwSarp2StripePaymentsRecurringCaptureCommand</item>
+                <item name="void" xsi:type="string">AwSarp2StripePaymentsRecurringVoidCommand</item>
+                <item name="refund" xsi:type="string">AwSarp2StripePaymentsRecurringRefundCommand</item>
+                <item name="cancel" xsi:type="string">AwSarp2StripePaymentsRecurringVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringCommandPool" type="AuthorizenetAcceptjsCommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2AuthorizenetAcceptjsRecurringAuthorizeCommand</item>
+                <item name="capture" xsi:type="string">AwSarp2AuthorizenetAcceptjsRecurringCaptureCommand</item>
+                <item name="sale" xsi:type="string">AwSarp2AuthorizenetAcceptjsRecurringSaleCommand</item>
+                <item name="settle" xsi:type="string">AwSarp2AuthorizenetAcceptjsRecurringSettleCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2AuthorizenetAcceptjsProfileCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="create_profile_by_transaction" xsi:type="string">AwSarp2AuthorizenetAcceptjsCreateProfileByTransactionCommand</item>
+                <item name="get_customer_data" xsi:type="string">AwSarp2AuthorizenetAcceptjsCommandGet</item>
+                <item name="update_customer_data" xsi:type="string">AwSarp2AuthorizenetAcceptjsCommandUpdate</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Braintree Recurring authorization command -->
+    <virtualType name="AwSarp2BraintreeRecurringAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2BraintreeRecurringAuthorizeRequest</argument>
+            <argument name="transferFactory" xsi:type="object">PayPal\Braintree\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">PayPal\Braintree\Gateway\Http\Client\TransactionSale</argument>
+            <argument name="handler" xsi:type="object">AwSarp2BraintreeRecurringResponseHandler</argument>
+            <argument name="validator" xsi:type="object">PayPal\Braintree\Gateway\Validator\ResponseValidator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreeRecurringAuthorizeRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="customer" xsi:type="string">PayPal\Braintree\Gateway\Request\CustomerDataBuilder</item>
+                <item name="payment" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Request\PaymentDataBuilder</item>
+                <item name="channel" xsi:type="string">PayPal\Braintree\Gateway\Request\ChannelDataBuilder</item>
+                <item name="address" xsi:type="string">PayPal\Braintree\Gateway\Request\AddressDataBuilder</item>
+                <item name="dynamic_descriptor" xsi:type="string">PayPal\Braintree\Gateway\Request\DescriptorDataBuilder</item>
+                <item name="store" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Request\StoreConfigBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Braintree Recurring authorization&capture command -->
+    <virtualType name="AwSarp2BraintreeRecurringSaleCommand" type="AwSarp2BraintreeRecurringAuthorizeCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2BraintreeRecurringSaleRequest</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreeRecurringSaleRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2BraintreeRecurringAuthorizeRequest</item>
+                <item name="settlement" xsi:type="string">PayPal\Braintree\Gateway\Request\SettlementDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Braintree Recurring capture strategy command -->
+    <virtualType name="AwSarp2BraintreeRecurringCaptureStrategyCommand" type="PayPal\Braintree\Gateway\Command\CaptureStrategyCommand">
+        <arguments>
+            <argument name="commandPool" xsi:type="object">AwSarp2BraintreeRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Braintree Recurring capture command -->
+    <virtualType name="AwSarp2BraintreeRecurringCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2BraintreeRecurringCaptureRequest</argument>
+            <argument name="transferFactory" xsi:type="object">PayPal\Braintree\Gateway\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">PayPal\Braintree\Gateway\Http\Client\TransactionSubmitForSettlement</argument>
+            <argument name="handler" xsi:type="object">AwSarp2BraintreeRecurringCaptureResponseHandler</argument>
+            <argument name="validator" xsi:type="object">PayPal\Braintree\Gateway\Validator\ResponseValidator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreeRecurringCaptureRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="capture" xsi:type="string">PayPal\Braintree\Gateway\Request\CaptureDataBuilder</item>
+                <item name="store" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Request\StoreConfigBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Braintree PayPal Recurring authorization command -->
+    <virtualType name="AwSarp2BraintreePayPalRecurringAuthorizeCommand" type="AwSarp2BraintreeRecurringAuthorizeCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2BraintreePayPalRecurringAuthorizeRequest</argument>
+            <argument name="handler" xsi:type="object">AwSarp2BraintreePayPalRecurringResponseHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreePayPalRecurringAuthorizeRequest" type="BraintreePayPalVaultAuthorizeRequest">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="payment" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Request\PaymentDataBuilder</item>
+                <item name="store" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Request\StoreConfigBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Braintree PayPal Recurring capture strategy command -->
+    <virtualType name="AwSarp2BraintreePayPalRecurringCaptureStrategyCommand" type="PayPal\Braintree\Gateway\Command\CaptureStrategyCommand">
+        <arguments>
+            <argument name="commandPool" xsi:type="object">AwSarp2BraintreePayPalRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Braintree PayPal Recurring authorization&capture command -->
+    <virtualType name="AwSarp2BraintreePayPalRecurringSaleCommand" type="AwSarp2BraintreePayPalRecurringAuthorizeCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2BraintreePayPalRecurringSaleRequest</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreePayPalRecurringSaleRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2BraintreePayPalRecurringAuthorizeRequest</item>
+                <item name="settlement" xsi:type="string">PayPal\Braintree\Gateway\Request\SettlementDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- BamboraApac Recurring authorization command -->
+    <virtualType name="AwSarp2AwBamboraApacRecurringAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AwBamboraApacRecurringAuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">AwSarp2AwBamboraApacRecurringAuthorizeResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\BamboraApac\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\BamboraApac\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">Aheadworks\BamboraApac\Gateway\Http\Client\TransactionSale</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="authorization" xsi:type="string">AwSarp2AwBamboraApacRecurringAuthorizationTrnXmlDataBuilder</item>
+                <item name="store" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\StoreDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringAuthorizationTrnXmlDataBuilder" type="Aheadworks\BamboraApac\Gateway\Request\TrnXmlDataBuilder">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AwBamboraApacRecurringRootTransactionBuilder</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringRootTransactionBuilder" type="Aheadworks\BamboraApac\Gateway\Request\RootTransactionDataBuilder">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AwBamboraApacRecurringAuthorizationTransactionDataBuilder</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringAuthorizationTransactionDataBuilder" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\TransactionDataBuilder</item>
+                <item name="transaction_auth" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\AuthTrnDataBuilder</item>
+                <item name="customer" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\CustomerDataBuilder</item>
+                <item name="payment" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\PaymentDataBuilder</item>
+                <item name="creditCard" xsi:type="string">Aheadworks\Sarp2\Gateway\BamboraApac\Request\CreditCardDataBuilder</item>
+                <item name="security" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\SecurityDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- BamboraApac Recurring authorization&capture command -->
+    <virtualType name="AwSarp2AwBamboraApacRecurringSaleCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AwBamboraApacRecurringSaleRequest</argument>
+            <argument name="handler" xsi:type="object">AwSarp2AwBamboraApacRecurringSaleResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\BamboraApac\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\BamboraApac\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">Aheadworks\BamboraApac\Gateway\Http\Client\TransactionSale</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringSaleRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="sale" xsi:type="string">AwSarp2AwBamboraApacRecurringSaleTrnXmlDataBuilder</item>
+                <item name="store" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\StoreDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringSaleTrnXmlDataBuilder" type="Aheadworks\BamboraApac\Gateway\Request\TrnXmlDataBuilder">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AwBamboraApacRecurringSaleDataBuilder</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringSaleDataBuilder"  type="AwSarp2AwBamboraApacRecurringRootTransactionBuilder">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AwBamboraApacRecurringSaleTransactionDataBuilder</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringSaleTransactionDataBuilder" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2AwBamboraApacRecurringAuthorizationTransactionDataBuilder</item>
+                <item name="transaction_purchase" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\PurchaseTrnDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- BamboraApac Recurring capture strategy command -->
+    <virtualType name="AwSarp2AwBamboraApacRecurringCaptureStrategyCommand" type="Aheadworks\BamboraApac\Gateway\Command\CaptureStrategyCommand">
+        <arguments>
+            <argument name="commandPool" xsi:type="object">AwSarp2AwBamboraApacRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- BamboraApac Recurring capture command -->
+    <virtualType name="AwSarp2AwBamboraApacRecurringCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwBamboraApacCaptureRequest</argument>
+            <argument name="handler" xsi:type="object">AwSarp2AwBamboraApacRecurringCaptureResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\BamboraApac\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\BamboraApac\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">Aheadworks\BamboraApac\Gateway\Http\Client\TransactionCapture</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- BamboraApac Recurring vault capture (sale actually) command -->
+    <virtualType name="AwSarp2AwBamboraApacRecurringVaultCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AwBamboraApacRecurringVaultCaptureRequest</argument>
+            <argument name="handler" xsi:type="object">AwSarp2AwBamboraApacRecurringCaptureResponseHandlerComposite</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\BamboraApac\Http\TransferFactory</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\BamboraApac\Gateway\Validator\ResponseCodeValidator</argument>
+            <argument name="client" xsi:type="object">Aheadworks\BamboraApac\Gateway\Http\Client\TransactionSale</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringVaultCaptureRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="vault_capture" xsi:type="string">AwSarp2AwBamboraApacRecurringVaultCaptureTrnXmlDataBuilder</item>
+                <item name="store" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\StoreDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringVaultCaptureTrnXmlDataBuilder" type="Aheadworks\BamboraApac\Gateway\Request\TrnXmlDataBuilder">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AwBamboraApacRecurringVaultCaptureDataBuilder</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringVaultCaptureDataBuilder" type="AwSarp2AwBamboraApacRecurringRootTransactionBuilder">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AwBamboraApacRecurringVaultCaptureTransactionDataBuilder</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringVaultCaptureTransactionDataBuilder" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\TransactionDataBuilder</item>
+                <item name="transaction_purchase" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\PurchaseTrnDataBuilder</item>
+                <item name="customer" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\CustomerDataBuilder</item>
+                <item name="payment" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\PaymentDataBuilder</item>
+                <item name="security" xsi:type="string">Aheadworks\BamboraApac\Gateway\Request\SecurityDataBuilder</item>
+                <item name="vault_capture" xsi:type="string">Aheadworks\Sarp2\Gateway\BamboraApac\Request\CreditCardDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- StripePayments Recurring authorization command -->
+    <virtualType name="AwSarp2StripePaymentsRecurringAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2StripePaymentsRecurringAuthorizationRequest</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\Client\TransactionSale</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Validator\ResponseValidator</argument>
+            <argument name="handler" xsi:type="object">AwSarp2StripePaymentsRecurringAuthorizeResponseHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2StripePaymentsRecurringAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="authorization" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Request\TransactionAuthDataBuilder</item>
+                <item name="payment" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Request\PaymentDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- StripePayments Recurring authorization&capture command -->
+    <virtualType name="AwSarp2StripePaymentsRecurringSaleCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2StripePaymentsRecurringSaleRequest</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\Client\TransactionSale</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Validator\ResponseValidator</argument>
+            <argument name="handler" xsi:type="object">AwSarp2StripePaymentsRecurringSaleResponseHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2StripePaymentsRecurringSaleRequest" type="AwSarp2StripePaymentsRecurringAuthorizationRequest">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="sale" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Request\TransactionSaleDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- StripePayments Recurring capture strategy command -->
+    <virtualType name="AwSarp2StripePaymentsRecurringCaptureStrategyCommand" type="PayPal\Braintree\Gateway\Command\CaptureStrategyCommand">
+        <arguments>
+            <argument name="commandPool" xsi:type="object">AwSarp2StripePaymentsRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- StripePayments Recurring capture command -->
+    <virtualType name="AwSarp2StripePaymentsRecurringCaptureCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2StripePaymentsRecurringCaptureRequest</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\Client\TransactionCapture</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Validator\ResponseValidator</argument>
+            <argument name="handler" xsi:type="object">AwSarp2StripePaymentsRecurringCaptureResponseHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2StripePaymentsRecurringCaptureRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="capture" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Request\TransactionCaptureDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- StripePayments Recurring void command -->
+    <virtualType name="AwSarp2StripePaymentsRecurringVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2StripePaymentsRecurringVoidRequest</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\Client\TransactionVoid</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Validator\VoidResponseValidator</argument>
+            <argument name="handler" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Response\VoidHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2StripePaymentsRecurringVoidRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="void" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Request\TransactionVoidDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- StripePayments Recurring refund command -->
+    <virtualType name="AwSarp2StripePaymentsRecurringRefundCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2StripePaymentsRecurringRefundRequest</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\Client\TransactionRefund</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Validator\ResponseValidator</argument>
+            <argument name="handler" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Response\RefundHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2StripePaymentsRecurringRefundRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="refund" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Request\TransactionRefundDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- AuthorizenetAcceptjs create profile by transaction command -->
+    <virtualType name="AwSarp2AuthorizenetAcceptjsCreateProfileByTransactionCommand" type="Magento\AuthorizenetAcceptjs\Gateway\Command\GatewayQueryCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AuthorizenetAcceptjsCreateProfileByTransactionRequest</argument>
+            <argument name="transferFactory" xsi:type="object">AuthorizenetAcceptjsDefaultTransferFactory</argument>
+            <argument name="client" xsi:type="object">Magento\AuthorizenetAcceptjs\Gateway\Http\Client</argument>
+            <argument name="validator" xsi:type="object">AuthorizenetAcceptjsTransactionDetailsValidator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsCreateProfileByTransactionRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="request_type" xsi:type="string">AwSarp2AuthorizenetAcceptjsCreateProfileByTransactionTypeBuilder</item>
+                <item name="merchant_account" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\AuthenticationDataBuilder</item>
+                <item name="reference_transaction" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\TransactionDetailsDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsCreateProfileByTransactionTypeBuilder" type="Magento\AuthorizenetAcceptjs\Gateway\Request\RequestTypeBuilder">
+        <arguments>
+            <argument name="type" xsi:type="string">createCustomerProfileFromTransactionRequest</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- AuthorizenetAcceptjs get customer profile command -->
+    <virtualType name="AwSarp2AuthorizenetAcceptjsCommandGet" type="Magento\AuthorizenetAcceptjs\Gateway\Command\GatewayQueryCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AuthorizenetAcceptjsRequestGet</argument>
+            <argument name="transferFactory" xsi:type="object">AuthorizenetAcceptjsDefaultTransferFactory</argument>
+            <argument name="client" xsi:type="object">Magento\AuthorizenetAcceptjs\Gateway\Http\Client</argument>
+            <argument name="validator" xsi:type="object">Magento\AuthorizenetAcceptjs\Gateway\Validator\GeneralResponseValidator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRequestGet" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="request_type" xsi:type="string">AwSarp2AuthorizenetAcceptjsGetCustomerPaymentProfileRequestTypeBuilderGet</item>
+                <item name="merchant_account" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\AuthenticationDataBuilder</item>
+                <item name="customer_data" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\AuthorizenetAcceptjs\Request\GetCustomerDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsGetCustomerPaymentProfileRequestTypeBuilderGet" type="Magento\AuthorizenetAcceptjs\Gateway\Request\RequestTypeBuilder">
+        <arguments>
+            <argument name="type" xsi:type="string">getCustomerPaymentProfileRequest</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- AuthorizenetAcceptjs update customer profile command -->
+    <virtualType name="AwSarp2AuthorizenetAcceptjsCommandUpdate" type="Magento\AuthorizenetAcceptjs\Gateway\Command\GatewayQueryCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AuthorizenetAcceptjsRequestUpdate</argument>
+            <argument name="transferFactory" xsi:type="object">AuthorizenetAcceptjsDefaultTransferFactory</argument>
+            <argument name="client" xsi:type="object">Magento\AuthorizenetAcceptjs\Gateway\Http\Client</argument>
+            <argument name="validator" xsi:type="object">Magento\AuthorizenetAcceptjs\Gateway\Validator\GeneralResponseValidator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRequestUpdate" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="request_type" xsi:type="string">AwSarp2AuthorizenetAcceptjsCreateProfileByTransactionTypeBuilderUpdate</item>
+                <item name="merchant_account" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\AuthenticationDataBuilder</item>
+                <item name="customer_update_data" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\AuthorizenetAcceptjs\Request\UpdateCustomerDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsCreateProfileByTransactionTypeBuilderUpdate" type="Magento\AuthorizenetAcceptjs\Gateway\Request\RequestTypeBuilder">
+        <arguments>
+            <argument name="type" xsi:type="string">updateCustomerPaymentProfileRequest</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- AuthorizenetAcceptjs Recurring authorize command -->
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringAuthorizeCommand" type="AuthorizenetAcceptjsAuthorizeCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AuthorizenetAcceptjsRecurringAuthorizeRequest</argument>
+            <argument name="handler" xsi:type="object">AwSarp2AuthorizenetAcceptjsRecurringAuthorizationHandler</argument>
+            <argument name="validator" xsi:type="object">AwSarp2AuthorizenetAcceptjsRecurringTransactionValidator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringTransactionValidator" type="Magento\Payment\Gateway\Validator\ValidatorComposite">
+        <arguments>
+            <argument name="chainBreakingValidators" xsi:type="array">
+                <item name="general" xsi:type="boolean">true</item>
+            </argument>
+            <argument name="validators" xsi:type="array">
+                <item name="general" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Validator\GeneralResponseValidator</item>
+                <item name="transaction_status" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Validator\TransactionResponseValidator</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringAuthorizeRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="request_type" xsi:type="string">AuthorizenetAcceptjsTransactionRequestTypeBuilder</item>
+                <item name="store" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\StoreConfigBuilder</item>
+                <item name="merchant_account" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\AuthenticationDataBuilder</item>
+                <item name="transaction_type" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\AuthorizeDataBuilder</item>
+                <item name="amount" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\AmountDataBuilder</item>
+                <item name="payment" xsi:type="string">Aheadworks\Sarp2\Gateway\AuthorizenetAcceptjs\Request\PaymentDataBuilder</item>
+                <item name="solution" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\SolutionDataBuilder</item>
+                <item name="order" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\OrderDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringAuthorizationHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="transaction_id" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Response\TransactionIdHandler</item>
+                <item name="payment_details" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Response\PaymentResponseHandler</item>
+                <item name="transaction_details" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Response\TransactionDetailsResponseHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- AuthorizenetAcceptjs Recurring authorize&capture command -->
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringSaleCommand" type="AuthorizenetAcceptjsSaleCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2AuthorizenetAcceptjsRecurringSaleRequest</argument>
+            <argument name="handler" xsi:type="object">AwSarp2AuthorizenetAcceptjsRecurringSaleHandler</argument>
+            <argument name="validator" xsi:type="object">AwSarp2AuthorizenetAcceptjsRecurringTransactionValidator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringSaleRequest" type="AwSarp2AuthorizenetAcceptjsRecurringAuthorizeRequest">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction_type" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\SaleDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringSaleHandler" type="AwSarp2AuthorizenetAcceptjsRecurringAuthorizationHandler">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="close_parent_transaction" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Response\CloseParentTransactionHandler</item>
+                <item name="notifications" xsi:type="string">Aheadworks\Sarp2\Gateway\AuthorizenetAcceptjs\Response\NotificationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- AuthorizenetAcceptjs Recurring capture command -->
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringCaptureCommand" type="Magento\AuthorizenetAcceptjs\Gateway\Command\CaptureStrategyCommand">
+        <arguments>
+            <argument name="commandPool" xsi:type="object">AwSarp2AuthorizenetAcceptjsRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <!-- AuthorizenetAcceptjs Recurring settle command -->
+    <virtualType name="AwSarp2AuthorizenetAcceptjsRecurringSettleCommand" type="AuthorizenetAcceptjsSettleCommand">
+        <arguments>
+            <argument name="handler" xsi:type="object">AwSarp2AuthorizenetAcceptjsSettleTransactionHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsSettleTransactionHandler" type="AuthorizenetAcceptjsCaptureTransactionHandler">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="notifications" xsi:type="string">Aheadworks\Sarp2\Gateway\AuthorizenetAcceptjs\Response\NotificationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Braintree Recurring value handlers infrastructure -->
+    <virtualType name="AwSarp2BraintreeRecurringResponseHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="payment_details" xsi:type="string">PayPal\Braintree\Gateway\Response\PaymentDetailsHandler</item>
+                <item name="txn_id" xsi:type="string">PayPal\Braintree\Gateway\Response\TransactionIdHandler</item>
+                <item name="card_details" xsi:type="string">PayPal\Braintree\Gateway\Response\CardDetailsHandler</item>
+                <item name="risk_data" xsi:type="string">PayPal\Braintree\Gateway\Response\RiskDataHandler</item>
+                <item name="notifications" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Response\NotificationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreeRecurringCaptureResponseHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="txn_id" xsi:type="string">PayPal\Braintree\Gateway\Response\TransactionIdHandler</item>
+                <item name="notifications" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Response\NotificationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreePayPalRecurringResponseHandler" type="BraintreePayPalVaultResponseHandler">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="notifications" xsi:type="string">Aheadworks\Sarp2\Gateway\Braintree\Response\NotificationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- BamboraApac Recurring value handlers infrastructure -->
+    <virtualType name="AwSarp2AwBamboraApacRecurringAuthorizeResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="payment_details" xsi:type="string">Aheadworks\BamboraApac\Gateway\Response\PaymentDetailsHandler</item>
+                <item name="transaction_id" xsi:type="string">Aheadworks\BamboraApac\Gateway\Response\TransactionIdHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringSaleResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="payment_details" xsi:type="string">Aheadworks\BamboraApac\Gateway\Response\PaymentDetailsHandler</item>
+                <item name="transaction_id" xsi:type="string">Aheadworks\BamboraApac\Gateway\Response\TransactionIdHandler</item>
+                <item name="notifications" xsi:type="string">Aheadworks\Sarp2\Gateway\BamboraApac\Response\NotificationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AwBamboraApacRecurringCaptureResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="transaction_id" xsi:type="string">Aheadworks\BamboraApac\Gateway\Response\TransactionIdHandler</item>
+                <item name="notifications" xsi:type="string">Aheadworks\Sarp2\Gateway\BamboraApac\Response\NotificationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- StripePayments Recurring value handlers infrastructure -->
+    <virtualType name="AwSarp2StripePaymentsRecurringAuthorizeResponseHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="payment_details" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Response\PaymentDetailsHandler</item>
+                <item name="card_details" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Response\CardDetailsHandler</item>
+                <item name="transaction_id" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Response\TransactionIdHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2StripePaymentsRecurringSaleResponseHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="payment_details" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Response\PaymentDetailsHandler</item>
+                <item name="card_details" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Response\CardDetailsHandler</item>
+                <item name="transaction_id" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Response\TransactionIdHandler</item>
+                <item name="notifications" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Response\NotificationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2StripePaymentsRecurringCaptureResponseHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="transaction_id" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Response\TransactionIdHandler</item>
+                <item name="notifications" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Response\NotificationHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <!-- Payment samplers facade configuration -->
+    <virtualType name="AwSarp2BraintreePaymentSamplerFacade" type="Aheadworks\Sarp2\Model\Payment\Sampler\Adapter">
+        <arguments>
+            <argument name="paymentMethodCode" xsi:type="string">braintree</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2SamplerBraintreeCommandPool</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AwSarp2SamplerBraintreeValueHandlerPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2BraintreePayPalPaymentSamplerFacade" type="AwSarp2BraintreePaymentSamplerFacade">
+        <arguments>
+            <argument name="paymentMethodCode" xsi:type="string">braintree_paypal</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2SamplerBraintreePayPalCommandPool</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AwSarp2SamplerBraintreePayPalValueHandlerPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2AwBamboraApacPaymentSamplerFacade" type="Aheadworks\Sarp2\Model\Payment\Sampler\Adapter">
+        <arguments>
+            <argument name="paymentMethodCode" xsi:type="string">aw_bambora_apac</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2SamplerAwBamboraApacCommandPool</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AwSarp2SamplerAwBamboraApacValueHandlerPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2StripePaymentSamplerFacade" type="Aheadworks\Sarp2\Model\Payment\Sampler\Adapter">
+        <arguments>
+            <argument name="paymentMethodCode" xsi:type="string">stripe_payments</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2SamplerStripePaymentsCommandPool</argument>
+            <argument name="valueHandlerPool" xsi:type="object">StripePaymentsValueHandlerPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2AuthorizenetAcceptjsPaymentSamplerFacade" type="Aheadworks\Sarp2\Model\Payment\Sampler\Adapter">
+        <arguments>
+            <argument name="paymentMethodCode" xsi:type="string">authorizenet_acceptjs</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2SamplerAuthorizenetAcceptjsCommandPool</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AwSarp2SamplerAuthorizenetAcceptjsValueHandlerPool</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\Sarp2\Model\Payment\Sampler\Pool">
+        <arguments>
+            <argument name="samplers" xsi:type="array">
+                <item name="braintree" xsi:type="string">AwSarp2BraintreePaymentSamplerFacade</item>
+                <item name="braintree_paypal" xsi:type="string">AwSarp2BraintreePayPalPaymentSamplerFacade</item>
+                <item name="aw_bambora_apac" xsi:type="string">AwSarp2AwBamboraApacPaymentSamplerFacade</item>
+                <item name="stripe_payments" xsi:type="string">AwSarp2StripePaymentSamplerFacade</item>
+                <item name="cashondelivery" xsi:type="string">AwSarp2CashondeliveryPaymentSampler</item>
+                <item name="authorizenet_acceptjs" xsi:type="string">AwSarp2AuthorizenetAcceptjsPaymentSamplerFacade</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="AwSarp2SamplerBraintreeCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2SamplerBraintreeAuthorizeCommand</item>
+                <item name="void" xsi:type="string">AwSarp2SamplerBraintreeVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <!--type="Magento\Payment\Gateway\Command\GatewayCommand"-->
+    <virtualType name="AwSarp2SamplerBraintreeAuthorizeCommand" type="BraintreeAuthorizeCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerBraintreeAuthorizeRequest</argument>
+            <argument name="handler" xsi:type="object">AwSarp2SamplerBraintreeAuthorizationHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2SamplerBraintreeAuthorizeRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="customer" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\CustomerDataBuilder</item>
+                <item name="payment" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\PaymentDataBuilder</item>
+                <item name="channel" xsi:type="string">PayPal\Braintree\Gateway\Request\ChannelDataBuilder</item>
+                <item name="address" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\AddressDataBuilder</item>
+                <item name="vault" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\PayPal\VaultDataBuilder</item>
+                <item name="merchant_account" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\MerchantAccountDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\MerchantAccountDataBuilder">
+        <arguments>
+            <argument name="config" xsi:type="object">PayPal\Braintree\Gateway\Config\Config</argument>
+        </arguments>
+    </type>
+    <virtualType name="AwSarp2SamplerBraintreeAuthorizationHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="txn_id" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Response\TransactionIdHandler</item>
+                <item name="aw_sarp2_vault_details" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Response\VaultDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2SamplerBraintreeValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">BraintreeConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerBraintreePayPalCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2SamplerBraintreePayPalAuthorizeCommand</item>
+                <item name="void" xsi:type="string">AwSarp2SamplerBraintreeVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2SamplerBraintreePayPalAuthorizeCommand" type="AwSarp2SamplerBraintreeAuthorizeCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerBraintreePayPalAuthorizeRequest</argument>
+            <argument name="handler" xsi:type="object">AwSarp2SamplerBraintreePayPalAuthorizationHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2SamplerBraintreePayPalAuthorizeRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="customer" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\CustomerDataBuilder</item>
+                <item name="payment" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\PaymentDataBuilder</item>
+                <item name="channel" xsi:type="string">PayPal\Braintree\Gateway\Request\ChannelDataBuilder</item>
+                <item name="vault" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\PayPal\VaultDataBuilder</item>
+                <item name="merchant_account" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\MerchantAccountDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2SamplerBraintreePayPalAuthorizationHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="txn_id" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Response\TransactionIdHandler</item>
+                <item name="aw_sarp2_vault_details" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Response\PayPal\VaultDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2SamplerBraintreePayPalValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">BraintreePayPalConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerBraintreeVoidCommand" type="BraintreeVoidCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\VoidDataBuilder</argument>
+            <argument name="handler" xsi:type="object">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Response\TransactionIdHandler</argument>
+        </arguments>
+    </virtualType>
+
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2SamplerAwBamboraApacAuthorizeCommand</item>
+                <item name="void" xsi:type="string">AwSarp2SamplerAwBamboraApacVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacAuthorizeCommand" type="AwBamboraApacAuthorizeCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerAwBamboraApacAuthorizationRequest</argument>
+            <argument name="handler" xsi:type="object">AwSarp2SamplerAwBamboraApacResponseHandlerComposite</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacAuthorizationRequest" type="AwBamboraApacAuthorizationRequest">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="authorization" xsi:type="string">AwSarp2SamplerAwBamboraApacAuthorizationTrnXmlDataBuilder</item>
+                <item name="store" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\StoreDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacAuthorizationTrnXmlDataBuilder" type="AwBamboraApacAuthorizationTrnXmlDataBuilder">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerAwBamboraApacAuthorizationDataBuilder</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacAuthorizationDataBuilder"  type="Aheadworks\BamboraApac\Gateway\Request\RootTransactionDataBuilder">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerAwBamboraApacAuthorizationTransactionDataBuilder</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacAuthorizationTransactionDataBuilder" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="transaction" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\TransactionDataBuilder</item>
+                <item name="transaction_purchase" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\PurchaseTrnDataBuilder</item>
+                <item name="customer" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\CustomerDataBuilder</item>
+                <item name="payment" xsi:type="string"> Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\PaymentDataBuilder</item>
+                <item name="creditCard" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\CreditCardDataBuilder</item>
+                <item name="security" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\SecurityDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2CashondeliveryPaymentSampler" type="Aheadworks\Sarp2\Model\Payment\Sampler\OfflinePayment\Adapter" />
+
+    <type name="Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\TransactionDataBuilder">
+        <arguments>
+            <argument name="config" xsi:type="object">Aheadworks\BamboraApac\Gateway\Config\Config</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\SecurityDataBuilder">
+        <arguments>
+            <argument name="config" xsi:type="object">Aheadworks\BamboraApac\Gateway\Config\Config</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacResponseHandlerComposite" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="transaction_id" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Response\TransactionIdHandler</item>
+                <item name="vault_details" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Response\VaultDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">AwBamboraApacConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacVoidCommand" type="AwBamboraApacVoidCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerAwBamboraApacVoidRequest</argument>
+            <argument name="handler" xsi:type="object">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Response\TransactionIdHandler</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacVoidRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="void" xsi:type="string">AwSarp2SamplerAwBamboraApacVoidTrnXmlDataBuilder</item>
+                <item name="store" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\StoreDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacVoidTrnXmlDataBuilder" type="Aheadworks\BamboraApac\Gateway\Request\TrnXmlDataBuilder">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerAwBamboraApacVoidDataBuilder</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacVoidDataBuilder"  type="Aheadworks\BamboraApac\Gateway\Request\RootVoidDataBuilder">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerAwBamboraApacVoidTransactionDataBuilder</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAwBamboraApacVoidTransactionDataBuilder" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="refund" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\VoidDataBuilder</item>
+                <item name="security" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\BamboraApac\Request\SecurityDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerStripePaymentsCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2SamplerStripePaymentsAuthorizeCommand</item>
+                <item name="void" xsi:type="string">AwSarp2SamplerStripePaymentsVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerStripePaymentsAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerStripePaymentsAuthorizationRequest</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\Client\TransactionSale</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Validator\ResponseValidator</argument>
+            <argument name="handler" xsi:type="object">AwSarp2SamplerStripePaymentsAuthorizeResponseHandler</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerStripePaymentsAuthorizationRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="authorization" xsi:type="string">Aheadworks\Sarp2\Gateway\StripePayments\Request\TransactionAuthDataBuilder</item>
+                <item name="payment" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\StripePayments\Request\PaymentDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerStripePaymentsAuthorizeResponseHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="payment_details" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\StripePayments\Response\PaymentDetailsHandler</item>
+                <item name="transaction_id" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\StripePayments\Response\TransactionIdHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerStripePaymentsValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">AwBamboraApacConfigValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerStripePaymentsVoidCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerStripePaymentsVoidRequest</argument>
+            <argument name="transferFactory" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\TransferFactory</argument>
+            <argument name="client" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Http\Client\TransactionVoid</argument>
+            <argument name="validator" xsi:type="object">Aheadworks\Sarp2\Gateway\StripePayments\Validator\VoidResponseValidator</argument>
+            <argument name="handler" xsi:type="object">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\StripePayments\Response\TransactionIdHandler</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2SamplerStripePaymentsVoidRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="void" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\StripePayments\Request\VoidDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAuthorizenetAcceptjsCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="authorize" xsi:type="string">AwSarp2SamplerAuthorizenetAcceptjsAuthorizeCommand</item>
+                <item name="void" xsi:type="string">AwSarp2SamplerAuthorizenetAcceptjsVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAuthorizenetAcceptjsAuthorizeCommand" type="Magento\Payment\Gateway\Command\GatewayCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerAuthorizenetAcceptjsAuthorizeRequest</argument>
+            <argument name="transferFactory" xsi:type="object">AuthorizenetAcceptjsDefaultTransferFactory</argument>
+            <argument name="client" xsi:type="object">Magento\AuthorizenetAcceptjs\Gateway\Http\Client</argument>
+            <argument name="handler" xsi:type="object">AwSarp2SamplerAuthorizenetAcceptjsAuthorizationHandler</argument>
+            <argument name="validator" xsi:type="object">AuthorizenetAcceptjsAcceptsFdsRequestValidator</argument>
+            <argument name="errorMessageMapper" xsi:type="object">AuthorizenetAcceptjsVirtualErrorMessageMapper</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2SamplerAuthorizenetAcceptjsAuthorizeRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="request_type" xsi:type="string">AwSarp2AuthorizenetAcceptjsUpdateCustomerPaymentProfileRequestTypeBuilder</item>
+                <item name="merchant_account" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\AuthenticationDataBuilder</item>
+                <item name="authorize_data" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\AuthorizenetAcceptjs\Request\AuthorizeDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsUpdateCustomerPaymentProfileRequestTypeBuilder" type="Magento\AuthorizenetAcceptjs\Gateway\Request\RequestTypeBuilder">
+        <arguments>
+            <argument name="type" xsi:type="string">createTransactionRequest</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2SamplerAuthorizenetAcceptjsAuthorizationHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="check_result" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\AuthorizenetAcceptjs\Response\AuthorizeHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAuthorizenetAcceptjsVoidCommand" type="Magento\AuthorizenetAcceptjs\Gateway\Command\GatewayQueryCommand">
+        <arguments>
+            <argument name="requestBuilder" xsi:type="object">AwSarp2SamplerAuthorizenetAcceptjsVoidRequest</argument>
+            <argument name="transferFactory" xsi:type="object">AuthorizenetAcceptjsDefaultTransferFactory</argument>
+            <argument name="client" xsi:type="object">Magento\AuthorizenetAcceptjs\Gateway\Http\Client</argument>
+            <argument name="validator" xsi:type="object">Magento\AuthorizenetAcceptjs\Gateway\Validator\GeneralResponseValidator</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2SamplerAuthorizenetAcceptjsVoidRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="request_type" xsi:type="string">AwSarp2AuthorizenetAcceptjsCreateTransactionRequestTypeBuilder</item>
+                <item name="merchant_account" xsi:type="string">Magento\AuthorizenetAcceptjs\Gateway\Request\AuthenticationDataBuilder</item>
+                <item name="void_data" xsi:type="string">Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\AuthorizenetAcceptjs\Request\VoidDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2AuthorizenetAcceptjsCreateTransactionRequestTypeBuilder" type="Magento\AuthorizenetAcceptjs\Gateway\Request\RequestTypeBuilder">
+        <arguments>
+            <argument name="type" xsi:type="string">createTransactionRequest</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2SamplerAuthorizenetAcceptjsValueHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">AuthorizenetAcceptjsDefaultValueHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <preference for="Magento\Quote\Model\Quote\Address\Total\Subtotal" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal" />
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal\Initial" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Initial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal\Trial" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Trial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal\Regular" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Subtotal\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Regular</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Shipping\Trial" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Shipping\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Trial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Shipping\Regular" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Shipping\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Regular</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Subtotal\Initial" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Subtotal\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Initial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Subtotal\Trial" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Subtotal\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Trial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Subtotal\Regular" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Subtotal\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Regular</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Shipping\Trial" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Shipping\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Trial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Shipping\Regular" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Tax\Shipping\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Regular</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Initial" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Initial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Trial" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Trial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Regular" type="Aheadworks\Sarp2\Model\Sales\Total\Quote\Grand\Collector">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Regular</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Subtotal\Initial" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Subtotal">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Initial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Subtotal\Trial" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Subtotal">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Trial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Subtotal\Regular" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Subtotal">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Regular</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Shipping\Trial" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Shipping">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Trial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Shipping\Regular" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Shipping">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Regular</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxSubtotal\Initial" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxSubtotal">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Initial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxSubtotal\Trial" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxSubtotal">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Trial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxSubtotal\Regular" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxSubtotal">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Regular</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxShipping\Trial" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxShipping">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Trial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxShipping\Regular" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxShipping">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Regular</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand\Initial" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Initial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand\Trial" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Trial</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand\Regular" type="Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand">
+        <arguments>
+            <argument name="totalsGroup" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Regular</argument>
+        </arguments>
+    </virtualType>
+
+    <type name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Initial">
+        <arguments>
+            <argument name="provider" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Provider\Initial</argument>
+            <argument name="populateMaps" xsi:type="array">
+                <item name="Magento\Quote\Api\Data\CartInterface" xsi:type="array">
+                    <item name="subtotal" xsi:type="string">aw_sarp_initial_subtotal</item>
+                    <item name="grand_total" xsi:type="string">aw_sarp_initial_grand_total</item>
+                </item>
+                <item name="Magento\Quote\Api\Data\CartItemInterface" xsi:type="array">
+                    <item name="price" xsi:type="string">aw_sarp_initial_fee</item>
+                    <item name="price_incl_tax" xsi:type="string">aw_sarp_initial_fee_incl_tax</item>
+                    <item name="row_total" xsi:type="string">aw_sarp_initial_row_total</item>
+                    <item name="row_total_incl_tax" xsi:type="string">aw_sarp_initial_row_total_incl_tax</item>
+                    <item name="row_total_tax" xsi:type="string">aw_sarp_initial_fee_tax_amount</item>
+                    <item name="tax_percent" xsi:type="string">aw_sarp_initial_fee_tax_percent</item>
+                </item>
+                <item name="Magento\Quote\Model\Quote\Address\Item" xsi:type="array">
+                    <item name="price" xsi:type="string">aw_sarp_initial_fee</item>
+                    <item name="price_incl_tax" xsi:type="string">aw_sarp_initial_fee_incl_tax</item>
+                    <item name="row_total" xsi:type="string">aw_sarp_initial_row_total</item>
+                    <item name="row_total_incl_tax" xsi:type="string">aw_sarp_initial_row_total_incl_tax</item>
+                    <item name="row_total_tax" xsi:type="string">aw_sarp_initial_fee_tax_amount</item>
+                    <item name="tax_percent" xsi:type="string">aw_sarp_initial_fee_tax_percent</item>
+                </item>
+                <item name="Magento\Quote\Api\Data\AddressInterface" xsi:type="array">
+                    <item name="subtotal" xsi:type="string">aw_sarp_initial_subtotal</item>
+                    <item name="subtotal_incl_tax" xsi:type="string">aw_sarp_initial_subtotal_incl_tax</item>
+                    <item name="tax" xsi:type="string">aw_sarp_initial_tax_amount</item>
+                    <item name="grand_total" xsi:type="string">aw_sarp_initial_grand_total</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Trial">
+        <arguments>
+            <argument name="provider" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Provider\Trial</argument>
+            <argument name="populateMaps" xsi:type="array">
+                <item name="Magento\Quote\Api\Data\CartInterface" xsi:type="array">
+                    <item name="subtotal" xsi:type="string">aw_sarp_trial_subtotal</item>
+                    <item name="grand_total" xsi:type="string">aw_sarp_trial_grand_total</item>
+                </item>
+                <item name="Magento\Quote\Api\Data\CartItemInterface" xsi:type="array">
+                    <item name="price" xsi:type="string">aw_sarp_trial_price</item>
+                    <item name="price_incl_tax" xsi:type="string">aw_sarp_trial_price_incl_tax</item>
+                    <item name="row_total" xsi:type="string">aw_sarp_trial_row_total</item>
+                    <item name="row_total_incl_tax" xsi:type="string">aw_sarp_trial_row_total_incl_tax</item>
+                    <item name="row_total_tax" xsi:type="string">aw_sarp_trial_tax_amount</item>
+                    <item name="tax_percent" xsi:type="string">aw_sarp_trial_tax_percent</item>
+                </item>
+                <item name="Magento\Quote\Model\Quote\Address\Item" xsi:type="array">
+                    <item name="price" xsi:type="string">aw_sarp_trial_price</item>
+                    <item name="price_incl_tax" xsi:type="string">aw_sarp_trial_price_incl_tax</item>
+                    <item name="row_total" xsi:type="string">aw_sarp_trial_row_total</item>
+                    <item name="row_total_incl_tax" xsi:type="string">aw_sarp_trial_row_total_incl_tax</item>
+                    <item name="row_total_tax" xsi:type="string">aw_sarp_trial_tax_amount</item>
+                    <item name="tax_percent" xsi:type="string">aw_sarp_trial_tax_percent</item>
+                </item>
+                <item name="Magento\Quote\Api\Data\AddressInterface" xsi:type="array">
+                    <item name="subtotal" xsi:type="string">aw_sarp_trial_subtotal</item>
+                    <item name="subtotal_incl_tax" xsi:type="string">aw_sarp_trial_subtotal_incl_tax</item>
+                    <item name="tax" xsi:type="string">aw_sarp_trial_tax_amount</item>
+                    <item name="shipping_amount" xsi:type="string">aw_sarp_trial_shipping_amount</item>
+                    <item name="shipping_amount_incl_tax" xsi:type="string">aw_sarp_trial_shipping_amount_incl_tax</item>
+                    <item name="shipping_tax_amount" xsi:type="string">aw_sarp_trial_shipping_tax_amount</item>
+                    <item name="grand_total" xsi:type="string">aw_sarp_trial_grand_total</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Group\Regular">
+        <arguments>
+            <argument name="provider" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Quote\Total\Provider\Regular</argument>
+            <argument name="populateMaps" xsi:type="array">
+                <item name="Magento\Quote\Api\Data\CartInterface" xsi:type="array">
+                    <item name="subtotal" xsi:type="string">aw_sarp_regular_subtotal</item>
+                    <item name="grand_total" xsi:type="string">aw_sarp_regular_grand_total</item>
+                </item>
+                <item name="Magento\Quote\Api\Data\CartItemInterface" xsi:type="array">
+                    <item name="price" xsi:type="string">aw_sarp_regular_price</item>
+                    <item name="price_incl_tax" xsi:type="string">aw_sarp_regular_price_incl_tax</item>
+                    <item name="row_total" xsi:type="string">aw_sarp_regular_row_total</item>
+                    <item name="row_total_incl_tax" xsi:type="string">aw_sarp_regular_row_total_incl_tax</item>
+                    <item name="row_total_tax" xsi:type="string">aw_sarp_regular_tax_amount</item>
+                    <item name="tax_percent" xsi:type="string">aw_sarp_regular_tax_percent</item>
+                </item>
+                <item name="Magento\Quote\Model\Quote\Address\Item" xsi:type="array">
+                    <item name="price" xsi:type="string">aw_sarp_regular_price</item>
+                    <item name="price_incl_tax" xsi:type="string">aw_sarp_regular_price_incl_tax</item>
+                    <item name="row_total" xsi:type="string">aw_sarp_regular_row_total</item>
+                    <item name="row_total_incl_tax" xsi:type="string">aw_sarp_regular_row_total_incl_tax</item>
+                    <item name="row_total_tax" xsi:type="string">aw_sarp_regular_tax_amount</item>
+                    <item name="tax_percent" xsi:type="string">aw_sarp_regular_tax_percent</item>
+                </item>
+                <item name="Magento\Quote\Api\Data\AddressInterface" xsi:type="array">
+                    <item name="subtotal" xsi:type="string">aw_sarp_regular_subtotal</item>
+                    <item name="subtotal_incl_tax" xsi:type="string">aw_sarp_regular_subtotal_incl_tax</item>
+                    <item name="tax" xsi:type="string">aw_sarp_regular_tax_amount</item>
+                    <item name="shipping_amount" xsi:type="string">aw_sarp_regular_shipping_amount</item>
+                    <item name="shipping_amount_incl_tax" xsi:type="string">aw_sarp_regular_shipping_amount_incl_tax</item>
+                    <item name="shipping_tax_amount" xsi:type="string">aw_sarp_regular_shipping_tax_amount</item>
+                    <item name="grand_total" xsi:type="string">aw_sarp_regular_grand_total</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Initial">
+        <arguments>
+            <argument name="provider" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Provider\Initial</argument>
+            <argument name="populateMaps" xsi:type="array">
+                <item name="Aheadworks\Sarp2\Api\Data\ProfileItemInterface" xsi:type="array">
+                    <item name="price" xsi:type="string">initial_fee</item>
+                    <item name="price_incl_tax" xsi:type="string">initial_fee_incl_tax</item>
+                    <item name="row_total" xsi:type="string">initial_row_total</item>
+                    <item name="row_total_incl_tax" xsi:type="string">initial_row_total_incl_tax</item>
+                    <item name="row_tax" xsi:type="string">initial_fee_tax_amount</item>
+                    <item name="tax_percent" xsi:type="string">initial_fee_tax_percent</item>
+                </item>
+                <item name="Aheadworks\Sarp2\Api\Data\ProfileInterface" xsi:type="array">
+                    <item name="subtotal" xsi:type="string">initial_subtotal</item>
+                    <item name="subtotal_incl_tax" xsi:type="string">initial_subtotal_incl_tax</item>
+                    <item name="tax" xsi:type="string">initial_fee_tax_amount</item>
+                    <item name="grand_total" xsi:type="string">initial_grand_total</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Trial">
+        <arguments>
+            <argument name="provider" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Provider\Trial</argument>
+            <argument name="populateMaps" xsi:type="array">
+                <item name="Aheadworks\Sarp2\Api\Data\ProfileItemInterface" xsi:type="array">
+                    <item name="price" xsi:type="string">trial_price</item>
+                    <item name="price_incl_tax" xsi:type="string">trial_price_incl_tax</item>
+                    <item name="row_total" xsi:type="string">trial_row_total</item>
+                    <item name="row_total_incl_tax" xsi:type="string">trial_row_total_incl_tax</item>
+                    <item name="row_tax" xsi:type="string">trial_tax_amount</item>
+                    <item name="tax_percent" xsi:type="string">trial_tax_percent</item>
+                </item>
+                <item name="Aheadworks\Sarp2\Api\Data\ProfileInterface" xsi:type="array">
+                    <item name="shipping_method" xsi:type="string">trial_shipping_method</item>
+                    <item name="shipping_description" xsi:type="string">trial_shipping_description</item>
+                    <item name="shipping_amount" xsi:type="string">trial_shipping_amount</item>
+                    <item name="shipping_amount_incl_tax" xsi:type="string">trial_shipping_amount_incl_tax</item>
+                    <item name="shipping_tax_amount" xsi:type="string">trial_shipping_tax_amount</item>
+                    <item name="subtotal" xsi:type="string">trial_subtotal</item>
+                    <item name="subtotal_incl_tax" xsi:type="string">trial_subtotal_incl_tax</item>
+                    <item name="tax" xsi:type="string">trial_tax_amount</item>
+                    <item name="grand_total" xsi:type="string">trial_grand_total</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Group\Regular">
+        <arguments>
+            <argument name="provider" xsi:type="object">Aheadworks\Sarp2\Model\Sales\Total\Profile\Total\Provider\Regular</argument>
+            <argument name="populateMaps" xsi:type="array">
+                <item name="Aheadworks\Sarp2\Api\Data\ProfileItemInterface" xsi:type="array">
+                    <item name="price" xsi:type="string">regular_price</item>
+                    <item name="price_incl_tax" xsi:type="string">regular_price_incl_tax</item>
+                    <item name="row_total" xsi:type="string">regular_row_total</item>
+                    <item name="row_total_incl_tax" xsi:type="string">regular_row_total_incl_tax</item>
+                    <item name="row_tax" xsi:type="string">regular_tax_amount</item>
+                    <item name="tax_percent" xsi:type="string">regular_tax_percent</item>
+                </item>
+                <item name="Aheadworks\Sarp2\Api\Data\ProfileInterface" xsi:type="array">
+                    <item name="shipping_method" xsi:type="string">regular_shipping_method</item>
+                    <item name="shipping_description" xsi:type="string">regular_shipping_description</item>
+                    <item name="shipping_amount" xsi:type="string">regular_shipping_amount</item>
+                    <item name="shipping_amount_incl_tax" xsi:type="string">regular_shipping_amount_incl_tax</item>
+                    <item name="shipping_tax_amount" xsi:type="string">regular_shipping_tax_amount</item>
+                    <item name="subtotal" xsi:type="string">regular_subtotal</item>
+                    <item name="subtotal_incl_tax" xsi:type="string">regular_subtotal_incl_tax</item>
+                    <item name="tax" xsi:type="string">regular_tax_amount</item>
+                    <item name="grand_total" xsi:type="string">regular_grand_total</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Sarp2\Model\Sales\Total\Profile\CollectorList">
+        <arguments>
+            <argument name="collectors" xsi:type="array">
+                <item name="initial-subtotal" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">0</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Subtotal\Initial</item>
+                </item>
+                <item name="trial-subtotal" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Subtotal\Trial</item>
+                </item>
+                <item name="regular-subtotal" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Subtotal\Regular</item>
+                </item>
+                <item name="initial-tax-subtotal" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxSubtotal\Initial</item>
+                </item>
+                <item name="trial-tax-subtotal" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxSubtotal\Trial</item>
+                </item>
+                <item name="regular-tax-subtotal" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">50</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxSubtotal\Regular</item>
+                </item>
+                <item name="trial-shipping" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">60</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Shipping\Trial</item>
+                </item>
+                <item name="regular-shipping" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">70</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Shipping\Regular</item>
+                </item>
+                <item name="trial-tax-shipping" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">80</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxShipping\Trial</item>
+                </item>
+                <item name="regular-tax-shipping" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">90</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\TaxShipping\Regular</item>
+                </item>
+                <item name="initial-grand-total" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand\Initial</item>
+                </item>
+                <item name="trial-grand-total" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">110</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand\Trial</item>
+                </item>
+                <item name="regular-grand-total" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">120</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Profile\Collector\Grand\Regular</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Model\Sales\Total\Merged\CollectorList">
+        <arguments>
+            <argument name="collectors" xsi:type="array">
+                <item name="subtotal" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">0</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Merged\Collector\Subtotal</item>
+                </item>
+                <item name="shipping" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">10</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Merged\Collector\Shipping</item>
+                </item>
+                <item name="tax-subtotal" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">20</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Merged\Collector\TaxSubtotal</item>
+                </item>
+                <item name="tax-shipping" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">30</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Merged\Collector\TaxShipping</item>
+                </item>
+                <item name="grand-total" xsi:type="array">
+                    <item name="sortOrder" xsi:type="number">100</item>
+                    <item name="className" xsi:type="string">Aheadworks\Sarp2\Model\Sales\Total\Merged\Collector\Grand</item>
+                </item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Sarp2\PaymentData\AdapterPool">
+        <arguments>
+            <argument name="adapters" xsi:type="array">
+                <item name="braintree" xsi:type="string">Aheadworks\Sarp2\PaymentData\Braintree\Adapter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Sarp2\PaymentData\BamboraApac\Transaction\CreditCardType">
+        <arguments>
+            <argument name="bamboraApacGatewayConfig" xsi:type="object">Aheadworks\BamboraApac\Gateway\Config\Config</argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Aheadworks\Sarp2\Model\Quote\Item\Grouping\Criterion\IsPriceInclInitialFee" type="Aheadworks\Sarp2\Model\Quote\Item\Grouping\Criterion\Field">
+        <arguments>
+            <argument name="fieldName" xsi:type="string">aw_sarp_is_price_incl_initial_fee_amount</argument>
+            <argument name="resultName" xsi:type="string">is_initial_fee_incl_in_prepayment</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Quote\Item\Grouping\Criterion\IsPriceInclTrialPrice" type="Aheadworks\Sarp2\Model\Quote\Item\Grouping\Criterion\Field">
+        <arguments>
+            <argument name="fieldName" xsi:type="string">aw_sarp_is_price_incl_trial_amount</argument>
+            <argument name="resultName" xsi:type="string">is_trial_price_incl_in_prepayment</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Quote\Item\Grouping\Criterion\IsPriceInclRegularPrice" type="Aheadworks\Sarp2\Model\Quote\Item\Grouping\Criterion\Field">
+        <arguments>
+            <argument name="fieldName" xsi:type="string">aw_sarp_is_price_incl_regular_amount</argument>
+            <argument name="resultName" xsi:type="string">is_regular_price_incl_in_prepayment</argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\Sarp2\Model\Quote\Item\Grouping\CriterionPool">
+        <arguments>
+            <argument name="criteria" xsi:type="array">
+                <item name="plan_definition" xsi:type="string">Aheadworks\Sarp2\Model\Quote\Item\Grouping\Criterion\PlanDefinition</item>
+                <item name="is_initial_fee_incl_in_prepayment" xsi:type="string">Aheadworks\Sarp2\Model\Quote\Item\Grouping\Criterion\IsPriceInclInitialFee</item>
+                <item name="is_trial_price_incl_in_prepayment" xsi:type="string">Aheadworks\Sarp2\Model\Quote\Item\Grouping\Criterion\IsPriceInclTrialPrice</item>
+                <item name="is_regular_price_incl_in_prepayment" xsi:type="string">Aheadworks\Sarp2\Model\Quote\Item\Grouping\Criterion\IsPriceInclRegularPrice</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Aheadworks\Sarp2\Model\Email\Sender\Enabler\BillingSuccessful" type="Aheadworks\Sarp2\Model\Email\Sender\Enabler">
+        <arguments>
+            <argument name="configPath" xsi:type="string">aw_sarp2/email_settings/successful_billing_email_enabled</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Email\Sender\Enabler\BillingFailed" type="Aheadworks\Sarp2\Model\Email\Sender\Enabler">
+        <arguments>
+            <argument name="configPath" xsi:type="string">aw_sarp2/email_settings/failed_billing_email_enabled</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="Aheadworks\Sarp2\Model\Email\Sender\BillingSuccessful" type="Aheadworks\Sarp2\Model\Email\Sender">
+        <arguments>
+            <argument name="enabler" xsi:type="object">Aheadworks\Sarp2\Model\Email\Sender\Enabler\BillingSuccessful</argument>
+            <argument name="emailTemplatePath" xsi:type="string">aw_sarp2/email_settings/successful_billing_email_template</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Email\Sender\BillingFailed" type="Aheadworks\Sarp2\Model\Email\Sender">
+        <arguments>
+            <argument name="enabler" xsi:type="object">Aheadworks\Sarp2\Model\Email\Sender\Enabler\BillingFailed</argument>
+            <argument name="emailTemplatePath" xsi:type="string">aw_sarp2/email_settings/failed_billing_email_template</argument>
+            <argument name="bccPath" xsi:type="string">aw_sarp2/email_settings/failed_billing_email_bcc</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Aheadworks\Sarp2\Model\Email\Sender\UpcomingBilling" type="Aheadworks\Sarp2\Model\Email\Sender">
+        <arguments>
+            <argument name="enabler" xsi:type="object">Aheadworks\Sarp2\Model\Email\Sender\Enabler\UpcomingBilling</argument>
+            <argument name="emailTemplatePath" xsi:type="string">aw_sarp2/email_settings/upcoming_billing_email_template</argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\Sarp2\Model\Email\SenderPool">
+        <arguments>
+            <argument name="senders" xsi:type="array">
+                <item name="billing_successful" xsi:type="string">Aheadworks\Sarp2\Model\Email\Sender\BillingSuccessful</item>
+                <item name="billing_failed" xsi:type="string">Aheadworks\Sarp2\Model\Email\Sender\BillingFailed</item>
+                <item name="upcoming_billing" xsi:type="string">Aheadworks\Sarp2\Model\Email\Sender\UpcomingBilling</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\ProviderPool">
+        <arguments>
+            <argument name="providers" xsi:type="array">
+                <item name="configurable" xsi:type="string">Aheadworks\Sarp2\Model\Product\Subscription\Details\Config\Configurable</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="Aheadworks\Sarp2\Engine\Logger\Handler\Exception" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/log/aw_sarp2_payment.log</argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\Sarp2\Engine\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">awSarp2Engine</argument>
+            <argument name="handlers" xsi:type="array">
+                <item name="exception" xsi:type="object">Aheadworks\Sarp2\Engine\Logger\Handler\Exception</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Aheadworks\Sarp2\Engine\Payment\Action\Exception\HandlerResolver">
+        <arguments>
+            <argument name="strategyPool" xsi:type="array">
+                <item name="braintree" xsi:type="object">Aheadworks\Sarp2\Engine\Payment\Action\Exception\Resolver\Type\Braintree</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Model\Profile\View\Edit\Payment\ConfigProvider\Composite">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="default_config_provider" xsi:type="object">Aheadworks\Sarp2\Model\Profile\View\Edit\Payment\ConfigProvider\DefaultConfig</item>
+                <item name="payment_methods_provider" xsi:type="object">Aheadworks\Sarp2\Model\Profile\View\Edit\Payment\ConfigProvider\PaymentMethods</item>
+                <item name="customer_data_provider" xsi:type="object">Aheadworks\Sarp2\Model\Profile\View\Edit\Payment\ConfigProvider\CustomerData</item>
+                <!-- <item name="authorizenet_acceptjs_config_provider" xsi:type="object">Magento\AuthorizenetAcceptjs\Model\Ui\ConfigProvider</item> -->
+                <item name="vault_config_provider" xsi:type="object">Aheadworks\Sarp2\Model\Profile\View\Edit\Payment\ConfigProvider\VaultConfig</item>
+                <item name="ccform" xsi:type="object">Magento\Payment\Model\CcGenericConfigProvider</item>
+                <item name="cc_card_config_provider" xsi:type="object">Magento\Payment\Model\CcConfigProvider</item>
+                <item name="checkout_agreements_config_provider" xsi:type="object">Magento\CheckoutAgreements\Model\AgreementsConfigProvider</item>
+                <item name="offline_payment_instructions_config_provider" xsi:type="object">Magento\OfflinePayments\Model\InstructionsConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Payment\Helper\Data">
+        <plugin name="awSarp2" type="Aheadworks\Sarp2\Plugin\Payment\Helper\DataPlugin"/>
+    </type>
+
+    <type name="StripeIntegration\Payments\Model\PaymentIntent">
+        <plugin name="awSarp2" type="Aheadworks\Sarp2\Plugin\Payment\StripePayments\PaymentIntentPlugin"/>
+    </type>
+    <type name="Aheadworks\Sarp2\Gateway\StripePayments\Config\Config">
+        <arguments>
+            <argument name="methodCode" xsi:type="string">stripe_payments</argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Model\Payment\Checker\OfflinePayment">
+        <arguments>
+            <argument name="allowedMethods" xsi:type="array">
+                <item name="0" xsi:type="string">cashondelivery</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\Cashondelivery"
+                 type="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\OfflinePaymentDefault">
+        <arguments>
+            <argument name="methodCode" xsi:type="string">cashondelivery</argument>
+        </arguments>
+    </virtualType>
+</config>

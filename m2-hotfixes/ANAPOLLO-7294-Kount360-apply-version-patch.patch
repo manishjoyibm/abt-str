@@ -1,0 +1,54 @@
+diff --git a/vendor/kount/magento2-kount360/Model/Ris/Inquiry/Builder/Order.php b/vendor/kount/magento2-kount360/Model/Ris/Inquiry/Builder/Order.php
+index 009d01e11..6288d63bb 100644
+--- a/vendor/kount/magento2-kount360/Model/Ris/Inquiry/Builder/Order.php
++++ b/vendor/kount/magento2-kount360/Model/Ris/Inquiry/Builder/Order.php
+@@ -54,7 +54,7 @@ class Order
+ 
+     public function processUpdate(DataObject $request, $risTransactionId, OrderInterface $order, $realTimeDecline = false): void
+     {
+-        $this->processGeneralInfo($request, $order);
++        $this->processGeneralInfo($request, $order, true);
+         $this->processAccountData($request, $order);
+         $this->processOrderTransactions($request, $order, $risTransactionId, $realTimeDecline);
+     }
+@@ -62,15 +62,18 @@ class Order
+     /**
+      * @param DataObject $request
+      * @param OrderInterface $order
++     * @param bool $order
+      * @return void
+      */
+-    protected function processGeneralInfo(DataObject $request, OrderInterface $order): void
++    protected function processGeneralInfo(DataObject $request, OrderInterface $order, bool $updateRequest = false): void
+     {
+         $request->setData('merchantOrderId', $order->getIncrementId());
+         $storeInformation = $this->configAccount->getStoreInformation();
+         $store = $order->getStore();
+         $request->setData('channel', $store->getBaseUrl() ?? 'MAGENTO');
+-        $this->kountSession->process($request);
++        if (!$updateRequest) {
++            $this->kountSession->process($request);
++        }
+         $now = $this->getCurrentTime();
+         $request->setData('creationDateTime', $now);
+         $this->processIpAndUserAgent($request, $order);
+@@ -149,11 +152,17 @@ class Order
+ 
+         if ($this->dataPersistor->get('kount_post_auth_failure')) {
+             $realTimeDecline = true;
++            $this->dataPersistor->set('kount_post_auth_failure', false);
+         }
+ 
+-        $transactionData['transactionStatus'] = $realTimeDecline ? 'REFUSED' : ($order->getPayment()->getEntityId() ? 'CAPTURED' : 'PENDING');
++        $transactionData['transactionStatus'] = $realTimeDecline ?
++            'REFUSED' :
++            ($order->getPayment()->getMethod() ? 'CAPTURED' : 'PENDING');
++
+         $transactionData['authorizationStatus'] = [
+-            'authResult' => $realTimeDecline ? 'DECLINED' : ($order->getPayment()->getEntityId() ? 'APPROVED' : 'UNKNOWN')
++            'authResult' => $realTimeDecline ?
++                'DECLINED' :
++                ($order->getPayment()->getMethod() ? 'APPROVED' : 'UNKNOWN')
+         ];
+ 
+         if ($risTransactionId) {

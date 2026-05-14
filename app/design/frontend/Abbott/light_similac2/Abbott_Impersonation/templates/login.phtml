@@ -1,0 +1,15 @@
+<?php
+/** @var \Magento\Framework\View\Element\Template $block */
+$helper = $this->helper('Abbott\CustomerTransistion\Helper\Data');
+$failureUrl = $helper->getFailureUrl().'account/profile.html';
+?>
+<p><?php echo $block->escapeHtml(__('You have logged in and will go to customer account in 5 seconds.')); ?></p>
+<script type="text/x-magento-init">
+{
+    "*": {
+        "Abbott_Impersonation/js/login": {
+            "redirectUrl": "<?= /* @noEscape */ $failureUrl ?>"
+        }
+    }
+}
+</script>

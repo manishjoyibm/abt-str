@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Sales\Model\Order\Email\Sender\OrderSender" type="Abbott\OrderManagement\Model\Order\Email\Sender\OrderSender" />
+    <preference for="Amasty\Orderattr\Model\Order\Pdf\Invoice" type="Abbott\OrderManagement\Model\Order\Pdf\Invoice" />
+    <preference for="Amasty\Orderattr\Model\ResourceModel\Value\Plugin\Order\Grid\SearchResult" type="Abbott\OrderManagement\Model\ResourceModel\Value\Plugin\Order\Grid\SearchResult" />
+    <preference for="Magento\Sales\Block\Adminhtml\Order\View\Tab\History" type="Abbott\OrderManagement\Block\Adminhtml\Order\View\Tab\History" />
+    <preference for="Magento\Sales\Model\Order\Email\SenderBuilder" type="Abbott\OrderManagement\Model\Order\Email\SenderBuilder" />    
+    <type name="Magento\Email\Model\AbstractTemplate">
+        <plugin name="custom_template_variable"
+                type="Abbott\OrderManagement\Plugin\AbstractTemplatePlugin" sortOrder="10" />
+    </type>
+    <type name="Magento\CatalogInventory\Observer\CancelOrderItemObserver">
+        <plugin name="abbott_inventory" type="Abbott\OrderManagement\Plugin\CancelOrderItemObserver"/>
+    </type>
+    <type name="Amasty\Orderattr\Model\Indexer\Mview\OrderAction">
+        <plugin name="abbott_orderattr_orderaction_plugin" type="Abbott\OrderManagement\Plugin\Model\Indexer\Mview\OrderAction"/>
+    </type>
+    <type name="Amasty\Orderattr\Model\Indexer\Action">
+        <plugin name="abbott_orderattr_action_plugin" type="Abbott\OrderManagement\Plugin\Model\Indexer\Action"/>
+    </type>
+    
+ <!-- Inject the statuses you want selectable in the multiselect -->
+    <type name="Abbott\OrderManagement\Model\Config\Source\SelectiveOrderStatus">
+        <arguments>
+            <argument name="allowedCodes" xsi:type="array">
+                <item name="hold" xsi:type="string">hold</item>
+                <item name="suspected_fraud" xsi:type="string">suspected_fraud</item>
+                <item name="on_hold" xsi:type="string">on_hold</item>
+                <item name="holded"  xsi:type="string">holded</item>
+                <item name="review_kount" xsi:type="string">review_kount</item>
+                <item name="error" xsi:type="string">error</item>
+            </argument>
+        </arguments>
+    </type>
+
+</config>

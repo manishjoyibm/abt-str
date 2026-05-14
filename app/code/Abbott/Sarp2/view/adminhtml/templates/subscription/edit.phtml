@@ -1,0 +1,36 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+ */
+
+/** @var $block \Abbott\Sarp2\Block\Adminhtml\Subscription\Info */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $profile = $block->getProfile();
+    $profileId = $profile->getProfileId();
+?>
+<div class="aw-sarp2_subscription_page">
+<form name="update_profile_form" method="post" action="<?php echo $block->getUpdateUrl()->getUrl("aw_sarp2/subscription/update",['profile_id' => $profileId]) ?>" >
+
+    <div class="subscription-page_title_wrapper">
+        <div class="subscription-page_title_title">
+            <h1><?= $block->escapeHtml(__('Subscription #%1', $profile->getIncrementId())) ?></h1>
+        </div>
+        <div class="subscription-page_title_status">
+            <span><?= $block->escapeHtml($block->getStatusLabel()) ?><span>
+        </div>
+    </div>
+    <div class="subscription-page_content_wrapper">
+        <?= $block->getNextOrderAndPlanHtml() ?>
+        <?= $block->getAddressesHtml() ?>
+        <?= $block->getDeliveryInstruction() ?>
+    </div>
+    <div><input name="form_key" type="hidden" value="<?php /* @escapeNotVerified */ echo $block->getFormKey() ?>" /></div>
+    <div style="float:right;">
+        <button type="submit" class="save primary" value="Update Profile">Update Profile</button>
+    </div>
+</div>
+

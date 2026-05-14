@@ -1,0 +1,7 @@
+{
+    "salesrule": {
+        "column": {
+            "checkout_message": true
+        }
+    }
+}

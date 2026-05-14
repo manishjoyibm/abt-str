@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <aw_sarp2>
+            <general>
+                <log_enabled>1</log_enabled>
+            </general>
+            <email_settings>
+                <email_identity>general</email_identity>
+                <successful_billing_email_enabled>1</successful_billing_email_enabled>
+                <failed_billing_email_enabled>1</failed_billing_email_enabled>
+                <upcoming_billing_email_days_offset>0</upcoming_billing_email_days_offset>
+            </email_settings>
+            <engine>
+                <use_bundled_payments>1</use_bundled_payments>
+                <bundle_virtual>0</bundle_virtual>
+                <bundled_failure_handling>retry_bundled</bundled_failure_handling>
+            </engine>
+            <subscription_editing>
+                <can_switch_to_another_plan>1</can_switch_to_another_plan>
+                <can_change_shipping_address>1</can_change_shipping_address>
+                <can_edit_next_payment_date>1</can_edit_next_payment_date>
+                <earliest_next_payment_date>1</earliest_next_payment_date>
+                <can_edit_next_payment_date_for_membership>0</can_edit_next_payment_date_for_membership>
+            </subscription_editing>
+        </aw_sarp2>
+        <payment>
+            <braintree>
+                <aw_sarp_can_use_mixed_checkout>1</aw_sarp_can_use_mixed_checkout>
+                <aw_sarp_can_use_subscription_checkout>1</aw_sarp_can_use_subscription_checkout>
+            </braintree>
+            <braintree_paypal>
+                <aw_sarp_can_use_mixed_checkout>1</aw_sarp_can_use_mixed_checkout>
+                <aw_sarp_can_use_subscription_checkout>1</aw_sarp_can_use_subscription_checkout>
+            </braintree_paypal>
+            <!-- to do need to find another way to apply settings (if module is off then fatal error occurs) -->
+            <aw_bambora_apac>
+                <aw_sarp_can_use_mixed_checkout>1</aw_sarp_can_use_mixed_checkout>
+                <aw_sarp_can_use_subscription_checkout>1</aw_sarp_can_use_subscription_checkout>
+            </aw_bambora_apac>
+            <stripe_payments>
+                <aw_sarp_can_use_mixed_checkout>1</aw_sarp_can_use_mixed_checkout>
+                <aw_sarp_can_use_subscription_checkout>1</aw_sarp_can_use_subscription_checkout>
+                <aw_sarp_cctypes_map><![CDATA[{"amex":"AE","discover":"DI","jcb":"JCB","mastercard":"MC","visa":"VI","diners":"DN"}]]></aw_sarp_cctypes_map>
+            </stripe_payments>
+            <authorizenet_acceptjs>
+                <aw_sarp_can_use_mixed_checkout>1</aw_sarp_can_use_mixed_checkout>
+                <aw_sarp_can_use_subscription_checkout>1</aw_sarp_can_use_subscription_checkout>
+            </authorizenet_acceptjs>
+            <cashondelivery>
+                <aw_sarp_can_use_mixed_checkout>1</aw_sarp_can_use_mixed_checkout>
+                <aw_sarp_can_use_subscription_checkout>1</aw_sarp_can_use_subscription_checkout>
+            </cashondelivery>
+            <aw_sarp_braintree_recurring>
+                <model>AwSarp2BraintreeRecurringFacade</model>
+                <can_use_checkout>0</can_use_checkout>
+            </aw_sarp_braintree_recurring>
+            <aw_sarp_braintree_paypal_recurring>
+                <model>AwSarp2BraintreePayPalRecurringFacade</model>
+                <can_use_checkout>0</can_use_checkout>
+            </aw_sarp_braintree_paypal_recurring>
+            <aw_sarp_aw_bambora_apac_recurring>
+                <model>AwSarp2AwBamboraApacRecurringFacade</model>
+                <can_use_checkout>0</can_use_checkout>
+            </aw_sarp_aw_bambora_apac_recurring>
+            <aw_sarp_stripe_payments_recurring>
+                <model>AwSarp2StripePaymentsRecurringFacade</model>
+                <can_use_checkout>0</can_use_checkout>
+            </aw_sarp_stripe_payments_recurring>
+            <!-- <aw_sarp_authorizenet_acceptjs_recurring>
+                <model>AwSarp2AuthorizenetAcceptjsRecurringFacade</model>
+                <can_use_checkout>0</can_use_checkout>
+            </aw_sarp_authorizenet_acceptjs_recurring> -->
+            <aw_sarp_cashondelivery_recurring>
+                <model>Magento\OfflinePayments\Model\Cashondelivery</model>
+                <can_use_checkout>0</can_use_checkout>
+            </aw_sarp_cashondelivery_recurring>
+        </payment>
+    </default>
+</config>

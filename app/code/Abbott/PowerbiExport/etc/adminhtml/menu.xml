@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Abbott_PowerbiExport::powerbi" title="Powerbi Export" module="Abbott_PowerbiExport" sortOrder="50"  resource="Abbott_PowerbiExport::menu"/>
+        <add id="Abbott_PowerbiExport::powerbiexport" title="Powerbi Export" module="Abbott_PowerbiExport" sortOrder="10" action="powerbi_export/index/index" resource="Abbott_PowerbiExport::menu" parent="Abbott_PowerbiExport::powerbi"/>
+        <add id="Abbott_PowerbiExport::powerbiexportconfig" title="Powerbi Export Configuration" module="Abbott_PowerbiExport" sortOrder="10" action="adminhtml/system_config/edit/section/powerbi_export" resource="Abbott_PowerbiExport::menu" parent="Abbott_PowerbiExport::powerbi"/>
+    </menu>
+</config>
+

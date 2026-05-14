@@ -1,0 +1,90 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+$dataHelper = $this->helper('Abbott\CustomerTransistion\Helper\Data');
+?>
+<link rel="stylesheet" type="text/css" href="<?php echo $dataHelper->getFailureUrl().'etc.clientlibs/an/similac/clientlibs/clientlib-similac-magento-base.min.css?v='.$dataHelper->getAemJsVersion();?>">
+<link rel="stylesheet" type="text/css" href="<?php echo $dataHelper->getFailureUrl().'etc.clientlibs/an/similac/clientlibs/clientlib-similac-commons.min.css?v='.$dataHelper->getAemJsVersion();?>">
+<?php $scriptString = <<<script
+require(["jquery","jquery/ui"],function(jQuery) {     
+    jQuery(document).ready(function() {
+	   	var scrollTop = jQuery("#scroll-top");
+	  	jQuery(window).scroll(function() {
+		    var topPos = jQuery(this).scrollTop();
+		    if (topPos > 100) {
+		      jQuery(scrollTop).css("opacity", "1");
+
+		    } else {
+		      jQuery(scrollTop).css("opacity", "0");
+		    }
+		}); 
+	  	jQuery(scrollTop).click(function() {
+		    jQuery('html, body').animate({
+		      scrollTop: 0
+		    }, 800);
+		    return false;
+		});
+
+	  	//Input Animation
+		jQuery(document).on("focus", ".field.fet input", function () {
+            jQuery(this).parent(".control").parent(".fet").find("label").addClass("labelfocus");
+        });
+        jQuery(document).on("focus", ".field.fet textarea", function () {
+            jQuery(this).parent(".control").parent(".fet").find("label").addClass("labelfocus");
+        });
+        jQuery(document).on("focusout", ".field.fet input", function () {
+            if (jQuery(this).val() != "") {
+                jQuery(this).parent(".control").parent(".fet").addClass("has-content");
+            } else {
+                jQuery(this).parent(".control").parent(".fet").removeClass("has-content");
+                jQuery(this).parent(".control").parent(".fet").find("label").removeClass("labelfocus");
+            }
+        });
+        jQuery(document).on("focusout", ".field.fet textarea", function () {
+            if (jQuery(this).val() != "") {
+                jQuery(this).parent(".control").closest(".fet").addClass("has-content");
+            } else {
+                jQuery(this).parent(".control").closest(".fet").removeClass("has-content");
+                jQuery(this).parent(".control").closest(".fet").find("label").removeClass("labelfocus");
+            }
+        });
+        jQuery(document).on("blur", ".field.fet input", function () {
+            if (jQuery(this).val() != "") {
+                jQuery(this).parent(".control").parent(".fet").addClass("has-content");
+            } else {
+                jQuery(this).parent(".control").parent(".fet").removeClass("has-content");
+                jQuery(this).parent(".control").parent(".fet").find("label").removeClass("labelfocus");
+            }
+        });
+        jQuery(document).on("blur", ".field.fet textarea", function () {
+            if (jQuery(this).val() != "") {
+                jQuery(this).parent(".control").closest(".fet").addClass("has-content");
+            } else {
+                jQuery(this).parent(".control").closest(".fet").removeClass("has-content");
+                jQuery(this).parent(".control").closest(".fet").find("label").removeClass("labelfocus");
+            }
+        });
+        function waitForEl() {
+            jQuery(".field.fet input").each(function (i) {
+                if (jQuery(this).val() != "") {
+                    jQuery(this).parent(".control").closest(".field.fet").addClass("has-content");
+                }
+            });
+            jQuery(".field.fet textarea").each(function (i) {
+                if (jQuery(this).val() != "") {
+                    jQuery(this).parent(".control").closest(".field.fet").addClass("has-content");
+                }
+            });
+        }
+        setTimeout(function () {
+            if (jQuery(".field.fet input, .field.fet textarea").length) {
+                waitForEl();
+            }
+        }, 1000);
+        waitForEl();
+	});   
+});
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>

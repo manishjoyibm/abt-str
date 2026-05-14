@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<event name="sales_quote_merge_after">
+	<observer name="prevent_progressive_product_add" instance="Abbott\ProgressiveDiscount\Observer\RestrictAddToCart" /></event>
+</config>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:Magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="targetbase_integration_targetbase_email_template_email_template" label="Targetbase Email template" file="targetbase_email_template.html" type="html" module="Abbott_Targetbase" area="frontend"/>
+    <template id="targetbase_integration_targetbase_email_template_report_email_template" label="Targetbase Export Report Email template" file="targetbase_export_report_email_template.html" type="html" module="Abbott_Targetbase" area="frontend"/>
+</config>
+ 

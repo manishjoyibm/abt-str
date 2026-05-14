@@ -1,0 +1,6 @@
+.form-login .fieldset>.field.required>.label:after{
+    margin: 0 0 0 0px !important;
+}
+.form-shipping-address .fieldset>.field._required>.label:after,.form-shipping-address .fieldset>.field.required>.label:after{
+    margin: 0 0 0 -5px !important;
+}

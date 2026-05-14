@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="workday_feed_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>WorkDay Integration</label>
+            <resource>Abbott_WorkdayFeed::workday_integration</resource>
+            <group id="workday_sftp" showInDefault="1">
+                <label>WorkDay SFTP Settings</label>
+                <field id="abbott_path" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>SFTP Folder Path for Abbott Workday</label>
+                    <comment>ex: /abbott/</comment>
+                </field>
+                <field id="emp_group_id_abbott" showInDefault="1" type="select" showInStore="0" showInWebsite="0" sortOrder="14" translate="label">
+                    <label>Abbott Employee Group Id</label>
+                    <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+                </field>
+                <field id="abbvie_path" translate="label" type="text" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>SFTP Folder Path for Abbvie Workday</label>
+                    <comment>ex: /abbvie/</comment>
+                </field>
+                <field id="emp_group_id_abbvie" showInDefault="1" type="select" showInStore="0" showInWebsite="0" sortOrder="14" translate="label">
+                    <label>Abbvie Employee Group Id</label>
+                    <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+                </field>
+                <field id="alere_path" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>SFTP Folder Path for Alere Workday</label>
+                    <comment>ex: /alere/</comment>
+                </field>
+                <field id="emp_group_id_alere" showInDefault="1" type="select" showInStore="0" showInWebsite="0" sortOrder="14" translate="label">
+                    <label>Alere Employee Group Id</label>
+                    <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+                </field>
+                <field id="retiree_group_id_abbott" showInDefault="1" type="select" showInStore="0" showInWebsite="0" sortOrder="14" translate="label">
+                    <label>Abbott Retiree Group Id</label>
+                    <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+                </field>
+                <field id="retiree_group_id_abbvie" showInDefault="1" type="select" showInStore="0" showInWebsite="0" sortOrder="14" translate="label">
+                    <label>Abbvie Retiree Group Id</label>
+                    <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+                </field>
+                <field id="retiree_group_id_alere" showInDefault="1" type="select" showInStore="0" showInWebsite="0" sortOrder="14" translate="label">
+                    <label>Alere Retiree Group Id</label>
+                    <source_model>Magento\Customer\Model\Config\Source\Group</source_model>
+                </field>
+                <field id="archive_path" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>SFTP Folder Path for Workday Archive Files</label>
+                    <comment>ex: /archive/</comment>
+                </field>
+                <field id="host" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="14" translate="label" type="text">
+                    <label>SFTP Host</label>
+                </field>
+                <field id="port" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="15" translate="label" type="text">
+                    <label>Port Number</label>
+                </field>
+                <field id="username" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="20" translate="label" type="text">
+                    <label>User Name</label>
+                </field>
+                <field id="password" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label" type="obscure">
+                    <label>Password</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="workday_customer_template" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Customer Account Create Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+                <field id="sent" translate="label" sortOrder="99" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Abbott\WorkdayFeed\Block\Adminhtml\System\Config\Button</frontend_model>
+                </field>
+            </group>
+            <group id="workday_feed"  showInDefault="1">
+                <label>WorkDay Email Templates</label>
+                <field id="lifetime_idx" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Days Saved In Log</label>
+                </field>
+                <field id="lifetime_feed" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Days Saved In Feed</label>
+                </field>
+                <field id="is_enabled_mail" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                   <label>Enable Mails</label>
+                   <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="email_enabled" translate="label" type="select" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0"> 
+                   <label>Enable Mails for Customers</label> 
+                   <source_model>Magento\Config\Model\Config\Source\Yesno</source_model> 
+                </field> 
+                <field id="receiver_email" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Receiver Email</label>
+                    <comment>Please provide the values separeted by commas ex: test1@example.com,test2@example.com</comment>
+                </field>
+                <field id="workday_template" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Success Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+            <group id="workday_keys" showInDefault="1">
+                <label>Workday Key Settings</label>
+                <field id="abbott_key" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Private Key for Abbott Workday</label>
+                </field>
+                <field id="abbvie_key" translate="label" type="textarea" sortOrder="11" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Private Key for Abbvie Workday</label>
+                </field>
+                <field id="alere_key" translate="label" type="textarea" sortOrder="12" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Private Key for Alere Workday</label>
+                </field>
+                <field id="abbott_passphrase" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label" type="obscure">
+                    <label>Passphrase for Abbott</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="abbvie_passphrase" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label" type="obscure">
+                    <label>Passphrase for Abbvie</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="alere_passphrase" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label" type="obscure">
+                    <label>Passphrase for Alere</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+            </group>
+            <group id="workday_crons" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Workday Cron Settings</label>
+                <field id="es_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Employee Sync Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="sync_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Expression for Employee Sync</label>
+                    <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                    <depends>
+                        <field id="es_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="process_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Expression for Employee Process</label>
+                    <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                    <depends>
+                        <field id="es_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="dl_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Delete Log Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="delete_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Expression for Delete Log</label>
+                    <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                    <depends>
+                        <field id="dl_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,79 @@
+   /* MAIN WRAPPER (matches Magento admin fieldset) */
+#abbott-adultsig-wrapper {
+    padding: 20px 0;
+    /* border: 1px solid #dcdcdc; */
+    /* background: #fafafa; */
+    border-radius: 4px;
+    margin-bottom: -40px;
+}
+
+#abbott-adultsig-wrapper .admin__page-section-title {
+    border-top: 1px solid #dcdcdc;
+    padding-top: 15px;
+}
+
+/* SECTION TITLE */
+#abbott-adultsig-wrapper .admin__fieldset-title .title {
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: #303030;
+    margin-bottom: 12px;
+    display: block;
+}
+
+/* REQUIRED RED ASTERISK */
+#abbott-adultsig-wrapper .required {
+    color: #e22626;
+    font-size: 1.4rem;
+}
+
+/* FLEX ALIGNMENT: checkbox + label on same line */
+#abbott-adultsig-wrapper .admin__field-control {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+#abbott-adult_signature_ack {
+    width: 17px;
+    height: 17px;
+    cursor: pointer;
+    margin-right: 8px;
+}
+
+/* LABEL */
+#abbott-adultsig-wrapper .admin__field-label {
+    font-size: 1.3rem;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    line-height: 1.5rem;
+}
+
+/* TEXT NOTE */
+#abbott-adultsig-wrapper .note {
+    margin-left: 26px;
+    font-size: 1.2rem;
+    color: #666;
+}
+#abbott-adultsig-wrapper .mage-error {
+    margin-left: 28px;
+    margin-top: 3px;
+    font-size: 1.2rem;
+}
+.admin-message-box {
+    background: #fff8e6;
+    border-left: 3px solid #e0a800;
+    padding: 10px 12px;
+    font-size: 1.3rem;
+    color: #6b5d2a;
+    margin-top: 10px;
+}
+
+div#order-shipping-method-choose {
+    min-height: 135px;
+}
+
+div#order-shipping-method-info {
+    min-height: 135px;
+}

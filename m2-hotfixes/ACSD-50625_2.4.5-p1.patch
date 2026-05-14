@@ -1,0 +1,119 @@
+diff --git a/vendor/magento/module-sales-rule-staging/Setup/Patch/Schema/MigrateSalesRuleLabelsForStaging.php b/vendor/magento/module-sales-rule-staging/Setup/Patch/Schema/MigrateSalesRuleLabelsForStaging.php
+new file mode 100644
+index 00000000000..46a87228baf
+--- /dev/null
++++ b/vendor/magento/module-sales-rule-staging/Setup/Patch/Schema/MigrateSalesRuleLabelsForStaging.php
+@@ -0,0 +1,113 @@
++<?php
++/**
++ * Copyright © Magento, Inc. All rights reserved.
++ * See COPYING.txt for license details.
++ */
++declare(strict_types=1);
++
++namespace Magento\SalesRuleStaging\Setup\Patch\Schema;
++
++use Magento\Framework\DB\Adapter\AdapterInterface;
++use Magento\Framework\Setup\ModuleDataSetupInterface;
++use Magento\Framework\Setup\Patch\DataPatchInterface;
++use Magento\SalesRuleStaging\Setup\Patch\Data\MigrateSalesRulesForStaging;
++
++class MigrateSalesRuleLabelsForStaging implements DataPatchInterface
++{
++    /**
++     * @var ModuleDataSetupInterface
++     */
++    private $moduleDataSetup;
++
++    /**
++     * MigrateSalesRulesForStaging constructor.
++     * @param ModuleDataSetupInterface $moduleDataSetup
++     */
++    public function __construct(ModuleDataSetupInterface $moduleDataSetup)
++    {
++        $this->moduleDataSetup = $moduleDataSetup;
++    }
++
++    /**
++     * @inheritdoc
++     */
++    public function apply()
++    {
++        $this->moduleDataSetup->startSetup();
++        $salesRuleEntityTable = $this->moduleDataSetup->getTable('salesrule');
++        $salesRuleLabelTable = $this->moduleDataSetup->getTable('salesrule_label');
++        $storeTable = $this->moduleDataSetup->getTable('store');
++        $rowIdFkName = $this->moduleDataSetup->getConnection()->getForeignKeyName(
++            $salesRuleLabelTable,
++            'row_id',
++            $salesRuleEntityTable,
++            'row_id'
++        );
++        $storeIdFkName = $this->moduleDataSetup->getConnection()->getForeignKeyName(
++            $salesRuleLabelTable,
++            'store_id',
++            $storeTable,
++            'store_id'
++        );
++        $this->moduleDataSetup->getConnection()->dropForeignKey($salesRuleLabelTable, $rowIdFkName);
++        $this->moduleDataSetup->getConnection()->dropForeignKey($salesRuleLabelTable, $storeIdFkName);
++        $this->moduleDataSetup->getConnection()->dropIndex($salesRuleLabelTable, 'SALESRULE_LABEL_ROW_ID_STORE_ID');
++        $select = $this->moduleDataSetup->getConnection()->select()->from(
++            ['labels' => $salesRuleLabelTable],
++            ['label_id']
++        )->join(
++            ['rules' => $salesRuleEntityTable],
++            'labels.row_id = rules.rule_id',
++            ['rules.row_id']
++        );
++        $data = $this->moduleDataSetup->getConnection()->fetchAll($select);
++        foreach ($data as $row) {
++            $this->moduleDataSetup->getConnection()->update(
++                $salesRuleLabelTable,
++                ['row_id' => $row['row_id']],
++                ['label_id = ?' => $row['label_id']]
++            );
++        }
++        $this->moduleDataSetup->getConnection()
++            ->addIndex(
++                $salesRuleLabelTable,
++                'SALESRULE_LABEL_ROW_ID_STORE_ID',
++                ['row_id', 'store_id'],
++                AdapterInterface::INDEX_TYPE_UNIQUE
++            );
++        $this->moduleDataSetup->getConnection()
++            ->addForeignKey(
++                $storeIdFkName,
++                $salesRuleLabelTable,
++                'store_id',
++                $storeTable,
++                'store_id'
++            );
++        $this->moduleDataSetup->getConnection()
++            ->addForeignKey(
++                $rowIdFkName,
++                $salesRuleLabelTable,
++                'row_id',
++                $salesRuleEntityTable,
++                'row_id'
++            );
++        $this->moduleDataSetup->endSetup();
++        return $this;
++    }
++
++    /**
++     * @inheritdoc
++     */
++    public static function getDependencies()
++    {
++        return [MigrateSalesRulesForStaging::class];
++    }
++
++    /**
++     * @inheritdoc
++     */
++    public function getAliases()
++    {
++        return [];
++    }
++}

@@ -1,0 +1,25 @@
+type Query {
+    recentlyPurchasedProducts: [ProductInfoOutput] @resolver(class: "Abbott\\MyAccount\\Model\\Resolver\\RecentPurchasedProducts") @doc(description: "The recently purchased products query returns information about the products which were bought by a customer in last order")
+    personalizedProducts: [personalizedProductsOutput] @resolver(class: "Abbott\\MyAccount\\Model\\Resolver\\PersonalizedProducts") @doc(description: "The recently purchased products query returns information about the products which were bought by a customer in last order")
+}
+
+type ProductInfoOutput {
+    id: Int @doc(description: "The ID number assigned to the product.")
+    name: String @doc(description: "The product name. Customers use this name to identify the product.")
+    sku: String @doc(description: "A number or code assigned to a product to identify the product, options, price, and manufacturer.")
+    meta_title: String @doc(description: "A string that is displayed in the title bar and tab of the browser and in search results lists.")
+    is_saleable: Boolean @doc(description: "Indicates whether the product is in stock")
+    url: String @doc(description: "The product url.")
+    aw_sarp2_subscription_type: Int @doc(description: "Subscription option selected previously")
+    quantity: Int @doc(description: "Product last ordered qty")
+}
+
+type personalizedProductsOutput {
+  status: Boolean @doc(description: "The graphql status.")    
+  aem_url: String @doc(description: "The product aem_url.")
+  dam_images: String @doc(description: "The product dam_images.") 
+}
+
+type Mutation {
+    generateCustomerToken(email: String! @doc(description: "The customer's email address."), password: String! @doc(description: "The customer's password."), is_aem_login_user_key: String! @doc(description: "AEM user flag.")): CustomerToken @resolver(class: "\\Magento\\CustomerGraphQl\\Model\\Resolver\\GenerateCustomerToken") @doc(description:"Generate a token for specified customer.")
+  }  

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceContainer name="content">
+            <block name="vault.cards.add" before="-" cacheable="false" template="Abbott_CreditCards::add/add-card.phtml" />
+        </referenceContainer>
+        <referenceBlock name="vault.cards.list">
+            <block class="PayPal\Braintree\Block\Customer\CardRenderer" name="braintree.card.renderer" template="Abbott_CreditCards::customer_account/credit_card.phtml"/>
+        </referenceBlock>
+        <referenceBlock name="stored.cards.customer.update">
+            <action method="setTemplate">
+                <argument name="template" xsi:type="string">Abbott_CreditCards::customer/update/update.phtml</argument>
+            </action>
+        </referenceBlock>
+
+    </body>
+</page>

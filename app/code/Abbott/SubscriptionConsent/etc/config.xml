@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- Default configuration values for Abbott_SubscriptionConsent -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <subscription_consent>
+            <general>
+                <!-- 0 = disabled by default; enable from Stores > Configuration -->
+                <enabled>0</enabled>
+
+                <!-- Optional: default consent content (supports HTML if you add it in admin).
+                     Use CDATA to keep markup intact if you set a default here. -->
+                <content><![CDATA[I agree to subscribe and accept the subscription terms.]]></content>
+
+                <!-- Optional: retained for compatibility even if you don't show error messages anymore -->
+                <error_message><![CDATA[This is a required field.]]></error_message>
+            </general>
+        </subscription_consent>
+    </default>
+</config>

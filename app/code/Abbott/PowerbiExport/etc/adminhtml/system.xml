@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="powerbi_export" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>Powerbi Export</label>
+            <resource>Abbott_PowerbiExport::powerbi_export</resource>
+            <group id="powerbi" sortOrder="10" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                <label>MBI report export to PowerBI CRON Setup</label>
+                <field id="enable" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="0" translate="label" type="select">
+					<label>Functionality Enable</label>
+                    <comment>Enable/Disable PowerBI Report Export Functionality</comment>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+                <field id="mbi_export_api_key" translate="label" type="obscure" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                   <label>MBI Export API Key</label>
+                   <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="mbi_export_api_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                   <label>MBI Export API URL</label>
+                </field>
+                <field id="enable_cron" translate="label" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                   <label>Cron Expression</label>
+                   <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                   <depends>
+                       <field id="enable_cron">1</field>
+                   </depends>
+                </field>
+                <field id="mbi_export_delete_file_setting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                   <label>File delete timespan</label>
+                   <comment>Add timespan for old exported reports deletion. You can add value in format of [-10 days or -2 month] likewise</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
+
+

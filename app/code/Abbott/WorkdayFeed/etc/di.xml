@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Abbott\WorkdayFeed\Api\Data\InboundFeedSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Abbott\WorkdayFeed\Api\Data\InboundFeedLogSearchResultsInterface"
+                type="Magento\Framework\Api\SearchResults" />
+    <preference for="Abbott\WorkdayFeed\Api\Data\InboundFeedInterface" type="Abbott\WorkdayFeed\Model\InboundFeed" />
+    <preference for="Abbott\WorkdayFeed\Api\Data\InboundFeedLogInterface" type="Abbott\WorkdayFeed\Model\InboundFeedLog" />
+
+    <preference for="Abbott\WorkdayFeed\Api\InboundFeedRepositoryInterface" type="Abbott\WorkdayFeed\Model\InboundFeedRepository" />
+    <preference for="Abbott\WorkdayFeed\Api\InboundFeedLogRepositoryInterface" type="Abbott\WorkdayFeed\Model\InboundFeedLogRepository" />
+
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="abbott_inboundfeed_listing_data_source" xsi:type="string">Abbott\WorkdayFeed\Model\ResourceModel\InboundFeed\Grid\Collection</item>
+                <item name="abbott_inboundfeedlog_listing_data_source" xsi:type="string">Abbott\WorkdayFeed\Model\ResourceModel\InboundFeedLog\Grid\Collection</item>
+           </argument>
+        </arguments>
+    </type>
+    <type name="Abbott\WorkdayFeed\Model\ResourceModel\InboundFeed\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">apollo_inbound_feed</argument>
+            <argument name="eventPrefix" xsi:type="string">abbott_workdayfeed_collection</argument>
+            <argument name="eventObject" xsi:type="string">workdayfeed_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Abbott\WorkdayFeed\Model\ResourceModel\InboundFeed</argument>
+        </arguments>
+    </type>
+    <type name="Abbott\WorkdayFeed\Model\ResourceModel\InboundFeedLog\Grid\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">apollo_inbound_workday_idx</argument>
+            <argument name="eventPrefix" xsi:type="string">abbott_workdayfeedlog_collection</argument>
+            <argument name="eventObject" xsi:type="string">workdayfeedlog_collection</argument>
+            <argument name="resourceModel" xsi:type="string">Abbott\WorkdayFeed\Model\ResourceModel\InboundFeedLog</argument>
+        </arguments>
+    </type>
+    <virtualType name="InboundFeedGirdFilterPool" type="Magento\Framework\View\Element\UiComponent\DataProvider\FilterPool">
+        <arguments>
+            <argument name="appliers" xsi:type="array">
+                <item name="regular" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\RegularFilter</item>
+                <item name="fulltext" xsi:type="object">Magento\Framework\View\Element\UiComponent\DataProvider\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\Model\Entity\RepositoryFactory">
+        <arguments>
+            <argument name="entities" xsi:type="array">
+                <item name="Abbott\WorkdayFeed\Api\Data\InboundFeedInterface" xsi:type="string">Abbott\WorkdayFeed\Api\InboundFeedRepositoryInterface</item>
+                <item name="Abbott\WorkdayFeed\Api\Data\InboundFeedLogInterface" xsi:type="string">Abbott\WorkdayFeed\Api\InboundFeedLogRepositoryInterface</item>
+             </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\MetadataPool">
+        <arguments>
+            <argument name="metadata" xsi:type="array">
+                <item name="Abbott\WorkdayFeed\Api\Data\InboundFeedInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">apollo_inbound_feed</item>
+                    <item name="identifierField" xsi:type="string">feed_id</item>
+                </item>
+                <item name="Abbott\WorkdayFeed\Api\Data\InboundFeedLogInterface" xsi:type="array">
+                    <item name="entityTableName" xsi:type="string">apollo_inbound_workday_idx</item>
+                    <item name="identifierField" xsi:type="string">row_id</item>
+                </item>
+           </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Framework\EntityManager\HydratorPool">
+        <arguments>
+            <argument name="hydrators" xsi:type="array">
+                <item name="Abbott\WorkdayFeed\Api\Data\InboundFeedInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+                <item name="Abbott\WorkdayFeed\Api\Data\InboundFeedLogInterface" xsi:type="string">Magento\Framework\EntityManager\AbstractModelHydrator</item>
+           </argument>
+        </arguments>
+    </type>
+    <virtualType name="Abbott\WorkdayFeed\Model\Api\SearchCriteria\CollectionProcessor\InboundFeedFilterProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="customFilters" xsi:type="array">
+                <item name="store_id" xsi:type="object">Abbott\WorkdayFeed\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\InboundFeedStoreFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Abbott\WorkdayFeed\Model\Api\SearchCriteria\InboundFeedCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Abbott\WorkdayFeed\Model\Api\SearchCriteria\CollectionProcessor\InboundFeedFilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Abbott\WorkdayFeed\Model\InboundFeedRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Abbott\WorkdayFeed\Model\Api\SearchCriteria\InboundFeedCollectionProcessor</argument>
+        </arguments>
+    </type>
+    <virtualType name="Abbott\WorkdayFeed\Model\Api\SearchCriteria\CollectionProcessor\InboundFeedLogFilterProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor\FilterProcessor">
+        <arguments>
+            <argument name="customFilters" xsi:type="array">
+                <item name="store_id" xsi:type="object">Abbott\WorkdayFeed\Model\Api\SearchCriteria\CollectionProcessor\FilterProcessor\InboundFeedLogStoreFilter</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Abbott\WorkdayFeed\Model\Api\SearchCriteria\InboundFeedLogCollectionProcessor" type="Magento\Framework\Api\SearchCriteria\CollectionProcessor">
+        <arguments>
+            <argument name="processors" xsi:type="array">
+                <item name="filters" xsi:type="object">Abbott\WorkdayFeed\Model\Api\SearchCriteria\CollectionProcessor\InboundFeedLogFilterProcessor</item>
+                <item name="sorting" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\SortingProcessor</item>
+                <item name="pagination" xsi:type="object">Magento\Framework\Api\SearchCriteria\CollectionProcessor\PaginationProcessor</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Abbott\WorkdayFeed\Model\InboundFeedLogRepository">
+        <arguments>
+            <argument name="collectionProcessor" xsi:type="object">Abbott\WorkdayFeed\Model\Api\SearchCriteria\InboundFeedLogCollectionProcessor</argument>
+        </arguments>
+    </type>
+    <type name="Abbott\WorkdayFeed\Ui\Component\DataProvider">
+        <arguments>
+            <argument name="additionalFilterPool" xsi:type="array">
+                <item name="fulltext" xsi:type="object">Abbott\WorkdayFeed\Ui\Component\InboundFeed\FulltextFilter</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <type name="Abbott\WorkdayFeed\Model\FileUploader">
+        <arguments>
+            <argument name="baseTmpPath" xsi:type="string">Abbott/WorkdayFeed</argument>
+            <argument name="basePath" xsi:type="string">Abbott/WorkdayFeed</argument>
+            <argument name="allowedExtensions" xsi:type="array">
+                <item name="txt" xsi:type="string">txt</item>
+            </argument>
+        </arguments>
+    </type>
+    
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="validate-workday-list" xsi:type="object">Abbott\WorkdayFeed\Model\Console\WorkdayListValidate</item>
+            </argument>
+        </arguments>
+    </type>
+    
+</config>

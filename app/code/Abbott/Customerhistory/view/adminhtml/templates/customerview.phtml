@@ -1,0 +1,75 @@
+<?php
+$params = $block->getRequest()->getParams();
+
+$url = $block->getSaveUrl();
+$admin = $block->getAdminUserData();
+$admin_user_id = $admin['user_id'];
+$admin_name = $admin['username'];
+$customer_id = $params['id'];
+?>
+
+<form action="<?= /* @noEscape */ $url ?>" enctype="multipart/form-data">
+
+<input type="hidden" name="admin_user_id" value="<?= /* @noEscape */ $admin_user_id ?>">
+<input type="hidden" name="admin_name" value="<?= /* @noEscape */ $admin_name ?>">
+<input type="hidden" name="customer_id" value="<?= /* @noEscape */ $customer_id ?>">
+
+<div id="customer_history_block" class="edit-customer-comments">
+    <div class="order-history-block" id="history_form">
+        <div class="admin__field">
+            <label for="history_comment" class="admin__field-label">
+                <?= $escaper->escapeHtml(__('Comment')) ?>
+            </label>
+            <div class="admin__field-control">
+                <textarea name="comment"
+                          rows="5" cols="40"
+                          id="customer_comment"
+                          class="admin__control-textarea-custom"></textarea>
+            </div>
+        </div>
+        <div class="customer-history-comments-actions">
+            <input id="submit_comment"
+                   class="action-default scalable action-save action-secondary"
+                   type="Submit" title="Submit Comment"
+                   name="" value="Submit Comment">
+        </div>
+    </div>
+</div>
+</form>
+
+<div id="result">
+    <span class="appendData"></span>
+    <?php
+    $responseData = $block->getCustomerInfo($customer_id);
+    if (isset($responseData)) { ?>
+    <ul class="note-list">
+        <?php
+        $responseData = array_reverse($responseData);
+        $length = count($responseData);
+        foreach ($responseData as $response) {
+            if ($response['comments']): ?>
+                <li class="note-list-item">
+                    <span class="note-list-date">
+                        <?=
+                        $escaper->escapeHtml($block->formatDate($response['created_at'], \IntlDateFormatter::MEDIUM)) ?>
+                    </span>
+                    <span class="note-list-time">
+                        <?=
+                        $escaper->escapeHtml($block->formatTime($response['created_at'], \IntlDateFormatter::MEDIUM)) ?>
+                    </span>
+                    <span class="note-list-comment">
+                        <?= $escaper->escapeHtml($response['comments'], ['b', 'br', 'strong', 'i', 'u', 'a']) ?>
+                        <?php if ($response['admin_username']): ?>
+                            <span>
+                                <strong>
+                                    <?= $escaper->escapeHtml(__('(Added by %1)', $response['admin_username'])) ?>
+                                </strong>
+                            </span>
+                        <?php endif; ?>
+                    </span>
+                </li>
+                <?php endif; ?>
+        <?php } ?>
+        </ul>
+    <?php }?>
+</div>

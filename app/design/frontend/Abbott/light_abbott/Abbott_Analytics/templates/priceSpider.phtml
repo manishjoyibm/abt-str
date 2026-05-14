@@ -1,0 +1,17 @@
+<?php
+  $psData = $block->getPsData();
+  $orderItems = $block->getProductsData();
+?>
+<?php if (count($orderItems) && $block->getPsrId()): ?>
+<script type="text/javascript" src="//cdn.pricespider.com/pathinsights/ps-pi-ps.min.js"></script>
+<script type="text/javascript">
+  var order = {};
+  order.redirectToken = <?= $psData['psrid'] ?>;
+  order.purchaseDate = '<?= $psData['purchasedate'] ?>';
+  order.purchaseTotal = <?= $psData['purchasetotal'] ?>;
+  order.orderDiscount = <?= $psData['purchasediscount'] ?>;
+  order.currencyCode = '<?= $psData['currencycode'] ?>';
+  order.details = <?= $block->getProductsDataJson() ?>;
+  pswtb.purchaseTracking.submit(order);
+</script>
+<?php endif;?>

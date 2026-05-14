@@ -1,0 +1,39 @@
+<?php
+/** @var $block \Abbott\AdultSignature\Block\Adminhtml\Order\Create\AdultSignature */
+$mustAck = $block->isAdultSignatureRequiredForQuote();
+?>
+
+<?php if ($mustAck): ?>
+<section id="abbott-adultsig-wrapper" class="admin__fieldset admin__fieldset-section">
+
+    <div class="admin__page-section-title">
+        <span class="title">Adult Signature Required</span>
+    </div>
+
+    <div class="admin__field field field-required">
+
+        <div class="admin__field-control admin__control-group">
+            <input type="checkbox"
+                id="<?= $block->escapeHtmlAttr($block->getFieldId()) ?>"
+                name="<?= $block->escapeHtmlAttr($block->getFieldName()) ?>"
+                value="1"
+                class="admin__control-checkbox "
+                data-validate="{required:true}" />
+
+            <label class="admin__field-label"
+                for="<?= $block->escapeHtmlAttr($block->getFieldId()) ?>">
+                I confirm
+            </label>
+        </div>
+        <div class="note">
+            <?php $adminMessage = $block->getAdminMessage(); ?>
+            <?php if ($adminMessage): ?>
+                <div class="admin-message-box">
+                    <?= $block->escapeHtml($adminMessage) ?>
+                </div>
+            <?php endif; ?>
+        </div>
+    </div>
+
+</section>
+<?php endif; ?>

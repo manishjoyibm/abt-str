@@ -1,0 +1,22 @@
+<script type="text/x-magento-init">
+   {
+       "*": {
+           "nameValidation": {}
+       }
+   }
+</script>
+<script type="text/javascript">
+    require([
+        'jquery'
+    ], function(jQuery){
+        (function($) {
+
+            $(document).ready(function(){
+                $('#email_address').addClass('maximum-length-255 validate-length');
+                $('#email').addClass('maximum-length-255 validate-length');
+            });
+
+        })(jQuery);
+
+    });
+</script>

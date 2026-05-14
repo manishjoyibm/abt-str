@@ -1,0 +1,125 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+			<item name="js_config" xsi:type="array">
+				<item name="provider" xsi:type="string">abbott_progressivediscount_managediscountcodes_listing.abbott_progressivediscount_managediscountcodes_listing_data_source</item>
+			</item>
+	</argument>
+	<settings>
+			<spinner>abbott_progressivediscount_managediscountcodes_columns</spinner>
+			<deps>
+				<dep>abbott_progressivediscount_managediscountcodes_listing.abbott_progressivediscount_managediscountcodes_listing_data_source</dep>
+			</deps>
+		 <buttons>
+			<button name="add">
+				<url path="*/*/new"/>
+				<class>primary</class>
+				<label translate="true">Add New DiscountCode</label>
+			</button>
+		</buttons>
+	</settings>
+	<dataSource component="Magento_Ui/js/grid/provider" name="abbott_progressivediscount_managediscountcodes_listing_data_source">
+			<settings>
+					<updateUrl path="mui/index/render"/>
+			</settings>
+			<aclResource>Abbott_ProgressiveDiscount::manage_discount_codes</aclResource>
+			<dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="abbott_progressivediscount_managediscountcodes_listing_data_source">
+					<settings>
+						<requestFieldName>id</requestFieldName>
+						<primaryFieldName>row_id</primaryFieldName>
+					</settings>
+			</dataProvider>
+	</dataSource>
+	<listingToolbar name="listing_top">
+			<settings>
+				<sticky>true</sticky>
+			</settings>
+			<bookmark name="bookmarks"/>
+			<columnsControls name="columns_controls"/>
+			<exportButton name="export_button"/>
+			<filters name="listing_filters"/>
+			<paging name="listing_paging"/>
+			<massaction name="listing_massaction">
+					<action name="delete">
+							<settings>
+									<confirm>
+											<message translate="true">Are you sure you want to delete selected items?</message>
+											<title translate="true">Delete items</title>
+									</confirm>
+									<url path="abbott_progressivediscount/managediscountcodes/massDelete"/>
+									<type>delete</type>
+									<label translate="true">Delete</label>
+							</settings>
+					</action>
+			</massaction>
+	</listingToolbar>
+	<columns name="abbott_progressivediscount_managediscountcodes_columns">
+		<selectionsColumn name="ids">
+			<settings>
+				<indexField>row_id</indexField>
+			</settings>
+		</selectionsColumn>
+		<column name="row_id">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">ID</label>
+			</settings>
+		</column>
+		<column name="months">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Months</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="discount">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Discount</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="promotional_sku">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Promotional Product Sku</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="plan">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Plan</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<actionsColumn class="Abbott\ProgressiveDiscount\Ui\Component\Listing\Column\ManageDiscountCodesActions" name="actions">
+			<settings>
+				<indexField>row_id</indexField>
+				<resizeEnabled>false</resizeEnabled>
+				<resizeDefaultWidth>107</resizeDefaultWidth>
+			</settings>
+		</actionsColumn>
+	</columns>
+</listing>

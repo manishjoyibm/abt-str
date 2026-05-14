@@ -1,0 +1,59 @@
+type Query {
+    inventory (
+        sku: String @doc(description: "Sku Id of the product")
+        custGrp: String @doc(description: "Encoded Customer Group value")
+    ): Inventory @resolver(class: "Abbott\\PriceInvGql\\Model\\Resolver\\PriceInvGql") @doc(description: "It provides the inventory details of the product.")
+}
+
+type Inventory {
+    products: [ProductDetails] @doc(description: "Array of products")
+    subscription_error: Int @doc(description: "Gives Subscription error falg")
+    subscription_message_html: String @doc(description: "Gives Subscription error message with html")
+}
+
+type ProductDetails {
+    qty: Int @doc(description: "Gives Quantity of product")
+    item_id: Int @doc(description: "Gives Item Id")
+    product_id: Int @doc(description: "Gives Product Id")
+    product_sku: String @doc(description: "Gives Product Sku")
+    product_name: String @doc(description: "Gives Product Name")
+    product_brand: String @doc(description: "Gives Product Brand")
+    categories: String @doc(description: "Gives Product Categories list")
+    forms: String @doc(description: "Gives Product form")
+    flavors: String @doc(description: "Gives Product flavor")
+    cases: String @doc(description: "Gives Product cases")
+    stock_id: Int @doc(description: "Gives Stock Id")
+    customizable_options: [Options] @doc(description: "Gives Product Options")
+    is_in_stock: Boolean @doc(description: "Gives whether the product is in stock or not")
+    backorders: Int @doc(description: "Gives whether the product has Backorder enabled or not")
+    price: Float @doc(description: "Gives the product price")
+    special_price: Float @doc(description: "Gives the special price of the product")
+    group_price: Float @doc(description: "Gives the product price for a particular group.")
+    group_message: String @doc(description: "Gives the product message for a particular group.")
+    subscription_price: [SubscriptionPrice] @doc(description: "Gives the discount details")
+	aem_color: String @doc(description: "Gives Product AEM Color Attribute Value")
+    order_on_call: Boolean @doc(description: "Gives if the product available order on call or not")
+    custom_order_on_call: Int @doc(description: "Order on call value as per the metabolic ordering table. ")
+    size: String @doc(description: "Gives Product size")
+    weight: String @doc(description: "Gives Product size_or_weight")
+    need_state: String @doc(description: "Gives Product need_state")
+}
+
+type Options {
+    option_id: Int @doc(description: "Gives Product Option Id")
+    metabolic_state: String @doc(description: "Gives the metabolic message for a product")
+    option_values : [OptionValues] @doc(description: "Gives Product Option Values")
+}
+
+type OptionValues {
+    option_type_id: Int @doc(description: "Gives Product Option Value Id")
+}
+
+type SubscriptionPrice {
+    id: Int @doc(description: "Plan Id")
+    option_id: Int @doc(description: "Plan option id")
+    name: String @doc(description: "Plan Name")
+    percent: Float @doc(description: "Discount Percent")
+    price: Float @doc(description: "Discounted Price")
+    is_progressive: String @doc(description: "Plan is progressive or not")
+}

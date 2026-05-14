@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="before.body.end">
+            <block class="Abbott\Analytics\Block\PriceSpider" template="Abbott_Analytics::priceSpider.phtml" name="abbott.pricespider"></block>
+        </referenceContainer>
+    </body>
+</page>

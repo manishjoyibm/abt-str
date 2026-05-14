@@ -1,0 +1,24 @@
+<!--@subject {{trans "A Reminder About Upcoming Billing"}} @-->
+<!--@vars {
+"layout handle=\"aw_sarp2_email_profile_items\" profile=$profile area=\"frontend\"":"Subscription Items Grid"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hello, %customerName," customerName=$customerName}}</p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <p>{{trans "The next billing date for the products listed below is %nextPaymentDate" nextPaymentDate=$nextPaymentDate}}</p>
+            {{layout handle="aw_sarp2_email_profile_items" profile=$profile area="frontend"}}
+            <p>{{trans "Total amount (including shipping) will be %totalScheduled" totalScheduled=$totalScheduled|raw}}</p>
+            <p>{{trans "Thank you for being our subscriber."}}</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

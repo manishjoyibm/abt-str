@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/consumer.xsd">
+    <consumer name="AbbottGratisReport"
+              queue="abbott_gratis_export_report"
+              connection="db"
+              handler="Abbott\AbbottReport\Model\Queue\Gratis::exportReport"/>
+</config>

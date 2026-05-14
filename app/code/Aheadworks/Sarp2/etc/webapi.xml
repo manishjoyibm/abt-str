@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+*/
+-->
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Webapi:etc/webapi.xsd">
+    <!-- Plan -->
+    <route url="/V1/awSarp2/plan/:planId" method="GET">
+        <service class="Aheadworks\Sarp2\Api\PlanRepositoryInterface" method="get"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::plans"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/plan/search" method="GET">
+        <service class="Aheadworks\Sarp2\Api\PlanRepositoryInterface" method="getList"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::plans"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/plan" method="POST">
+        <service class="Aheadworks\Sarp2\Api\PlanRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::plans"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/plan/:id" method="PUT">
+        <service class="Aheadworks\Sarp2\Api\PlanRepositoryInterface" method="save"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::plans"/>
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/plan/:planId" method="DELETE">
+        <service class="Aheadworks\Sarp2\Api\PlanRepositoryInterface" method="deleteById"/>
+        <resources>
+            <resource ref="Aheadworks_Sarp2::plans"/>
+        </resources>
+    </route>
+
+    <!-- Checkout -->
+    <route url="/V1/awSarp2/guest-carts/:cartId/payment-information" method="POST">
+        <service class="Aheadworks\Sarp2\Api\GuestPaymentInfoManagementInterface" method="savePaymentInfoAndSubmitCart"/>
+        <resources>
+            <resource ref="anonymous" />
+        </resources>
+    </route>
+    <route url="/V1/awSarp2/carts/mine/payment-information" method="POST">
+        <service class="Aheadworks\Sarp2\Api\PaymentInfoManagementInterface" method="savePaymentInfoAndSubmitCart"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+        <data>
+            <parameter name="cartId" force="true">%cart_id%</parameter>
+        </data>
+    </route>
+    <route url="/V1/awSarp2/carts/mine/payment-information" method="GET">
+        <service class="Aheadworks\Sarp2\Api\PaymentInfoManagementInterface" method="getPaymentInfoForSubscription"/>
+        <resources>
+            <resource ref="self" />
+        </resources>
+    </route>
+</routes>

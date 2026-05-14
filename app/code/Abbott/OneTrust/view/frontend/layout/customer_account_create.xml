@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="checkout"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Abbott_OneTrust::css/onetrust.css"/>
+    </head>
+    <body>
+        <referenceContainer name="before.body.end">
+            <block
+                class="Magento\Framework\View\Element\Template"
+                name="customer_onetrustconsent"
+                template="Abbott_OneTrust::ot_register_verbiage.phtml"
+                ifconfig="onetrust/general/enabled">
+                <arguments>
+                    <argument name="ot_view_model" xsi:type="object">Abbott\OneTrust\ViewModel\OnetrustViewModel</argument>
+                </arguments>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

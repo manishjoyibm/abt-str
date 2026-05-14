@@ -1,0 +1,14 @@
+<?php
+/** @var $block \Kount\Kount360\Block\Checkout\DataCollector
+ *  @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<script type="text/javascript" src="<?= $block->escapeHtmlAttr($block->getJsDataCollectorUrl()) ?>"></script>
+<?php
+$storeCode = $this->getStoreCode();
+$scriptString = <<<script
+        var client = new ka.ClientSDK();
+        client.autoLoadEvents();
+    script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

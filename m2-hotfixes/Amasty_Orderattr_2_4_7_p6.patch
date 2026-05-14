@@ -1,0 +1,17 @@
+diff --git a/app/code/Amasty/Orderattr/Model/ResourceModel/Attribute/Attribute.php b/app/code/Amasty/Orderattr/Model/ResourceModel/Attribute/Attribute.php
+index ca4591f68..d49a540c4 100644
+--- a/app/code/Amasty/Orderattr/Model/ResourceModel/Attribute/Attribute.php
++++ b/app/code/Amasty/Orderattr/Model/ResourceModel/Attribute/Attribute.php
+@@ -304,4 +304,12 @@ class Attribute extends \Magento\Eav\Model\ResourceModel\Entity\Attribute
+             }
+         }
+     }
++
++    /**
++     * Magento 2.4.7 compatibility
++     */
++    public function getUsedInForms(): array
++    {
++        return [];
++    }
+ }

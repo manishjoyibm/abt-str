@@ -1,0 +1,14 @@
+/** @var $block 
+\Abbott\ValidateAdminPassword\Block\Adminhtml\User\Validate
+ */
+
+ <script>
+    require.config({
+        config: {
+            'Abbott_ValidateAdminPassword/js/validation-mixin':{
+                minLength: <?= /* @noEscape */ (int) $block->getPasswordLength(); ?>
+
+            }
+        }
+    });
+ </script>

@@ -1,0 +1,8 @@
+<div class="subscription-container" data-bind="visible: shouldShowDiv()">
+  <h2>
+    <span data-bind="text: getSubscriptionSummaryRenewText()"></span>
+    <span data-bind="text: getSubscriptionSummaryRenewPrice()"></span>
+  </h2>
+  <div class="product-name" data-bind="html: getSubscriptionSummaryRenewPoductName()"></div>
+</div>
+<div class="subscription-renewal" data-bind="text: getSubscriptionRenewDate()"></div>

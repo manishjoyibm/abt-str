@@ -1,0 +1,35 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="salesrule_coupon_usage" resource="default" engine="innodb" comment="Salesrule Coupon Usage">
+        <column xsi:type="varchar" name="quote_id" nullable="true" length="255" comment="Quote Id"/>
+        <column xsi:type="varchar" name="created_at" nullable="true" comment="Date at which coupon code applied to quote"/>
+    </table>
+    <table name="salesrule" resource="default" engine="innodb" comment="Salesrule">
+        <column xsi:type="smallint" name="address_validation" padding="6" unsigned="false" nullable="true" identity="false"
+                default="0" comment="Is Address Validation Active"/>
+    </table>
+    <table name="sales_rule_address" resource="default" engine="innodb" comment="Address Used for coupon code">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Auto Increment Id"/>
+        <column xsi:type="varchar" name="shipping_address" nullable="false" length="255" comment="Format of address(street,city,region,postcode)"/>
+        <column xsi:type="timestamp" name="created_datetime" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Created Datetime"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="sales_rule_address_code_usage" resource="default" engine="innodb" comment="Address against coupon code">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" nullable="false" identity="true" comment="Auto Increment Id"/>
+        <column xsi:type="int" name="address_id" padding="10" unsigned="true" nullable="false" identity="false" comment="address Id"/>
+        <column xsi:type="int" name="coupon_id" padding="10" unsigned="true" nullable="false" identity="false" comment="coupon Id"/>
+        <column xsi:type="int" name="rule_id" padding="10" unsigned="true" nullable="false" identity="false" comment="Rule Id"  />
+        <column xsi:type="timestamp" name="created_datetime" nullable="false" default="CURRENT_TIMESTAMP" on_update="false" comment="Created Datetime"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="sales_rule_address_usage" indexType="btree">
+            <column name="coupon_id"/>
+            <column name="rule_id"/>
+        </index>
+        <constraint xsi:type="foreign" referenceId="sales_rule_address_code_usage_address_fk" table="sales_rule_address_code_usage" column="address_id" referenceTable="sales_rule_address" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="sales_rule_address_code_usage_coupon_fk" table="sales_rule_address_code_usage" column="coupon_id" referenceTable="salesrule_coupon" referenceColumn="coupon_id" onDelete="CASCADE" disabled="true" />
+        <constraint xsi:type="foreign" referenceId="sales_rule_address_code_rule_fk" table="sales_rule_address_code_usage" column="rule_id" referenceTable="salesrule" referenceColumn="rule_id" onDelete="CASCADE"/>
+    </table>
+</schema>

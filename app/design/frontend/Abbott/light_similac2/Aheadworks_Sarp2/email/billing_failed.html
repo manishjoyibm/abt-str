@@ -1,0 +1,65 @@
+<!--@subject {{trans "Schedule & Save Next Order – Declined for the profile #%profileIncrementId" profileIncrementId=$profileIncrementId}} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+  <tr>
+    <td class="esd-structure es-p20t es-p30r es-p30l" align="left"
+        style="background-color: #BFE6F7;height: 30px;">
+        <table cellpadding="0" cellspacing="0" width="100%">
+            <tbody>
+                <tr>
+                    <td width="540" class="esd-container-frame" align="center"
+                        valign="top">
+                        <table cellpadding="0" cellspacing="0" width="100%">
+                            <tbody>
+                                <tr>
+                                    <td align="left" class="esd-block-text"
+                                        style="padding: 10px 20px;">
+                                        <p
+                                            style="margin: 0;font-size: 13.5pt;
+                                            font-family: Georgia, Arial, sans-serif, serif;
+                                            text-transform: uppercase;font-weight: bold;">
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </td>
+  </tr>
+  <tr class="bg-white email-information">
+      <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 25px 20px 0 20px;">
+          <p class="mb"><b>{{trans "An attempt to process the credit card on file for your next Schedule & Save order has failed."}}</b></p>
+          <p class="mb">{{trans "Your credit card payment has recently declined for your upcoming subscription order. The decline could be due to card expiration, insufficient funds, card number change, non-availability of product etc."}}</p>
+          <p class="mb">{{trans "In order to prevent discontinuation of subscription service, please verify your subscription information or contact The Similac "}}<a style="color: #FE9E1F !important;" href="{{customVar code=newsimilac_contactus_url}}">{{trans "Customer Service Team"}}</a>{{trans " for more details."}}</p>
+          <p class="mb">{{trans "Please "}}<a href="{{var this.getUrl($store,'customer/account',[_query:[token:$customer.rp_token],_nosid:1])}}" target="_blank" style="color: #FE9E1F !important;">{{trans "click here"}}</a> {{trans " to login to our site and update your information so that we may re-process your card. If your subscription details are not updated, your subscription will be cancelled.  If you feel that we have reached you in error, please contact The Similac Customer Service Team at <a href=\"tel:%store_phone\" style=\"color: #FE9E1F !important;\">%store_phone</a>, %store_hours." store_phone=$store_phone store_hours=$store_hours |raw"}}</p>
+          <p class="mb">{{trans "Thank you for your immediate attention to this matter."}}</p>
+          <br>
+          <p class="mb25">{{trans "Kind regards,"}}</p>
+          <p class="mb25">{{trans "The Similac "}}
+              <a href="{{customVar code=newsimilac_contactus_url}}" style="color: #FE9E1F !important;">{{trans "Customer Service Team"}}</a>
+              {{depend store_phone}} {{trans '%store_phone' store_phone=$store_phone |raw}}{{/depend}}
+      </td>
+  </tr>
+  <tr>
+    <td>
+        <table border="0" cellspacing="0" cellpadding="0" style="background-color:white;width:100%;border-collapse:collapse;">
+        <tbody>
+            <tr>
+                <td valign="top" style="padding: 30pt 0px 30pt 0px;">
+                    <p align="center" style="font-size:11pt;font-family: Arial, Georgia, sans-serif, serif;text-align:center;margin:0;">
+                        <span style="font-size: 12pt; font-family: Arial, Georgia, sans-serif, serif; line-height: 13.5pt;"><a href="{{var this.getUrl($store,'customer/account',[_query:[token:$customer.rp_token],_nosid:1])}}" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="background-color:#FE9E1F;border: 20px solid #FE9E1F; color: #ffffff;text-decoration: none;"><b><span style="font-size: 13.5pt; font-family: Arial, Georgia, sans-serif, serif; text-transform: uppercase; color: #ffffff;">
+                                        {{trans "VISIT MY ACCOUNT >"}}</span></b></a></span></p>
+                </td>
+            </tr>
+        </tbody>
+        </table>
+    </td>
+  </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

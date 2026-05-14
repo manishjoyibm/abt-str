@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <secure_admin_configuration>
+            <deactivatembouserconfig>
+                <enabled_module>1</enabled_module>
+                <password_expiration_notification_before>10</password_expiration_notification_before>
+                <password_expiration_period>90</password_expiration_period>
+                <template_identifier_notification>deactivation_mbo_user_notification</template_identifier_notification>
+                <template_identifier_deactivate>deactivation_mbo_user</template_identifier_deactivate>
+                <admin_user_deactivation_cron_frequency>30 3 * * *</admin_user_deactivation_cron_frequency>
+            </deactivatembouserconfig>
+        </secure_admin_configuration>
+    </default>
+</config>

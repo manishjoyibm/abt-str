@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default"> <!-- Doesn't need to be unique Sat 8:05AM run find 5 8 * * Sat-->
+        <!-- ANAPOLLO-6974 - Cron Deactivation and Notification for Admin user : if not logged as per specified time period -->
+        <job name="mob_user_notification_deactivation_cron" instance="Abbott\SecureAdmin\Cron\DeactivateMboUserNotification" method="execute">
+            <config_path>secure_admin_configuration/deactivatembouserconfig/admin_user_deactivation_cron_frequency</config_path>
+        </job>     
+    </group>
+</config>

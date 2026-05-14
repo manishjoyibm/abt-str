@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="trustarc_cookie_preference" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+            <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>TrustArc Cookie Preference</label>
+            <resource>Abbott_CookiePreferences::trustarc_cookie_preference</resource>
+            <group id="trustarc_cm" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>TrustArc CM ID</label>
+                <field id="trustarc_cm_id" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enter Website TrustArc CM ID</label>
+                    <comment>ex: dltyco</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

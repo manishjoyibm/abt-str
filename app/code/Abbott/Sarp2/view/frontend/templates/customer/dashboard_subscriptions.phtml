@@ -1,0 +1,109 @@
+<?php
+/* @var $block \Abbott\Sarp2\Block\Customer\Subscriptions */
+
+// @codingStandardsIgnoreFile
+?>
+<div class="block subscription-details">
+    <?php
+        $profiles = $block->getProfilesList();
+        $productId = 'product_id';
+        $productName = 'name';
+        $count = count($profiles);
+    ?>
+    <div class="block-title subscription">
+        <strong><?= $block->escapeHtml(__('My Scheduled Orders')) ?></strong>
+        <?php if ($count > 0) : ?>
+            <a class="action view" href="<?= $block->escapeUrl($block->getUrl('aw_sarp2/profile/')) ?>">
+                <span><?= $block->escapeHtml(__('View All')) ?></span>
+            </a>
+        <?php endif; ?>
+    </div>
+    <div class="block-content">
+    <?php if ($count > 0) : ?>
+        <div class="table-wrapper orders-recent">
+            <table class="data table table-subscription-items" id="my-subscription-table">
+                <caption class="table-caption"><?= $block->escapeHtml(__('My Scheduled Orders')) ?></caption>
+                <thead>
+                    <tr>
+                        <th scope="col" class="col profile-id"><?php echo $block->escapeHtml(__('Profile ID')) ?></th>
+                        <th scope="col" class="col status"><?php echo $block->escapeHtml(__('Status')) ?></th>
+                        <th scope="col" class="col products"><?php echo $block->escapeHtml(__('Product(s)')) ?></th>
+                        <th scope="col" class="col next-payment-date"><?php echo $block->escapeHtml(__('Next Payment Date')) ?></th>
+                        <th scope="col" class="col next-payment-amount"><?php echo $block->escapeHtml(__('Next Payment Amount*')) ?></th>
+                        <th scope="col" class="col actions"><?php echo $block->escapeHtml(__('Actions')) ?></th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php
+                    /* @var $profile \Aheadworks\Sarp2\Api\Data\ProfileInterface */
+                ?>
+                <?php foreach ($profiles as $profile): ?>
+                    <tr>
+                        <td style="border-bottom: 0px;" data-th="<?php echo $block->escapeHtml(__('Profile ID')) ?>" class="col profile-id">
+                            <?php /* @noEscape */ echo $profile->getIncrementId() ?>
+                        </td>
+                        <td style="border-bottom: 0px;" data-th="<?php echo $block->escapeHtml(__('Status')) ?>" class="col status">
+                            <?php echo $block->escapeHtml($block->getStatusLabel($profile->getStatus())) ?>
+                        </td>
+                        <td style="border-bottom: 0px;" data-th="<?php echo $block->escapeHtml(__('Product(s)')) ?>" class="col products">
+                            <ul style="margin: 0; padding: 0;">
+                                <?php foreach ($profile->getItems() as $item): ?>
+                                    <li style="list-style:none; margin:0px;">
+                                        <?php if ($block->isProductExists($item[$productId]) && $block->hasProductUrl($item[$productId])): ?>
+                                            <a href="<?php echo $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl().''.$this->helper('Abbott\MyAccount\Helper\Data')->getAemUrl($item[$productId]) ?>">
+                                                <span><?php echo $block->escapeHtml($item[$productName]) ?></span>
+                                            </a>
+                                        <?php else: ?>
+                                            <?php echo $block->escapeHtml($item[$productName]) ?>
+                                        <?php endif; ?>
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </td>
+                        <td style="border-bottom: 0px;" data-th="<?php echo $block->escapeHtml(__('Next Payment Date')) ?>" class="col next-payment-date">
+                            <?php /* @noEscape */ echo $block->getNextPaymentDateInfo($profile) ?>
+                        </td>
+                        <td style="border-bottom: 0px;"  data-th="<?php echo $block->escapeHtml(__('Next Payment Amount*')) ?>" class="col next-payment-amount">
+                            <?php /* @noEscape */ echo $block->getNextPaymentAmountHtml($profile) ?>
+                        </td>
+                        <td style="border-bottom: 0px;" data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                            <?php if ($block->isEditActionAvailable($profile->getProfileId())): ?>
+                                <a href="<?php echo $block->escapeUrl($block->getEditUrl($profile->getProfileId())) ?>" class="action edit">
+                                    <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                                </a>
+                            <?php endif; ?>
+                            <?php if ($block->isCancelActionAvailable($profile->getProfileId())): ?>
+                                <a data-role="aw-sarp2-cancel-button" href="#"
+                                   class="action cancel">
+                                    <span><?php echo $block->escapeHtml(__('Cancel')) ?></span>
+                                </a>
+                                <script type="text/x-magento-init">
+                                    {
+                                        "[data-role=aw-sarp2-cancel-button]": {
+                                            "awSarp2ButtonControl": {
+                                                "newLocation": "<?php echo $block->escapeUrl($block->getCancelDashboardUrl($profile->getProfileId())) ?>",
+                                                "confirm": {
+                                                    "enabled": true,
+                                                    "message": "<?php echo $block->escapeHtml(
+                                                    __('<strong>Are you sure you want to cancel this subscription?</strong> <br/>Cancelling this subscription will cancel all future subscription orders for this item.')
+                                                    , ['strong','br']) ?>"
+                                                }
+                                            }
+                                        }
+                                    }
+                                </script>
+                            <?php endif;?>
+                        </td>
+                    </tr>
+                    <tr><td style="border-bottom: 1px solid #999; padding: 0; font-size: 11px; border: 0px solid;" colspan="6"><?php echo $block->escapeHtml(__('* Tax, if applicable, is calculated at time of shipment.')) ?></tr>
+                <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    <?php else: ?>
+        <div class="message info empty">
+            <span><?php echo $block->escapeHtml(__('You have created no subscriptions.')) ?></span>
+        </div>
+    <?php endif ?>
+    </div>
+</div>

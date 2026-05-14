@@ -1,0 +1,35 @@
+<!--@vars {
+"var otp":"One Time Password(OTP)",
+"var store.frontend_name":"Store Frontend Name"
+} @-->
+<!--@subject {{trans "One Time Password (OTP) for Customer 2FA on %store_name" store_name=$store.frontend_name}} @-->
+
+{{template config_path="design/email/header_template"}}
+<table>
+    <tr class="text-block bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 10px 15px;background: #BFE6F7;">
+            <h1 style="margin-bottom: 0;"><b style="font-family: Arial, sans-serif, serif, EmojiFont;">One Time Password (OTP)</b></h1>
+        </td>
+    </tr>
+    <tr>
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 20px;">
+            <p class="mb25"><b>{{trans "Your One Time Password (OTP) to access %store_name is %otp." store_name=$store.frontend_name otp=$otp}}</b></p>
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <table style="background-color:white;width:100%;border-collapse:collapse;">
+                <tbody>
+                <tr>
+                    <td style="padding: 30pt 0px 30pt 0px;">
+                        <p style="font-size:11pt;font-family:Calibri,sans-serif;text-align:center;margin:0;">
+                          <span style="font-size: 12pt; font-family: Helvetica Neue, serif, EmojiFont; line-height: 13.5pt;"><a href="{{customVar code=abbottstore_url}}" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="background-color:rgb(0, 156, 222);border: 20px solid rgb(0, 156, 222); color: #ffffff;text-decoration: none;"><b><span style="font-size: 13.5pt; line-height: 13.5pt; font-family: Arial, sans-serif, serif, EmojiFont; text-transform: uppercase;">
+                                          {{trans "visit %store_name " store_name=$store.frontend_name}}</span></b></a></span></p>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

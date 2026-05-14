@@ -1,0 +1,13 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<stores>
+            <new_similac>
+                <abbott_awslambda>
+                    <api>
+                        <enable>0</enable>
+                        <enable_debug>0</enable_debug>
+                    </api>
+                </abbott_awslambda>
+            </new_similac>
+	</stores>
+</config>

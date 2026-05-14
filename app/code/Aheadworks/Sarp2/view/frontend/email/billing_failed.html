@@ -1,0 +1,19 @@
+<!--@subject {{trans "Subscription payment failed"}} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Dear %customerName," customerName=$customerName}}</p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <p>{{trans "We were unable to renew your subscription because of a problem with your current payment method."}}</p>
+            {{trans 'Feel free to contact us for more information on the matter at <a href="mailto:%store_email">%store_email</a>' store_email=$store_email |raw}}{{depend store_phone}} {{trans 'or call us at <a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}.
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

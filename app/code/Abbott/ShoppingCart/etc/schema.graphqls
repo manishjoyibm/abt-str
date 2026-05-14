@@ -1,0 +1,36 @@
+type Cart {
+    items: [CartItemInterface] @resolver(class: "\\Magento\\QuoteGraphQl\\Model\\Resolver\\CartItems")
+    success: [String] @doc(description: "Gives the success message")
+    shipping_message: [ShippingMessage] @doc(description: "Gives array of shipping details")@resolver(class: "\\Abbott\\ShoppingCart\\Model\\Resolver\\ShippingMessage")
+    applied_coupon: AppliedCoupon @resolver(class: "\\Magento\\QuoteGraphQl\\Model\\Resolver\\AppliedCoupon")
+    email: String @resolver (class: "\\Magento\\QuoteGraphQl\\Model\\Resolver\\CartEmail")
+    shipping_addresses: [ShippingCartAddress]! @resolver(class: "\\Magento\\QuoteGraphQl\\Model\\Resolver\\ShippingAddresses")
+    billing_address: BillingCartAddress! @resolver(class: "\\Magento\\QuoteGraphQl\\Model\\Resolver\\BillingAddress")
+    available_payment_methods: [AvailablePaymentMethod] @resolver(class: "Magento\\QuoteGraphQl\\Model\\Resolver\\AvailablePaymentMethods") @doc(description: "Available payment methods")
+    selected_payment_method: SelectedPaymentMethod @resolver(class: "\\Magento\\QuoteGraphQl\\Model\\Resolver\\SelectedPaymentMethod")
+    prices: CartPrices @resolver(class: "\\Magento\\QuoteGraphQl\\Model\\Resolver\\CartPrices")
+}
+
+interface CartItemInterface @typeResolver(class: "Magento\\QuoteGraphQl\\Model\\Resolver\\CartItemTypeResolver") {
+    id: String!
+    quantity: Float!
+    backorder_status: String @doc(description: "Gives backorder information")@resolver(class: "Abbott\\ShoppingCart\\Model\\Resolver\\Backorder") 
+    aem_url: String @doc(description: "Gives aem_url information")@resolver(class: "Abbott\\ShoppingCart\\Model\\Resolver\\AemUrl")
+    dam_images: String @doc(description: "Gives dam_images information")@resolver(class: "Abbott\\ShoppingCart\\Model\\Resolver\\DamImages")
+    flavors: String @doc(description: "Gives flavors information")@resolver(class: "Abbott\\ShoppingCart\\Model\\Resolver\\Flavors") 
+    size: String @doc(description: "Gives flavors information")@resolver(class: "Abbott\\ShoppingCart\\Model\\Resolver\\Size") 
+    subscription_details: [SubscriptionDetails] @doc(description: "Gives array of subscription details")@resolver(class: "Abbott\\ShoppingCart\\Model\\Resolver\\CartSubscription")
+    product: ProductInterface!
+}
+
+type SubscriptionDetails implements CartItemInterface {
+    option_label: String @doc(description: "Gives subscription option label")
+    option_value: String @doc(description: "Gives subscription option value")
+}
+
+
+type ShippingMessage implements CartItemInterface {
+    message: String @doc(description: "Gives message")
+    percentage: String @doc(description: "Gives percentage")
+    status: String @doc(description: "Gives status")
+}

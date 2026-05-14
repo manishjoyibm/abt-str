@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+  <argument name="data" xsi:type="array">
+     <item name="js_config" xsi:type="array">
+        <item name="provider" xsi:type="string">powerbi_export_report_listing.powerbi_export_report_listing_data_source</item>
+        <item name="deps" xsi:type="string">powerbi_export_report_listing.powerbi_export_report_listing_data_source</item>
+     </item>
+     <item name="spinner" xsi:type="string">powerbi_export_report_columns</item>
+     <item name="buttons" xsi:type="array">
+        <item name="add" xsi:type="array">
+           <item name="name" xsi:type="string">add</item>
+           <item name="label" xsi:type="string">Add New Report</item>
+           <item name="class" xsi:type="string">primary</item>
+           <item name="url" xsi:type="string">*/*/new</item>
+        </item>
+     </item>
+  </argument>
+  <dataSource name="powerbi_export_report_listing_data_source">
+   <argument name="dataProvider" xsi:type="configurableObject">
+       <argument name="class" xsi:type="string">Abbott\PowerbiExport\Ui\DataProvider\PowerbiReport\ListingDataProvider</argument>
+       <argument name="name" xsi:type="string">powerbi_export_report_listing_data_source</argument>
+       <argument name="primaryFieldName" xsi:type="string">entity_id</argument>
+       <argument name="requestFieldName" xsi:type="string">entity_id</argument>
+       <argument name="data" xsi:type="array">
+         <item name="config" xsi:type="array">
+           <item name="update_url" xsi:type="url" path="mui/index/render"/>
+           <item name="storageConfig" xsi:type="array">
+             <item name="indexField" xsi:type="string">entity_id</item>
+           </item>
+         </item>
+       </argument>
+   </argument>
+   <argument name="data" xsi:type="array">
+     <item name="js_config" xsi:type="array">
+        <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+     </item>
+   </argument>
+  </dataSource>
+  <listingToolbar name="listing_top">
+    <bookmark name="bookmarks"/>
+    <columnsControls name="columns_controls"/>
+    <massaction name="listing_massaction">
+      <argument name="data" xsi:type="array">
+        <item name="data" xsi:type="array">
+           <item name="selectProvider" xsi:type="string">powerbi_export_report_listing.powerbi_export_report_listing.powerbi_export_report_columns.ids</item>
+           <item name="displayArea" xsi:type="string">bottom</item>
+           <item name="component" xsi:type="string">Magento_Ui/js/grid/tree-massactions</item>
+           <item name="indexField" xsi:type="string">entity_id</item>
+        </item>
+      </argument>
+      <action name="delete">
+         <argument name="data" xsi:type="array">
+           <item name="config" xsi:type="array">
+               <item name="type" xsi:type="string">delete</item>
+               <item name="label" xsi:type="string" translate="true">Delete</item>
+               <item name="url" xsi:type="url" path="powerbi_export/powerbi/massDelete"/>
+               <item name="confirm" xsi:type="array">
+                  <item name="title" xsi:type="string" translate="true">Delete items</item>
+                  <item name="message" xsi:type="string" translate="true">Are you sure you want to delete selected items?</item>
+               </item>
+           </item>
+         </argument>
+      </action>
+    </massaction>
+    <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="templates" xsi:type="array">
+                        <item name="filters" xsi:type="array">
+                            <item name="select" xsi:type="array">
+                                <item name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</item>
+                                <item name="template" xsi:type="string">ui/grid/filters/elements/ui-select</item>
+                            </item>
+                        </item>
+                    </item>
+                </item>
+            </argument>
+    </filters>
+    <paging name="listing_paging"/>
+  </listingToolbar>
+  <columns name="powerbi_export_report_columns">
+    <selectionsColumn name="ids">
+       <argument name="data" xsi:type="array">
+           <item name="config" xsi:type="array">
+              <item name="indexField" xsi:type="string">entity_id</item>
+           </item>
+       </argument>
+    </selectionsColumn>
+    <column name="entity_id">
+      <settings>
+         <filter>textRange</filter>
+         <label translate="true">ID</label>
+         <resizeDefaultWidth>25</resizeDefaultWidth>
+      </settings>
+    </column>
+    <column name="report_id">
+      <settings>
+         <filter>text</filter>
+         <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+         <label translate="true">MBI Report Id</label>
+      </settings>
+    </column>
+    <column name="report_name">
+      <settings>
+         <filter>text</filter>
+         <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+         <label translate="true">Report Name</label>
+      </settings>
+    </column>
+    <column name="status">
+            <argument name="data" xsi:type="array">
+                <item name="options" xsi:type="object">Abbott\PowerbiExport\Model\Source\ReportStatus</item>
+                <item name="config" xsi:type="array">
+                    <item name="filter" xsi:type="string">select</item>
+                    <item name="bodyTmpl" xsi:type="string">ui/grid/cells/html</item>
+                    <item name="sortable" xsi:type="boolean">true</item>
+                    <item name="dataType" xsi:type="string">select</item>
+                    <item name="sortOrder" xsi:type="number">40</item>
+                    <item name="component" xsi:type="string">Magento_Ui/js/grid/columns/select</item>
+                    <item name="editor" xsi:type="string">select</item>
+                    <item name="label" xsi:type="string" translate="true">Status</item>
+                </item>
+            </argument>
+        </column>
+    <column name="last_cron_update_date">
+      <settings>
+         <filter>dateRange</filter>
+         <bodyTmpl>ui/grid/cells/text</bodyTmpl>
+         <label translate="true">Last cron update date</label>
+      </settings>
+    </column>
+    <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+      <settings>
+        <filter>dateRange</filter>
+        <dataType>date</dataType>
+        <label translate="true">Created At</label>
+      </settings>
+    </column>
+    <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date" component="Magento_Ui/js/grid/columns/date">
+      <settings>
+        <filter>dateRange</filter>
+        <dataType>date</dataType>
+        <label translate="true">Updated At</label>
+      </settings>
+    </column>
+    <actionsColumn name="actions" class="Abbott\PowerbiExport\Ui\Component\Listing\Column\Actions" sortOrder="200">
+       <argument name="data" xsi:type="array">
+          <item name="config" xsi:type="array">
+              <item name="resizeEnabled" xsi:type="boolean">false</item>
+              <item name="resizeDefaultWidth" xsi:type="string">107</item>
+              <item name="indexField" xsi:type="string">entity_id</item>
+          </item>
+       </argument>
+    </actionsColumn>
+  </columns>
+</listing>

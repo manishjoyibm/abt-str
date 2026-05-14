@@ -1,0 +1,20 @@
+<?php
+/**
+ * Shopping cart template
+ *
+ * @var $block \Magento\Checkout\Block\Cart
+ */
+if ($block->getItemsCount()) {
+    // phpcs:ignore Magento2.Security.LanguageConstruct.DirectOutput
+    echo $block->getChildHtml('with-items');
+    
+    ?>
+    <div id="cart_notes" class="cart_notes">
+        <?php echo $block->getLayout()->createBlock(\Magento\Cms\Block\Block::class)->setBlockId('similac_cart_terms_and_conditions')->toHtml();?>
+    </div>
+<?php } else {
+    // phpcs:ignore Magento2.Security.LanguageConstruct.DirectOutput
+    echo $block->getChildHtml('no-items');
+}
+?>
+

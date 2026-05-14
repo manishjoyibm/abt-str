@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- Default configuration for Abbott_AdultSignature -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+  <default>
+    <abbott_adult_signature>
+      <general>
+        <enabled>0</enabled>
+        <popup_message>The purchase of one or more products in your cart requires an Adult Signature at delivery.</popup_message>
+        <admin_message>One or more items in the consumer's order require an Adult Signature upon delivery.
+            Please confirm you have notified the consumer and received their agreement.</admin_message>
+      </general>
+      <shipping>
+        <force_carrier_signature>0</force_carrier_signature>
+      </shipping>
+    </abbott_adult_signature>
+  </default>
+</config>

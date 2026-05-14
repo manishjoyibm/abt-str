@@ -1,0 +1,52 @@
+.ot-form-wrapper {
+    max-width: 750px;
+    height: 800px;
+}
+.ot-form-wrapper iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+  monospace;
+}
+
+.otnotice-content .otnotice-menu {
+display: none !important;
+}
+
+.otnotice-content .otnotice-sections {
+margin-left: 0px !important;
+margin-right: 0px !important;
+}
+
+.ot-privacy-notice-language-dropdown-container {
+display: none !important;
+}
+
+div.otnotice__version {
+display: none !important;
+}
+
+.otnotice-section-content {
+margin-left: 0px !important;
+}
+
+.side-by-side {
+display: inline-block;
+}
+
+.onetrust-parent {
+    display: flex;
+}

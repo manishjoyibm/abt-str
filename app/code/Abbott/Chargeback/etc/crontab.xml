@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="chargeback_sftp_sync" instance="Abbott\Chargeback\Model\ChargebackSync" method="execute">
+          <config_path>chargeback_settings/chargeback_cron/sync_expr</config_path>
+        </job>
+        <job name="chargeback_delete_log" instance="Abbott\Chargeback\Model\ChargebackDeleteDbLog" method="execute">
+          <config_path>chargeback_settings/chargeback_cron/delete_expr</config_path>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!-- Declarative schema for Abbott_AdultSignature -->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="quote">
+        <column xsi:type="boolean" name="adult_signature_required" nullable="false" default="0" comment="Adult Signature Required"/>
+        <column xsi:type="boolean" name="adult_signature_accepted" nullable="false" default="0" comment="Adult Signature Accepted"/>
+    </table>
+    <table name="sales_order">
+        <column xsi:type="boolean" name="adult_signature_required" nullable="false" default="0" comment="Adult Signature Required"/>
+        <column xsi:type="boolean" name="adult_signature_accepted" nullable="false" default="0" comment="Adult Signature Accepted"/>
+     </table>
+</schema>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="120">
+            <label>Abbott</label>
+        </tab>
+        <section id="status_setting" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>Order Status Configuration</label>
+            <resource>Abbott_OrderStatus::orderstatus</resource>
+            <group id="settings" translate="label" sortOrder="10" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Settings</label>
+                    <field id="enable" type="select" translate="label" sortOrder="10" showInDefault="1">
+                        <label>Enable</label>
+                        <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    </field>
+                    <field id="payment_method" showInDefault="1" sortOrder="20" translate="label" type="multiselect">
+                        <label>Applicable on Payment Method</label>
+                        <source_model>Abbott\OrderStatus\Model\Config\Source\Adminpayments</source_model>
+                    </field>
+		    <field id="store_view" showInDefault="1" translate="label" type="multiselect" sortOrder="30" >
+                          <label>Applicable on store</label>
+                          <source_model>Magento\Store\Model\System\Store</source_model>
+                    </field>
+            </group>
+            <group id="days" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>No. of days</label>
+                <field id="number" translate="label" type="text" sortOrder="10" showInDefault="1">
+                    <label>Days</label>
+                </field>
+            </group>
+            <group id="cron" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Crons</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="20" showInDefault="1">
+                    <label>Cron Expression</label>
+                    <comment>Ex(*/30 * * * *) Please ensure that there is space between each star(*).</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

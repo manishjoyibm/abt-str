@@ -1,0 +1,119 @@
+<!--@subject {{trans "%store_name.com - Confirmation Order" store_name=$store.frontend_name}} #{{var order.increment_id}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order_data.email_customer_note|escape|nl2br":"Email Order Note",
+"var order.increment_id":"Order Id",
+"layout handle=\"sales_email_order_items\" order=$order area=\"frontend\"":"Order Items Grid",
+"var payment_html|raw":"Payment Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"var shipping_msg":"Shipping message",
+"var created_at_formatted":"Order Created At (datetime)",
+"var store.frontend_name":"Store Frontend Name",
+"var store_phone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var this.getUrl($store,'customer/account/',[_nosid:1])":"Customer Account URL",
+"var order_data.is_not_virtual":"Order Type",
+"var order":"Order",
+"var order_data.customer_name":"Customer Name",
+"var store.id":"Store ID"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="text-block bg-white">
+      <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 10px 15px;background: #BFE6F7;">
+          <h1 style="margin-bottom: 0;"><b style="font-family: Arial, Georgia, sans-serif, serif;"><b>Order Confirmation Information</b></h1>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 20px;">
+          <p style="font-size:15px;"><b>{{trans 'Order <span class="no-link">#%increment_id</span>' increment_id=$order.increment_id |raw}}</b></p>
+          <p class="mb25"><b>{{trans 'Order Date: ' }}{{var created_at_formatted_1}}</b></p>
+          <p class="mb25">{{trans 'Thank you for placing your order with'}} <a href="{{customVar code=newsimilacstore_url}}" style="color: #FE9E1F !important;">{{trans '%store_name.com</a>.' store_name=$store.frontend_name |raw}}
+             {{trans 'This is a receipt for your order.'}}</p>
+          <p class="mb25">{{trans "%store_name.com " store_name=$store.frontend_name}}
+             <a href="{{customVar code=newsimilac_contactus_url}}" style="color: #FE9E1F !important;">{{trans"Customer Service Team"}}</a>
+             {{depend store_phone}} {{trans '<a href="tel:%store_phone" style="color: #FE9E1F !important;">(%store_phone)</a>' store_phone=$store_phone |raw}}{{/depend}}
+          </p>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 10px 15px;background: #BFE6F7;">
+            <h1 style="margin-bottom: 0;"><b style="font-family: Arial, Georgia, sans-serif, serif;"><b>{{trans "Shipping And Billing"}}</b></h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 20px;">
+            <table class="order-details">
+                <tr>
+                  {{depend order_data.is_not_virtual}}
+                  <td class="address-details" style="font-family: Georgia, Arial, sans-serif, serif;">
+                      <h3 class="light-blue" style="color: #002F87;"><b style="color: #002F87;">{{trans "Shipping Info"}}</b></h3>
+                      <p style="color: #002F87;">{{var formattedShippingAddress|raw}}</p>
+                  </td>
+                  {{/depend}}
+                  <td class="address-details" style="font-family: Georgia, Arial, sans-serif, serif;">
+                      <h3 class="light-blue" style="color: #002F87;"><b style="color: #002F87;">{{trans "Billing Info"}}</b></h3>
+                      <p style="color: #002F87;">{{var formattedBillingAddress|raw}}</p>
+                      <p class="light-blue" style="color: #002F87;">{{var order_data.billing_email}}</p>
+                  </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 10px 15px;background: #BFE6F7;">
+        <h1 style="margin-bottom: 0;"><b style="font-family: Arial, Georgia, sans-serif, serif;"><b>{{trans "Order Details"}}</b></h1>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="font-family: Georgia, Arial, sans-serif, serif !important; padding: 20px; color: #002F87;">
+        {{layout handle="sales_email_order_items" order_id=$order_id area="frontend"}}
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 10px 15px;background: #BFE6F7;">
+            <h1 style="margin-bottom: 0;"><b style="font-family: Arial, Georgia, sans-serif, serif;">{{trans "Payment Details"}}</b></h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 20px;">
+        <table class="bg-white">
+          <tr class="bd-white">
+              <th class="light-blue" style="font-family: Georgia, Arial, sans-serif, serif; color: #002F87;">{{trans 'Method'}}</th>
+              <th class="light-blue" style="font-family: Georgia, Arial, sans-serif, serif; color: #002F87;">{{trans 'Status'}}</th>
+              <th class="light-blue" style="font-family: Georgia, Arial, sans-serif, serif; color: #002F87;">{{trans 'Specifics'}}</th>
+              <th class="light-blue" style="font-family: Georgia, Arial, sans-serif, serif; color: #002F87;">{{trans 'Amount'}}</th>
+          </tr>
+          <tr>
+              <td style="font-family: Georgia, Arial, sans-serif, serif; color: #002F87;">{{var order_data.payment_title}}</td>
+              <td style="font-family: Georgia, Arial, sans-serif, serif; color: #002F87;">{{var custom_order_status}}</td>
+              <td style="font-family: Georgia, Arial, sans-serif, serif; color: #002F87;">{{var order_data.payment_additional_info}}</td>
+              <td style="font-family: Georgia, Arial, sans-serif, serif; color: #002F87;">{{var currency_symbol}}{{var order_grand_total}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table border="0" cellspacing="0" cellpadding="0" style="background-color:white;width:100%;border-collapse:collapse;">
+          <tbody>
+            <tr>
+                  <td valign="top" style="padding: 30pt 0px 30pt 0px;">
+                      <p align="center" style="font-size:11pt;font-family: Arial, Georgia, sans-serif, serif;text-align:center;margin:0;">
+                          <span style="font-size: 12pt; font-family: Arial, sans-serif, serif; line-height: 13.5pt;"><a href="{{customVar code=newsimilacstore_url}}" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="background-color:#FE9E1F;border: 20px solid #FE9E1F; color: #ffffff;text-decoration: none;"><b><span style="font-size: 13.5pt; line-height: 13.5pt; font-family: Arial, Georgia, sans-serif, serif; text-transform: uppercase; color: #ffffff;">
+                                          {{trans "visit %store_name >" store_name=$store.frontend_name}}</span></b></a></span></p>
+                  </td>
+              </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+</table>
+
+
+
+{{template config_path="design/email/footer_template"}}

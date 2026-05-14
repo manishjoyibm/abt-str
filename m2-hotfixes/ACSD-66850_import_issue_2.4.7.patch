@@ -1,0 +1,42 @@
+diff --git a/vendor/magento/module-catalog-import-export/Model/Import/Product/Validator.php b/vendor/magento/module-catalog-import-export/Model/Import/Product/Validator.php
+index f74886069d501..f6e34264d73d8 100644
+--- a/vendor/magento/module-catalog-import-export/Model/Import/Product/Validator.php
++++ b/vendor/magento/module-catalog-import-export/Model/Import/Product/Validator.php
+@@ -164,13 +164,34 @@ public function isRequiredAttributeValid($attrCode, array $attributeParams, arra
+         }
+ 
+         if ($doCheck === true) {
+-            return isset($rowData[$attrCode])
+-                && strlen(trim($rowData[$attrCode]))
+-                && trim($rowData[$attrCode]) !== $this->context->getEmptyAttributeValueConstant();
++            return $this->validateRequiredAttributeValue($attrCode, $rowData);
+         }
+         return true;
+     }
+ 
++    /**
++     * Validate required attribute value for both array and string types.
++     *
++     * @param string $attrCode
++     * @param array $rowData
++     * @return bool
++     */
++    private function validateRequiredAttributeValue(string $attrCode, array $rowData): bool
++    {
++        $emptyConstant = $this->context->getEmptyAttributeValueConstant();
++        if (isset($rowData[$attrCode]) && is_array($rowData[$attrCode])) {
++            $trimmedValues = array_map('trim', $rowData[$attrCode]);
++            $filteredArray = array_filter($trimmedValues, function ($value) {
++                return !empty($value);
++            });
++            return !empty($filteredArray)
++                && !in_array($emptyConstant, $trimmedValues, true);
++        }
++        return isset($rowData[$attrCode])
++            && strlen(trim($rowData[$attrCode]))
++            && trim($rowData[$attrCode]) !== $emptyConstant;
++    }
++
+     /**
+      * Is attribute valid
+      *

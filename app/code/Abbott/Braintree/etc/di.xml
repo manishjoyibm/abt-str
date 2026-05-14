@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="PayPal\Braintree\Gateway\Request\VaultCaptureDataBuilder" type="Abbott\Braintree\Gateway\Request\VaultCaptureDataBuilder" />
+    <preference for="PayPal\Braintree\Model\Adapter\BraintreeAdapter" type="Abbott\Braintree\Model\Adapter\BraintreeAdapter"/>
+    <type name="PayPal\Braintree\Gateway\Command\CaptureStrategyCommand">
+        <plugin name="magentoCaptureStrategyPlugin"
+                type="Abbott\Braintree\Plugin\Gateway\Command\CaptureStrategyCommandPlugin" />
+    </type>
+
+    <type name="Abbott\Braintree\Plugin\Gateway\Command\CaptureStrategyCommandPlugin">
+        <arguments>
+            <argument name="vaultHandlers" xsi:type="array">
+                <item name="braintree" xsi:type="string">PayPal\Braintree\Gateway\Response\VaultDetailsHandler</item>
+                <item name="aw_sarp_braintree_recurring" xsi:type="string">PayPal\Braintree\Gateway\Response\VaultDetailsHandler</item>
+                <item name="braintree_paypal" xsi:type="string">Abbott\Braintree\Gateway\Response\PayPal\VaultDetailsHandler</item>
+                <item name="aw_sarp_braintree_paypal_recurring" xsi:type="string">Abbott\Braintree\Gateway\Response\PayPal\VaultDetailsHandler</item>
+                <item name="braintree_googlepay" xsi:type="string">Abbott\Braintree\Gateway\Response\GooglePay\VaultDetailsHandler</item>
+                <item name="aw_sarp_braintree_googlepay_recurring" xsi:type="string">Abbott\Braintree\Gateway\Response\GooglePay\VaultDetailsHandler</item>
+                <item name="braintree_applepay" xsi:type="string">Abbott\Braintree\Gateway\Response\ApplePay\VaultDetailsHandler</item>
+                <item name="aw_sarp_braintree_applepay_recurring" xsi:type="string">Abbott\Braintree\Gateway\Response\ApplePay\VaultDetailsHandler</item>
+            </argument>
+        </arguments>
+    </type>
+
+    <virtualType name="AwSarp2BraintreeRecurringCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="vault_capture" xsi:type="string">BraintreeVaultCaptureCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2BraintreePayPalRecurringCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="vault_capture" xsi:type="string">BraintreeVaultCaptureCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="BraintreeGooglePayCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="vault_capture" xsi:type="string">BraintreeVaultCaptureCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="BraintreeApplePayCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="vault_capture" xsi:type="string">BraintreeVaultCaptureCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Quote\Api\CartManagementInterface">
+        <plugin name="order_cancellation" disabled="true" />
+        <plugin name="order_cancellation_override" type="Abbott\Braintree\Plugin\OrderCancellation" disabled="false"/>
+    </type>
+    <type name="PayPal\Braintree\Gateway\Config\PayPal\Config">
+        <plugin name="update_getImagesizefromString" type="Abbott\Braintree\Plugin\Gateway\Config\PayPal\Config"/>
+    </type>
+    <preference for="PayPal\Braintree\Gateway\Response\PayPal\VaultDetailsHandler"
+                type="Abbott\Braintree\Gateway\Response\PayPal\VaultDetailsHandler" />
+    <preference for="PayPal\Braintree\Model\Ui\PayPal\TokenUiComponentProvider"
+                type="Abbott\Braintree\Model\Ui\PayPal\TokenUiComponentProvider" />
+</config>

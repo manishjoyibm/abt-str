@@ -1,0 +1,59 @@
+<!--@subject {{trans "%store_name.com Shipment Update" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var order_data.customer_name":"Customer Name",
+"var order.increment_id":"Order Id",
+"var payment_html|raw":"Payment Details",
+"var comment":"Shipment Comment",
+"var shipment.increment_id":"Shipment Id",
+"layout handle=\"sales_email_order_shipment_items\" shipment=$shipment order=$order":"Shipment Items Grid",
+"block class='Magento\\\\Framework\\\\View\\\\Element\\\\Template' area='frontend' template='Magento_Sales::email\/shipment\/track.phtml' shipment=$shipment order=$order":"Shipment Track Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.shipping_description":"Shipping Description"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro bg-white">
+        <td style="padding: 25px 15px 0 15px;">
+            <p class="greeting mb25"><b>{{trans "Dear %name," name=$order_data.customer_name}}</b></p>
+            <p class="mb25">
+              {{trans 'Thank you for placing your order with %store_name.com. ' store_name=$store.frontend_name}}
+              {{trans 'We are pleased to inform you that your order is on its way!'}}
+            </p>
+        </td>
+    </tr>
+    <tr class="email-summary bg-white">
+        <td class="padding-left15">
+            <p class="mb25">{{trans "Your order tracking information is listed below. "}}</p>
+            {{layout handle="sales_email_order_shipment_track" shipment_id=$shipment_id order_id=$order_id}}
+        </td>
+    </tr>
+    <tr class="bg-white">
+        <td style="padding:0 15px;">
+            <p class="mb25">{{trans "Kind regards,"}}</p>
+            <p class="mb25">
+                {{trans "If you have any questions about your return, please contact %store_name Customer Service at " store_name=$store.frontend_name}}
+                {{depend store_phone}} {{trans '<a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}
+                {{trans ". Our representatives are available %store_hours" store_hours=$store_hours |raw}}
+            </p>
+        </td>
+    </tr>
+</table>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 20px solid #d5652c">
+    <tr>
+        <td class="pb0">
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="dark-red-bg">
+                        <a class="shop-now-btn border-none glucerna-block" href="{{customVar code=glucernastore_url}}" target="_blank">{{trans "SHOP NOW >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

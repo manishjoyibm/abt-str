@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="manage_discount_rules" resource="default" engine="innodb" comment="Manage Discount Codes">
+        <column xsi:type="int" name="row_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Row ID"/>
+        <column xsi:type="int" name="months" padding="10" unsigned="true" nullable="false" comment="Months"/>
+        <column xsi:type="int" name="discount" padding="10" unsigned="true" nullable="false" comment="Discount"/>
+        <column xsi:type="varchar" name="plan" nullable="false" length="32" comment="Plan Name"/>
+        <column xsi:type="varchar" name="promotional_sku" nullable="false" comment="Promotional Product Sku"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="row_id"/>
+        </constraint>
+    </table>
+    <table name="manage_monthly_subscription" resource="default" engine="innodb" comment="Manage Monthly Subscription">
+        <column xsi:type="int" name="row_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Row Id"/>
+        <column xsi:type="varchar" name="profile_id" nullable="false" length="16"
+                comment="Profile Id"/>
+        <column xsi:type="int" name="current_month" padding="10" unsigned="true" nullable="false" comment="Current Month"/>
+        <column xsi:type="varchar" name="customer_email" nullable="false" length="64" comment="Customer Email"/>
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" default="CURRENT_TIMESTAMP" on_update="true" nullable="false" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="row_id"/>
+        </constraint>
+    </table>
+</schema>

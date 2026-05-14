@@ -1,0 +1,10 @@
+{
+    "mst_search_score_rule_index": {
+        "column": {
+            "id": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

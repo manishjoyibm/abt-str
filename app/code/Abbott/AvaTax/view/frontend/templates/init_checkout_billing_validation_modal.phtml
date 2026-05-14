@@ -1,0 +1,23 @@
+<?php
+/**
+ *  @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+?>
+<?php
+    $url = $block->getUrl();
+    $scriptString = <<<script
+        require([
+            'mage/url'
+        ], function (url) {
+            return url.setBaseUrl('$url');
+        })
+    script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+<?php
+    $storeCode = $this->getStoreCode();
+    $scriptString = <<<script
+        window.avaTaxStoreCode = "$storeCode";
+    script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

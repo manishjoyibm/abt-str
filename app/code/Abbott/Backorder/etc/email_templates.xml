@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Mail/etc/email_templates.xsd">
+    <template id="backorder_email" 
+    label="Backorder Notification Email" 
+    file="backorder_email.html"
+     type="html" module="Abbott_Backorder" area="frontend"/>
+</config>

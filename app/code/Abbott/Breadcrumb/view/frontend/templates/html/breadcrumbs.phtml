@@ -1,0 +1,38 @@
+<?php
+$helper = $this->helper(\Abbott\Breadcrumb\Helper\Data::class);
+if ($crumbs && is_array($crumbs)): ?>
+    <div class="breadcrumbs">
+        <ul class="items">
+            <?php foreach ($crumbs as $crumbName => $crumbInfo):
+                if ($crumbName == 'home'):
+                    $crumbInfo['link'] = $helper->getHomepageUrl();
+
+                endif;
+
+                ?>
+                <li class="item <?= $block->escapeHtmlAttr($crumbName) ?>">
+                    <?php if ($crumbInfo['link']) {
+                        if ($crumbInfo['last']) { ?>
+                            <?= $block->escapeHtml($crumbInfo['label']) ?>
+                        <?php } else { ?>
+                            <a href="<?= $block->escapeUrl($crumbInfo['link']) ?>"
+                               title="<?= $block->escapeHtmlAttr($crumbInfo['title']) ?>">
+                                <?= $block->escapeHtml($crumbInfo['label']) ?>
+                            </a>
+                        <?php } ?>
+
+                    <?php } elseif ($crumbInfo['last']) { ?>
+                        <strong><?php
+                            if ($helper->getLastCruminfo() != null) {
+                                echo '#' . $helper->getLastCruminfo();
+                            } else {
+                                echo $crumbInfo['label'];
+                            } ?></strong>
+                    <?php } else { ?>
+                        <?= $block->escapeHtml($crumbInfo['label']) ?>
+                    <?php } ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+<?php endif; ?>

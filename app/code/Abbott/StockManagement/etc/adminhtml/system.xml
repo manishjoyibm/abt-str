@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="stock_management" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>Stock Management</label>
+            <resource>Abbott_StockManagement::stock_management</resource>
+            <group id="configuration" sortOrder="10" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Out of Stock Configuration</label>
+                <field id="enabled" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Out Of Stock</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="product_message" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Product Line Message</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <comment>Param 1 is Product Name, Param 2 is Display Qty.</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
+
+

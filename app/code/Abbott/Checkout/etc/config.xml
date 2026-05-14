@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <braintree_custom>
+            <braintree_msg>
+                <token_failure_msg>Due to a one time system update, please re-enter your saved card details as a new card</token_failure_msg>
+            </braintree_msg>
+        </braintree_custom>
+    </default>
+</config>

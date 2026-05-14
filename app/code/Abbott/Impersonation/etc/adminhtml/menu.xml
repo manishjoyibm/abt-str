@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+  <menu>
+      <add id="Abbott_Impersonation::login_log" title="Login As Customer Log" module="Abbott_Impersonation" parent="Magento_Customer::customer" sortOrder="50"  resource="Abbott_Impersonation::login_log" action="impersonation/impersonation/" />
+  </menu>
+</config>

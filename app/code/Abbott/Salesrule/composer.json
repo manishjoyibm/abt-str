@@ -1,0 +1,22 @@
+{
+    "name": "abbott/module-salesrule",
+    "description": "Add quote id and created at field in salesrule_coupon_usage table",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Rahul Hedaoo",
+            "email": "rahul.hedaoo@abbott.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Abbott\\Salesrule\\": ""
+        }
+    }
+}

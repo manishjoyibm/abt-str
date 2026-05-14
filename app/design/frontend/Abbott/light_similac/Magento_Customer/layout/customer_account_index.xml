@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title" class="Abbott\MyAccount\Block\Account\Title" template="Abbott_MyAccount::title.phtml"></referenceBlock>
+        <referenceBlock name="customer_account_dashboard_address" remove="true" />
+        <referenceBlock name="customer_account_dashboard_top" remove="true" />
+        <referenceContainer name="content">
+            <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions" name="aw_sarp2.customer.subscriptions" template="Aheadworks_Sarp2::customer/subscriptions.phtml" cacheable="false"/>
+        </referenceContainer>
+    </body>
+</page>

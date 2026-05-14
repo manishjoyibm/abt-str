@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/consumer.xsd">
+    <consumer name="HHPlaceOrderSync"
+              queue="hh_place_order_sync"
+              connection="amqp"
+              handler="Abbott\Hartehanks\Model\Queue\Consumer::process"/>
+    <consumer name="HHFindOrderSync"
+              queue="hh_find_order_sync"
+              connection="amqp"
+              handler="Abbott\Hartehanks\Model\Queue\Consumer::processFindOrder"/>
+</config>

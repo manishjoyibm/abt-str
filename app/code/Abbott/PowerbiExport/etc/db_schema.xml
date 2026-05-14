@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="powerbi_export" resource="default" engine="innodb"
+           comment="Powerbi Export Table">
+    <column xsi:type="int" name="entity_id" unsigned="false" nullable="false" identity="true" comment="Entity ID"/>
+    <column xsi:type="int" name="report_id" unsigned="true" nullable="false" identity="false" comment="Report ID"/>
+    <column xsi:type="varchar" name="report_name" nullable="false" length="255" comment="Report Name"/>
+    <column xsi:type="int" name="status" unsigned="true" nullable="false" identity="false" comment="Status"/>
+    <column name="created_at" comment="Created At" default="CURRENT_TIMESTAMP" nullable="false" xsi:type="timestamp"/>
+    <column name="updated_at" comment="Updated At" default="CURRENT_TIMESTAMP" nullable="false" xsi:type="timestamp"/>
+    <column name="last_cron_update_date" comment="Last Report Export On" nullable="false" xsi:type="timestamp"/>
+    <constraint xsi:type="primary" referenceId="PRIMARY">
+        <column name="entity_id"/>
+    </constraint>
+    <index referenceId="POWERBI_EXPORT_REPORT_ID" indexType="btree">
+        <column name="report_id"/>
+    </index>
+    <index referenceId="POWERBI_EXPORT_CREATED_AT" indexType="btree">
+        <column name="created_at"/>
+    </index>
+</table>
+</schema>

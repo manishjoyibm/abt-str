@@ -1,0 +1,19 @@
+.custom_tfoot {
+    margin-left: auto;
+    width: 30%;
+    border-top: 1px solid #f5f5f5;
+}
+.custom_tfoot th,
+.custom_tfoot td {
+    padding: 8px 15px;
+}
+.custom_tfoot th {
+    text-align: right;
+    vertical-align: middle;
+    font-weight: normal;
+    background: #f5f5f5;
+    color: black;
+}
+.custom_tfoot_div {
+    background: #f5f5f5;
+}

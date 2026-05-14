@@ -1,0 +1,15 @@
+<link rel="stylesheet" type="text/css" href="<?php echo $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl().'etc.clientlibs/abbott/clientlibs/clientlib-abbottstore.min.css'?>">
+<?php
+/**
+ *  @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+    $baseUrl = $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl();
+    $abbottStoreLibsUrl = $baseUrl.'etc.clientlibs/abbott/clientlibs/clientlib-abbottstore.min.js';
+
+$scriptString = <<<script
+    require(["jquery","js/jquery.cookie.min"],function(jQuery) {
+        $ = jQuery;
+    });
+    script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>

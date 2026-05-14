@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="10">
+            <label>Abbott</label>
+        </tab>
+        <section id="onetrust" translate="label" sortOrder="132" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>OneTrust</label>
+            <tab>abbott</tab>
+            <resource>Abbott_Configuration::Custom_configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+				<field id="enabled" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="client_id" translate="label" type="obscure" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Client Id</label>
+                    <validate>required-entry no-whitespace</validate> <!-- Field is required and must not contain any whitespace. -->
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+				<field id="client_secret" translate="label" type="obscure" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Client Secret</label>
+                    <validate>required-entry no-whitespace</validate> <!-- Field is required and must not contain any whitespace. -->
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+				<field id="oauth_token_request_url" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Token Request URL</label>
+                    <validate>required-entry no-whitespace</validate> <!-- Field is required and must not contain any whitespace. -->
+                </field>
+                <field id="oauth_token" translate="label" type="obscure" sortOrder="5" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>OAuth Token</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="get_collection_end_point" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Get Collection Endpoint</label>
+                </field>
+                <field id="submit_consent_end_point" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Submit Consent Endpoint</label>
+                </field>
+                <field id="create_data_subject_endpoint" translate="label" type="text" sortOrder="8" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Create Data Subject Endpoint</label>
+                </field>
+            </group>
+
+            <group id="environment_configuration" translate="label" type="text" sortOrder="12" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Collection Point: Registration Page</label>
+				<field id="registration_collection_point_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Collection Point Id</label>
+                </field>
+				<field id="newsletter_purpose_id" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purpose Id</label>
+                </field>
+                <field id="newsletter_notice_id" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Newsletter Notice ID</label>
+                </field>
+            </group>
+
+            <group id="mbo_environment_configuration" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Collection Point: MBO Customer Edit Page</label>
+                <field id="mbo_collection_point_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Collection Point Id</label>
+                </field>
+                <field id="mbo_newsletter_purpose_id" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Purpose Id</label>
+                </field>
+            </group>
+
+            <group id="checkout_environment_configuration" translate="label" type="text" sortOrder="14" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Collection Point: Checkout Page</label>
+				<field id="checkout_collection_point_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Collection Point Id</label>
+                </field>
+				<field id="checkout_employee_term" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Employee Terms Purpose Id</label>
+                </field>
+                <field id="checkout_payment_term" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Terms Purpose Id</label>
+                </field>
+                <field id="emp_consent_notice_id" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Employee Consent Notice ID</label>
+                </field>
+                <field id="payment_consent_notice_id" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Term Notice ID</label>
+                </field>
+                <field id="checkout_subscription_term" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscription Terms Purpose Id</label>
+                </field>
+                 <field id="subscription_consent_notice_id" translate="label" type="text" sortOrder="6" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Subscription Consent Notice ID</label> 
+                </field>
+            </group>
+            <group id="mbo_checkout_configuration" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Collection Point: MBO Checkout Page</label>
+                <field id="collection_point_id" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Collection Point Id</label>
+                </field>
+                <field id="employee_term" translate="label" type="text" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Employee Terms Purpose Id</label>
+                </field>
+            </group>
+            <group id="preference_center" translate="label" type="text" sortOrder="16" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Preference Center</label>
+                <field id="preference_center_endpoint" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Preference Center Endpoint</label>
+                    <comment>Endpoint ending with slash (/)</comment>
+                </field>
+                <field id="preference_center_id" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Preference Center Id</label>
+                </field>
+                <field id="data_subject_endpoint" translate="label" type="text" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Data Subject Endpoint</label>
+                    <comment>Url to generate customer token for Preference Center</comment>
+                </field>
+            </group>
+            <group id="consent_sdk" translate="label" type="text" sortOrder="17" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Consent Verbiage SDK</label>
+                <field id="sdk_js_url" translate="label" type="text" sortOrder="6" showInDefault="6" showInWebsite="1" showInStore="1">
+                    <label>SDK JS URL</label>
+                </field>
+                <field id="sdk_endpoint" translate="label" type="text" sortOrder="6" showInDefault="6" showInWebsite="1" showInStore="1">
+                    <label>SDK URL</label>
+                </field>
+                <field id="sdk_setting" translate="label" type="obscure" sortOrder="6" showInDefault="6" showInWebsite="1" showInStore="1">
+                    <label>SDK settings Token</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="sdk_storage_container" translate="label" type="text" sortOrder="6" showInDefault="6" showInWebsite="1" showInStore="1">
+                    <label>SDK storage container ID</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

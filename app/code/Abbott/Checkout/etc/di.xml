@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+<type name="Magento\Eav\Model\Attribute\Data\Text">
+<plugin name="textPlugin" type="Abbott\Checkout\Model\Attribute\Data\Plugin\Text" />
+</type>
+<type name="Magento\Customer\Model\Metadata\Form\Text">
+<plugin name="formTextPlugin" type="Abbott\Checkout\Model\Metadata\Form\Plugin\Text" />
+</type>
+<type name="Magento\Customer\Model\Metadata\Form\Postcode">
+<plugin name="formPostcodePlugin" type="Abbott\Checkout\Model\Metadata\Form\Plugin\Postcode" />
+</type>
+<type name="Magento\Customer\Model\Attribute\Data\Postcode">
+<plugin name="postcodePlugin" type="Abbott\Checkout\Model\Attribute\Data\Plugin\Postcode" />
+</type>
+<type name="Magento\CustomerCustomAttributes\Helper\Data">
+<plugin name="customerCustomAttributesHelperPlugin" type="Abbott\Checkout\Plugin\Helper\DataPlugin" />
+</type>
+<preference for="Magento\Checkout\Block\Checkout\AttributeMerger" type="Abbott\Checkout\Block\Checkout\AttributeMerger" />
+<virtualType name="Magento\Payment\Model\Method\VirtualDebug" type="Magento\Framework\Logger\Handler\Base">
+<arguments>
+    <argument name="fileName" xsi:type="string">/var/apolloLog/payment.log</argument>
+</arguments>
+</virtualType>
+<type name="Magento\QuoteGraphQl\Model\Resolver\UpdateCartItems">
+    <plugin name="updatecartitemplugin" type="Abbott\Checkout\Plugin\UpdateCartItemPlugin"/>
+</type>
+<preference for="Magento\Checkout\Model\Cart" type="Abbott\Checkout\Model\Cart" />
+<preference for="Magento\Vault\Observer\AfterPaymentSaveObserver" type="Abbott\Checkout\Observer\AfterPaymentSaveObserver" />
+<type name="Magento\Checkout\Block\Checkout\LayoutProcessor">
+    <plugin disabled="false" name="Abbott_Checkout_Plugin_Block_Checkout_LayoutProcessor" sortOrder="99" type="Abbott\Checkout\Plugin\Block\Checkout\LayoutProcessor"/>
+</type>
+
+
+</config>

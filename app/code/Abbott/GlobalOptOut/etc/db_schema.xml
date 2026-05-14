@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+ 
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="abbott_global_optout" resource="default" engine="innodb" comment="Global Opt Out Table">
+        <column xsi:type="int" name="id" padding="10" identity="true" unsigned="true" nullable="false" comment="Id"/>
+        <column xsi:type="varchar" name="email" nullable="false" length="255" comment="Email"/>
+        <column xsi:type="datetime"  name="created_at" nullable="false"  default="CURRENT_TIMESTAMP" on_update="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        <index referenceId="GLOBAL_OPT_OUT_EMAIL" indexType="fulltext">
+            <column name="email"/>
+        </index>
+    </table>
+</schema>

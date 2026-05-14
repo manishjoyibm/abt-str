@@ -1,0 +1,26 @@
+<script>
+require([
+    'jquery',
+    'prototype',
+], function(jQuery){
+    function createFile() {
+        params = {
+        };
+
+        new Ajax.Request('<?= $escaper->escapeUrl($block->getAjaxUrl())?>', {
+            loaderArea:     true,
+            asynchronous:   true,
+            parameters:     params,
+            onSuccess: function(transport) {
+                var response = JSON.parse(transport.responseText);
+            }
+        });
+    }
+
+    jQuery('#tb_sync_file').click(function () {
+        createFile();
+    });
+});
+</script>
+
+<?= $block->getButtonHtml() ?>

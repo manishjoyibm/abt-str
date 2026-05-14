@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="10">
+            <label>Abbott</label>
+        </tab>
+        <section id="secure_admin_configuration" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Secure Admin</label>
+            <tab>abbott</tab>
+            <resource>Abbott_SecureAdmin::Custom_configuration</resource>
+            <group id="deactivatembouserconfig" translate="label" type="text" sortOrder="21" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>MBO User 90 days Deactivate Configuration</label>
+                <field id="enabled_module" translate="label comment" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module Enabled</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="password_expiration_notification_before" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Password Deactivation Notification Days Before</label>
+                    <comment>Enter password deactivation notification before in days.</comment>
+                </field>
+                <field id="password_expiration_period" translate="label" type="text" sortOrder="4" showInDefault="3" showInWebsite="1" showInStore="1">
+                    <label>Password Deactivation Days After</label>
+                    <comment>Enter password deactivation after in days.</comment>
+                </field>
+                <field id="template_identifier_notification" translate="label" type="text" sortOrder="5" showInDefault="3" showInWebsite="1" showInStore="1">
+                    <label>Email Identifier for Notification</label>
+                    <comment>Enter email identifier for notification.</comment>
+                </field>
+                <field id="template_identifier_deactivate" translate="label" type="text" sortOrder="6" showInDefault="3" showInWebsite="1" showInStore="1">
+                    <label>Email Identifier for Deactivation</label>
+                    <comment>Enter email identifier for deactivate.</comment>
+                </field>
+                <field id="admin_user_deactivation_cron_frequency" translate="label" type="text" sortOrder="7" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Frequency</label>
+                    <comment>Set the Cron Frequency Daily</comment>
+                </field>
+            </group>
+        </section>      
+    </system>
+</config>

@@ -1,0 +1,8 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/publisher.xsd">
+    <publisher topic="hh.placeorder.sync">
+        <connection name="amqp" exchange="hartehank-sync" />
+    </publisher>
+    <publisher topic="hh.findorder.sync">
+        <connection name="amqp" exchange="hartehank-sync" />
+    </publisher>
+</config>

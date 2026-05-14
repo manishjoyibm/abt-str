@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../../../Magento/Backend/etc/menu.xsd">
+    <menu>
+        <add id="Abbott_Tokenmigrate::parent" title="Token Migrate" module="Abbott_Tokenmigrate" sortOrder="100" resource="Abbott_Tokenmigrate::parent"/> 
+		<add id="Abbott_Tokenmigrate::tokenmigrate" title="Token migrate script" module="Abbott_Tokenmigrate" sortOrder="20" parent="Abbott_Tokenmigrate::parent" action="tokenmigrate/tokenmigrate" resource="Abbott_Tokenmigrate::tokenmigrate"/>
+    </menu>
+</config>

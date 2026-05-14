@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page layout="2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Abbott_Checkout::css/checkoutcart.css"/>
+    </head>
+    <body>
+        <referenceBlock name="checkout.cart.giftcardaccount" remove="true"/>
+        <referenceBlock name="checkout.cart.order.actions.gift_options" remove="true"/>
+        <referenceBlock name="checkout.cart.methods.multishipping" remove="true"/>
+        <referenceBlock name="sale.reorder.sidebar" remove="true"/>
+        <referenceContainer name="content">
+            <referenceContainer name="cart.summary">
+                <block
+                    class="Magento\Framework\View\Element\Template"
+                    name="checkout.cart.custom.block" after="checkout.cart.summary.title"
+                    template="Abbott_ShoppingCart::checkout/freeshipping.phtml"
+                    ifconfig="pedialyte_configuration/settings/show_shipping_progress_bar">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Abbott\ShoppingCart\ViewModel\Shipping</argument>
+                    </arguments>
+                </block>
+            </referenceContainer>
+        </referenceContainer>
+        <referenceContainer name="page.wrapper">
+            <container name="custom.popup" htmlClass="customPopupSection" htmlTag="section" htmlId="custom_popup_section" before="main.content">
+                <block
+                    class="Magento\Framework\View\Element\Template"
+                    name="custompopup" before="-"
+                    template="Magento_Theme::header/pedialyte_popup.phtml">
+                </block>
+            </container>
+        </referenceContainer>
+    </body>
+</page>

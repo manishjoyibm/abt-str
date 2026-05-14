@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="110">
+            <label>Abbott</label>
+        </tab>
+        <section id="shipping_restrction" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Shipping Restriction</label>
+            <tab>abbott</tab>
+            <resource>Abbott_ShippingRestriction::config_shippingrestrction</resource>
+            <group id="shipping_restrctions_group" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                 <label>Shipping Restriction</label>
+
+                <field id="is_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                   <label>Enable Shipping Restriction</label>
+                   <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="ground_shipping_amount" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                   <label>Flat Rate (if Subtotal less than threshold Amount)</label>
+                </field>
+            </group>
+            <group id="tracker" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Shipping Tracker URLs</label>
+                <field id="fedex_tracker_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Fedex Tracker URL</label>
+                </field>
+            </group>
+        </section>
+        <section id="free_shipping_config" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>Free Shipping Configuration</label>
+            <tab>abbott</tab>
+            <resource>Abbott_ShippingRestriction::config_free_shipping_config</resource>
+            <group id="free_shipping_config_group" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                 <label>Free Shipping Configuration</label>
+
+                <field id="ship_list" translate="label" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                   <label>Enable Free Shipping</label>
+                   <can_be_empty>1</can_be_empty>
+                   <source_model>\Abbott\ShippingRestriction\Model\Config\Source\Stores</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

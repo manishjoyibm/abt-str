@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_form">
+            <block class="Abbott\Customerhistory\Block\Adminhtml\Edit\Tab\Customerhistory" name="customer_edit_tab_customerhistory" template="Abbott_Customerhistory::customerhistory.phtml" >
+              <action method="setTabLabel">
+                  <argument name="label" xsi:type="string">Customer Comment</argument>
+              </action>
+            </block>
+            <referenceBlock name="customer_edit_tab_view">
+                <block class="Abbott\Customerhistory\Block\Adminhtml\Edit\Tab\Customerhistory" name="customer_history_comments" after="-" template="Abbott_Customerhistory::customerview.phtml"/>
+            </referenceBlock>
+        </referenceBlock>      
+        <!--
+            Removes the "Gift Registry" tab from the Customer Edit page.
+            Originates from Magento_GiftRegistry module.
+        -->
+        <referenceBlock name="giftregistry" remove="true"/>
+        
+        <!--
+            Removes the "Wish List" tab from the Customer Edit page.
+            Originates from Magento_Wishlist module.
+        -->
+        <referenceBlock name="wishlist" remove="true"/>
+
+        <!--
+            Removes the "Store Credit" tab from the Customer Edit page.
+            Originates from Magento_CustomerBalance module.
+        -->
+        <referenceBlock name="customerbalance" remove="true"/>
+
+        <!--
+            Removes the "Reward Points" tab from the Customer Edit page.
+            Originates from Magento_Reward module.
+        -->
+        <referenceBlock name="customer_edit_tab_reward" remove="true"/>
+
+        <!--
+            Removes the "Billing Agreements" tab from the Customer Edit page.
+            Originates from Magento_Paypal module.
+        -->
+        <referenceBlock name="customer_edit_tab_agreements" remove="true"/>
+
+        <!--
+            Removes the "Product Reviews" tab from the Customer Edit page.
+            Originates from Magento_Review module.
+        -->
+        <referenceBlock name="reviews" remove="true"/>
+
+    </body>
+</page>

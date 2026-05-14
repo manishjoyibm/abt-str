@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <chargeback_settings>
+            <chargeback_sftp>
+                <chargeback_path></chargeback_path>
+                <archive_path>/archive/</archive_path>
+                <host></host>
+                <port></port>
+                <username></username>
+            </chargeback_sftp>
+            <chargeback_cron>
+                <cs_enabled>1</cs_enabled>
+                <sync_expr>0 0 * * 1</sync_expr>
+                <dl_enabled>1</dl_enabled>
+                <delete_expr>0 0 1 * *</delete_expr>
+            </chargeback_cron>
+            <chargeback_file_settings>
+                <archive_file_path>Abbott/Chargeback/Archive/</archive_file_path>
+                <archive_file_lifetime>30</archive_file_lifetime>
+                <chargeback_log_lifetime>10</chargeback_log_lifetime>
+            </chargeback_file_settings>
+            <chargeback_admin_email>
+                <is_mail_enabled>1</is_mail_enabled>
+                <sender>general</sender>
+                <chargeback_template>chargeback_settings_chargeback_admin_email_chargeback_template</chargeback_template>
+            </chargeback_admin_email>
+            <kount_email_settings>
+                <is_mail_enabled>1</is_mail_enabled>
+                <sender>general</sender>
+                <kount_template>chargeback_settings_kount_email_settings_kount_template</kount_template>
+            </kount_email_settings>
+        </chargeback_settings>
+    </default>
+</config>

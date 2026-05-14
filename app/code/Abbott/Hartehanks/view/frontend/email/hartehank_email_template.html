@@ -1,0 +1,50 @@
+<!--@subject {{trans "HH Inventory Report"}}@-->
+
+<!--@styles
+.wrapper .heading th, .wrapper .data td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.wrapper {
+  width: 100%;
+}
+.report{
+  align:center;
+}
+@-->
+{{if status_fail}}
+{{template config_path="design/email/header_template"}}
+{{trans "The system failed to process the HarteHanks Inventory Sync on "}}{{var creation_time}}
+{{trans "For more information on failure records please login to MBO and refer System->Abbott->Summary Report"}}
+{{template config_path="design/email/footer_template"}}
+
+{{else}}
+{{template config_path="design/email/header_template"}}
+{{trans "The system processed the HarteHanks Inventory Sync on "}}{{var creation_time}}
+<h2 id="report" class = "report">HH Inventory Report</h2>
+<table aria-describedby="report" class="wrapper">
+  <tr style="text-align: center" class="heading">
+    <th scope="col">
+      <h3><strong>Records</strong></h3>
+    </th>
+    <th scope="col">
+      <h3><strong>Count</strong></h3>
+    </th>
+  </tr>
+  <tr style="text-align: center" class="data">
+    <td>Success</td>
+    <td>{{var added}}</td>
+  </tr>
+  <tr style="text-align: center" class="data">
+    <td>Failed</td>
+    <td>{{var failed}}</td>
+  </tr>
+  <tr style="text-align: center" class="data">
+    <td>Total</td>
+    <td>{{var total_records}}</td>
+  </tr>
+</table>
+<br>
+{{trans "For more information on failure records please login to MBO and refer System->Abbott->HH Inventory Log"}}
+{{template config_path="design/email/footer_template"}}
+{{/if}}

@@ -1,0 +1,88 @@
+<!--@subject {{trans "Your %store_name order has shipped" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var order_data.customer_name":"Customer Name",
+"var order.increment_id":"Order Id",
+"var payment_html|raw":"Payment Details",
+"var comment":"Shipment Comment",
+"var shipment.increment_id":"Shipment Id",
+"layout handle=\"sales_email_order_shipment_items\" shipment=$shipment order=$order":"Shipment Items Grid",
+"block class='Magento\\\\Framework\\\\View\\\\Element\\\\Template' area='frontend' template='Magento_Sales::email\/shipment\/track.phtml' shipment=$shipment order=$order":"Shipment Track Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.shipping_description":"Shipping Description"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr>
+      <td class="esd-structure es-p20t es-p30r es-p30l" align="left"
+          style="background-color: #BFE6F7;height: 30px;">
+          <table cellpadding="0" cellspacing="0" width="100%">
+              <tbody>
+                  <tr>
+                      <td width="540" class="esd-container-frame" align="center"
+                          valign="top">
+                          <table cellpadding="0" cellspacing="0" width="100%">
+                              <tbody>
+                                  <tr>
+                                      <td align="left" class="esd-block-text"
+                                          style="padding: 10px 20px;">
+                                          <p
+                                              style="margin: 0;font-size: 13.5pt;
+                                              font-family: Arial, sans-serif, serif, EmojiFont;
+                                              text-transform: uppercase;font-weight: bold;">
+                                          </p>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </td>
+  </tr>
+
+    <tr class="email-intro bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 20px;">
+            <p class="greeting mb25"><b style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{trans "Dear %name," name=$order_data.customer_name}}</b></p>
+            <p class="mb25">
+              {{trans 'Thank you for placing your order with %store_name.com. ' store_name=$store.frontend_name}}
+              {{trans 'We are pleased to inform you that your order is on its way!'}}
+            </p>
+        </td>
+    </tr>
+    <tr class="email-summary bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 15px 20px;">
+            <p class="mb25">{{trans "Your order tracking information is listed below. "}}</p>
+            {{layout handle="sales_email_order_shipment_track" shipment_id=$shipment_id order_id=$order_id}}
+        </td>
+    </tr>
+    <tr class="bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 0 15px;">
+            <p class="mb25">{{trans "Kind regards,"}}</p>
+            <p style="font-size: 15px;">{{trans "%store_name.com " store_name=$store.frontend_name}}
+               <a href="{{customVar code=abbott_contactus_url}}">{{trans"Customer Service Team"}}</a>
+               {{depend store_phone}} {{trans '<a href="tel:%store_phone">(%store_phone)</a>' store_phone=$store_phone |raw}}{{/depend}}
+            </p>
+        </td>
+    </tr>
+    <tr>
+      <td>
+        <table border="0" cellspacing="0" cellpadding="0" style="background-color:white;width:100%;border-collapse:collapse;">
+          <tbody>
+            <tr>
+                  <td valign="top" style="padding: 30pt 0px 30pt 0px;">
+                      <p align="center" style="font-size:11pt;font-family:Calibri,sans-serif;text-align:center;margin:0;">
+                          <span style="font-size: 12pt; font-family: Helvetica Neue, serif, EmojiFont; line-height: 13.5pt;"><a href="{{customVar code=abbottstore_url}}" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="background-color:rgb(0, 156, 222);border: 20px solid rgb(0, 156, 222); color: #ffffff;text-decoration: none;"><b><span style="font-size: 13.5pt; font-family: Arial, sans-serif, serif, EmojiFont; text-transform: uppercase;">
+                                          {{trans "shop now >"}}</span></b></a></span></p>
+                  </td>
+              </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

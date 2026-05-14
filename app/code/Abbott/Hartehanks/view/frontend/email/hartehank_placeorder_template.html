@@ -1,0 +1,65 @@
+<!--@subject {{trans "HH PlaceOrder Report"}}@-->
+
+<!--@styles
+.wrapper .heading th, .wrapper .data td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.wrapper {
+  width: 100%;
+}
+.report{
+  align:center;
+}
+@-->
+{{if status_fail}}
+{{template config_path="design/email/header_template"}}
+{{trans "The system failed to process the HH Place Order on "}}{{var creation_time}}
+{{trans "For more information on failure records please login to MBO and refer System->Abbott->Summary Report"}}
+{{template config_path="design/email/footer_template"}}
+
+{{else}}
+{{template config_path="design/email/header_template"}}
+{{trans "The system processed the HH Place Order on "}}{{var creation_time}}
+<h2 class = "report" id="abbott" >HH Placeorder Report</h2>
+<table aria-describedby="abbott" class="wrapper">
+  <tr style="text-align: center" class="heading">
+    <th scope="col">
+      <h3><strong>Store</strong></h3>
+    </th>
+    <th scope="col">
+      <h3><strong>Success</strong></h3>
+    </th>
+    <th scope="col">
+      <h3><strong>Failed</strong></h3>
+    </th>
+    <th scope="col">
+      <h3><strong>Total</strong></h3>
+    </th>
+  </tr>
+  <tr style="text-align: center" class="data">
+    <td>Abbott</td>
+    <td>{{var abbott_success}}</td>
+    <td>{{var abbott_failure}}</td>
+    <td>{{var abbott_total}}</td>
+  </tr>
+
+  <tr style="text-align: center" class="data">
+    <td>Glucerna</td>
+    <td>{{var glucerna_success}}</td>
+    <td>{{var glucerna_failure}}</td>
+    <td>{{var glucerna_total}}</td>
+  </tr>
+
+  <tr style="text-align: center" class="data">
+    <td>Similac</td>
+    <td>{{var similac_success}}</td>
+    <td>{{var similac_failure}}</td>
+    <td>{{var similac_total}}</td>
+  </tr>
+
+</table>
+<br>
+{{trans "For more information on failure records please login to MBO and refer System->Abbott->HH PlaceOrder Log"}}
+{{template config_path="design/email/footer_template"}}
+{{/if}}

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+-->
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="search_query" resource="default" engine="innodb" comment="Search query table">
+        <column xsi:type="smallint" name="display_in_terms" unsigned="false" nullable="false" identity="false" default="0" comment="Display in terms"/>
+    </table>
+</schema>

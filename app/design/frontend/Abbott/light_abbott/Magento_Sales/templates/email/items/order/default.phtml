@@ -1,0 +1,99 @@
+<?php
+/** @var $block \Magento\Sales\Block\Order\Email\Items\DefaultItems */
+/** @var $_item \Magento\Sales\Model\Order\Item */
+$_item = $block->getItem();
+$_order = $_item->getOrder();
+
+$subscriptionWeeks = null;
+$hasSubscription = false;
+?>
+
+<tr>
+    <td class="item-info<?= ($block->getItemOptions() ? ' has-extra' : '') ?>">
+        <p class="product-name"><?= $block->escapeHtml($_item->getName()) ?></p>
+        <p class="sku" style="margin-bottom:0px;"><?= $block->escapeHtml(__('SKU')) ?>: <?= $block->escapeHtml($block->getSku($_item)) ?></p>
+        <?php if ($size = $this->helper(\Abbott\OrderManagement\Helper\Data::class)->checkAttrValue($block->getSku($_item),'size')) : ?>
+            <p class="size"><?= $block->escapeHtml(__('Size')) ?>: <?= $block->escapeHtml($size) ?></p>
+        <?php endif; ?>
+        <?php if ($flavor = $this->helper(\Abbott\OrderManagement\Helper\Data::class)->checkAttrValue($block->getSku($_item),'flavors')) :  ?>
+            <p class="flavors"><?= $block->escapeHtml(__('Flavor')) ?>: <?= $block->escapeHtml($flavor) ?></p>
+        <?php endif; ?>
+        <?php if ($block->getItemOptions()) : ?>
+            <dl class="item-options">
+                <?php foreach ($block->getItemOptions() as $option) : ?>
+                    <dt><strong><em><?= $block->escapeHtml($option['label']) ?></em></strong></dt>
+                    <dd><?= /* @noEscape */ nl2br($block->escapeHtml($option['value'])) ?></dd>
+
+                    <?php
+                    // Capture subscription details for dynamic paragraph
+                    if ($block->escapeHtml($option['label']) === 'Subscription Plan') {
+                        $hasSubscription = true;
+
+                        // Try to extract the "X-week(s)" number from the option value
+                        // Examples matched: "Every 4 weeks", "4 weeks", "4-week", "every 2-weeks"
+                        $subscriptionWeeks = $block->escapeHtml($option['value']);
+                    }
+                    ?>
+                <?php endforeach; ?>
+            </dl>
+        <?php endif; ?>
+        <?php $addInfoBlock = $block->getProductAdditionalInformationBlock(); ?>
+        <?php if ($addInfoBlock) :?>
+            <?= $addInfoBlock->setItem($_item)->toHtml() ?>
+        <?php endif; ?>
+        <?= $block->escapeHtml($_item->getDescription()) ?>
+        <?php if ($this->helper(\Abbott\OrderManagement\Helper\Data::class)->checkBackOrder($block->escapeHtml($block->getSku($_item)))) :  ?>
+            <dl><p style="color:red;"><strong><?= $block->escapeHtml(__('BackOrdered')) ?></strong></p></dl>
+        <?php endif; ?>
+        <?php if ($hasSubscription) : ?>
+        </br>
+            <p style="margin-top:15px">
+                <?php
+                // Build dynamic values
+                $weekLabel = $subscriptionWeeks ?  $subscriptionWeeks : 'X-week';
+
+                // Link URL (update to your real subscription help page)
+                $storeLink = $this->helper(\Abbott\CustomerTransistion\Helper\Data::class)->getFailureUrl().'schedule-and-save.html';
+                $helpLink = '<a href="'.$storeLink.'" target="_blank">here</a>';
+
+                // Build paragraph with HTML formatting
+                $text = sprintf(
+                    'You will be charged the <strong>%1$s</strong> to the payment method listed below on a <strong>%2$s</strong> basis beginning on the Order Date. 
+                    Sales tax may apply. Pricing subject to change. 
+                    Your subscription will renew automatically and you will receive a new shipment every <strong>%2$s</strong> and <strong> will be charged for each shipment every <strong>%2$s</strong> 
+                    until you fail to pay or you cancel your subscription via your My Account settings online or by following the instructions for which may be found %3$s. 
+                    To avoid future charges, you must cancel before your next shipment date.</strong>',
+                    $block->getItemPrice($_item),     
+                    $weekLabel,          
+                    $helpLink            
+                );
+                echo $text; 
+                ?>
+            </p>
+        <?php endif; ?>
+    </td>
+    <td class="item-qty"><?= (float) $_item->getQtyOrdered() ?></td>
+    <td class="item-price">
+        <?= /* @noEscape */ $block->getItemPrice($_item) ?>
+    </td>
+</tr>
+
+<?php if ($_item->getGiftMessageId()
+    && $_giftMessage = $this->helper(\Magento\GiftMessage\Helper\Message::class)->getGiftMessage($_item->getGiftMessageId())
+) : ?>
+<tr>
+    <td colspan="3" class="item-extra">
+        <table class="message-gift">
+            <tr>
+                <td>
+                    <h3><?= $block->escapeHtml(__('Gift Message')) ?></h3>
+                    <strong><?= $block->escapeHtml(__('From:')) ?></strong> <?= $block->escapeHtml($_giftMessage->getSender()) ?>
+                    <br /><strong><?= $block->escapeHtml(__('To:')) ?></strong> <?= $block->escapeHtml($_giftMessage->getRecipient()) ?>
+                    <br /><strong><?= $block->escapeHtml(__('Message:')) ?></strong>
+                    <br /><?= $block->escapeHtml($_giftMessage->getMessage()) ?>
+                </td>
+            </tr>
+        </table>
+    </td>
+</tr>
+<?php endif; ?>

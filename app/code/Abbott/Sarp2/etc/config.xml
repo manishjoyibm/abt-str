@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <buy_now_tagging>
+            <buy_now>
+                <enabled>1</enabled>
+                <javascript>91821</javascript>
+                <source_url>https://tags.bkrtx.com/js/bk-coretag.js</source_url>
+            </buy_now>
+        </buy_now_tagging>
+        <subscription_email_setting>
+            <subscription_cancel_email>
+                <enabled>1</enabled>
+                <cancel_subscription_template>subscription_email_setting_subscription_cancel_email_cancel_subscription_template</cancel_subscription_template>
+                <sender>general</sender>
+            </subscription_cancel_email>
+            <subscription_update_email>
+                <enabled>1</enabled>
+                <update_subscription_template>subscription_email_setting_subscription_update_email_update_subscription_template</update_subscription_template>
+                <sender>general</sender>
+            </subscription_update_email>
+            <subscription_out_of_stock_email>
+                <enabled>1</enabled>
+                <out_of_stock_email_template>subscription_email_setting_subscription_out_of_stock_email_subscription_out_of_stock_template</out_of_stock_email_template>
+                <sender>general</sender>
+            </subscription_out_of_stock_email>
+             <subscription_generate_messages>
+                <message_one>Request is added in to Queue, Click the Generate Order button to generate the order</message_one>
+                <message_two>Order is generated successfully.</message_two>
+            </subscription_generate_messages>
+        </subscription_email_setting>
+        <abbott_subscription>
+            <payment_change_limitations>
+                <limit_payment_change_per_profile>5</limit_payment_change_per_profile>
+                <time_limit_payment_change_per_profile>1440</time_limit_payment_change_per_profile>
+                <limit_payment_change_per_profile_message>You've reached a limit of payment changes for this subscription.</limit_payment_change_per_profile_message>
+                <limit_payment_change_invalid>5</limit_payment_change_invalid>
+                <time_limit_payment_change_invalid>1440</time_limit_payment_change_invalid>
+                <limit_payment_change_invalid_message>You've reached a limit of invalid payment changes.</limit_payment_change_invalid_message>
+                <test_unsuccessful_transaction>0</test_unsuccessful_transaction>
+            </payment_change_limitations>
+        </abbott_subscription>
+        <aw_sarp2>
+          <aw_crons1>
+            <pp_enabled>0</pp_enabled>
+            <payment_expr>0 * * * *</payment_expr>
+          </aw_crons1>
+          <aw_crons2>
+            <pn_enabled>0</pn_enabled>
+            <notify_expr>0 * * * *</notify_expr>
+          </aw_crons2>
+          <aw_crons3>
+            <psp_enabled>0</psp_enabled>
+            <sample_payment_expr>*/10 * * * *</sample_payment_expr>
+          </aw_crons3>
+          <aw_crons_controlled>
+            <control_enabled>0</control_enabled>
+          </aw_crons_controlled>
+          <MBO_subscription_history>
+              <change_product_qty>{created_at} Quantity for the Product {product} for the subscription was changed from {oldQty} to {newQty} {crAgent}.</change_product_qty>
+              <change_occurance_date>{created_at} Next Payment Date for the subscription was changed from {oldDate} to {newDate} {crAgent}.</change_occurance_date>
+              <change_shipping_address>{created_at} Shipping address for the subscription was changed from {oldAddress} to {newAddress} {crAgent}.</change_shipping_address>
+              <change_billing_address>{created_at} Billing address for the subscription was changed from {oldAddress} to {newAddress} {crAgent}.</change_billing_address>
+              <change_card_data>{created_at} Payment method for the subscription was changed from {oldCard} to {newCard} {crAgent}.</change_card_data>
+              <change_profile_to_pause_status>{created_at} the subscription has been paused manually {crAgent}.</change_profile_to_pause_status>
+              <change_profile_to_resume_status>{created_at}  the subscription has been resumed manually {crAgent}.</change_profile_to_resume_status>
+              <change_profile_to_cancelled_status>{created_at} the subscription has been cancelled manually {crAgent}.</change_profile_to_cancelled_status>
+              <change_profile_plan>{created_at} Subscription schedule for the subscription was changed from {oldPlan} to {newPlan} {crAgent}.</change_profile_plan>
+              <change_profile_to_cancelled_status_by_cron>{created_at} the subscription has been cancelled automatically.</change_profile_to_cancelled_status_by_cron>
+			  <profile_remove_product>{created_at} Product {name}, {sku} ({qty}) was removed from the subscription {crAgent}.</profile_remove_product>
+		      <profile_change_product>{created_at} Product: {oldProductName}, {oldProductSku} ({oldProductQty}) was changed to Product: {newProductName}, {newProductSku} ({newProductQty}) for the subscription {crAgent}.</profile_change_product>
+              <profile_create>{created_at} The subscription has been created: {productData} {crAgent}</profile_create>
+		  </MBO_subscription_history>
+        </aw_sarp2>
+        <payment>
+            <aw_sarp_braintree_googlepay_recurring>
+                <model>AwSarp2BraintreeGooglePayRecurringFacade</model>
+                <can_use_checkout>0</can_use_checkout>
+            </aw_sarp_braintree_googlepay_recurring>
+        </payment>
+        <payment>
+            <aw_sarp_braintree_applepay_recurring>
+                <model>AwSarp2BraintreeApplePayRecurringFacade</model>
+                <can_use_checkout>0</can_use_checkout>
+            </aw_sarp_braintree_applepay_recurring>
+        </payment>
+        
+        <annual_reminder_section>
+            <annual_reminder>
+                <enabled>0</enabled>
+                <cron_expression>10 1 * * *</cron_expression>
+                <annual_subscription_template>abbott_sarp2_annual_reminder_template</annual_subscription_template>
+                <days_before>0</days_before>
+                <start_date_anchor>2023-01-01 00:00:00</start_date_anchor>
+                <allowed_store_views>1</allowed_store_views>
+                <test_mode>0</test_mode>
+                <test_date_time/>
+            </annual_reminder>
+        </annual_reminder_section>
+
+    </default>
+</config>

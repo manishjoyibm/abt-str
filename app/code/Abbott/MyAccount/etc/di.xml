@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\GraphQl\Controller\GraphQl" type="Abbott\MyAccount\Controller\GraphQl" />
+    <type name="Magento\Customer\Model\Customer\Attribute\Source\Group">
+        <plugin name="groupPlugin" type="Abbott\MyAccount\Plugin\Model\Customer\Attribute\Source\GroupPlugin" />
+    </type>
+    <type name="Magento\Customer\Model\EmailNotification">
+        <plugin name="emailNotificationPlugin" type="Abbott\MyAccount\Plugin\Model\Customer\EmailNotificationPlugin" />
+    </type>
+    <type name="Magento\Framework\GraphQl\Query\ResolverInterface">     <plugin name="graphql_recaptcha_validation" disabled="true" /> <plugin name="graphql_recaptcha_validation_custom" type="Abbott\MyAccount\Plugin\GraphQlValidator"/>
+    </type>
+    <preference for="Magento\CustomerGraphQl\Model\Resolver\GenerateCustomerToken" type="Abbott\MyAccount\Model\Resolver\GenerateCustomerToken" />
+     <preference for="Magento\Integration\Model\Oauth\Token\RequestThrottler" type="Abbott\MyAccount\Model\Oauth\Token\RequestThrottler" />
+</config>

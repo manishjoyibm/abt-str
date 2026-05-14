@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<form xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">abbott_inboundfeed_form.inboundfeed_form_data_source</item>
+        </item>
+        <item name="label" xsi:type="string" translate="true">InboundFeed Information</item>
+        <item name="template" xsi:type="string">templates/form/collapsible</item>
+    </argument>
+    <settings>
+        <buttons>
+            <button name="save" class="Abbott\WorkdayFeed\Block\Adminhtml\InboundFeed\Edit\SaveButton"/>
+            <button name="sftp" class="Abbott\WorkdayFeed\Block\Adminhtml\InboundFeed\Edit\ExceuteWorkdayCron"/>
+            <button name="back" class="Abbott\WorkdayFeed\Block\Adminhtml\InboundFeed\Edit\BackButton"/>
+        </buttons>
+        <namespace>abbott_inboundfeed_form</namespace>
+        <dataScope>data</dataScope>
+        <deps>
+            <dep>abbott_inboundfeed_form.inboundfeed_form_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="inboundfeed_form_data_source">
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/form/provider</item>
+            </item>
+        </argument>
+        <settings>
+            <submitUrl path="abbott/inboundfeed/save"/>
+        </settings>
+        <dataProvider class="Abbott\WorkdayFeed\Model\InboundFeed\DataProvider" name="inboundfeed_form_data_source">
+            <settings>
+                <requestFieldName>feed_id</requestFieldName>
+                <primaryFieldName>feed_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <fieldset name="general">
+        <settings>
+            <label/>
+        </settings>
+        <field name="feed_id" formElement="input">
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="source" xsi:type="string">inboundfeed</item>
+                </item>
+            </argument>
+            <settings>
+                <dataType>text</dataType>
+                <visible>false</visible>
+                <dataScope>feed_id</dataScope>
+            </settings>
+        </field>
+       <field name="file_name">
+          <argument name="data" xsi:type="array">
+              <item name="config" xsi:type="array">
+                  <item name="dataType" xsi:type="string">string</item>
+                  <item name="source" xsi:type="string">inboundfeed</item>
+                  <item name="label" xsi:type="string" translate="true">File</item>
+                  <item name="visible" xsi:type="boolean">true</item>
+                  <item name="formElement" xsi:type="string">fileUploader</item>
+                  <item name="elementTmpl" xsi:type="string">ui/form/element/uploader/uploader</item>
+                  <item name="sortOrder" xsi:type="number">30</item>
+                  <item name="uploaderConfig" xsi:type="array">
+                      <item name="url" xsi:type="url" path="abbott/inboundfeed/upload"/>
+                  </item>
+                  <item name="validation" xsi:type="array">
+                      <item name="required-entry" xsi:type="boolean">true</item>
+                  </item>
+              </item>
+          </argument>
+      </field>
+      
+    </fieldset>
+</form>

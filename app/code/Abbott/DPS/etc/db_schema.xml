@@ -1,0 +1,40 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="abbott_dps_list">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" identity="true" nullable="false" comment="Id"/>
+        <column xsi:type="text" name="reference_id" nullable="false" comment="Reference Id"/>
+        <column xsi:type="datetime" name="start_date" nullable="false" comment="Created At"/>
+        <column xsi:type="datetime" name="end_date" nullable="false" comment="Updated At"/>
+        <column xsi:type="text" name="name" nullable="false" comment="Name"/>
+        <column xsi:type="text" name="source" nullable="false" comment="QR Code"/>
+        <column xsi:type="text" name="type" nullable="true" comment="IP"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+    <table name="abbott_dps_list_address">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" identity="true" nullable="false" comment="Id"/>
+        <column xsi:type="int" name="parent_id" nullable="false" comment="Parent Id"/>
+        <column xsi:type="text" name="country" nullable="false" comment="Country"/>
+        <column xsi:type="text" name="postal_code" nullable="false" comment="Postal code"/>
+        <column xsi:type="text" name="state" nullable="false" comment="State"/>
+        <column xsi:type="text" name="city" nullable="false" comment="City"/>
+        <column xsi:type="text" name="address" nullable="false" comment="Address"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+
+    <table name="abbott_dps_list_log">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" identity="true" nullable="false" comment="Id"/>
+        <column xsi:type="text" name="name" nullable="false" comment="Name"/>
+        <column xsi:type="text" name="country" nullable="false" comment="Country"/>
+        <column xsi:type="text" name="postal_code" nullable="false" comment="Postal code"/>
+        <column xsi:type="text" name="state" nullable="false" comment="State"/>
+        <column xsi:type="text" name="city" nullable="false" comment="City"/>
+        <column xsi:type="text" name="address" nullable="false" comment="Address"/>
+        <column xsi:type="datetime" name="created_at" nullable="false" comment="Created At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+    </table>
+</schema>

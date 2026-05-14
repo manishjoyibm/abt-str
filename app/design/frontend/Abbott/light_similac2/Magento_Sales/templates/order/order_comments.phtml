@@ -1,0 +1,29 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+?>
+<?php /** @var  $block \Magento\Sales\Block\Order\View*/?>
+
+<?php $_history = $block->getOrder()->getVisibleStatusHistory() ?>
+<?php if (!empty($_history)) : ?>
+    <div class="block block-order-details-comments">
+        <div class="block-title"><strong><?= $block->escapeHtml(__('Order Comments')) ?></strong></div>
+        <div class="block-content">
+            <dl class="order-comments">
+                <?php foreach ($_history as $_historyItem) : ?>
+                    <?php if ($_historyItem->getIsVisibleOnFront()) : ?>
+                        <dt class="order-comment-date">
+                            <strong class="order-comment-autor">
+                                <?= $block->escapeHtml(__('Customer Service')); ?>
+                            </strong>
+                            <?= $block->escapeHtml($block->formatDate($_historyItem->getCreatedAt(), \IntlDateFormatter::MEDIUM, true)) ?>
+                        </dt>
+                        <dd class="order-comment-text"><?= nl2br($block->escapeHtml($_historyItem->getComment())) ?></dd>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            </dl>
+        </div>
+    </div>
+<?php endif; ?>

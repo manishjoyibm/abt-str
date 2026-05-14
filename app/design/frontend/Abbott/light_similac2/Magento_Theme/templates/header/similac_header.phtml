@@ -1,0 +1,10 @@
+<?php echo $block->getLayout()->createBlock(\Magento\Cms\Block\Block::class)->setBlockId('similac2_header')->toHtml(); 
+$dataHelper = $this->helper('Abbott\CustomerTransistion\Helper\Data');
+?>
+<script>
+require(["jquery","jquery/ui"],function(jQuery) {
+	jQuery(document).ready(function() {
+		jQuery("#header-set").load("<?php echo $dataHelper->getFailureUrl() . "content/experience-fragments/an/similac/global/en/header/master/jcr:content/root/header.plain.html?v=".$dataHelper->getAemJsVersion(); ?>" );
+	});
+});
+</script>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="braintree_custom" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>Braintree</label>
+            <resource>Abbott_Checkout::braintree_custom</resource>
+            <group id="braintree_msg" showInDefault="1">
+                <label>Braintree Messages</label>
+                <field id="token_failure_msg" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Token Failure Message</label>
+                </field>
+            </group>
+        </section>
+		<section id="failure_notification_settings">
+            <group id="notification" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Failure Notification Settings</label>
+                <field id="to_email" translate="label" type="text" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>To Email</label>
+				</field>
+            </group>
+        </section>
+		<section id="my_account">
+            <group id="cart_qty_limit" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cart Quantity Limit Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Quantity Limit For Progressive Products</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                      <comment>This limit will be applied to product add to cart, update shopping cart and miicart</comment>             
+                </field>
+            </group>
+			<group id="subscription_program" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Subscription Program Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable For SSM Users</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                      <comment>If this setting is enabled the 10% and Progressive Subscription will be allowed to SSM users only</comment>
+				</field>	
+				<field id="ssm_registration_url" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AEM Strongmom Registration Url</label>
+                </field>				
+            </group>
+        </section>
+    </system>
+</config>

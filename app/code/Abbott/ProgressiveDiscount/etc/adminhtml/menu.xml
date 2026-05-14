@@ -1,0 +1,8 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add id="Abbott_ProgressiveDiscount::discount_engine" title="Discount Engine" module="Abbott_ProgressiveDiscount" sortOrder="30" resource="Abbott_ProgressiveDiscount::discount_engine"/>
+    <add id="Abbott_ProgressiveDiscount::manage_subscription" title="Manage Subscription Month" module="Abbott_ProgressiveDiscount" sortOrder="10" action="abbott_progressivediscount/progressiveDiscount" resource="Abbott_ProgressiveDiscount::manage_subscription" parent="Abbott_ProgressiveDiscount::discount_engine"/>
+		<add id="Abbott_ProgressiveDiscount::manage_discount_codes" title="Manage Discount Codes" module="Abbott_ProgressiveDiscount" sortOrder="20" action="abbott_progressivediscount/manageDiscountCodes/index" resource="Abbott_ProgressiveDiscount::manage_discount_codes" parent="Abbott_ProgressiveDiscount::discount_engine"/>
+	</menu>
+</config>

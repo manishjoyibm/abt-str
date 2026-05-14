@@ -1,0 +1,13 @@
+<script type="text/javascript">
+  require(['jquery', 'jquery/ui'],function(e){
+    jQuery('.edit').click(function(){
+       window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            event: "ga-custom-events",
+            eventCategory: "edit-subscription",
+            eventAction: "click",
+            eventLabel: "edit-subscription"
+        });
+    });
+  });
+</script>

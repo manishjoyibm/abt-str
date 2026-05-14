@@ -1,0 +1,87 @@
+﻿<?php
+$linkDataHelper = $this->helper(\Abbott\MyAccount\Helper\LinkData::class);
+$customerStoreId = $linkDataHelper->getCustomerStore();
+$sharedCustomer = $linkDataHelper->isCustomerShared();
+
+?>
+<span
+    id = "data-column-info" data-column1 = "<?= (int) $customerStoreId ?>"
+    data-column2 = "<?= (int) $sharedCustomer ?>" />
+<?php
+/**
+ * @var $block \Magento\Sales\Block\Adminhtml\Order\Create\Store\Select
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ * */
+?>
+<div class="store-scope form-inline">
+    <div class="admin__fieldset tree-store-scope">
+        <?php $showHelpHint = 0; ?>
+        <?php foreach ($block->getWebsiteCollection() as $_website): if ($_website->getCode() !==
+            'similac_website' && $_website->getCode() !== 'glucerna_website') {?>
+            <?php $showWebsite = false; ?>
+            <?php foreach ($block->getGroupCollection($_website) as $_group): ?>
+                <?php $showGroup = false; ?>
+                <?php foreach ($block->getStoreCollection($_group) as $_store): ?>
+                    <?php
+                    $customerCreateDisabled = $linkDataHelper->getEmailEditDisableFlag($_store->getId());
+                    ?>
+                    <?php if (!$showWebsite): ?>
+                        <?php $showWebsite = true; ?>
+                        <div class="admin__field field-website_label">
+                            <label class="admin__field-label" for="">
+                                <span><?= $escaper->escapeHtml($_website->getName()) ?></span>
+                            </label>
+                            <div class="admin__field-control">
+                                <div class="admin__field admin__field-option">
+                                    <?php if ($showHelpHint == 0):
+                                        echo $block->getHintHtml();
+                                        $showHelpHint = 1;
+                                    endif; ?>
+                                </div>
+                            </div>
+                        </div>
+                    <?php endif; ?>
+
+                    <?php if (!$showGroup): ?>
+                        <?php $showGroup = true; ?>
+                        <div class="admin__field field-group_label">
+                            <label class="admin__field-label" for="">
+                                <span><?= $escaper->escapeHtml($_group->getName()) ?></span>
+                            </label>
+                            <div class="admin__field-control"></div>
+                        </div>
+                    <?php endif; ?>
+
+                    <div class="admin__field field-store_label">
+                        <label class="admin__field-label" for="">
+                            <span><?= $escaper->escapeHtml($_group->getName()) ?></span>
+                        </label>
+                        <div class="admin__field-control">
+                            <div class="nested">
+                                <div class="admin__field admin__field-option">
+                                    <input type="radio" name="store_selection"
+                                           id="store_<?= (int) $_store->getId() ?>"
+                                           class="admin__control-radio" />
+                                    <label class="admin__field-label" for="store_<?= (int) $_store->getId() ?>">
+                                        <?= $escaper->escapeHtml($_store->getName()) ?>
+                                    </label>
+                                    <?= /* @noEscape */ $secureRenderer->renderEventListenerAsTag(
+                                        'onclick',
+                                        "order.setStoreId(
+                                            '".(int)$_store->getId()."',
+                                            '".(int) $customerCreateDisabled."',
+                                            '".$_store->getName()."'
+                                        )",
+                                        'input#store_' . $_store->getId()
+                                    ) ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+                <?php if ($showGroup): ?>
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php } endforeach; ?>
+    </div>
+</div>

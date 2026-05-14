@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Avalara\AvaTax\Framework\Interaction\Tax" type="Abbott\AvaTaxRecurringPayments\Framework\Interaction\Tax" />
+
+    <preference for="Avalara\AvaTax\Framework\Interaction\Rest\Tax" type="Abbott\AvaTaxRecurringPayments\Framework\Interaction\Rest\Tax"/>
+
+    <preference for="Avalara\AvaTax\Framework\Interaction\Line" type="Abbott\AvaTaxRecurringPayments\Framework\Interaction\Line" />
+
+    <preference for="Avalara\AvaTax\Plugin\Sales\Model\Spi\InvoiceResource" type="Abbott\AvaTaxRecurringPayments\Plugin\Sales\Model\Spi\InvoiceResource" />
+
+    <type name="Avalara\AvaTax\Helper\Rest\Config">
+        <plugin name="getTextCaseMixed" type="Abbott\AvaTaxRecurringPayments\Plugin\Config"/>
+    </type>
+    
+</config>

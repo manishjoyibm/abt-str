@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="css/glucernastore.css"/>
+        <remove src="css/clientlib-base.css"/>
+        <remove src="js/clientlib-glucernastore.js"/>
+        <remove src="js/clientlib-base.js"/>
+    </head>
+    <body>
+        <referenceBlock name="sales.order.print.info" remove="true"/>
+        <referenceBlock name="cusotmheader" remove="true"/>
+        <referenceBlock name="customfooter" remove="true"/>
+    </body>
+</page>

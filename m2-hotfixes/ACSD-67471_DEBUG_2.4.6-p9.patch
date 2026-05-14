@@ -1,0 +1,189 @@
+diff --git a/vendor/magento/module-catalog/Model/ResourceModel/Product.php b/vendor/magento/module-catalog/Model/ResourceModel/Product.php
+index c950b49348dc3..365b8d2924454 100644
+--- a/vendor/magento/module-catalog/Model/ResourceModel/Product.php
++++ b/vendor/magento/module-catalog/Model/ResourceModel/Product.php
+@@ -774,6 +774,12 @@ protected function evaluateDelete($object, $id, $connection)
+      */
+     public function save(AbstractModel $object)
+     {
++        $description = $object->getData('description');
++        if(is_string($description) && str_contains($description, '<div data-content-type="html" data-appearance="default" data-element="main"></div>')) {
++            \Magento\Framework\Debugger::getInstance('ACSD-67471')->log(__METHOD__, [
++                'description' => $object->getData('description')
++            ], false);
++        }
+         $this->getEntityManager()->save($object);
+         return $this;
+     }
+diff --git a/vendor/magento/framework/Debugger.php b/vendor/magento/framework/Debugger.php
+new file mode 100644
+index 0000000000000..1ffec63ce744c
+--- /dev/null
++++ b/vendor/magento/framework/Debugger.php
+@@ -0,0 +1,165 @@
++<?php
++/**
++ * Support Debugger that helps add log messages constantly at separated log file
++ */
++namespace Magento\Framework;
++
++use Magento\Framework\App\Filesystem\DirectoryList;
++use Magento\Framework\App\ObjectManager;
++
++/**
++ * Constant debugger
++ */
++class Debugger
++{
++    /**
++     * Debugger log file name mask
++     */
++    const DEBUGGER_LOG_FILE_MASK = 'debug/support/debug_%s.log';
++
++    /**
++     * Debugger error log file name
++     */
++    const DEBUGGER_ERRORS_LOG_FILE = 'debug_errors.log';
++
++    /**
++     * Store debugger singleton instance
++     *
++     * @var \Magento\Framework\Debugger
++     */
++    private static $_instance = null;
++
++    /**
++     * @var string
++     */
++    private $dir;
++
++    /**
++     * @var string
++     */
++    private $debugFile;
++
++    /**
++     * Fields that should be replaced in debug data with '***'
++     *
++     * @var array
++     */
++    protected $_debugReplacePrivateDataKeys = array(
++        'cvv', 'cc_cid', 'cc_number', 'customer_password', 'confirm_password', 'last4'
++    );
++
++    /**
++     * Create log directory if it not exists
++     * Prevent creating any instances outside of class because of using singleton pattern
++     *
++     * @param string $logId
++     */
++    private function __construct($logId)
++    {
++        if (empty($logId)) {
++            $logId = session_id() ? session_id() : uniqid();
++        }
++        $filesystem = ObjectManager::getInstance()->get(Filesystem::class);
++        $this->dir = $filesystem->getDirectoryWrite(DirectoryList::VAR_DIR);
++        $this->debugFile = sprintf(self::DEBUGGER_LOG_FILE_MASK, $logId);
++    }
++
++    /**
++     * Prevent creating any clones because of using singleton pattern
++     */
++    private function __clone()
++    {
++    }
++
++    /**
++     * Retrieve singleton instance of debugger
++     *
++     * @param int $logId
++     * @return \Magento\Framework\Debugger
++     */
++    public static function getInstance($logId = null)
++    {
++        if (!(self::$_instance instanceof Debugger)) {
++            self::$_instance = new self($logId);
++        }
++        return self::$_instance;
++    }
++
++    /**
++     * Log message and data
++     *
++     * @param string $message
++     * @param mixed $data
++     */
++    public function log($message, $data = '!empty!')
++    {
++        $stream = $this->dir->openFile($this->debugFile, 'a');
++        $stream->lock();
++        $stream->write($this->prepareMessage($message, $data));
++        $stream->unlock();
++        $stream->close();
++    }
++
++    /**
++     * Prepare message and converts data into sting
++     *
++     * @param $message
++     * @param $data
++     *
++     * @return string
++     */
++    private function prepareMessage($message, $data)
++    {
++        $backtrace = Debug::backtrace(true, false, false);
++        if ($data != '!empty!') {
++            $data = $this->_filterDebugData($data);
++            ob_start();
++            var_dump($data);
++            $data = ob_get_clean();
++        }
++        $result = sprintf($this->getMessageTemplate(),
++            date('r'), $message, memory_get_usage(true), memory_get_usage(), $backtrace, $data);
++        return $result;
++    }
++
++    /**
++     * Recursive filter data
++     *
++     * @param mixed $data
++     * @return mixed
++     */
++    private function _filterDebugData($data)
++    {
++        if (is_array($data) && is_array($this->_debugReplacePrivateDataKeys)) {
++            foreach ($data as $key => $value) {
++                if (in_array($key, $this->_debugReplacePrivateDataKeys, true)) {
++                    $data[$key] = '****';
++                } else {
++                    if (is_array($data[$key])) {
++                        $data[$key] = $this->_filterDebugData($data[$key]);
++                    }
++                }
++            }
++        }
++        return $data;
++    }
++
++    /**
++     * Get Message Format Template
++     *
++     * @return string
++     */
++    private function getMessageTemplate()
++    {
++        return <<<EOF
++%s: %s
++MEMORY_REAL_USAGE: %s
++MEMORY_EMALLOC_USAGE: %s
++BACKTRACE:
++%s
++DATA:
++%s
++
++EOF;
++    }
++}
+\ No newline at end of file

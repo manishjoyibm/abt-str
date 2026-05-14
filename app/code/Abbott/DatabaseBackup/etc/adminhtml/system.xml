@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="abbott" sortOrder="999" translate="label">
+			<label>abbott</label>
+		</tab>
+		<section id="database_backup" showInDefault="1" showInStore="1" showInWebsite="1" sortOrder="10" translate="label">
+			<label>Database Backup</label>
+			<tab>abbott</tab>
+			<resource>Abbott_DatabaseBackup::config_abbott_databasebackup</resource>
+			<group id="configuration" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label">
+				<label>configuration</label>
+				<field id="enable" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="select">
+					<label>Enable DB Backup</label>
+					<comment/>
+					<source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+				</field>
+				<field id="cron_expression" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="text">
+					<label>Cron expression</label>
+                    <comment>Cron expression to enable cron expression</comment>
+				</field>
+				<field id="bucket_name" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="text">
+					<label>Bucket name</label>
+					<comment/>
+				</field>
+				<field id="s3_key" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="text">
+					<label>AWS S3 Key</label>
+                    <comment>Key for S3 Bucket</comment>
+				</field>
+                <field id="s3_secret" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="obscure">
+                    <label>AWS S3 Secret</label>
+                    <comment>Secret for S3 Bucket</comment>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="aws_region" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="text">
+                    <label>AWS Region</label>
+                    <comment>Region of AWS account</comment>
+                </field>
+                <field id="version" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="text">
+                    <label>AWS Version</label>
+                    <comment>AWS S3 kit version</comment>
+                </field>
+                <field id="error_notification" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="text">
+                    <label>Error Notification Receiver Emails</label>
+                    <comment>Add multiple email ids comma separated.</comment>
+                </field>
+                <field id="error_template" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Select DB backup Exception Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <comment>Email template is chosen based on theme fallback when "Default" option is selected.</comment>
+                </field>
+			</group>
+
+            <group id="status" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="20" translate="label">
+                <label>Status</label>
+                <field id="last_synced_file" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="10" translate="label" type="label">
+                    <label>Last sync file :</label>
+                </field>
+                <field id="synced_date" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="20" translate="label" type="label">
+                    <label>Synced date time :</label>
+                </field>
+                <field id="file_size" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label" type="label">
+                    <label>File size :</label>
+                    <comment> Size is in MB</comment>
+                </field>
+            </group>
+		</section>
+	</system>
+</config>

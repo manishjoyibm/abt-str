@@ -1,0 +1,10 @@
+{
+    "quote": {
+        "column": {
+            "is_pedialyte_cart": true
+        },
+        "index": {
+            "QUOTE_IS_PEDIALYTE_CART": true
+        }
+    }
+}

@@ -1,0 +1,45 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+<preference for="Abbott\PowerbiExport\Api\Data\PowerbiSearchResultsInterface" 
+             type="Abbott\PowerbiExport\Model\PowerbiSearchResult"/>
+<preference for="Abbott\PowerbiExport\Api\PowerbiExportRepositoryInterface" type="Abbott\PowerbiExport\Model\PowerbiExportRepository"/>
+
+<preference for="Abbott\PowerbiExport\Api\Data\PowerbiInterface" type="Abbott\PowerbiExport\Model\Data\Powerbi"/>
+
+<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+    <arguments>
+        <argument name="collections" xsi:type="array">
+            <item name="powerbi_export_report_listing_data_source" xsi:type="string">PowerbiExportCollection</item>
+        </argument>
+    </arguments>
+</type>
+<virtualType name="PowerbiExportCollection" type="Abbott\PowerbiExport\Ui\DataProvider\PowerbiReport\Listing\Collection">
+    <arguments>
+        <argument name="mainTable" xsi:type="string">powerbi_export</argument>
+        <argument name="resourceModel" xsi:type="string">Abbott\PowerbiExport\Model\ResourceModel\Powerbi
+         </argument>
+    </arguments>
+</virtualType>   
+<virtualType name="Abbott\PowerbiExport\Logger\Logger" type="Magento\Framework\Logger\Handler\Base">
+    <arguments>
+        <argument name="fileName" xsi:type="string">/var/log/powerbi-export.log</argument>
+    </arguments>
+</virtualType>
+<type name="Abbott\PowerbiExport\Logger\Method\Logger">
+    <arguments>
+        <argument name="name" xsi:type="string">PowerbiExport_Log</argument>
+        <argument name="handlers" xsi:type="array">
+            <item name="system" xsi:type="object">Abbott\PowerbiExport\Logger\Logger</item>
+        </argument>
+    </arguments>
+</type>
+<type name="Magento\Framework\Console\CommandList">
+<arguments>
+    <argument name="commands" xsi:type="array">
+        <item name="powerbiExport" xsi:type="object">Abbott\PowerbiExport\Console\Command\PowerbiExport</item>
+    </argument>
+</arguments>
+</type>
+</config>
+

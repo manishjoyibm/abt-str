@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="customerhistory" comment="Customer History Table" engine="innodb" resource="default">
+      <column name="id" comment="Id" identity="true" nullable="false" padding="10" unsigned="true" xsi:type="bigint"/>
+      <column name="customer_id" comment="Customer Id" xsi:type="int"/>
+      <column name="customer_tab_info" comment="Customer Tab Info" nullable="true" xsi:type="text"/>
+      <column name="address_tab_info" comment="Address Tab Info" nullable="true" xsi:type="text"/>
+      <column name="created_at" comment="Created At" default="CURRENT_TIMESTAMP" nullable="false" xsi:type="timestamp"/>
+      <column name="admin_user_id" comment="Admin User Id" xsi:type="int"/>
+      <column name="admin_username" comment="Admin User Name" nullable="false" xsi:type="text"/>
+      <column name="comments" comment="Comments" nullable="true" xsi:type="text"/>
+      <column name="flag" comment="Flag" nullable="false" xsi:type="text"/>
+      <constraint referenceId="PRIMARY" xsi:type="primary">
+          <column name="id"/>
+      </constraint>
+    </table>
+    
+    <table name="customer_log" resource="default" engine="innodb" comment="Customer Log">
+        <!-- New column to track logout source -->
+        <column xsi:type="varchar" name="logout_source" nullable="true" length="16" comment="Logout Source"/>
+       </table>
+
+</schema>

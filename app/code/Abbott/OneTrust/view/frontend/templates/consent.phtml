@@ -1,0 +1,64 @@
+<?php
+
+use Abbott\OneTrust\ViewModel\OnetrustViewModel;
+use Magento\Framework\View\Element\Template;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
+/** @var Template $block */
+/** @var OnetrustViewModel $viewModel */
+/** @var SecureHtmlRenderer $secureRenderer */
+
+$viewModel = $block->getData('ot_view_model');
+$sdkEndpoint = $viewModel->getSdkEndpoint();
+$sdkStorageContainer = $viewModel->getSdkStorageContainer();
+$employeeNoticeId = $viewModel->getNoticeId('employee_notice');
+$paymentTermNoticeId = $viewModel->getNoticeId('payment_term_notice');
+$isSdkJsAvailable = $viewModel->isSdkJsAvailable();
+// this will use in future when we get id from onetrust
+$subscriptionTermNoticeId = $viewModel->getNoticeId('subscription_term_notice');
+
+if ($isSdkJsAvailable) { ?>
+
+    <div style="display:none" class="employee-consent" id="otnotice-<?php echo $employeeNoticeId; ?>"></div>
+    <div style="display:none" class="payment-terms-consent" id="otnotice-<?php echo $paymentTermNoticeId; ?>"></div>
+    <div style="display:none" class="subscription-terms-consent" id="otnotice-<?php echo $subscriptionTermNoticeId; ?>"></div>
+    
+    <?php
+    // Employee consent fetch on div
+    $url = $sdkEndpoint."storage-container/".$sdkStorageContainer.
+            "/privacy-notices/".$employeeNoticeId."/published/privacynotice.json";
+    $scriptString = <<<script
+        OneTrust.NoticeApi.Initialized.then(function () {
+            OneTrust.NoticeApi.LoadNotices(['$url']);
+        });
+        script;
+    ?>
+    <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>
+
+    <?php
+     // Payment t&c consent fetch on div
+    $url = $sdkEndpoint."storage-container/".$sdkStorageContainer.
+        "/privacy-notices/".$paymentTermNoticeId."/published/privacynotice.json";
+    $scriptString = <<<script
+        OneTrust.NoticeApi.Initialized.then(function () {
+            OneTrust.NoticeApi.LoadNotices(['$url']);
+        });
+        script;
+    ?>
+    <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>
+
+    <?php
+     // Subscription t&c consent fetch on div
+    $url = $sdkEndpoint."storage-container/".$sdkStorageContainer.
+        "/privacy-notices/".$subscriptionTermNoticeId."/published/privacynotice.json";
+    $scriptString = <<<script
+        OneTrust.NoticeApi.Initialized.then(function () {
+            OneTrust.NoticeApi.LoadNotices(['$url']);
+        });
+        script;
+    ?>
+    <?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>
+
+<?php } 
+
+

@@ -1,0 +1,15 @@
+<?php
+$customerdata = $block->decryptCustomerFile();
+$orderdata = $block->decryptOrderFile();
+if ($customerdata) {
+    echo "<h2>Customer Data</h2>";
+    echo "<pre>";
+    echo $customerdata;
+    echo "</pre>";
+}
+if ($orderdata) {
+    echo "<h2>Order Data</h2>";
+    echo "<pre>";
+    echo $orderdata;
+    echo "</pre>";
+}

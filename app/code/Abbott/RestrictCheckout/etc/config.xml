@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <restrictcheckout>
+            <restrictcheckout>
+                <restrictcheckout_order_limit>500</restrictcheckout_order_limit>
+                <restrictcheckout_message>This order cannot be placed. Your total product purchases, with your Employee/Retiree discount, are above ${{ordertotal}} for the last 30-day period. Please review your cart items.</restrictcheckout_message>
+            </restrictcheckout>
+        </restrictcheckout>
+    </default>
+</config>

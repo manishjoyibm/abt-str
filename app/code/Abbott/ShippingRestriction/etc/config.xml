@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <shipping_restrction>
+            <shipping_restrctions_group>
+                <is_enabled>1</is_enabled>
+                <ground_shipping_amount>7.95</ground_shipping_amount>
+            </shipping_restrctions_group>
+            <tracker>
+              <fedex_tracker_url><![CDATA[https://www.fedex.com/apps/fedextrack/?action=track&trackingnumber=]]></fedex_tracker_url>
+            </tracker>
+        </shipping_restrction>
+    </default>
+</config>

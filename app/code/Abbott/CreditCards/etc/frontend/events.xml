@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+	<event name="checkout_onepage_controller_success_action">
+		<observer instance="Abbott\CreditCards\Observer\Sales\OrderPlaceAfter" name="abbott_creditcards_observer_sales_orderplaceafter_sales_order_place_after"/>
+	</event>
+	<event name="controller_action_predispatch_card_add_savecard">
+        <observer name="recaptcha_on_mycreditcard_form" instance="Abbott\CreditCards\Observer\MyCreditCardObserver"/>
+    </event>
+</config>

@@ -1,0 +1,112 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+ */
+
+/** @var $block \Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\Addresses */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $profile = $block->getProfile();    
+    $tokenData = $block->getAwSarp2TokenDetails($profile->getPaymentTokenId());     
+    $shippingAddress = $profile->getShippingAddress();
+    $billingAddress = $profile->getBillingAddress();
+    $customerAddress = $block->getCustomerAddress($profile->getCustomerId());  
+    $cards = $block->getCustomerVaults($profile->getCustomerId());
+?>
+<section class="admin__page-section addresses-shipping-payment">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo $block->escapeHtml(__('Address')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <?php if ($shippingAddress): ?>
+            <div class="admin__page-section-item billing-address">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php echo $block->escapeHtml(__('Shipping Address')) ?></span>
+                </div>
+                <!-- todo: consider use \Aheadworks\Sarp2\Model\Profile\Address\Renderer, M2SARP-382 -->
+                <div class="admin__page-section-item-content">
+                    <?php if($customerAddress):?>
+                    <select name="shipping_address_id">                     
+                    <?php foreach($customerAddress as $address): 
+                    $selected = null;
+                    if($shippingAddress->getCustomerAddressId() == $address['entity_id'])
+                    {
+                        $selected = "selected";
+                    }
+                    $addressLine =  $address['street'] . ", "  . $address['city'] . ", "  . $address['region']  . ", "  . $address['country_id'] . ", "  . $address['postcode'];
+                    ?>
+                     <option <?=$selected?> value="<?php echo $shippingAddress->getAddressId() ."__". $address['entity_id']?>"><?php echo $addressLine; ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+ 
+    </div>
+
+    <div class="admin__page-section-content">
+        <?php if ($billingAddress): ?>
+            <div class="admin__page-section-item billing-address">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php echo $block->escapeHtml(__('Billing Address')) ?></span>
+                </div>
+                <!-- todo: consider use \Aheadworks\Sarp2\Model\Profile\Address\Renderer, M2SARP-382 -->
+                <div class="admin__page-section-item-content">
+                    <?php if($customerAddress):?>
+                    <select name="billing_address_id">
+                    <?php foreach($customerAddress as $address): 
+                    $selected = null;
+                    if($billingAddress->getCustomerAddressId() == $address['entity_id'])
+                    {
+                        $selected = "selected";
+                    }
+                    $addressLine =  $address['street'] . ", "  . $address['city'] . ", "  . $address['region']  . ", "  . $address['country_id'] . ", "  . $address['postcode'];
+                    ?>
+                     <option <?=$selected ?> value="<?php echo $billingAddress->getAddressId() ."__".  $address['entity_id']?>"><?php echo $addressLine; ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+ 
+    </div>
+
+    <div class="admin__page-section-content">
+        <?php if ($cards): ?>
+            <div class="admin__page-section-item billing-address">
+                <div class="admin__page-section-item-title">
+                    <span class="title"><?php echo $block->escapeHtml(__('Credit Card')) ?></span>
+                </div>
+                <!-- todo: consider use \Aheadworks\Sarp2\Model\Profile\Address\Renderer, M2SARP-382 -->
+                <div class="admin__page-section-item-content">
+                    <?php if($cards):?>
+                    <select name="credit_card_info">
+                    <option value="0">--Please select--</option>
+                    <?php foreach($cards as $card):
+                    $selected = null;
+                    if($tokenData) { 
+                        if($card['customer_id'] == $profile->getCustomerId() && $tokenData->getTokenValue() == $card['gateway_token'])
+                        {
+                            $selected = "selected";
+                        }
+                    }
+                    $cardDigits = $block->getLast4Digits($card['details']);
+                    $maskedNumber = "XXXX-" .  $cardDigits;
+                    ?>
+                    <option <?=$selected?> value="<?php echo $card['entity_id']?>"><?php echo $maskedNumber; ?></option>
+                    <?php endforeach; ?>
+                    </select>
+                    <?php endif; ?>
+                </div>
+            </div>
+        <?php endif; ?>
+ 
+    </div>
+
+
+</section>

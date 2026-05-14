@@ -1,0 +1,23 @@
+﻿<script type="text/javascript">
+  require(['jquery', 'jquery/ui'],function(e){
+    jQuery('.cancel').click(function(){
+      window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            event: "ga-custom-events",
+            eventCategory: "cancel-subscription",
+            eventAction: "click",
+            eventLabel: "cancel-subscription"
+        });
+    });
+    jQuery('.change_product').click(function(){
+console.log('change product');
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+            event: "ga-custom-events",
+            eventCategory: "edit-subscription",
+            eventAction: "click",
+            eventLabel: "change-product"
+        });
+    });
+  });
+</script>

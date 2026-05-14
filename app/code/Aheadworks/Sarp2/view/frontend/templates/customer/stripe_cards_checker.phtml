@@ -1,0 +1,22 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+ */
+
+/* @var $block \Aheadworks\Sarp2\Block\Customer\StripeCardsChecker */
+
+// @codingStandardsIgnoreFile
+?>
+<script type="text/x-magento-init">
+    {
+        ".stripe-payments .saved-cards": {
+            "awSarp2StripeCardsChecker": {
+                "elementSelector": ".delete-card",
+                "confirmPopupClass": "confirm aw-sarp2__subscription-confirm",
+                "confirmPopupMessage": "<?= $block->escapeHtml(__('This card is used for paying for one or more subscriptions. If you continue, these subscriptions will stop.')) ?>",
+                "subscriptionTokens": <?= /* @noEscape */ \Zend_Json::encode($block->getActiveSubscriptionTokens()) ?>
+            }
+        }
+    }
+</script>

@@ -1,0 +1,44 @@
+<script>
+require([
+    'jquery',
+    'prototype',
+], function($){
+    function validate() {
+        $.ajax( {
+            url: '<?= /* @noEscape */ $block->getCustomUrl() ?>',
+            data: {form_key: window.FORM_KEY},
+            type: 'POST',
+            showLoader: true
+        }).done(function(result) {
+          $("#collect_result").removeClass();
+          if(result === 'success'){
+            $('#collect_result').text("Details Validated Successfully");
+            $("#collect_result").removeClass("error");
+            $('#collect_result').addClass("successs");
+          }else{
+            $('#collect_result').text("Login Failed");
+            $('#collect_result').removeClass("successs");
+            $('#collect_result').addClass("error");
+          }
+        });
+    }
+
+    $('#sent').click(function () {
+        validate ();
+    });
+});
+</script>
+
+<?= $block->getButtonHtml() ?>
+<div id="collect_span">
+    <span id="collect_result"></span>
+</div>
+
+<style>
+.successs {
+  color: green;
+}
+.error {
+  color: red;
+}
+</style>

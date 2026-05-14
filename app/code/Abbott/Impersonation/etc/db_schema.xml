@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="abbott_impersonation" resource="default" engine="innodb" comment="Custom New Table">
+        <column xsi:type="int" name="login_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Admin Login Id"/>
+        <column xsi:type="int" name="customer_id" nullable="true" padding="10" unsigned="true" comment="Customer ID"/>
+        <column xsi:type="int" name="admin_id" nullable="true" padding="10" unsigned="true" comment="Admin ID"/>
+        <column xsi:type="timestamp" name="created_at" on_update="false" nullable="false" default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+        <column xsi:type="text" name="secret" nullable="true" comment="Login Secret"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="login_id"/>
+        </constraint>
+        <index referenceId="ABBOTT_IMPERSONATION_CUSTOMER_ID" indexType="btree">
+            <column name="customer_id"/>
+        </index>
+        <index referenceId="ABBOTT_IMPERSONATION_ADMIN_ID" indexType="btree">
+            <column name="admin_id"/>
+        </index>
+    </table>
+</schema>

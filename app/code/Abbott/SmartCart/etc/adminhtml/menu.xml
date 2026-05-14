@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Abbott_SmartCart::smartcart" title="SmartCart" module="Abbott_SmartCart" sortOrder="1" parent="Magento_Backend::marketing" action="smartcart/smartcart" resource="Abbott_SmartCart::smartcart"/>
+    </menu>
+</config>

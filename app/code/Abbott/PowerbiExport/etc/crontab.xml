@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="default">
+		<job name="abbott_powerbi_export" instance="Abbott\PowerbiExport\Cron\Powerbi" method="execute">
+            <config_path>powerbi_export/powerbi/cron_expression</config_path>
+		</job>
+	</group>
+</config>

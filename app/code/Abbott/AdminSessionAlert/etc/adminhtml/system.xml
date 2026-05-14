@@ -1,0 +1,26 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+	<system>
+		<tab id="abbott" sortOrder="20" translate="label">
+            <label>Admin Session Settings</label>
+		</tab>
+		<section id="admin_session" showInDefault="1" sortOrder="120" translate="label">
+			<label>Admin Session Settings</label>
+			<tab>abbott</tab>
+			<resource>Abbott_AdminSessionAlert::warning_before</resource>
+			<group id="timeout_warning" translate="label" type="text" showInDefault="1" sortOrder="10" >
+				<label>Session Timeout Popup</label>
+                <field id="enabled" translate="label" type="select" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Session Timeout Popup</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="warning_time" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Show Popup Before X Seconds</label>
+                    <backend_model>Abbott\AdminSessionAlert\Model\Config\Backend\WarningBefore</backend_model>
+                    <validate>validate-digits</validate>
+                <comment>Enter the time (in seconds) to show the popup before session timeout.</comment>
+                </field>
+            </group>
+		</section>
+	</system>
+</config>

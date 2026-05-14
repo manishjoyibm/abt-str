@@ -1,0 +1,110 @@
+<?php
+/* @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $profile = $block->getProfile();
+    $shippingAddress = $profile->getShippingAddress();
+?>
+<div class="table-wrapper aw-sarp2-customer-subscriptions">
+    <table class="data table">
+        <tbody>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Product(s)')) ?></th>
+                <td class="col products">
+                    <ul>
+                        <?php foreach ($profile->getItems() as $item): ?>
+                            <?php if (!$item->getParentItemId()): ?>
+                                <li>
+                                    <?php if ($block->isProductExists($item->getProductId()) && $block->hasProductUrl($item->getProductId())): ?>
+                                        <a href="<?php echo $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl().''.$this->helper('Abbott\MyAccount\Helper\Data')->getAemUrl($item->getProductId()) ?>">
+                                            <span><?php echo $block->escapeHtml($item->getName()) ?></span>
+                                        </a>
+                                    <?php else: ?>
+                                        <?php echo $block->escapeHtml($item->getName()) ?>
+                                    <?php endif; ?>
+                                </li>
+                            <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </td>
+                <td>
+                    <?php if ($block->isCancelActionAvailable($profile->getProfileId())): ?>
+                        <a data-role="aw-sarp2-cancel-button" href="#"
+                           class="action cancel">
+                            <span><?php echo $block->escapeHtml(__('Cancel')) ?></span>
+                        </a>
+                        <script type="text/x-magento-init">
+                        {
+                            "[data-role=aw-sarp2-cancel-button]": {
+                                "awSarp2ButtonControl": {
+                                    "newLocation": "<?php echo $block->escapeUrl($block->getCancelUrl($profile->getProfileId())) ?>",
+                                    "confirm": {
+                                        "enabled": true,
+                                        "message": "<?php echo $block->escapeHtml(__('Are you sure you want to cancel this subscription?')) ?>"
+                                    }
+                                }
+                            }
+                        }
+                        </script>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Subscription Plan')) ?></th>
+                <td><?php echo $block->escapeHtml($block->getPlanName($profile)) ?></td>
+                <td>
+                    <?php if ($block->isEditPlanActionAvailable($profile->getProfileId())): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getSubscriptionPlanEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__subscription-plan">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Next Payment Date')) ?></th>
+                <td><?php /* @noEscape */ echo $block->getNextPaymentDateInfo($profile) ?></td>
+                <td>
+                    <?php if ($block->isEditNextPaymentDateActionAvailable($profile->getProfileId())): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getNextPaymentDateEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__next-payment-date">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Shipping Address')) ?></th>
+                <td>
+                    <?php if ($shippingAddress && !$profile->getIsVirtual()): ?>
+                        <?= /* @noEscape */ $block->getFormattedAddress($shippingAddress) ?>
+                    <?php endif; ?>
+                </td>
+                <td>
+                    <?php if ($block->isEditAddressActionAvailable($profile)): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getShippingAddressEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__shipping-address">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Payment Details')) ?></th>
+                <td>
+                    <?= /* @noEscape */ $block->getPaymentDetailsHtml($profile) ?>
+                </td>
+                <td>
+                    <?php if ($block->isEditActionAvailable($profile->getProfileId())): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getPaymentDetailsEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__payment-details">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif; ?>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

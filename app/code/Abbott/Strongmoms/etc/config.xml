@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <websites>
+        <new_similac_website>
+			<aboott_message>
+				<ssm_user_notes>
+					<messagenote>This address is used for mailing coupons, offers, and other Similac® StrongMoms® Rewards communications.</messagenote>
+				</ssm_user_notes>
+				<subscription_user_notes>
+					<subscriptionusermessage>SUBSCRIPTION ORDERS:
+Make updates in {Subscriptions} to change the shipping address of an existing subscription order.</subscriptionusermessage>
+				</subscription_user_notes>
+			</aboott_message>
+        </new_similac_website>
+    </websites>
+</config>

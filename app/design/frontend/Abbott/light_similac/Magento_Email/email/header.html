@@ -1,0 +1,84 @@
+<!--@subject {{trans "Header"}} @-->
+<!--@vars {
+"var logo_height":"Email Logo Image Height",
+"var logo_width":"Email Logo Image Width",
+"var template_styles|raw":"Template CSS"
+} @-->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <style type="text/css">
+        {{var template_styles|raw}}
+
+        {{css file="css/email.css"}}
+    </style>
+</head>
+<body>
+{{inlinecss file="css/email-inline.css"}}
+{{inlinecss file="css/source/_email-extend.less"}}
+
+<!-- Begin wrapper table -->
+<table class="wrapper" width="100%">
+    <tr>
+        <td class="wrapper-inner" align="center">
+            <table class="main" align="center">
+                <tr>
+                    <td class="esd-structure es-p20t es-p30r es-p30l" align="left">
+                        <!--[if mso]><table width="540" cellpadding="0" cellspacing="0"><tr><td width="260" valign="top"><![endif]-->
+                        <table cellpadding="0" cellspacing="0" class="es-left" align="left"
+                            width="100%">
+                            <tbody>
+                                <tr>
+                                    <td class="esd-structure es-p20t es-p30r es-p30l" align="left" style="background-color: #C2F0FF;border: 20px solid #C2F0FF; border-top: 0; border-bottom: 0;">
+                                        <table cellpadding="0" cellspacing="0" class="es-left"
+                                            align="left" width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td width="auto"
+                                                        class="es-m-p20b esd-container-frame"
+                                                        align="left">
+                                                        <table cellpadding="0" cellspacing="0"
+                                                            width="100%">
+                                                            <tbody>
+                                                                <tr>
+                                                                    <td align="left"
+                                                                        class="esd-block-image"
+                                                                        style="padding: 15pt 0; display: block">
+                                                                        <a href="{{customVar code=similacstore_url}}" target="_blank">
+                                                                            <img class="adapt-img esdev-empty-img"
+                                                                                src="https://i.postimg.cc/y8dZCjf2/similec-logo.png"
+                                                                                alt width="45%"
+                                                                                height="auto" style="display: block"/>
+                                                                        </a>
+                                                                    </td>
+                                                                    <td align="right"
+                                                                        style="color: #006BB4; padding: 20px 0;vertical-align: bottom;"
+                                                                        class="esd-block-text">
+                                                                        <p style="margin:0;">
+                                                                            <a href="{{store url='customer/account/login'}}"
+                                                                                target="_blank"
+                                                                                style="color: #006BB4;text-transform: uppercase;font-weight: 600;font-family: Arial, Helvetica, sans-serif;">
+                                                                                Sign In
+                                                                            </a>
+                                                                        </p>
+                                                                    </td>
+                                                                </tr>
+                                                            </tbody>
+                                                        </table>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="">
+                    <!-- Begin Content -->

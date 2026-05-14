@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+	<group id="default">
+		<job instance="Abbott\MetabolicOrdering\Cron\RemoveRecords" method="execute" name="metabolic_cron">
+			<config_path>metabolic_ordering/metabolic/cron_expression</config_path>
+		</job>
+
+		
+ 		<job name="abbott_metabolic_send_expiry_reminders" instance="Abbott\MetabolicOrdering\Cron\SendExpiryReminders" method="execute">
+            <!-- Run every hour; inside, we check cron_expr and enabled flag to actually process. 
+                 This makes behavior flexible without altering cron table. -->
+			<config_path>metabolic_ordering/expiry_notifications/cron_expression</config_path>
+        </job>
+
+		<job name="abbott_metabolic_send_run_out_after_order" instance="Abbott\MetabolicOrdering\Cron\RunOutAfterOrder" method="execute">
+            <!-- Run every hour; inside, we check cron_expr and enabled flag to actually process. 
+                 This makes behavior flexible without altering cron table. -->
+			<config_path>metabolic_ordering/threshold_notifications/cron_expression</config_path>
+        </job>
+
+	</group>
+</config>

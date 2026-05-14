@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!-- DI configuration for Abbott_AdultSignature -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+ 
+     <type name="Magento\Checkout\CustomerData\Cart">
+        <plugin name="abbott_add_signature_flags_to_cart" 
+                type="Abbott\AdultSignature\Plugin\Checkout\CustomerDataSignaturePlugin" 
+                sortOrder="10"/>
+    </type>
+    
+     <type name="Magento\Checkout\Model\CompositeConfigProvider">
+        <plugin name="abbott_adult_signature_checkout_config"
+                type="Abbott\AdultSignature\Plugin\CheckoutConfigPlugin"
+                sortOrder="10"/>
+    </type>
+    
+</config>

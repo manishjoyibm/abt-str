@@ -1,0 +1,17 @@
+{
+    "ssm_shopping_cart": {
+        "column": {
+            "id": true,
+            "email": true,
+            "website_id": true,
+            "masked_cart_id": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "SSM_SHOPPING_CART_EMAIL_WEBSITE_ID": true,
+            "SSM_SHOPPING_CART_MASKED_CART_ID": true
+        }
+    }
+}

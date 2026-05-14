@@ -1,0 +1,130 @@
+.checkout-index-index .opc-wrapper .opc .order-attributes-form .field._required .control input[type=checkbox]+label {
+  display: inline-block;
+  margin-left: 34px;
+  margin-top: -20px;
+}
+
+.product_flavour{
+  color: #002a3a;
+  font-size: 16px;
+  line-height: 2em;
+}
+.product_size{
+  color: #002a3a;
+  font-size: 16px;
+  line-height: 2em;
+}
+
+.product_backorder{
+  color: #000000;
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 2em;
+}
+
+div.mage-error {
+  margin-top: 25px;
+  color: #e4002b;
+  font: normal 14px/14.7px BrandonText-Regular,serif;
+  letter-spacing: .4px;
+}
+
+hr{
+  display: none;
+}
+
+@media only screen and (max-width: 767px) {
+  .product_backorder {
+    font-size: 1.4rem !important;
+  }
+  .product_size {
+    font-size: 1.4rem !important;
+  }
+  .product_flavour{
+    font-size: 1.4rem !important;
+  }
+}
+
+.checkout_success{
+  margin: 0 0 8px;
+  padding-top: 3px;
+  padding-bottom: 14px;
+  display: block;
+  line-height: 12px;
+  font-size: 13px;
+  background: #e5efe5;
+  color: #1aaf46;
+  padding-left: 40px;
+  position: relative;
+}
+#myProgress {
+  width: 100%;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  border: 1px solid;
+  height: 6px;
+}
+
+#myBar, #myBar_summary {
+  width: 20%;
+  height: 5px;
+}
+
+.free_message, .free_message_summary {
+  height: 20px;
+  width: 323px;
+  color: #000000;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 23px;
+  text-align: center;
+  padding-left: 44px;
+}
+
+.label-width{
+  white-space: nowrap;
+ }
+
+.custom_checkout_error {
+  color: #e4002b;
+  font: normal 14px/14.7px BrandonText-Regular,serif;
+  letter-spacing: .4px;
+  margin-top: 4px !important;
+}
+
+.dynamic_text{
+  margin-left: 26px;
+  margin-top: -4px;
+}
+
+.custom_check {
+  top: 13px !important;
+}
+
+@media only screen and (max-width: 767px) {
+  .free_message, .free_message_summary {
+    text-align: left;
+    padding-left:24px;
+    font-weight: 500;
+  }
+}
+
+.opc-block-summary.glucerna-block-summary .table-totals .discount .mark .title {
+  font-size: 1.4rem;
+  padding-bottom: 8px;
+}
+@media only screen and (max-width: 340px) {
+  .opc-block-summary.glucerna-block-summary .table-totals .discount .mark .title {
+    font-size: 12px;
+  }
+}
+.checkout-index-index .modal-popup .modal-inner-wrap .modal-content select, .checkout-billing-address select {
+  padding-right: 25px;
+}
+.checkout-index-index .modal-popup .modal-inner-wrap .modal-content .shippingAddresspostcode .input-text, .checkout-billing-address .input-text {
+padding-right: 10px;
+}
+.checkout-index-index .checkout-contact-hint span {
+    font-size: 12px;
+}

@@ -1,0 +1,12 @@
+<script>
+require([
+    'jquery',
+    'prototype',
+], function(jQuery){
+    jQuery('#tb_derypt_file').click(function () {
+        window.open('<?= $escaper->escapeUrl($block->getAjaxUrl()) ?>');
+    });
+});
+</script>
+
+<?= $block->getButtonHtml() ?>

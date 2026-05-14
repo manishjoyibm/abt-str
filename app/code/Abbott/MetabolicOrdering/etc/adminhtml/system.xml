@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="metabolic_ordering" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>Metabolic Ordering</label>
+            <resource>Abbott_MetabolicOrdering::metabolic_ordering</resource>
+            <group id="metabolic" sortOrder="10" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Display Additional Information Settings</label>
+                <field id="enable" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="default_days" translate="label" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Default Days</label>
+                </field>
+                <field id="enable_cron" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                   <label>Cron Expression</label>
+                   <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                   <depends>
+                       <field id="enable_cron">1</field>
+                   </depends>
+               </field>
+            </group>
+            
+            <!-- Expiry Reminders -->
+            <group id="expiry_notifications" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Expiry Reminder Emails</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="days_before_expiry" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1">
+                    <label>Days Before Expiry</label>
+                    <comment>Send reminder this many days before expiry_date.</comment>
+                    <validate>validate-number validate-number-range number-range-1-365</validate>
+                </field>
+                <field id="sender" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="template" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1">
+                    <label>Email Template</label>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1">
+                    <label>Cron Expression</label>
+                    <comment>Optional. Leave blank to run daily at 02:00.</comment>
+                </field>
+            </group>
+
+            <!-- Threshold Alerts -->
+            <group id="threshold_notifications" translate="label" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Qty Threshold Emails</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="threshold_qty" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1">
+                    <label>Threshold Qty</label>
+                    <comment>Send alert when qtyless than equal this value OR equals 0.</comment>
+                    <validate>validate-number validate-number-range number-range-0-1000000</validate>
+                </field>
+                <field id="sender" translate="label" type="select" sortOrder="30" showInDefault="1" showInWebsite="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="template" translate="label" type="text" sortOrder="40" showInDefault="1" showInWebsite="1">
+                    <label>Email Template</label>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="50" showInDefault="1" showInWebsite="1">
+                    <label>Cron Expression</label>
+                    <comment>Optional. Leave blank to run daily at 02:00.</comment>
+                </field>
+            </group>
+
+        </section>
+    </system>
+</config>
+
+

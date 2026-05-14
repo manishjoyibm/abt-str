@@ -1,0 +1,115 @@
+<!--@subject {{trans "Your %store_name order confirmation" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order_data.email_customer_note|escape|nl2br":"Email Order Note",
+"var order.increment_id":"Order Id",
+"layout handle=\"sales_email_order_items\" order=$order area=\"frontend\"":"Order Items Grid",
+"var payment_html|raw":"Payment Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"var shipping_msg":"Shipping message",
+"var created_at_formatted":"Order Created At (datetime)",
+"var store.frontend_name":"Store Frontend Name",
+"var store_phone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var this.getUrl($store,'customer/account/',[_nosid:1])":"Customer Account URL",
+"var order_data.is_not_virtual":"Order Type",
+"var order":"Order",
+"var order_data.customer_name":"Customer Name",
+"var store.id":"Store ID"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="text-block bg-white">
+        <td style="background: #17b4ed;padding: 15px 20px;">
+            <h1 class="text-uppercase">Order Confirmation</h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="padding: 20px;">
+          <p><b>{{trans 'Order <span class="no-link">#%increment_id</span>' increment_id=$order.increment_id |raw}}</b></p>
+          <p class="mb25"><b>{{trans 'Order Date: ' }}{{var order.getCreatedAtFormatted(1)}}</b></p>
+          <p class="mb25">{{trans 'Thank you for becoming a special part of the Similac Sisterhood of Motherhood Savings Club! We appreciate your subscription order and look forward to being your convenient and cost-effective source for Similac formula.'}}</p>
+          <p class="mb25">{{trans "We embrace mothers who embrace motherhood...and we're pleased to welcome you to the club!"}}</p>
+          <p class="mb25">{{trans 'Warm regards,'}}</p>
+          <p class="mb25">{{trans "%store_name.com " store_name=$store.getFrontendName()}}
+             {{trans 'Similac Sisterhood of Motherhood Savings Club Customer Service Team'}}
+             {{depend store_phone}} {{trans '<a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}
+          </p>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="background: #17b4ed;padding: 15px 20px;">
+            <h1 class="text-uppercase">{{trans "Shipping And Billing"}}</h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="padding: 0 15px;">
+            <table class="order-details">
+                <tr>
+                  {{depend order.getIsNotVirtual()}}
+                  <td class="address-details">
+                      <h3 class="light-blue"><b>{{trans "Shipping Info"}}</b></h3>
+                      <p>{{var formattedShippingAddress|raw}}</p>
+                  </td>
+                  {{/depend}}
+                  <td class="address-details">
+                      <h3 class="light-blue"><b>{{trans "Billing Info"}}</b></h3>
+                      <p>{{var formattedBillingAddress|raw}}</p>
+                  </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="background: #17b4ed;padding: 15px 20px;">
+          <h1 class="text-uppercase">{{trans "Order Details"}}</h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td>
+            {{layout handle="sales_email_order_items" order=$order area="frontend"}}
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="background: #17b4ed;padding: 15px 20px;">
+            <h1 class="text-uppercase">{{trans "Payment Details"}}</h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="padding: 20px;">
+            <table>
+                <tr>
+                    <th class="light-blue">{{trans 'Method'}}</th>
+                    <th class="light-blue">{{trans 'Status'}}</th>
+                    <th class="light-blue">{{trans 'Specifics'}}</th>
+                    <th class="light-blue">{{trans 'Amount'}}</th>
+                </tr>
+                <tr>
+                    <td>{{var order.getPayment().getMethodInstance().getTitle()}}-{{var order.getPayment().getAdditionalInformation('cc_type')}}</td>
+                    <td>{{var custom_order_status}}</td>
+                    <td>{{var order.getPayment().getAdditionalInformation('cc_number')}}</td>
+                    <td>{{var store.getBaseCurrency().getCurrencySymbol()}}{{var order.getGrandTotal()}}</td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td class="pb0">
+            <table border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="dark-orange-bg" style="border: 20px solid #f5a12f">
+                        <a class="visit-abbott-btn border-none background-none" href="{{customVar code=similacstore_url}}" target="_blank">{{trans "view your account >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

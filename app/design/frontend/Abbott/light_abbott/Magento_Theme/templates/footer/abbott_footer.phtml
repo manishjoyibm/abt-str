@@ -1,0 +1,55 @@
+<?php echo $block->getLayout()->createBlock(\Magento\Cms\Block\Block::class)->setBlockId('abbott_footer')->toHtml();
+
+$dataHelper = $this->helper('Abbott\CustomerTransistion\Helper\Data');
+$viewModelCookiePref = $block->getData('cp_view_model');
+$cmId = $viewModelCookiePref->getCmId();
+?>
+<input type="hidden" id="cmpidField" name="cmpid" value="<?php echo $cmId;?>">
+<script>
+    require(["jquery","jquery/ui","bootstrap.bundle"],function(jQuery) {
+        jQuery(document).ready(function() {
+            jQuery( "#footer-set" ).load("<?php echo $dataHelper->getFailureUrl() . '_jcr_content/root/footer.html'?>");
+        });
+    });
+
+    function onEnterpriseCaptchaLoad() {
+        grecaptcha.enterprise.ready(function() {
+            let loginRecaptchaSiteKey = jQuery("#abbottstore-recaptcha-key").data('value');
+            // do request for recaptcha token
+            grecaptcha.enterprise.execute(loginRecaptchaSiteKey, {
+                action: 'submit'
+            }).then(function(loginRecaptchaToken) {
+                // add token value to form
+                if (loginRecaptchaToken != null && loginRecaptchaToken.length > 0) {
+                    verifyRecaptcha(loginRecaptchaToken);
+                } else {
+                    jQuery('#loginRecaptchaHelp').removeClass('d-none');
+                    $('.login-modal__btn').prop('disabled', true);
+                }
+            });
+        });
+    }
+    
+    function verifyRecaptcha(loginRecaptchaToken) {
+        jQuery.ajax({
+            type: "POST",
+            async: false,
+            url: jQuery("#aem-base-url").val() + "/bin/verify/loginRecaptcha",
+            data: {
+                //This will tell the form if user is captcha varified.
+                'loginRecaptchaToken': loginRecaptchaToken,
+            },
+            success: function(data) {
+                if (data.status == "success") {
+                    document.getElementById('is_aem_login_user_key').value = data.captcha_secret;
+                }
+                if (data.status == "failure") {
+                    // Toggle captcha error
+                    jQuery('#loginRecaptchaHelp').removeClass('d-none');
+                    $('.login-modal__btn').prop('disabled', true);
+
+                }
+            }
+        });
+    }
+</script>

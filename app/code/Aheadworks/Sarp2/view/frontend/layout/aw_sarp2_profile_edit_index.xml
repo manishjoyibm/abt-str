@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <body>
+        <referenceBlock name="page.main.title">
+            <action method="setCssClass">
+                <argument name="cssClass" xsi:type="string">aw-sarp2__title</argument>
+            </action>
+            <block class="Aheadworks\Sarp2\Block\BackLink"
+                   name="customer.account.link.back"
+                   cacheable="false"/>
+        </referenceBlock>
+        <referenceBlock name="customer_account_navigation">
+            <action method="setActive">
+                <argument name="path" xsi:type="string">aw_sarp2/profile</argument>
+            </action>
+        </referenceBlock>
+        <referenceContainer name="content">
+            <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View"
+                   name="aw_sarp2.customer.subscriptions.edit.view"
+                   template="customer/subscriptions/edit/view.phtml"
+                   cacheable="false">
+                <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails"
+                       name="aw_sarp2.customer.subscriptions.edit.view.payment.details"
+                       template="Aheadworks_Sarp2::customer/subscriptions/edit/view/payment_details.phtml"
+                       cacheable="false">
+                    <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\Braintree"
+                           name="aw_sarp2.customer.subscriptions.edit.view.payment.details.type.braintree"
+                           template="Aheadworks_Sarp2::customer/subscriptions/edit/view/payment_details/type/credit_card.phtml"
+                           cacheable="false"/>
+                    <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\Braintree\PayPal"
+                           name="aw_sarp2.customer.subscriptions.edit.view.payment.details.type.braintree.paypal"
+                           template="Aheadworks_Sarp2::customer/subscriptions/edit/view/payment_details/type/braintree/paypal.phtml"
+                           cacheable="false"/>
+                    <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\AwBamboraApac"
+                           name="aw_sarp2.customer.subscriptions.edit.view.payment.details.type.aw_bambora_apac"
+                           template="Aheadworks_Sarp2::customer/subscriptions/edit/view/payment_details/type/credit_card.phtml"
+                           cacheable="false"/>
+                    <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\StripePayments"
+                           name="aw_sarp2.customer.subscriptions.edit.view.payment.details.type.stripe_payments"
+                           template="Aheadworks_Sarp2::customer/subscriptions/edit/view/payment_details/type/credit_card.phtml"
+                           cacheable="false"/>
+                    <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\AuthorizenetAcceptjs"
+                           name="aw_sarp2.customer.subscriptions.edit.view.payment.details.type.authorizenet_acceptjs"
+                           template="Aheadworks_Sarp2::customer/subscriptions/edit/view/payment_details/type/credit_card.phtml"
+                           cacheable="false"/>
+                    <block class="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails\Type\Cashondelivery"
+                           name="aw_sarp2.customer.subscriptions.edit.view.payment.details.type.cachondelivery"
+                           template="Aheadworks_Sarp2::customer/subscriptions/edit/view/payment_details/type/offline_payment.phtml"
+                           cacheable="false"/>
+                </block>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

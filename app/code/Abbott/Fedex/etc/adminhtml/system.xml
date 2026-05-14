@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="carriers">
+            <group id="fedex">
+                <field id="free_shipping_smart_post_enable" translate="label" type="select" sortOrder="220" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Free Smart Post Shipping Threshold</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="free_shipping_smart_post_subtotal" translate="label" type="text" sortOrder="230" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Free Shipping Smart Post Amount Threshold</label>
+                    <validate>validate-number validate-zero-or-greater</validate>
+                    <depends>
+                        <field id="free_shipping_smart_post_enable">1</field>
+                    </depends>
+                </field>
+                <field id="smart_post_states" translate="label" type="multiselect" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Smart Post for Specific States</label>
+                    <source_model>Abbott\Fedex\Model\Config\Source\State</source_model>
+                    <can_be_empty>1</can_be_empty>
+                </field>
+
+                <field id="timeout_fallback_limit" translate="label" type="text" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>FedEx Fallback Timeout</label>
+                    <comment>How long should magento wait for fedex response. Do not put 0 unless if fallback is required for absolutely all requests.</comment>
+                    <validate>integer validate-number validate-zero-or-greater</validate>
+                </field>
+
+                <field id="fallback_rates" translate="label" sortOrder="260" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>FedEx Fallback Rates</label>
+                    <frontend_model>Abbott\Fedex\Block\Adminhtml\Form\Field\FallbackRates</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+
+                <field id="api_key_tracking" translate="label" type="obscure" sortOrder="80" showInDefault="1" showInWebsite="1">
+                    <label>API Key for Tracking API</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="web_service_type">REST</field>
+                    </depends>
+                </field>
+
+                <field id="secret_key_tracking" translate="label" type="obscure" sortOrder="80" showInDefault="1" showInWebsite="1">
+                    <label>Secret Key for Tracking API</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                    <depends>
+                        <field id="web_service_type">REST</field>
+                    </depends>
+                </field>
+
+            </group>
+        </section>
+    </system>
+</config>

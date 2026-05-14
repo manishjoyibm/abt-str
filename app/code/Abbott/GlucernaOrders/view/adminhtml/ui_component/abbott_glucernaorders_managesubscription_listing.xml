@@ -1,0 +1,124 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">abbott_glucernaorders_managesubscription_listing.abbott_glucernaorders_managesubscription_listing_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>abbott_glucernaorders_managesubscription_columns</spinner>
+		<deps>
+			<dep>abbott_glucernaorders_managesubscription_listing.abbott_glucernaorders_managesubscription_listing_data_source</dep>
+		</deps>
+		<buttons>
+			<button name="add">
+				<url path="*/*/new"/>
+				<class>primary</class>
+				<label translate="true">Add New Plan</label>
+			</button>
+		</buttons>
+	</settings>
+	<dataSource component="Magento_Ui/js/grid/provider" name="abbott_glucernaorders_managesubscription_listing_data_source">
+		<settings>
+			<updateUrl path="mui/index/render"/>
+		</settings>
+		<aclResource>Abbott_GlucernaOrders::managesubscription</aclResource>
+		<dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="abbott_glucernaorders_managesubscription_listing_data_source">
+			<settings>
+				<requestFieldName>id</requestFieldName>
+				<primaryFieldName>managesubscription_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<listingToolbar name="listing_top">
+		<settings>
+			<sticky>true</sticky>
+		</settings>
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<filters name="listing_filters"/>
+		<paging name="listing_paging"/>
+	</listingToolbar>
+	<columns name="abbott_glucernaorders_managesubscription_columns">
+		<column name="managesubscription_id">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">ID</label>
+			</settings>
+		</column>
+		<column name="plan_code">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Plan Code</label>
+			</settings>
+		</column>
+		<column name="plan_name">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Plan Name</label>
+			</settings>
+		</column>
+		<column name="plan_label">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Plan Label</label>
+			</settings>
+		</column>
+                <column name="trial_period">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Trial Period</label>
+			</settings>
+		</column>
+		<column name="plan_value">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Plan Value</label>
+			</settings>
+		</column>
+		<column name="plan_price">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Plan Price</label>
+			</settings>
+		</column>
+		<column name="plan_shipping_rate">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">Plan Shipping Rate</label>
+			</settings>
+		</column>
+		<column name="is_trial_plan" component="Magento_Ui/js/grid/columns/select">
+			<settings>
+				<options class="Magento\Config\Model\Config\Source\Yesno"/>
+				<filter>select</filter>
+				<dataType>select</dataType>
+				<label translate="true">Is Trial Plan</label>
+			</settings>
+		</column>
+		<column name="is_default_plan" component="Magento_Ui/js/grid/columns/select">
+			<settings>
+				<options class="Magento\Config\Model\Config\Source\Yesno"/>
+				<filter>select</filter>
+				<dataType>select</dataType>
+				<label translate="true">Is Default Plan</label>
+			</settings>
+		</column>
+		<column name="is_active_plan" component="Magento_Ui/js/grid/columns/select">
+			<settings>
+				<options class="Magento\Config\Model\Config\Source\Yesno"/>
+				<filter>select</filter>
+				<dataType>select</dataType>
+				<label translate="true">Is Active Plan</label>
+			</settings>
+		</column>
+		<actionsColumn class="Abbott\GlucernaOrders\Ui\Component\Listing\Column\ManagesubscriptionActions" name="actions">
+			<settings>
+				<indexField>managesubscription_id</indexField>
+				<resizeEnabled>false</resizeEnabled>
+				<resizeDefaultWidth>107</resizeDefaultWidth>
+			</settings>
+		</actionsColumn>
+	</columns>
+</listing>

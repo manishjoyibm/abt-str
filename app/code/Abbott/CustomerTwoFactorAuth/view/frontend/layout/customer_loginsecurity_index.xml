@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="2columns-left"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <title>Login Security</title>
+                <css src="Abbott_CustomerTwoFactorAuth::css/custom.css"/>
+    </head>
+    <body>
+        <referenceContainer name="content">
+            <block class="Abbott\CustomerTwoFactorAuth\Block\Customer\LoginSecurity" name="abbott_twofactorauth_content"
+                   as="content_main" template="Abbott_CustomerTwoFactorAuth::customer/twofactorauth.phtml" cacheable="false" />
+        </referenceContainer>
+    </body>
+</page>

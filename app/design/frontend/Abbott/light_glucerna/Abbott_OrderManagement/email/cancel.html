@@ -1,0 +1,115 @@
+<!--@subject {{trans "Your"}} {{var storeName}} {{trans "order Cancellation"}} @-->
+<!--@vars {
+"var orderIncrement_id":"Order Id",
+"var orderShipping":"Shipping Address",
+"var created_at_formatted":"Order Created At (datetime)",
+"var url": "url",
+"var store" : "Store",
+"var storePhone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var this.getUrl($store,'customer/account/',[_nosid:1])":"Customer Account URL",
+"var order":"Order",
+"var orderTax":"Tax",
+"var store.id":"Store ID",
+"var orderItems":"Order Items",
+"var orderSubTotal": "Order Subtotal",
+"var orderTax":"Order Tax",
+"var orderShippingAmount": "Order Shipping Amount"
+"var orderGrandTotal":"Order Grandtotal",
+"var orderBilling":"Billing Details",
+"var orderShipping":"Shipping Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var formattedBillingAddress|raw":"Billing Address"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="text-block bg-white">
+      <td style="padding: 15px 20px;background-color: #484abe;">
+          <h1><b>Order Cancellation</b></h1>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 20px;">
+          <p class="mb25"><b>{{trans 'Order #'}}<span class="no-link">{{var orderIncrement_id}}</span></b></p>
+          <p class="mb25">{{trans 'Order Date:' }}{{var created_at_formatted}}</p>
+          <p class="mb25">{{trans 'This order has been cancelled.'}}<br/>
+             {{trans 'Once again thank you for the interest in '}}{{var store.frontend_name}}{{trans '.com. We look forward to you visiting our site again soon.'}}</p>
+          <p class="mb25">{{var store.frontend_name}}{{trans '.com'}}
+             <a href="{{customVar code=glucerna_contactus_url}}">{{trans"Customer Service Team"}}</a>
+             {{depend store_phone}} {{trans '<a href="tel:%store_phone">(%store_phone)</a>' store_phone=$store_phone |raw}}{{/depend}}
+          </p>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 15px 20px;background-color: #484abe;">
+          <h1><b>{{trans "Shipping And Billing"}}</b></h1>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 20px;">
+        <table class="order-details">
+          <tr>
+            <td class="address-details">
+              <h3 class="light-blue"><b>{{trans "Billing Info"}}</b></h3>
+              <p style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{var formattedBillingAddress|raw}}</p>
+            </td>
+            <td class="address-details">
+                <h3 class="light-blue"><b>{{trans "Shipping Info"}}</b></h3>
+                <p style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{var formattedShippingAddress |raw}}</p>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 15px 20px;background-color: #484abe;">
+        <h1><b>{{trans "Order Details"}}</b></h1>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td colspan="3" style="padding: 20px;">
+        <table>
+          <tr>
+            <th class="light-blue pb10">{{trans "Item Details"}}</th>
+            <th class="light-blue pb10">{{trans "Qty"}}</th>
+            <th class="light-blue pb10">{{trans "Price"}}</th>
+          </tr>
+          <tr>{{var orderItems |raw}}</tr>
+          <tr>
+              <th colspan="2" class="text-right">{{trans "Subtotal "}}</th>
+              <td>{{var currency_symbol}}{{var orderSubTotal}}</td>
+          </tr>
+          <tr>
+              <th colspan="2" class="text-right">{{trans "Shipping "}}</th>
+              <td>{{var currency_symbol}}{{var orderShippingAmount}}</td>
+          </tr>
+          <tr>
+              <th colspan="2" class="text-right">{{trans "Tax "}}</th>
+              <td>{{var currency_symbol}}{{var orderTax}}</td>
+          </tr>
+          <tr>
+              <th colspan="2" class="text-right"><b>{{trans "Grand Total "}}</b></th>
+              <td>{{var currency_symbol}}{{var orderGrandTotal}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+</table>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 20px solid #d5652c">
+    <tr>
+        <td class="pb0">
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="dark-red-bg">
+                        <a class="shop-now-btn border-none glucerna-block" href="{{var url}}" target="_blank">{{trans "shop now >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

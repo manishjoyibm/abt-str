@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework/ObjectManager/etc/config.xsd">
+
+    <!-- Append rows to the data Amasty prints in Additional Information -->
+    <type name="Amasty\Orderattr\Block\Adminhtml\Order\View\Attributes">
+        <plugin name="abbott_adultsig_append_into_amasty_attributes"
+                type="Abbott\AdultSignature\Plugin\Adminhtml\Orderattr\AppendAdultSigToAttributesData"
+                sortOrder="100"/>
+    </type>
+
+    
+ <!-- Append adult signature block right after the Order Comment HTML -->
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Shipping\Method\Form">
+        <plugin name="abbott_adultsig_after_comment"
+                type="Abbott\AdultSignature\Plugin\Sales\Block\Adminhtml\Order\Create\AdultSignaturePlugin"
+                sortOrder="10"/>
+    </type>
+
+    <!-- Server-side validation on order create -->
+    <type name="Magento\Sales\Controller\Adminhtml\Order\Create\Save">
+        <plugin name="abbott_adultsig_save_validator"
+                type="Abbott\AdultSignature\Plugin\Sales\Controller\Adminhtml\Order\Create\SavePlugin"
+                sortOrder="10"/>
+    </type>    
+
+</config>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="order_cancel_after">
+        <observer name="metabolic_event" instance="Abbott\MetabolicOrdering\Observer\Metabolic" />
+    </event>
+
+    
+ <event name="sales_order_place_after">
+        <observer name="abbott_metabolic_threshold_check" instance="Abbott\MetabolicOrdering\Observer\RunoutAfterOrder"/>
+</event>
+
+</config>

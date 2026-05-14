@@ -1,0 +1,35 @@
+<!--@subject {{trans "Schedule & Save Next Order – Declined for the profile #%profileIncrementId" profileIncrementId=$profileIncrementId}} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-information bg-white" style="padding-bottom: 15px;">
+        <td style="padding: 20px;">
+            <p class="mb"><b>{{trans "An attempt to process the credit card on file for your next Schedule & Save order has failed."}}</b></p>
+            <p class="mb">{{trans "Your credit card payment has recently declined for subscription order. The decline could be due to card expiration, insufficient funds, card number change, non availability of product etc. In order to prevent discontinuation of subscription service, please verify your subscription information or contact store owner for more details."}}</p>
+            <p class="mb">{{trans "Please "}}<a href="{{var this.getUrl($store,'customer/account',[_query:[token:$customer.rp_token],_nosid:1])}}" target="_blank">{{trans "click here"}}</a> {{trans " to login to our site and update your information so that we may re-process your card. In the event that we do not hear from you with updated information, your subscription will be cancelled.
+              If you feel that we have reached you in error, please contact Customer Service at the phone number below. <a href="tel:%store_phone">%store_phone</a> on %store_hours " store_phone=$store_phone store_hours=$store_hours |raw"}}</p>
+            <p class="mb">{{trans "Thank you for your immediate attention to this matter."}}</p>
+            <p class="mb25">{{trans "Kind regards,"}}</p>
+            <p class="mb25">{{trans "%store_name.com " store_name=$store.getFrontendName()}}
+               <a href="{{customVar code=similac_contactus_url}}">{{trans "Customer Service Team"}}</a>
+               {{depend store_phone}} {{trans '%store_phone' store_phone=$store_phone |raw}}{{/depend}}
+        </td>
+    </tr>
+</table>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td class="pb0">
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="dark-orange-bg" style="border: 20px solid #f5a12f">
+                        <a class="shop-now-btn border-none similac-block" href="{{customVar code=similacstore_url}}" target="_blank">{{trans "VISIT YOUR ACCOUNT >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

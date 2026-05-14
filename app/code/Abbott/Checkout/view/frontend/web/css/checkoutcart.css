@@ -1,0 +1,109 @@
+#myProgress {
+  width: 100%;
+  background-color: #FFFFFF;
+  border-radius: 5px;
+  border: 1px solid;
+  height: 6px;
+}
+
+#myBar, #myBar_summary {
+  width: 20%;
+  height: 5px;
+}
+
+.backorder_text {
+    color: #000000;
+    font-size: 21px;
+    font-weight: bold;
+    text-align: left !important;
+}
+
+.size_text{
+  color: #474747;
+  font-weight: normal;
+  text-align: left !important;
+  font-size: 18px;
+}
+
+.flavour_text{
+  color: #474747;
+  text-align: left !important;
+  font-size: 18px;
+  font-weight: normal;
+}
+.free_message, .free_message_summary  {
+  height: 20px;
+  width: 323px;
+  color: #000000;
+  font-size: 11px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 23px;
+  padding-left: 0 !important;
+}
+
+.update{
+ display: none !important;
+}
+
+.qty_bar{
+  display: flex;
+  position: relative;
+}
+
+.continue{
+  color: #159BD7;
+  font-family: Brandon Text,serif;
+  font-size: 16px;
+  font-weight: bold;
+  letter-spacing: 0;
+  line-height: 22px;
+  box-sizing: border-box;
+  height: 48px;
+  width: 231px;
+  border: 1px solid #159BD7;
+  border-radius: 4px;
+}
+
+
+.qty_button {
+  margin-left: 10px;
+  font-size: x-large;
+  margin-right: 10px;
+  font-weight: lighter;
+  color: #666666;
+}
+
+a.qty_button {
+    text-decoration: none !important;
+    color: #666666 !important;
+  }
+
+
+@media only screen and (max-width: 767px) {
+  .free_message,  .free_message_summary {
+    text-align: left;
+    padding-left:73px !important;
+    font-weight: 600;
+  }
+  #myProgress {
+    margin-bottom: 11px;
+    width: 323px;
+    margin-left: 21px;
+  }
+  .qty_button {
+    margin-left: 5px;
+    margin-right: 5px;
+    color: #666666;
+  }
+  .abbott_price{
+    width: 30% !important;
+  }
+  .abbott_subtotal{
+    width: 30% !important;
+  }
+  .abbott_qty{
+    width: 40% !important;
+    padding: 20px 8px 10px !important;
+  }
+}

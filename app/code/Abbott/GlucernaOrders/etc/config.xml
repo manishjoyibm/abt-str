@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <glucerna_order>
+            <backorder_message>
+                <message>Flavor is currently on backorder until </message>
+            </backorder_message>
+        </glucerna_order>
+    </default>
+    <websites>
+        <glucerna_website>
+            <glucerna_order>
+                <backorder_message>
+                    <message>Flavor is currently on backorder until </message>
+                </backorder_message>
+            </glucerna_order>
+        </glucerna_website>
+    </websites>
+</config>

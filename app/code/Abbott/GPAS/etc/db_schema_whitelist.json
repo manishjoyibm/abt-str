@@ -1,0 +1,24 @@
+{
+    "abbott_gpas_qrcode": {
+        "column": {
+            "entity_id": true,
+            "created_at": true,
+            "updated_at": true,
+            "store_id": true,
+            "code": true,
+            "ip": true,
+            "lat": true,
+            "long": true,
+            "is_redeemed": true,
+            "sales_order_id": true
+        },
+        "index": {
+            "ABBOTT_GPAS_QRCODE_SALES_ORDER_ID": true,
+            "ABBOTT_GPAS_QRCODE_CODE": true,
+            "ABBOTT_GPAS_QRCODE_IS_REDEEMED": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

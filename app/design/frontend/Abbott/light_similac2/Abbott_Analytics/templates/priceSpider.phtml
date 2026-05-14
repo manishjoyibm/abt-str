@@ -1,0 +1,24 @@
+<?php
+  $psData = $block->getPsData();
+  $orderItems = $block->getProductsData();
+?>
+<?php if (count($orderItems) && $block->getPsrId()): ?>
+<script type="text/javascript" src="https://cdn.pricespider.com/scripts/purchase-tracking.js"></script>
+<script type="text/javascript">
+  var order = {};
+  order.psrid = '<?= $psData['psrid'] ?>';
+  order.purchaseDate = '<?= $psData['purchasedate'] ?>';
+  order.purchaseTotal = <?= $psData['purchasetotal'] ?>;
+  order.orderDiscount = <?= $psData['purchasediscount'] ?>;
+  order.currencyCode = '<?= $psData['currencycode'] ?>';
+  <?php foreach ($orderItems as $i => $orderItem): ?>
+  <?php $i++; ?>
+  order.manufacturer<?= $i;?> = '<?=  $orderItem["brand"];?>';
+  order.sku<?= $i;?> = '<?= $orderItem["sku"];?>';
+  order.productName<?= $i;?> = '<?= $orderItem["name"];?>';
+  order.unitPrice<?= $i;?> = <?= $orderItem["price"];?>;
+  order.quantity<?= $i;?> = <?= $orderItem["qty"];?>;
+  <?php endforeach;?>
+  pswtb.purchaseTracking.submit(order);
+</script>
+<?php endif;?>

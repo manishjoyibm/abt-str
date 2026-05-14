@@ -1,0 +1,121 @@
+<!--@subject {{trans "Your %store_name order confirmation" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order_data.email_customer_note|escape|nl2br":"Email Order Note",
+"var order.increment_id":"Order Id",
+"layout handle=\"sales_email_order_items\" order=$order area=\"frontend\"":"Order Items Grid",
+"var payment_html|raw":"Payment Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"var shipping_msg":"Shipping message",
+"var created_at_formatted":"Order Created At (datetime)",
+"var store.frontend_name":"Store Frontend Name",
+"var store_phone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var this.getUrl($store,'customer/account/',[_nosid:1])":"Customer Account URL",
+"var order_data.is_not_virtual":"Order Type",
+"var order":"Order",
+"var order_data.customer_name":"Customer Name",
+"var store.id":"Store ID"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="text-block">
+        <td style="background-color: #484abe;padding: 15px 20px;">
+            <h1 class="text-uppercase">Order Confirmation Information</h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 20px;">
+          <p><b>{{trans 'Order <span class="no-link">#%increment_id</span>' increment_id=$order.increment_id |raw}}</b></p>
+          <p class="mb25"><b>{{trans 'Order Date: ' }}{{var created_at_formatted_1}}</b></p>
+          <p class="mb25">{{trans 'Thank you for placing your order with'}} <a href="{{customVar code=glucernastore_url}}">{{trans '%store_name.com</a>.' store_name=$store.frontend_name |raw}}
+             {{trans 'This is a receipt for your order.'}}</p>
+          <p class="mb25">{{trans "%store_name.com " store_name=$store.frontend_name}}
+             <a href="{{customVar code=glucerna_contactus_url}}">{{trans "Customer Service Team"}}</a>
+             {{depend store_phone}} {{trans '<a href="tel:%store_phone">(%store_phone)</a>' store_phone=$store_phone |raw}}{{/depend}}
+          </p>
+      </td>
+    </tr>
+    <tr class="text-block">
+        <td style="background-color: #484abe;padding: 15px 20px;">
+            <h1 class="text-uppercase">{{trans "Shipping And Billing"}}</h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td>
+            <table class="order-details">
+                <tr>
+                  {{depend order_data.is_not_virtual}}
+                  <td class="address-details padding-left15">
+                      <h3 class="light-blue"><b>{{trans "Shipping Info"}}</b></h3>
+                      <p>{{var formattedShippingAddress|raw}}</p>
+                  </td>
+                  {{/depend}}
+                  <td class="address-details padding-right15">
+                      <h3 class="light-blue"><b>{{trans "Billing Info"}}</b></h3>
+                      <p>{{var formattedBillingAddress|raw}}</p>
+                      <p class="light-blue">{{var order_data.billing_email}}</p>
+                  </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr class="text-block">
+        <td style="background-color: #484abe;padding: 15px 20px;">
+          <h1 class="text-uppercase">{{trans "Order Details"}}</h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td>
+          {{layout handle="sales_email_order_items" order_id=$order_id area="frontend"}}
+        </td>
+    </tr>
+    <tr class="text-block">
+        <td style="background-color: #484abe;padding: 15px 20px;">
+            <h1 class="text-uppercase">{{trans "Payment Details"}}</h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="padding-top: 20px;">
+          <table>
+              <tr>
+                  <td class="method-info pb25">
+                      <table class="padding-left-right-20">
+                        <tr>
+                            <th class="light-blue padding-left15">{{trans 'Method'}}</th>
+                            <th class="light-blue">{{trans 'Status'}}</th>
+                            <th class="light-blue">{{trans 'Specifics'}}</th>
+                            <th class="light-blue">{{trans 'Amount'}}</th>
+                        </tr>
+                        <tr>
+                            <td class="padding-left15">{{var order_data.payment_title}}</td>
+                            <td>{{var custom_order_status}}</td>
+                            <td>{{var order_data.payment_additional_info}}</td>
+                            <td>{{var currency_symbol}}{{var order_grand_total}}</td>
+                        </tr>
+                      </table>
+                  </td>
+              </tr>
+          </table>
+      </td>
+    </tr>
+</table>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 20px solid #d5652c">
+    <tr>
+        <td class="pb0">
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="dark-red-bg">
+                        <a class="shop-now-btn border-none glucerna-block" href="{{customVar code=glucernastore_url}}" target="_blank">{{trans "SHOP NOW >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

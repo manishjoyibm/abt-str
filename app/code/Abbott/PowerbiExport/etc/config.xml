@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <powerbi_export>
+            <powerbi>
+                <enable>1</enable>
+                <enable_cron>1</enable_cron>
+                <cron_expression>0 0 * * *</cron_expression>
+                <mbi_export_api_url>https://api.rjmetrics.com/0.1/figure/</mbi_export_api_url>
+                <mbi_export_delete_file_setting>-3 month</mbi_export_delete_file_setting>
+            </powerbi>
+        </powerbi_export>
+    </default>
+</config>

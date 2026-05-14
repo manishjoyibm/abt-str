@@ -1,0 +1,148 @@
+<!--@subject {{trans "Your %store_name order confirmation" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var formattedBillingAddress|raw":"Billing Address",
+"var order_data.email_customer_note|escape|nl2br":"Email Order Note",
+"var order.increment_id":"Order Id",
+"layout handle=\"sales_email_order_items\" order=$order area=\"frontend\"":"Order Items Grid",
+"var payment_html|raw":"Payment Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var order.shipping_description":"Shipping Description",
+"var shipping_msg":"Shipping message",
+"var created_at_formatted":"Order Created At (datetime)",
+"var store.frontend_name":"Store Frontend Name",
+"var store_phone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var this.getUrl($store,'customer/account/',[_nosid:1])":"Customer Account URL",
+"var order_data.is_not_virtual":"Order Type",
+"var order":"Order",
+"var order_data.customer_name":"Customer Name",
+"var order_id": "Order DB Id",
+"var store.id":"Store ID"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr>
+        <td class="esd-structure es-p20t es-p30r es-p30l" align="left"
+            style="background-color: #BFE6F7;">
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="540" class="esd-container-frame" align="center"
+                            valign="top">
+                            <table cellpadding="0" cellspacing="0" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td align="left" class="esd-block-text"
+                                            style="padding: 10px 20px;">
+                                            <p
+                                                style="margin: 0;font-size: 13.5pt;
+                                                font-family: Arial, sans-serif, serif, EmojiFont;
+                                                text-transform: uppercase;font-weight: bold;">
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 10px 15px;background: #BFE6F7;">
+          <h1 style="margin-bottom: 0;"><b style="font-family: Arial, sans-serif, serif, EmojiFont;">Order Confirmation Information</b></h1>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 20px;">
+          <p><b>{{trans 'Order <span class="no-link">#%increment_id</span>' increment_id=$order.increment_id |raw}}</b></p>
+          <p class="mb25"><b>{{trans 'Order Date: ' }}{{var created_at_formatted_1}}</b></p>
+          <p class="mb25">{{trans 'Thank you for placing your order with'}} <a href="{{customVar code=abbottstore_url}}">{{trans '%store_name.com</a>.' store_name=$store.frontend_name |raw}}
+             {{trans 'This is a receipt for your order.'}}</p>
+          <p class="mb25">{{trans "%store_name.com " store_name=$store.frontend_name}}
+             <a href="{{customVar code=abbott_contactus_url}}">{{trans"Customer Service Team"}}</a>
+             {{depend store_phone}} {{trans '<a href="tel:%store_phone">(%store_phone)</a>' store_phone=$store_phone |raw}}{{/depend}}
+          </p>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 10px 15px;background: #BFE6F7;">
+            <h1 style="margin-bottom: 0;"><b style="font-family: Arial, sans-serif, serif, EmojiFont;">{{trans "Shipping And Billing"}}</b></h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 20px;">
+            <table class="order-details">
+                <tr>
+                  {{depend order_data.is_not_virtual}}
+                  <td class="address-details" style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">
+                      <h3 class="light-blue" style="font-family: Georgia, serif, sans-serif, Arial;"><b>{{trans "Shipping Info"}}</b></h3>
+                      <p>{{var formattedShippingAddress|raw}}</p>
+                  </td>
+                  {{/depend}}
+                  <td class="address-details" style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">
+                      <h3 class="light-blue" style="font-family: Georgia, serif, sans-serif, Arial;"><b>{{trans "Billing Info"}}</b></h3>
+                      <p>{{var formattedBillingAddress|raw}}</p>
+                      <p class="light-blue">{{var order_data.billing_email}}</p>
+                  </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 10px 15px;background: #BFE6F7;">
+        <h1 style="margin-bottom: 0;"><b style="font-family: Arial, sans-serif, serif, EmojiFont;">{{trans "Order Details"}}</b></h1>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 20px;">
+        {{layout handle="sales_email_order_items" order_id=$order_id area="frontend"}}
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 10px 15px;background: #BFE6F7;">
+            <h1 style="margin-bottom: 0;"><b style="font-family: Arial, sans-serif, serif, EmojiFont;">{{trans "Payment Details"}}</b></h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 20px;">
+        <table class="bg-white">
+          <tr class="bd-white">
+              <th class="light-blue" style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{trans 'Method'}}</th>
+              <th class="light-blue" style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{trans 'Status'}}</th>
+              <th class="light-blue" style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{trans 'Specifics'}}</th>
+              <th class="light-blue" style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{trans 'Amount'}}</th>
+          </tr>
+          <tr>
+              <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{var order_data.payment_title}}</td>
+              {{var custom_order_status_td_html|raw}}
+              <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{var order_data.payment_additional_info}}</td>
+              <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{var currency_symbol}}{{var order_grand_total}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <table border="0" cellspacing="0" cellpadding="0" style="background-color:white;width:100%;border-collapse:collapse;">
+          <tbody>
+            <tr>
+                  <td valign="top" style="padding: 30pt 0px 30pt 0px;">
+                      <p align="center" style="font-size:11pt;font-family:Calibri,sans-serif;text-align:center;margin:0;">
+                          <span style="font-size: 12pt; font-family: Helvetica Neue, serif, EmojiFont; line-height: 13.5pt;"><a href="{{customVar code=abbottstore_url}}" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="background-color:rgb(0, 156, 222);border: 20px solid rgb(0, 156, 222); color: #ffffff;text-decoration: none;"><b><span style="font-size: 13.5pt; line-height: 13.5pt; font-family: Arial, sans-serif, serif, EmojiFont; text-transform: uppercase;">
+                                          {{trans "visit %store_name >" store_name=$store.frontend_name}}</span></b></a></span></p>
+                  </td>
+              </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+</table>
+
+
+
+{{template config_path="design/email/footer_template"}}

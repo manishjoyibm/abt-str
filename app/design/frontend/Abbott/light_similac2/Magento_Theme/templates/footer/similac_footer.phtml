@@ -1,0 +1,38 @@
+<div id="footer-set"></div>
+<?php
+$dataHelper = $this->helper('Abbott\CustomerTransistion\Helper\Data');
+$viewModelCookiePref = $block->getData('cp_view_model');
+$cmId = $viewModelCookiePref->getCmId();
+?>
+<input type="hidden" id="cmpidField" name="cmpid" value="<?php echo $cmId;?>">
+<script>
+    require(["jquery","jquery/ui"],function(jQuery) {
+        if(!window.jQuery) window.jQuery = jQuery;
+        if(!window.$) window.$ = jQuery;
+        jQuery(document).ready(function() {
+            jQuery( "#footer-set" ).load("<?php echo $dataHelper->getFailureUrl() . 'content/experience-fragments/an/similac/global/en/footer/master/jcr:content/root.plain.html?v='.$dataHelper->getAemJsVersion();?>" ,
+            function(){
+                if (jQuery("#leftnav-set").length) {
+                     jQuery("#leftnav-set").load("<?php echo $dataHelper->getFailureUrl() . 'content/experience-fragments/an/similac/global/en/left-navigation/master/jcr:content/root/leftnavigation.plain.html?v='.$dataHelper->getAemJsVersion();?>", 
+                function () {
+                    jQuery.getScript("<?php echo $dataHelper->getFailureUrl() . 'etc.clientlibs/an/similac/clientlibs/clientlib-similac-magento-base.min.js?v='.$dataHelper->getAemJsVersion();?>", 
+                    function() {
+                        jQuery.getScript("<?php echo $dataHelper->getFailureUrl() . 'etc.clientlibs/an/similac/clientlibs/clientlib-similac-commons.min.js?v='.$dataHelper->getAemJsVersion();?>", 
+                        function() {
+                            jQuery.getScript("<?php echo $dataHelper->getFailureUrl() . 'etc.clientlibs/an/similac/clientlibs/clientlib-components/user-profile.min.js?v='.$dataHelper->getAemJsVersion();?>");
+
+                        });
+                    });
+                });
+                } else {
+                        jQuery.getScript("<?php echo $dataHelper->getFailureUrl() . 'etc.clientlibs/an/similac/clientlibs/clientlib-similac-magento-base.min.js?v='.$dataHelper->getAemJsVersion();?>", 
+                        function() {
+                            jQuery.getScript("<?php echo $dataHelper->getFailureUrl() . 'etc.clientlibs/an/similac/clientlibs/clientlib-similac-commons.min.js?v='.$dataHelper->getAemJsVersion();?>");                            
+                            jQuery.getScript("<?php echo $dataHelper->getFailureUrl() . 'etc.clientlibs/an/similac/clientlibs/clientlib-components/user-profile.min.js?v='.$dataHelper->getAemJsVersion();?>");
+                    });
+                }
+               
+            });
+        });
+    });
+</script>

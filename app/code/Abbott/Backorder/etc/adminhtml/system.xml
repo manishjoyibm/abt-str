@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="additional_info" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>Backorder - Additional Information</label>
+            <resource>Abbott_Backorder::additional_data</resource>
+            <group id="showdata" sortOrder="10" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Display Additional Information Settings</label>
+                <field id="backorder" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Backorder</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="size" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Size</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="falvour" translate="label" type="select" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Show Flavour</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+             <group id="backorder_email" translate="label" type="text" sortOrder="10" showInDefault="1">
+                <label>Backorder Email Settings</label>
+                <field id="enabled" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Enable Backorder Emails</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="allowed_store_views" translate="label" type="multiselect" sortOrder="50" showInDefault="1">
+                    <label>Select Store Views</label>
+                    <source_model>Magento\Store\Model\System\Store</source_model>
+                    <comment>Select one or more store views for backorder notifications.</comment>
+                </field>
+                <field id="days_threshold" translate="label" type="text" sortOrder="20" showInDefault="1">
+                    <label>Days Threshold</label>
+                    <comment>Number of days after order placement to trigger backorder email notification.</comment>
+                </field>
+                <field id="email_template" translate="label" type="text" sortOrder="30" showInDefault="1">
+                    <label>Email Template Identifier</label>
+                </field>
+                <field id="sender" translate="label" type="select" sortOrder="30" showInDefault="1">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                </field>
+                <field id="cron_expression" translate="label" type="text" sortOrder="50" showInDefault="1">
+                    <label>Cron Expression</label>
+                    <comment>Optional. Leave blank to run daily at 02:00.</comment>
+                </field>                
+                <field id="backorder_email_test_mode" translate="label" type="select" sortOrder="10" showInDefault="1">
+                    <label>Enable Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <comment>If enable it, only for testing</comment>
+                </field>
+                <field id="backorder_test_emails" translate="label" type="text" sortOrder="15" showInDefault="1">
+                    <label>Test Email IDs (comma separated)</label>
+                    <depends>
+                        <field id="backorder_email_test_mode">1</field>
+                    </depends>
+                </field>
+
+             </group> 
+        </section>
+    </system>
+</config>
+
+

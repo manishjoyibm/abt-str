@@ -1,0 +1,138 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="chargeback_settings" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+            <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>ChargeBack Integration</label>
+            <resource>Abbott_Chargeback::chargeback_integration</resource>
+            <group id="chargeback_sftp" showInDefault="1">
+                <label>Chargeback SFTP Settings</label>
+                <field id="chargeback_path" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>SFTP Folder Path for Chargeback Files</label>
+                    <comment>ex: /chargeback/</comment>
+                </field>
+                <field id="archive_path" translate="label" type="text" sortOrder="13" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>SFTP Folder Path for Chargeback Archive Files</label>
+                    <comment>ex: /archive/</comment>
+                </field>
+                <field id="zip_password" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="13" translate="label" type="obscure">
+                    <label>Zip Extraction Password</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="host" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="14" translate="label" type="text">
+                    <label>SFTP Host</label>
+                </field>
+                <field id="port" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="15" translate="label" type="text">
+                    <label>Port Number</label>
+                </field>
+                <field id="username" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="20" translate="label" type="text">
+                    <label>User Name</label>
+                </field>
+                <field id="password" showInDefault="1" showInStore="0" showInWebsite="0" sortOrder="30" translate="label" type="obscure">
+                    <label>Password</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+                <field id="sent" translate="label" sortOrder="99" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <frontend_model>Abbott\Chargeback\Block\Adminhtml\System\Config\Button</frontend_model>
+                </field>
+            </group>
+            <group id="chargeback_file_settings"  showInDefault="1">
+                <label>ChargeBack File Settings</label>
+                <field id="archive_file_path" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>ChargeBack Archive File Folder</label>
+                </field>
+                <field id="archive_file_lifetime" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Delete From Archive After Days</label>
+                </field>
+                <field id="chargeback_log_lifetime" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Delete From Log After Days</label>
+                </field>
+            </group>
+             <group id="chargeback_cron" showInDefault="1">
+               <label>Chargeback Cron Settings</label>
+               <field id="cs_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                   <label>Chargeback SFTP Sync Cron</label>
+                   <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+               </field>
+               <field id="sync_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                   <label>Cron Expression for Chargeback Sync</label>
+                   <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                   <depends>
+                       <field id="cs_enabled">1</field>
+                   </depends>
+               </field>
+               <field id="dl_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                   <label>Delete Log Cron</label>
+                   <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+               </field>
+               <field id="delete_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                   <label>Cron Expression for Delete Log</label>
+                   <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                   <depends>
+                       <field id="dl_enabled">1</field>
+                   </depends>
+               </field>
+            </group>
+            <group id="chargeback_admin_email"  showInDefault="1">
+                <label>ChargeBack Admin Notification Email Settings</label>
+                <field id="is_mail_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Mails</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sender" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="chargeback_settings/chargeback_admin_email/is_mail_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="receiver_email" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Receiver Email</label>
+                    <comment>Please provide the values separeted by commas ex: test1@example.com,test2@example.com</comment>
+                    <depends>
+                        <field id="chargeback_settings/chargeback_admin_email/is_mail_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="chargeback_template" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="chargeback_settings/chargeback_admin_email/is_mail_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="kount_email_settings"  showInDefault="1">
+                <label>Kount Email Settings</label>
+                <field id="is_mail_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable Mails</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="sender" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Email Sender</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Identity</source_model>
+                    <depends>
+                        <field id="chargeback_settings/kount_email_settings/is_mail_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="receiver_email" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Receiver Email</label>
+                    <comment>Please provide the values separeted by commas ex: test1@example.com,test2@example.com</comment>
+                    <depends>
+                        <field id="chargeback_settings/kount_email_settings/is_mail_enabled">1</field>
+                    </depends>
+                </field>
+                <field id="kount_template" translate="label" type="select" sortOrder="40" showInDefault="1" showInWebsite="0" showInStore="0" canRestore="1">
+                    <label>Email Template</label>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                    <depends>
+                        <field id="chargeback_settings/kount_email_settings/is_mail_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

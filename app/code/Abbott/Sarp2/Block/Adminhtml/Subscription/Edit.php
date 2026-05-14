@@ -1,0 +1,170 @@
+<?php
+
+namespace Abbott\Sarp2\Block\Adminhtml\Subscription;
+
+use Aheadworks\Sarp2\Api\Data\ProfileInterface;
+use Aheadworks\Sarp2\Api\ProfileRepositoryInterface;
+use Abbott\Sarp2\Block\Adminhtml\Subscription\Edit\Addresses as AddressesBlock;
+use Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\Orders as OrdersBlock;
+use Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\Plan as PlanBlock;
+use Abbott\Sarp2\Block\Adminhtml\Subscription\Edit\NextOrderAndPlan as NextOrderAndPlanBlock;
+use Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\Products as ProductsBlock;
+use Aheadworks\Sarp2\Model\Profile\Source\Status as StatusSource;
+use Magento\Backend\Block\Template;
+use Magento\Backend\Block\Template\Context;
+use Magento\Framework\Exception\LocalizedException;
+use Magento\Framework\UrlInterface;
+use Abbott\Sarp2\Block\Adminhtml\Subscription\Edit\DeliveryInstruction;
+
+class Edit extends Template
+{
+    /**
+     * @var ProfileRepositoryInterface
+     */
+    private $profileRepository;
+
+    /**
+     * @var StatusSource
+     */
+    private $statusSource;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $_template = 'Abbott_Sarp2::subscription/edit.phtml';
+
+    /**
+     * @param Context $context
+     * @param ProfileRepositoryInterface $profileRepository
+     * @param StatusSource $statusSource
+     * @param array $data
+     */
+
+     /**
+      * @var UrlInterface
+      */
+    private $urlBuilder;
+
+    public function __construct(
+        Context $context,
+        ProfileRepositoryInterface $profileRepository,
+        StatusSource $statusSource,
+        UrlInterface $urlBuilder,
+        array $data = []
+    ) {
+        parent::__construct($context, $data);
+        $this->profileRepository = $profileRepository;
+        $this->statusSource = $statusSource;
+        $this->urlBuilder = $urlBuilder;
+    }
+
+    /**
+     * Get profile entity
+     *
+     * @return ProfileInterface
+     */
+    public function getProfile()
+    {
+        $profileId = $this->getRequest()->getParam('profile_id');
+        return $this->profileRepository->get($profileId);
+    }
+
+    /**
+     * Get profile status label
+     *
+     * @return string
+     */
+    public function getStatusLabel()
+    {
+        $statusOptions = $this->statusSource->getOptions();
+        return $statusOptions[$this->getProfile()->getStatus()];
+    }
+
+    /**
+     * Get orders block html
+     *
+     * @return string
+     * @throws LocalizedException
+     */
+    public function getOrdersHtml()
+    {
+        $ordersBlock = $this->getLayout()
+            ->createBlock(OrdersBlock::class, 'aw_sarp2.subscription.orders');
+        return $ordersBlock->toHtml();
+    }
+
+    /**
+     * Get next order and subscription plan block html
+     *
+     * @return string
+     * @throws LocalizedException
+     */
+    public function getNextOrderAndPlanHtml()
+    {
+        /** @var NextOrderAndPlanBlock $block */
+        $block = $this->getLayout()
+            ->createBlock(NextOrderAndPlanBlock::class, 'abbott_sarp2.subscription.next_order_and_plan');
+        return $block
+            ->setProfile($this->getProfile())
+            ->toHtml();
+    }
+
+    /**
+     * Get products block html
+     *
+     * @return string
+     * @throws LocalizedException
+     */
+    public function getProductsHtml()
+    {
+        /** @var ProductsBlock $productsBlock */
+        $productsBlock = $this->getLayout()
+            ->createBlock(ProductsBlock::class, 'aw_sarp2.subscription.products');
+        return $productsBlock
+            ->setProfile($this->getProfile())
+            ->toHtml();
+    }
+
+    /**
+     * Get addresses, shipping and payment block html
+     *
+     * @return string
+     * @throws LocalizedException
+     */
+    public function getAddressesHtml()
+    {
+        /** @var AddressesBlock $addressesBlock */
+        $addressesBlock = $this->getLayout()
+            ->createBlock(AddressesBlock::class, 'aw_sarp2.subscription.addresses');
+        return $addressesBlock
+            ->setProfile($this->getProfile())
+            ->toHtml();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function _beforeToHtml()
+    {
+        /** @var \Magento\Theme\Block\Html\Title $pageTitle */
+        $pageTitle = $this->getLayout()->getBlock('page.title');
+        if ($pageTitle) {
+            $pageTitle->setPageTitle(' ');
+        }
+        return parent::_beforeToHtml();
+    }
+
+    public function getUpdateUrl()
+    {
+        return $this->urlBuilder;
+    }
+
+    public function getDeliveryInstruction(){
+        /** @var AddressesBlock $addressesBlock */
+        $deliveryInstruction = $this->getLayout()
+            ->createBlock(DeliveryInstruction::class, 'aw_sarp2.subscription.delivery.instruction');
+        return $deliveryInstruction
+            ->setProfile($this->getProfile())
+            ->toHtml();
+    }
+}

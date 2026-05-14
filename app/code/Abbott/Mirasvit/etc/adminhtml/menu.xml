@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <remove id="Mirasvit_Core::core" />
+        <remove id="Mirasvit_Core::extensions" />
+        <remove id="Mirasvit_Core::marketplace" />
+        <remove id="Mirasvit_LandingPage::landing_pages" />
+    </menu>
+</config>

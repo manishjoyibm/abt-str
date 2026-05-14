@@ -1,0 +1,161 @@
+diff --git a/vendor/kount/magento2-kount360/Model/Ens/EventHandler/EventHandlerOrder.php b/vendor/kount/magento2-kount360/Model/Ens/EventHandler/EventHandlerOrder.php
+index 61f282624..4b2662708 100644
+--- a/vendor/kount/magento2-kount360/Model/Ens/EventHandler/EventHandlerOrder.php
++++ b/vendor/kount/magento2-kount360/Model/Ens/EventHandler/EventHandlerOrder.php
+@@ -17,10 +17,14 @@ class EventHandlerOrder
+     /**
+      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
+      * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
++     * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
++     * @param \Kount\Kount360\Model\Logger $logger
+      */
+     public function __construct(
+         protected \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
+-        protected \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
++        protected \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
++        protected \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory,
++        protected \Kount\Kount360\Model\Logger $logger
+     ) {
+     }
+ 
+@@ -34,14 +38,91 @@ class EventHandlerOrder
+             throw new \InvalidArgumentException('Invalid Order number.');
+         }
+ 
+-        $searchCriteria = $this->searchCriteriaBuilder
++        // Intentionally commented and added a new functions, See: ANAPOLLO-
++        /*$searchCriteria = $this->searchCriteriaBuilder
+             ->addFilter(self::ORDER_INCREMENT_ID_FIELD, $orderId)
+             ->create();
+-        $order = $this->orderRepository->getList($searchCriteria)->getFirstItem();
++        $order = $this->orderRepository->getList($searchCriteria)->getFirstItem();*/
++
++        $order = $this->fetchByIncrementIdWithRetry($orderId);
+ 
+         if (!$order->getId()) {
+             throw new \InvalidArgumentException("Unable to locate order for: {$orderId}");
+         }
+         return $order;
+     }
++
++
++    /**
++     * Fetch order by increment_id with retry logic.
++     *
++     * @param string $incrementId
++     * @param int $maxAttempts
++     * @param int $initialDelayMs
++     * @return OrderInterface|null
++     */
++    public function fetchByIncrementIdWithRetry(
++        string $incrementId,
++        int $maxAttempts = 5,
++        int $initialDelayMs = 100
++    ): ?OrderInterface {
++        $attempt = 1;
++        $delayMs = $initialDelayMs;
++
++        while ($attempt <= $maxAttempts) {
++            $order = $this->tryFetchByIncrementId($incrementId);
++            if ($order) {
++                return $order;
++            }
++
++            $this->logger->info(sprintf(
++                'Order not found for increment_id=%s (attempt %d/%d). Retrying after %dms.',
++                $incrementId,
++                $attempt,
++                $maxAttempts,
++                $delayMs
++            ));
++
++            usleep($delayMs * 1000); // sleep in microseconds
++            $delayMs *= 2; // exponential backoff
++            $attempt++;
++        }
++
++        $this->logger->warning(sprintf(
++            'Order with increment_id=%s not found after %d attempts.',
++            $incrementId,
++            $maxAttempts
++        ));
++
++        return null;
++    }
++
++    /**
++     * Try fetching order once by increment_id.
++     *
++     * @param string $incrementId
++     * @return OrderInterface|null
++     */
++    private function tryFetchByIncrementId(string $incrementId): ?OrderInterface
++    {
++        $collection = $this->orderCollectionFactory->create();
++        $collection->addFieldToFilter('increment_id', $incrementId);
++        $collection->setPageSize(1)->setCurPage(1);
++
++        $entityId = null;
++        foreach ($collection as $orderModel) {
++            $entityId = (int)$orderModel->getId();
++            break;
++        }
++
++        if (!$entityId) {
++            return null;
++        }
++
++        try {
++            return $this->orderRepository->get($entityId);
++        } catch (NoSuchEntityException $e) {
++            return null;
++        }
++    }
+ }
+diff --git a/vendor/kount/magento2-kount360/Model/Ens/EventHandler/NotesAdd.php b/vendor/kount/magento2-kount360/Model/Ens/EventHandler/NotesAdd.php
+index 93d4b9d50..4b3059117 100644
+--- a/vendor/kount/magento2-kount360/Model/Ens/EventHandler/NotesAdd.php
++++ b/vendor/kount/magento2-kount360/Model/Ens/EventHandler/NotesAdd.php
+@@ -15,13 +15,15 @@ class NotesAdd extends EventHandlerOrder implements EventHandlerInterface
+      * @param \Kount\Kount360\Model\Logger $logger
+      * @param \Magento\Sales\Api\OrderRepositoryInterface $orderRepository
+      * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
++     * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
+      */
+     public function __construct(
+         protected \Kount\Kount360\Model\Logger $logger,
+         protected \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
+-        protected \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
++        protected \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
++        protected \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
+     ) {
+-        parent::__construct($orderRepository, $searchCriteriaBuilder);
++        parent::__construct($orderRepository, $searchCriteriaBuilder, $orderCollectionFactory, $logger);
+     }
+ 
+     /**
+diff --git a/vendor/kount/magento2-kount360/Model/Ens/EventHandler/StatusEdit.php b/vendor/kount/magento2-kount360/Model/Ens/EventHandler/StatusEdit.php
+index 6b8f55972..dcc1ca246 100644
+--- a/vendor/kount/magento2-kount360/Model/Ens/EventHandler/StatusEdit.php
++++ b/vendor/kount/magento2-kount360/Model/Ens/EventHandler/StatusEdit.php
+@@ -20,6 +20,7 @@ class StatusEdit extends EventHandlerOrder implements EventHandlerInterface
+      * @param \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder
+      * @param \Kount\Kount360\Model\Logger $logger
+      * @param \Kount\Kount360\Model\RisService $risService
++     * @param \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
+      */
+     public function __construct(
+         protected \Kount\Kount360\Model\Order\ActionFactory $orderActionFactory,
+@@ -27,9 +28,10 @@ class StatusEdit extends EventHandlerOrder implements EventHandlerInterface
+         protected \Magento\Sales\Api\OrderRepositoryInterface $orderRepository,
+         protected \Magento\Framework\Api\SearchCriteriaBuilder $searchCriteriaBuilder,
+         protected \Kount\Kount360\Model\Logger $logger,
+-        protected RisService $risService
++        protected RisService $risService,
++        protected \Magento\Sales\Model\ResourceModel\Order\CollectionFactory $orderCollectionFactory
+     ) {
+-        parent::__construct($orderRepository, $searchCriteriaBuilder);
++        parent::__construct($orderRepository, $searchCriteriaBuilder, $orderCollectionFactory, $logger);
+     }
+ 
+     /**

@@ -1,0 +1,58 @@
+<?xml version="1.0" ?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+	<table name="apollo_hartehank_log" comment="abbott_hartehanks_hartehank Table" engine="innodb" resource="default">
+		<column name="hartehank_id" identity="true" xsi:type="bigint" nullable="false" unsigned="true" comment="Entity Id" />
+		<column name="product_id" nullable="false" xsi:type="varchar"/>
+		<column name="qty_available" identity="false" nullable="true" xsi:type="int"/>
+		<column name="status" nullable="true" xsi:type="text" comment="Status"/>
+		<column name="message" nullable="true" xsi:type="text" comment="Message"/>
+		<column name="hh_data" nullable="true" xsi:type="text" comment="Data"/>
+		<column name="created_at" default="CURRENT_TIMESTAMP" nullable="true" xsi:type="timestamp" comment="Created At"/>
+		<column name="updated_at" default="CURRENT_TIMESTAMP" nullable="true" xsi:type="timestamp" on_update="true" comment="Updated At"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="hartehank_id"/>
+		</constraint>
+	</table>
+	<table name="apollo_hartehank_placeorder_log" comment="abbott_hartehanks_hartehank Table" engine="innodb" resource="default">
+		<column name="hartehank_id" comment="Entity Id" identity="true"  nullable="false" unsigned="true" xsi:type="bigint"/>
+		<column name="order_id" nullable="false" xsi:type="varchar"/>
+		<column name="website" identity="false" nullable="true" xsi:type="int"/>
+		<column name="status" nullable="true" xsi:type="text" comment="Status"/>
+		<column name="message" nullable="true" xsi:type="text" comment="Message"/>
+		<column name="hh_data" nullable="true" xsi:type="text" comment="Data"/>
+		<column name="created_at" default="CURRENT_TIMESTAMP" nullable="true" xsi:type="timestamp" comment="Created At"/>
+		<column name="updated_at" default="CURRENT_TIMESTAMP" nullable="true" xsi:type="timestamp" on_update="true" comment="Updated At"/>
+		<column name="hh_req_id" comment="Entity Id" nullable="false" xsi:type="int"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="hartehank_id"/>
+		</constraint>
+	</table>
+	<table name="apollo_hartehank_findorder_log" comment="Find Order Log Table" engine="innodb" resource="default">
+		<column name="hhfindorder_id" comment="Row Id" identity="true"  nullable="false" unsigned="true" xsi:type="bigint"/>
+		<column name="created_at" nullable="true" xsi:type="date" comment="Created At"/>
+		<column name="updated_at" default="CURRENT_TIMESTAMP" nullable="true" xsi:type="timestamp" on_update="true" comment="Updated At"/>
+		<column name="first_order_date" default="CURRENT_TIMESTAMP" nullable="true" xsi:type="timestamp" comment="First Order Date"/>
+		<column name="last_order_date" default="CURRENT_TIMESTAMP" nullable="true" xsi:type="timestamp" comment="Last Order Date"/>
+		<constraint referenceId="PRIMARY" xsi:type="primary">
+			<column name="hhfindorder_id"/>
+		</constraint>
+	</table>
+	<table name="sales_order" comment="Sales Order Table" engine="innodb" resource="default">
+		<column name="retry_count" comment="Retry Tracker" xsi:type="int" default="0" nullable="true"/>
+	</table>
+    <table name="apollo_hartehank_processing_orders" comment="HH Processing Orders" engine="innodb" resource="default">
+        <column name="entity_id" comment="Entity Id" identity="true" nullable="false" unsigned="true"
+                xsi:type="int"/>
+        <column xsi:type="int" name="order_id" unsigned="true" nullable="false" comment="Order Entity ID"/>
+        <column xsi:type="varchar" name="order_increment_id" nullable="true" length="50" comment="Order Increment ID"/>
+        <column name="created_at" default="CURRENT_TIMESTAMP" nullable="true" xsi:type="timestamp"
+                comment="Created At"/>
+        <constraint referenceId="PRIMARY" xsi:type="primary">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="HH_PO_SALES_ORDER_ID" indexType="btree">
+            <column name="order_id"/>
+            <column name="order_increment_id"/>
+        </index>
+    </table>
+</schema>

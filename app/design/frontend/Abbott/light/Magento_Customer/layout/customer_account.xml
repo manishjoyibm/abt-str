@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+
+<page layout="2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceContainer name="page.wrapper">
+      <block class="Magento\Framework\View\Element\Template"
+          name="validation"
+          template="Magento_Theme::validation.phtml"/>
+    </referenceContainer>
+    <body>
+    <referenceBlock name="customer-account-navigation-2fa-frontend" remove="true"/>
+       <referenceBlock name="customer-account-navigation-account-link">
+           <arguments>
+               <argument name="label" xsi:type="string" translate="true">Account Preferences</argument>
+           </arguments>
+       </referenceBlock>
+       <referenceBlock name="customer-account-navigation-address-link">
+           <arguments>
+               <argument name="sortOrder" xsi:type="number">10</argument>
+           </arguments>
+       </referenceBlock>
+       <referenceBlock name="sidebar.main.account_nav">
+            <arguments>
+                <argument name="block_title" translate="true" xsi:type="string">Account Preferences</argument>
+            </arguments>
+       </referenceBlock>
+       <referenceBlock name="customer-account-navigation-return-history-link">
+           <arguments>
+               <argument name="sortOrder" xsi:type="number">20</argument>
+           </arguments>
+       </referenceBlock>
+       <referenceBlock name="customer-account-navigation-my-credit-cards-link">
+           <arguments>
+               <argument name="label" xsi:type="string" translate="true">My Credit Cards</argument>
+           </arguments>
+       </referenceBlock>
+       <referenceBlock name="customer-account-navigation-checkout-sku-link" remove="true"/>
+       <referenceBlock name="customer-account-navigation-downloadable-products-link" remove="true"/>
+       <referenceBlock name="customer-account-navigation-wish-list-link" remove="true"/>
+       <referenceBlock name="customer-account-navigation-account-edit-link" remove="true"/>
+       <referenceBlock name="customer-account-navigation-gift-card-link" remove="true"/>
+       <referenceBlock name="customer-account-navigation-customer-balance-link" remove="true"/>
+       <referenceBlock name="customer-account-navigation-reward-link" remove="true"/>
+       <referenceBlock name="customer-account-navigation-giftregistry-link" remove="true"/>
+       <referenceBlock name="customer-account-navigation-product-reviews-link" remove="true"/>
+       <referenceBlock name="customer-account-navigation-magento-invitation-link" remove="true"/>
+       <referenceBlock name="customer-account-navigation-delimiter-1" remove="true"/>
+       <referenceBlock name="customer-account-navigation-delimiter-2" remove="true"/>  
+    </body>
+</page>

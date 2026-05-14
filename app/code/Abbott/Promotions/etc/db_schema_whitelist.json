@@ -1,0 +1,9 @@
+{
+    "salesrule": {
+        "column": {
+            "enable_max_price_rule": true,
+            "enable_error_message": true,
+            "custom_error_message": true
+        }
+    }
+}

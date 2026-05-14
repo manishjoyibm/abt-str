@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <abbott_dps>
+            <general>
+                <enable>1</enable>
+                <cron_enable>1</cron_enable>
+                <cron_expr>0 0 * * *</cron_expr>
+                <file_url>https://api.trade.gov/static/consolidated_screening_list/consolidated.json</file_url>
+                <error_message>Sorry, your order has been declined. Error code: DPS.</error_message>
+            </general>
+            <percentage_match>
+                <name>85</name>
+                <street>80</street>
+                <city>80</city>
+                <zip>80</zip>
+            </percentage_match>
+        </abbott_dps>
+    </default>
+</config>

@@ -1,0 +1,6 @@
+<?php if ($block->getSubscriptionHistorySetting()): ?>
+    <h2><b> <?= __('Subscription History Logs') ?> </b></h2>
+    <hr>
+    <?= $block->getGridHtml() ?>
+<?php endif; ?>
+

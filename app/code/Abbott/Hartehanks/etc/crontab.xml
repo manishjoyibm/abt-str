@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="hh_inventory_cron" instance="Abbott\Hartehanks\Model\HartehankSync" method="execute">
+        	<schedule>30 7 * * *</schedule>
+        </job>
+        <job name="harthank_log_delete" instance="Abbott\Hartehanks\Model\HartehankSync" method="deleteHhLogData">
+            <schedule>0 0 * * *</schedule>
+        </job>
+        <job name="abbott_hh_placeorder_cron" instance="Abbott\Hartehanks\Model\HartehankPlaceOrderSync" method="execute">
+            <config_path>hartehanks/hh_cron/po_cron_expr</config_path>
+        </job>
+        <job name="hh_placeorder_log_delete" instance="Abbott\Hartehanks\Model\HartehankPlaceOrderSync" method="deleteHhLogData">
+            <schedule>0 0 * * *</schedule>
+        </job>
+        <job name="abbott_hh_findorder_cron" instance="Abbott\Hartehanks\Model\HartehankFindOrderSync" method="execute">
+            <config_path>hartehanks/hh_cron/fo_cron_expr</config_path>
+        </job>
+    </group>
+</config>

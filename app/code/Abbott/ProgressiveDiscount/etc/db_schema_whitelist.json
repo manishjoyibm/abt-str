@@ -1,0 +1,27 @@
+{
+    "manage_discount_rules": {
+        "column": {
+            "row_id": true,
+            "months": true,
+            "discount": true,
+            "plan": true,
+            "promotional_sku": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "manage_monthly_subscription": {
+        "column": {
+            "row_id": true,
+            "profile_id": true,
+            "current_month": true,
+            "customer_email": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <stock_management>
+            <configuration>
+                <enabled>1</enabled>
+                <product_message>We don't have as many %1 as you requested. Please adjust your cart to a quantity of %2 and check back for additional inventory.</product_message>
+            </configuration>
+        </stock_management>
+    </default>
+    <stores>
+        <new_similac>
+            <stock_management>
+                <configuration>
+                    <enabled>0</enabled>
+                </configuration>
+            </stock_management>
+        </new_similac>
+        <abbott>
+            <stock_management>
+                <configuration>
+                    <enabled>1</enabled>
+                </configuration>
+            </stock_management>
+        </abbott>
+        <glucerna>
+            <stock_management>
+                <configuration>
+                    <enabled>0</enabled>
+                </configuration>
+            </stock_management>
+        </glucerna>
+    </stores>
+</config>

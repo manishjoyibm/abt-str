@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="aw_sarp2_process_payments" instance="Abbott\Sarp2\Cron\ProcessPayments" method="execute">
+            <config_path>aw_sarp2/aw_crons1/payment_expr</config_path>
+        </job>
+        <job name="aw_sarp2_process_notifications" instance="Abbott\Sarp2\Cron\ProcessNotifications" method="execute">
+            <config_path>aw_sarp2/aw_crons2/notify_expr</config_path>
+        </job>
+        <job name="aw_sarp2_process_sample_payments" instance="Abbott\Sarp2\Cron\ProcessSamplePayments" method="execute">
+            <config_path>aw_sarp2/aw_crons3/sample_payment_expr</config_path>
+        </job>
+        
+         <job name="abbott_sarp2_annual_reminder_cron"
+             instance="Abbott\Sarp2\Cron\AnnualReminderCron"
+             method="execute">
+            <!-- Use system config: abbott_sarp2/annual_reminder/cron_expression -->
+            <config_path>annual_reminder_section/annual_reminder/cron_expression</config_path>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,15 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+ */
+
+
+return [
+    [1, 'day', 1, 10, '', null, 1, 1, 5],
+    [2, 'day', 1, 10, '', null, 1, 0, 0],
+    [3, 'day', 1, 10, '', null, 0, 0, 0],
+    [4, 'day', 1, 10, '', null, 1, 1, 5],
+    [5, 'week', 1, 10, '', null, 1, 1, 5],
+    [6, 'month', 1, 10, '', null, 1, 1, 5]
+];

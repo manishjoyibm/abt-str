@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <targetbase_integration>
+            <targetbase>
+                <targetbase_order_filename>TargetBaseExport_ORDER</targetbase_order_filename>
+                <targetbase_customer_filename>TargetBaseExport_CUSTOMER</targetbase_customer_filename>
+                <targetbase_folder_order>Targetbase/Orders/</targetbase_folder_order>
+                <targetbase_archive_folder_order>Targetbase/Orders/Archive/</targetbase_archive_folder_order>
+                <targetbase_folder_customer>Targetbase/Customers/</targetbase_folder_customer>
+                <targetbase_archive_folder_customer>Targetbase/Customers/Archive/</targetbase_archive_folder_customer>
+                <targetbase_sftp_folder_order>Targetbase/Orders/</targetbase_sftp_folder_order>
+                <targetbase_sftp_archive_folder_order>Targetbase/Orders/Archive/</targetbase_sftp_archive_folder_order>
+                <targetbase_sftp_folder_customer>Targetbase/Customers/</targetbase_sftp_folder_customer>
+                <targetbase_sftp_archive_folder_customer>Targetbase/Orders/Archive/</targetbase_sftp_archive_folder_customer>
+                <targetbase_last_order_file>order_export.csv</targetbase_last_order_file>
+                <targetbase_last_customer_file>customer_export.csv</targetbase_last_customer_file>
+                <targetbase_archive_folder_deldays>30</targetbase_archive_folder_deldays>
+                <targetbase_onetime>1</targetbase_onetime>
+                <targetbase_onetime_date>2020-04-24</targetbase_onetime_date>
+                <targetbase_filecreate_expr>30 19 * * 1</targetbase_filecreate_expr>
+                <targetbase_filesync_expr>30 20 * * 1</targetbase_filesync_expr>
+                <timeout>30</timeout>
+            </targetbase>
+            <targetbase_email_template>
+				<email_template>targetbase_integration_targetbase_email_template_email_template</email_template>
+                <report_email_template>targetbase_integration_targetbase_email_template_report_email_template</report_email_template>
+				<sender>general</sender>
+            </targetbase_email_template>
+        </targetbase_integration>
+    </default>
+</config>

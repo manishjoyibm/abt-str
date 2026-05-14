@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Abbott\CreditCards\Model\Method\VirtualDebug" type="Magento\Framework\Logger\Handler\Base">
+        <arguments>
+            <argument name="fileName" xsi:type="string">/var/apolloLog/saveccard.log</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="Abbott\CreditCards\Model\Method\VirtualLogger" type="Magento\Framework\Logger\Monolog">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="debug" xsi:type="object">Abbott\CreditCards\Model\Method\VirtualDebug</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Abbott\CreditCards\Model\Method\Logger">
+        <arguments>
+            <argument name="logger" xsi:type="object">Abbott\CreditCards\Model\Method\VirtualLogger</argument>
+        </arguments>
+    </type>
+
+</config>

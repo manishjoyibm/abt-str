@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <preference for="Abbott\PasswordHistory\Api\Data\UsedPasswordInterface" type="Abbott\PasswordHistory\Model\UsedPassword"/>
+    <preference for="Abbott\PasswordHistory\Api\UsedPasswordRepositoryInterface" type="Abbott\PasswordHistory\Model\UsedPasswordRepository"/>
+    <preference for="Abbott\PasswordHistory\Api\UsedPasswordManagementInterface" type="Abbott\PasswordHistory\Model\UsedPasswordManagement"/>
+
+    <type name="Magento\Customer\Api\AccountManagementInterface">
+        <plugin name="abbott_password_history_plugin" type="Abbott\PasswordHistory\Plugin\AccountManagementPlugin" />
+    </type>
+
+    <type name="Magento\Customer\Controller\Account\CreatePassword">
+        <plugin name="abbott_password_history_createpassword_controller_plugin" type="Abbott\PasswordHistory\Plugin\Controller\Account\CreatePasswordPlugin" />
+    </type>
+</config>

@@ -1,0 +1,40 @@
+<?php if ($block->getCustomerVaults()) { ?>
+    <fieldset class="fieldset">
+        <legend class="legend">
+            <span><?php echo $block->escapeHtml(__('Stored Cards')); ?></span>
+        </legend>
+        <form name="sarp2_vault_list" class="sarp2_vault_list" method="post" action="<?php echo $block->getUrl("awsarp2/subscription/changevault", ['profile_id' => $block->getProfileId()]) ?>">
+            <div class="payment-method fieldset" style="margin-top : 4em;">
+                <?php
+
+                foreach ($block->getCustomerVaults() as $card) {
+                    $details = $block->getCardDetailsArray($card->getDetails());
+                    $type = isset($details['type']) ? strtolower($details['type']) : null;
+                    $maskedCC = isset($details['maskedCC']) ? $details['maskedCC'] : null;
+                    $expirationDate = isset($details['expirationDate']) ? $details['expirationDate'] : null;
+                    if ($card->getIsActive() && $maskedCC && $expirationDate) {
+                ?>
+
+                        <div class="payment-method-title field choice">
+                            <input type="radio" name="payment[vaultId]" class="radio" id="braintree_cc_vault_<?= $card->getId() ?>" value="<?= $card->getId() ?>">
+                            <label class="label" for="braintree_cc_vault_<?= $card->getId() ?>">
+                                <img class="payment-icon" src="<?= $block->getViewFileUrl("Magento_Payment/images/cc/$type.png") ?>" style="vertical-align: middle;" width="40">
+                                <span>ending </span><span><?= $maskedCC ?></span> ( <span>expires</span>: <span><?= $expirationDate ?></span> )
+                            </label>
+                        </div>
+
+                <?php }
+                } ?>
+                <div class="actions-toolbar">
+                    <div class="primary">
+                        <button class="action primary" type="submit">
+                            <span><?php echo $block->escapeHtml(__('Save Payment')); ?></span>
+                        </button>
+                    </div>
+                </div>
+                <input type="hidden" name="form_key" value="<?php echo $block->getFormKey() ?>" />
+            </div>
+        </form>
+    </fieldset>
+
+<?php } ?>

@@ -1,0 +1,122 @@
+.label_animation {
+    font-size: 20px; 
+    color: @secondary !important; 
+    letter-spacing: 0; 
+    line-height: 24px; 
+    font-family: @text_font; 
+    font-weight: 400; 
+    text-align: left;
+    transition: all .5s ease; 
+    padding: 0;
+    span {
+        font-size: 22px !important;
+        line-height: 24px !important;
+        font-family: @text_font; 
+        font-weight: 400 !important; 
+    }
+}
+
+.label_focus_animation {
+    font-size: 18px; 
+    color: @secondary; 
+    letter-spacing: 0; 
+    line-height: 24px; 
+    font-family: @text_font; 
+    font-weight: 700; 
+    text-align: left;
+    transition: all .5s ease; 
+    padding: 0;
+    span {
+        font-size: 18px !important;
+        line-height: 24px !important;
+        font-family: @text_font; 
+        font-weight: 700 !important; 
+    }
+}
+
+.account form .fieldset .field, .checkout-index-index .fieldset.address .field {
+    &.fet {
+        position: relative;
+        margin: 0 0 25px;
+        display: inline-block;
+        label {
+            position: absolute;
+            left: 15px;
+            width: 90% !important;
+            top: 27px;            
+            z-index: 2;            
+            &:extend(.label_animation all);
+        }
+        .control {
+            position: relative;
+            z-index: 1;
+            margin: 20px 0 0;
+        } 
+        label.labelfocus {
+            top: -6px;
+            left: 0;
+            transition: all .5s ease;
+            z-index: 2;
+            &:extend(.label_focus_animation all);
+        }  
+        &.select {
+            .select, select {
+                background-clip: padding-box;
+            }
+            .control {
+                margin: 0;
+            } 
+            label, label.labelfocus {
+                position: relative;
+                top: 0;
+                z-index: 1;
+                left: 0;
+                &:extend(.label_focus_animation all);
+            }
+            &.has-content {
+                z-index: 0;
+            }
+        } 
+        &.has-content {
+            z-index: 0;
+            label, label.labelfocus {
+                top: -6px;
+                left: 0;
+                z-index: 2;
+                &:extend(.label_focus_animation all);
+            }
+        }
+        &._required, &.required {
+            label {
+                &:after {
+                    opacity: 1;
+                    content: "*";
+                    color: @secondary;
+                    opacity: 1;
+                    display: inline-block;
+                }
+            }
+            .control {
+                label {
+                    &:after {
+                        display: none;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.checkout-index-index {
+    .fieldset.address {
+        .field {
+            &.fet {
+                width: 100%;
+            }
+        }
+    }
+}
+
+
+
+

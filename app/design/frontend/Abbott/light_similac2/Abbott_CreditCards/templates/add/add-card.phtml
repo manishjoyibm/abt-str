@@ -1,0 +1,28 @@
+﻿<form
+    class="form"
+    action="<?= $block->escapeUrl($block->getUrl('card/add/newcard')) ?>"
+    method="post"
+    >
+    <button type="submit" class="action addcard">
+        <span><?= $block->escapeHtml(__('Add New Payment Method')) ?></span>
+    </button>
+</form>
+<?php
+$helper = $this->helper('Abbott\MyAccount\Helper\Data');
+if($helper->getConfigGoogleAnalyticsEnable())
+{
+ ?>
+<script type="text/javascript">
+  require(['jquery', 'jquery/ui'],function(e){
+    jQuery('.addcard').click(function(){
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({ 
+            event: "ga-custom-events", 
+            eventCategory: "add-new-payment-method", 
+            eventAction: "click", 
+            eventLabel: "add-new-payment-method" 
+        });
+    });
+  });
+</script>
+<?php } ?>

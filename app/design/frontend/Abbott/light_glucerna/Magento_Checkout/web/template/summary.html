@@ -1,0 +1,25 @@
+<div class="opc-block-summary glucerna-block-summary" data-bind="blockLoader: isLoading">
+    <span data-bind="i18n: 'Order Summary'" class="title"></span>
+    <table class="free-trial-table" data-bind="visible: checkIsTrial()">
+      <tbody>
+        <tr>
+          <th class="trial-th">YOUR INTRODUCTORY TRIAL</th>
+        </tr>
+        <tr>
+          <th>Introductory Trial</th>
+          <td data-bind="html: getItemShakes()"></td>
+        </tr>
+      </tbody>
+    </table>
+    <table class="product-choosen-table" data-bind="visible: !isTrial">
+      <tbody>
+        <tr>
+          <th>Product Choosen</th>
+          <td data-bind="html: getProductChoosen()"></td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- ko foreach: elems() -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+</div>

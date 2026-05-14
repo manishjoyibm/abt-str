@@ -1,0 +1,6 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+	<menu>
+		<add action="abbott_webhook/webhook/index" id="Abbott_Webhook::webhook" module="Abbott_Webhook" parent="Abbott_WorkdayFeed::system_abbott" resource="Abbott_Webhook::webhook" sortOrder="50" title="Webhook Integration" translate="title"/>
+	</menu>
+</config>

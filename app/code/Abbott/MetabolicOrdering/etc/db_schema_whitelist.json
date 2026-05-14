@@ -1,0 +1,27 @@
+{
+    "metabolic_ordering": {
+        "column": {
+            "entity_id": true,
+            "customer_id": true,
+            "customer_email": true,
+            "sku": true,
+            "admin_user": true,
+            "qty": true,
+            "disable_email": true,
+            "created_at": true,
+            "updated_at": true,
+            "expirt_date": true,
+            "expiry_date": true,
+            "enable_email": true
+        },
+        "index": {
+            "METABOLIC_ORDERING_CUSTOMER_ID": true,
+            "METABOLIC_ORDERING_SKU": true,
+            "METABOLIC_ORDERING_CREATED_AT": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "METABOLIC_ORDERING_CUSTOMER_ID_SKU": true
+        }
+    }
+}

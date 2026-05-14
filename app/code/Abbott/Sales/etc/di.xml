@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\Sales\Block\Order\Email\Items\Order\DefaultOrder" type="Abbott\Sales\Block\Order\Email\Items\Order\DefaultOrder" />
+    <type name="Magento\Sales\Block\Items\AbstractItems">
+		  <plugin name="abbott-sales-plugin-block" type="Abbott\Sales\Plugin\AbstractItems" sortOrder="5" />
+	  </type>
+    <type name="Magento\Sales\Model\AdminOrder\Create">
+		  <plugin name="abbott-sales-admin-order-error" type="Abbott\Sales\Plugin\CreatePlugin" sortOrder="5" />
+	  </type>
+</config>

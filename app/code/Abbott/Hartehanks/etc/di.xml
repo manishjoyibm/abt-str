@@ -1,0 +1,60 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+	<preference for="Abbott\Hartehanks\Api\HarteHankRepositoryInterface" type="Abbott\Hartehanks\Model\HarteHankRepository"/>
+	<preference for="Abbott\Hartehanks\Api\Data\HarteHankInterface" type="Abbott\Hartehanks\Model\Data\HarteHank"/>
+	<preference for="Abbott\Hartehanks\Api\Data\HarteHankSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<preference for="Abbott\Hartehanks\Api\HhPlaceOrderRepositoryInterface" type="Abbott\Hartehanks\Model\HhPlaceOrderRepository"/>
+	<preference for="Abbott\Hartehanks\Api\Data\HhPlaceOrderInterface" type="Abbott\Hartehanks\Model\Data\HhPlaceOrder"/>
+	<preference for="Abbott\Hartehanks\Api\Data\HhPlaceOrderSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<preference for="Magento\InventorySourceDeductionApi\Model\SourceDeductionService" type="Abbott\Hartehanks\Model\SourceDeductionService"/>
+	<preference for="Abbott\Hartehanks\Api\HhFindorderRepositoryInterface" type="Abbott\Hartehanks\Model\HhFindorderRepository"/>
+	<preference for="Abbott\Hartehanks\Api\Data\HhFindorderInterface" type="Abbott\Hartehanks\Model\Data\HhFindorder"/>
+	<preference for="Abbott\Hartehanks\Api\Data\HhFindorderSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+	<type name="Abbott\Hartehanks\Model\ResourceModel\HarteHank\Grid\Collection">
+			<arguments>
+					<argument name="mainTable" xsi:type="string">apollo_hartehank_log</argument>
+					<argument name="eventPrefix" xsi:type="string">abbott_hartehanklog_collection</argument>
+					<argument name="eventObject" xsi:type="string">hartehanklog_collection</argument>
+					<argument name="resourceModel" xsi:type="string">Abbott\Hartehanks\Model\ResourceModel\HarteHank</argument>
+			</arguments>
+	</type>
+	<type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+		<arguments>
+			<argument name="collections" xsi:type="array">
+				<item name="abbott_hartehanks_hartehank_listing_data_source" xsi:type="string">Abbott\Hartehanks\Model\ResourceModel\HarteHank\Grid\Collection</item>
+				<item name="abbott_hartehanks_hhplaceorder_listing_data_source" xsi:type="string">Abbott\Hartehanks\Model\ResourceModel\HhPlaceOrder\Grid\Collection</item>
+			</argument>
+		</arguments>
+	</type>
+	<type name="Abbott\Hartehanks\Model\ResourceModel\HhPlaceOrder\Grid\Collection">
+			<arguments>
+					<argument name="mainTable" xsi:type="string">apollo_hartehank_placeorder_log</argument>
+					<argument name="eventPrefix" xsi:type="string">abbott_hhPlaceOrderlog_collection</argument>
+					<argument name="eventObject" xsi:type="string">hartehanklog_collection</argument>
+					<argument name="resourceModel" xsi:type="string">Abbott\Hartehanks\Model\ResourceModel\HhPlaceOrder</argument>
+			</arguments>
+	</type>
+	<type name="Magento\Rma\Controller\Returns\Submit">
+      <plugin name="return_submit" type="Abbott\Hartehanks\Plugin\Returns\Submit" />
+  </type>
+	<type name="Magento\Rma\Controller\Adminhtml\Rma\Save">
+      <plugin name="rma_save" type="Abbott\Hartehanks\Plugin\Rma\Save" />
+  </type>
+	<virtualType name="Abbott\Hartehanks\Model\Method\VirtualDebug" type="Magento\Framework\Logger\Handler\Base">
+			<arguments>
+					<argument name="fileName" xsi:type="string">/var/apolloLog/hartehank.log</argument>
+			</arguments>
+	</virtualType>
+	<virtualType name="Abbott\Hartehanks\Model\Method\VirtualLogger" type="Magento\Framework\Logger\Monolog">
+			<arguments>
+					<argument name="handlers" xsi:type="array">
+							<item name="debug" xsi:type="object">Abbott\Hartehanks\Model\Method\VirtualDebug</item>
+					</argument>
+			</arguments>
+	</virtualType>
+	<type name="Abbott\Hartehanks\Model\Method\Logger">
+			<arguments>
+					<argument name="logger" xsi:type="object">Abbott\Hartehanks\Model\Method\VirtualLogger</argument>
+			</arguments>
+	</type>
+</config>

@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Cache/etc/cache.xsd">
+    <type name="onetrust_cache_type_id" translate="label,description" instance="Abbott\OneTrust\Model\Cache\Type\CacheType">
+        <label>OneTrust Cache</label>
+        <description>OneTrust Data Cache</description>
+    </type>
+</config>

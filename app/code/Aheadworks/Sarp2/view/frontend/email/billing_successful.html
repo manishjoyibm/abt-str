@@ -1,0 +1,28 @@
+<!--@subject {{trans "Subscription billing successful"}} @-->
+<!--@vars {
+"layout handle=\"aw_sarp2_email_order_items\" order=$order area=\"frontend\"":"Subscription Items Grid"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro">
+        <td>
+            <p class="greeting">{{trans "Hello, %customerName," customerName=$customerName}}</p>
+            <p>{{trans "We have processed your subscription payment successfully."}}</p>
+        </td>
+    </tr>
+    <tr class="email-information">
+        <td>
+            <p>{{trans "Subscription product(s):"}}</p>
+            {{layout handle="aw_sarp2_email_order_items" order=$order area="frontend"}}
+            <p>{{trans "Total payment amount: %totalPaid" totalPaid=$totalPaid|raw}}</p>
+            {{if nextPaymentDate}}
+                <p>{{trans "The next payment date: %nextPaymentDate" nextPaymentDate=$nextPaymentDate}}</p>
+            {{/if}}
+            <p>{{trans "The invoice for this payment will be sent in a separate email."}}</p>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

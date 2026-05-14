@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Theme\Model\View\Design">
+        <arguments>
+             <argument name="themes" xsi:type="array">
+                 <item name="adminhtml" xsi:type="string">Abbott/backend</item>
+             </argument>
+         </arguments>
+    </type>
+    <preference for="Magento\Sales\Block\Adminhtml\Order\Create\Search\Grid" type="Abbott\OrderManagement\Block\Adminhtml\Order\Create\Search\Grid" />
+    <preference for="Magento\Customer\Block\Adminhtml\Edit\Tab\Orders" type="Abbott\OrderManagement\Block\Adminhtml\Edit\Tab\Orders" />
+    <preference for="Magento\Sales\Block\Adminhtml\Order\Create\Search\Grid\DataProvider\ProductCollection" type="Abbott\OrderManagement\Block\Adminhtml\Order\Create\Search\Grid\DataProvider\ProductCollection" />
+    <type name="Magento\Sales\Controller\Adminhtml\Order\Cancel">
+            <plugin name="order_cancel" type="Abbott\OrderManagement\Plugin\Controller\Adminhtml\Order\CancelOrder" sortOrder="10" disabled="false"/>
+    </type>
+    <type name="Magento\Backend\Block\Widget\Button\Toolbar">
+        <plugin name="cancelButton" type="Abbott\OrderManagement\Plugin\Block\Widget\Button\Toolbar" />
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\View\Tab\History">
+        <plugin name="adminNameOrderCommentHistory" type="Abbott\OrderManagement\Plugin\Sales\Block\Adminhtml\Order\View\Tab\History" />
+    </type>
+	<preference for="Magento\Sales\Controller\Adminhtml\Order\MassCancel" type="Abbott\OrderManagement\Controller\Adminhtml\Order\MassCancel" />
+    <type name="PayPal\Braintree\Block\Form">
+        <plugin name="countryCode" type="Abbott\OrderManagement\Plugin\Block\Form" />
+    </type>
+    <!-- Cancel button for suspected fraud -->
+    <type name="Magento\Sales\Model\Order">
+        <plugin name="vendor_cancel_override_plugin" type="Abbott\OrderManagement\Plugin\OrderCanCancelPlugin" sortOrder="10" disabled="false"/>
+    </type>
+</config>

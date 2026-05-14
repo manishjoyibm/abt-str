@@ -1,0 +1,5 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework-message-queue:etc/topology.xsd">
+    <exchange name="abbott-gratis-report" type="topic" connection="db">
+        <binding id="AbbottGratisReport" topic="abbott.gratis.report" destinationType="queue" destination="abbott_gratis_export_report"/>
+    </exchange>
+</config>

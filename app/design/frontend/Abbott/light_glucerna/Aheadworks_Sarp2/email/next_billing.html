@@ -1,0 +1,44 @@
+<!--@subject {{trans "Notification for your upcoming Schedule & Save order"}} @-->
+<!--@vars {
+"layout handle=\"aw_sarp2_email_profile_items\" profile=$profile area=\"frontend\"":"Subscription Items Grid"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="email-intro bg-white">
+        <td style="padding: 20px;">
+            <p><b>{{trans "Dear %customerName," customerName=$customerName}}</b></p>
+        </td>
+    </tr>
+    <tr class="email-information bg-white">
+        <td style="padding: 20px;">
+            <p>{{trans "Your Schedule & Save order will be processed on %nextPaymentDate. If this date falls on weekend or holiday, your order will be processed the next business day." nextPaymentDate=$nextPaymentDate}}</p>
+            <p class="mb25">{{trans "Your Schedule & Save Subscription can be updated by logging in to your account at "}}<a href="{{customVar code=glucernastore_url}}">{{trans "%store_name.com" store_name=$store.frontend_name}}</a>{{trans " and viewing My Account--My Scheduled Orders. Any Subscription changes within 24 hours of order generation will need to be completed by contacting %store_name.com Customer Service at %store_phone,%store_hours " store_name=$store.frontend_name store_phone=$store_phone store_hours=$store_hours |raw}}</p>
+            <p class="mb25">{{trans "Once your order ships, you will receive an additional email with tracking details."}}</p>
+            <p class="mb25">{{trans 'For additional questions or concerns and to contact Customer Service, '}}<a href="{{customVar code=glucerna_contactus_url}}">{{trans"click here"}}</a>.</p>
+            <p class="mb25">{{trans "Once again, thank you for your business with "}}<a href="{{customVar code=glucernastore_url}}">{{trans "%store_name.com" store_name=$store.frontend_name}}</a>.</p>
+            <p class="mb25">{{trans "Kind regards,"}}</p>
+            <p class="mb25">{{trans "%store_name.com " store_name=$store.frontend_name}}
+                <a href="{{customVar code=glucerna_contactus_url}}">{{trans "Customer Service Team"}}</a>
+                {{depend store_phone}} {{trans '<a href="tel:%store_phone">(%store_phone)</a>' store_phone=$store_phone |raw}}{{/depend}}
+            </p>
+        </td>
+    </tr>
+</table>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 20px solid #d5652c">
+    <tr>
+        <td class="pb0">
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="dark-red-bg">
+                        <a class="shop-now-btn border-none glucerna-block" href="{{customVar code=glucernastore_url}}" target="_blank">{{trans "SHOP NOW >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

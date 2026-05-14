@@ -1,0 +1,33 @@
+<script type="text/javascript">
+  require(['jquery', 'jquery/ui'],function(e){
+    jQuery('.edit').click(function(){
+      window.dataLayer = window.dataLayer || [];
+      dataLayer.push({
+            event: "ga-custom-events",
+            eventCategory: "edit-payment-method",
+            eventAction: "click",
+            eventLabel: "edit-payment-method "
+        });
+    });
+
+    jQuery('.delete').click(function(){
+      window.dataLayer = window.dataLayer || [];
+      dataLayer.push({
+            event: "ga-custom-events",
+            eventCategory: "edit-payment-method",
+            eventAction: "click",
+            eventLabel: "edit-payment-method_delete"
+        });
+    });
+
+    jQuery('#edit_card').submit(function(){
+      window.dataLayer = window.dataLayer || [];
+       dataLayer.push({
+            event: "ga-custom-events",
+            eventCategory: "edit-payment-method",
+            eventAction: "submit",
+            eventLabel: "edit-payment-method_submit"
+        });
+    });
+  });
+</script>

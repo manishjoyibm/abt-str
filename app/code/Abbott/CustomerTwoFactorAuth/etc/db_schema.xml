@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="abbott_customer_two_fa"
+           resource="default"
+           engine="innodb"
+           comment="Customer 2FA Table">
+
+        <!-- Primary key -->
+        <column xsi:type="int"
+                name="entity_id"
+                unsigned="true"
+                identity="true"
+                nullable="false"
+                comment="Entity Id"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+
+        <!-- Business columns -->
+        <column xsi:type="varchar"
+                name="email"
+                length="255"
+                nullable="false"
+                comment="Email"/>
+
+        <column xsi:type="varchar"
+                name="otp"
+                length="100"
+                nullable="false"
+                comment="One Time Password"/>
+
+        <!-- Keep IP for audit/reporting; not used for uniqueness -->
+        <column xsi:type="varchar"
+                name="ip_address"
+                length="100"
+                nullable="true"
+                comment="IP Address"/>
+
+        <column xsi:type="int"
+                name="times"
+                unsigned="true"
+                nullable="false"
+                default="1"
+                comment="Times"/>
+
+        <column xsi:type="timestamp"
+                name="created_at"
+                on_update="false"
+                nullable="false"
+                default="CURRENT_TIMESTAMP"
+                comment="Created At"/>
+
+        <column xsi:type="timestamp"
+                name="updated_at"
+                on_update="true"
+                nullable="false"
+                default="CURRENT_TIMESTAMP"
+                comment="Updated At"/>
+
+        <!-- Enforce single active record per email -->
+        <constraint xsi:type="unique" referenceId="ABBOTT_CUSTOMER_TWO_FA_EMAIL_UNQ">
+            <column name="email"/>
+        </constraint>
+
+        <!-- Optional non-unique index for faster lookups by IP -->
+        <index referenceId="ABBOTT_CUSTOMER_TWO_FA_IP_IDX">
+            <column name="ip_address"/>
+        </index>
+
+    </table>
+</schema>

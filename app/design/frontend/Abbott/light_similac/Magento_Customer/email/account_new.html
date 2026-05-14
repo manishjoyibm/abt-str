@@ -1,0 +1,39 @@
+<!--@subject {{trans "Welcome to %store_name" store_name=$store.getFrontendName()}} @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="text-block bg-white">
+        <td style="background: #17b4ed;padding: 15px 20px;">
+            <h1>{{trans "welcome to the club!"}}</h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="padding: 20px;">
+            <p class="mb25 light-blue">{{trans "Dear %name," name=$customer.name}}</p>
+            <p class="mb25">{{trans "Welcome to the Similac Sisterhood of Motherhood Savings Club™!"}}</p>
+            <p class="mb25">
+                {{trans "We trust you will find it to be your most convenient and cost-effective way to stay stocked up on fresh-from-the-source Similac® infant formulas, and enjoy the premium benefits of:"}}
+            </p>
+            <ul class="ml30">
+                <li><b><i>{{trans "Exclusive discounts on your favorite Similac formulas"}}</i></b></li>
+                <li><b><i>{{trans "Free shipping on monthly deliveries from Similac tailored to the needs of you and your little one"}}</i></b></li>
+                <li><b><i>{{trans "The flexibility to cancel or update your subscription at any time, track your orders, and more"}}</i></b></li>
+            </ul>
+            <p class="mb25">{{trans "At the Similac Sisterhood of Motherhood Savings Club, we embrace mothers who embrace motherhood. And we’re glad to welcome you in."}}</p>
+            <p class="mb25">{{trans 'For questions, please contact '}}<a href="{{customVar code=similac_contactus_url}}">{{trans"Customer Service Team"}}</a></p>
+            <p class="mb25">{{trans "Warm regards,"}}</p>
+            <p class="mb25">{{trans "Similac Sisterhood of Motherhood Savings Club Customer Service Team"}}
+               {{depend store_phone}} {{trans '<a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}
+            </p>
+        </td>
+    </tr>
+</table>
+
+
+{{template config_path="design/email/footer_template"}}

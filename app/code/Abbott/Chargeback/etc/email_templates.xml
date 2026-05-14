@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+ 
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:Magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="chargeback_settings_chargeback_admin_email_chargeback_template" label="Chargeback Admin Notification Email template" file="chargeback_email_template.html" type="html" module="Abbott_Chargeback" area="frontend"/>
+    <template id="chargeback_settings_kount_email_settings_kount_template" label="Kount Email template" file="kount_email_template.html" type="html" module="Abbott_Chargeback" area="frontend"/>
+</config>

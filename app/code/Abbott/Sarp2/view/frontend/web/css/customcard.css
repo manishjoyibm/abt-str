@@ -1,0 +1,4 @@
+.payment-method-braintree .cvv{
+    max-width: 215px !important;
+    position: relative;
+}

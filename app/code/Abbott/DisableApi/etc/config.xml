@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <abbott_disable_gq_api>
+            <grpahql_api>
+                <enable_create_customer>1</enable_create_customer>
+                <enable_isemail_available>1</enable_isemail_available>
+                <enable_sendemailto_friend>1</enable_sendemailto_friend>               
+            </grpahql_api>  
+        </abbott_disable_gq_api>
+    </default>
+</config>

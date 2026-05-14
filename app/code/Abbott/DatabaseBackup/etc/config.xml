@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<database_backup>
+			<configuration>
+                <enable>1</enable>
+                <cron_expression> 0 */8 * * *</cron_expression>
+                <bucker_name></bucker_name>
+                <s3_key></s3_key>
+                <s3_secret></s3_secret>
+                <aws_region>us-east-1</aws_region>
+                <version>latest</version>
+			</configuration>
+		</database_backup>
+	</default>
+</config>

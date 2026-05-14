@@ -1,0 +1,50 @@
+<!--@subject {{trans "Workday Feed Report"}}@-->
+
+<!--@styles
+.wrapper .heading th, .wrapper .data td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.wrapper {
+  width: 100%;
+}
+.report{
+  align:center;
+}
+@-->
+
+{{template config_path="design/email/header_template"}}
+{{trans "The system processed the following files "}}{{var file_name}}{{trans " on "}}{{var creation_time}}
+<h2 id="report" class = "report"> WorkDay Weekly Employee Report</h2>
+<table aria-describedby="report" class="wrapper">
+  <tr style="text-align: center" class="heading">
+    <th scope="col">
+      <h3>Records</h3>
+    </th>
+    <th scope="col">
+      <h3>Count</h3>
+    </th>
+  </tr>
+  <tr style="text-align: center" class="data">
+    <td>Added</td>
+    <td>{{var added}}</td>
+  </tr>
+  <tr style="text-align: center" class="data">
+    <td>Modified</td>
+    <td>{{var modifed}}</td>
+  </tr>
+  <tr style="text-align: center" class="data">
+    <td>Shifted</td>
+    <td>{{var shifted}}</td>
+  </tr>
+  <tr style="text-align: center" class="data">
+    <td>Failed</td>
+    <td>{{var failed}}</td>
+  </tr>
+  <tr style="text-align: center" class="data">
+    <td>Total</td>
+    <td>{{var total_records}}</td>
+  </tr>
+</table>
+{{trans "For more information on failure records please login to MBO and refer System->Abbott->Inbound Feed Log"}}
+{{template config_path="design/email/footer_template"}}

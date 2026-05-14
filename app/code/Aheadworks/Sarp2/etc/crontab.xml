@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="aw_sarp2_process_payments" instance="Aheadworks\Sarp2\Cron\ProcessPayments" method="execute">
+            <schedule>0 * * * *</schedule>
+        </job>
+        <job name="aw_sarp2_process_notifications" instance="Aheadworks\Sarp2\Cron\ProcessNotifications" method="execute">
+            <schedule>0 * * * *</schedule>
+        </job>
+        <job name="aw_sarp2_process_sample_payments" instance="Aheadworks\Sarp2\Cron\ProcessSamplePayments" method="execute">
+            <schedule>*/10 * * * *</schedule>
+        </job>
+    </group>
+</config>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\CatalogInventory\Model\Source\Backorders">
+        <plugin name="add_option_to_backorder"
+                type="Abbott\StockManagement\Plugin\CatalogInventory\Model\Source\Backorders" sortOrder="1"/>
+    </type>
+    <type name="Abbott\AdditionalAttributes\Model\Resolver\Product\Qty">
+        <plugin name="stock_management_plugin" type="Abbott\StockManagement\Plugin\Model\Resolver\QtyPlugin"/>
+    </type>
+    <type name="Magento\QuoteGraphQl\Model\Resolver\UpdateCartItems">
+        <plugin name="checkqtyplugin" type="Abbott\StockManagement\Plugin\UpdateCartItemPlugin"/>
+        <plugin name="UpdateCartItemsAfterPlugin"
+                type="Abbott\StockManagement\Plugin\UpdateCartItemsAfterPlugin"/>
+    </type>
+    <type name="Magento\Catalog\Model\Product">
+        <plugin name="abbott_rewrite_plugin" type="Abbott\StockManagement\Plugin\Catalog\Model\ProductPlugin"/>
+    </type>
+    <type name="Magento\Quote\Model\Quote">
+        <plugin name="abbott_quote_plugin" type="Abbott\StockManagement\Plugin\Catalog\Model\QuotePlugin"/>
+    </type>
+    <type name="Abbott\PriceInvGql\Model\Resolver\PriceInvGql">
+        <plugin name="abbott_qty_update" type="Abbott\StockManagement\Plugin\Model\Resolver\StockPlugin"/>
+    </type>
+    <type name="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator">
+        <plugin name="Abbott_StockManagement_Plugin" type="Abbott\StockManagement\Plugin\Magento\CatalogInventory\Model\Quote\Item\QuantityValidator" sortOrder="10" disabled="false"/>
+    </type>
+     <preference for="Magento\InventorySales\Model\IsProductSalableForRequestedQtyCondition\IsCorrectQtyCondition" type="Abbott\StockManagement\Model\IsCorrectQtyCondition" />
+     <preference for="Magento\CatalogInventory\Model\StockStateProvider" type="Abbott\StockManagement\Model\StockStateProvider" />
+</config>

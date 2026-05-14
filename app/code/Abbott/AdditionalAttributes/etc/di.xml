@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\CatalogGraphQl\DataProvider\CategoryAttributesMapper" type="Abbott\AdditionalAttributes\DataProvider\CategoryAttributesMapper" />
+    <preference for="Magento\CatalogGraphQl\DataProvider\Category\Query\CategoryAttributeQuery" type="Abbott\AdditionalAttributes\DataProvider\Category\Query\CategoryAttributeQuery" />
+    <type name="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Builder\Category">
+        <plugin name="after-category" type="Abbott\AdditionalAttributes\Plugin\Category" sortOrder="1" />
+    </type>
+    <preference for="Magento\CatalogGraphQl\DataProvider\Product\SearchCriteriaBuilder" type="Abbott\AdditionalAttributes\DataProvider\Product\SearchCriteriaBuilder"/>
+    <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\AttributeOptionProvider" type="Abbott\AdditionalAttributes\DataProvider\Product\LayeredNavigation\AttributeOptionProvider"/>
+    <preference for="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\Builder\Attribute" type="Abbott\AdditionalAttributes\DataProvider\Product\LayeredNavigation\Builder\Attribute"/>
+    <type name="Magento\CatalogGraphQl\DataProvider\Product\LayeredNavigation\LayerBuilder">
+        <plugin name="category_aggregation_order_change" type="Abbott\AdditionalAttributes\Plugin\LayerBuilder"/>
+    </type>
+    <type name="Magento\Framework\GraphQl\Query\Resolver\Argument\SearchCriteria\Builder">
+        <plugin name="remove_is_active_filter" type="Abbott\AdditionalAttributes\Plugin\BuildPlugin"/>
+    </type>
+</config>

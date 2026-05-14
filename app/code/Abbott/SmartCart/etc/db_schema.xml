@@ -1,0 +1,21 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="abbott_smartcart_smartcart">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" identity="true" nullable="false" comment="Id"/>
+        <column xsi:type="datetime" name="created_at" nullable="true" comment="Created At"/>
+        <column xsi:type="datetime" name="updated_at" nullable="true" comment="Updated At"/>
+        <column xsi:type="int" name="store_id" padding="10" unsigned="true" nullable="false" comment="Store Id"/>
+        <column xsi:type="varchar" name="code" length="255" nullable="false" comment="SmartCart Code"/>
+        <column xsi:type="text" name="products" nullable="false" comment="Product Id"/>
+        <column xsi:type="int" name="discount_rule_id" nullable="true" padding="10" comment="Discount Rule Id"/>
+        <column xsi:type="int" name="is_active" nullable="false" default="0" padding="10" comment="Is Active?"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <constraint xsi:type="unique" referenceId="SMARTCART_CODE">
+            <column name="code"/>
+        </constraint>
+    </table>
+    <table name="quote" resource="checkout" comment="Sales Flat Quote">
+        <column xsi:type="boolean" name="is_smart_cart" nullable="true" comment="Is Smart Cart?"/>
+    </table>
+</schema>

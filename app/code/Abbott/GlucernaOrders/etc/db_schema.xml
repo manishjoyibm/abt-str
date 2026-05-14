@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="apollo_glucerna_subscription_plans" resource="default" engine="innodb" comment="Glucerna Subscription Plans">
+        <column xsi:type="int" name="managesubscription_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Subscription Id"/>
+        <column xsi:type="varchar" name="plan_code" nullable="false" length="32" comment="Plan Code"/>
+        <column xsi:type="varchar" name="plan_name" nullable="false" length="32" comment="Plan Name"/>
+        <column xsi:type="varchar" name="plan_label" nullable="false" length="512" comment="Plan Label"/>
+        <column xsi:type="int" name="trial_period" padding="10" unsigned="true" nullable="true" comment="Trial Period"/>
+        <column xsi:type="int" name="plan_value" padding="10" unsigned="true" nullable="false" comment="Plan Value"/>
+        <column xsi:type="varchar" name="plan_price" nullable="false" length="32" comment="Plan Price"/>
+        <column xsi:type="float" name="plan_shipping_rate" unsigned="true" nullable="false" comment="Plan Shipping Rate"/>
+        <column xsi:type="boolean" name="is_trial_plan" nullable="false" default="false" comment="Is Trial Plan"/>
+        <column xsi:type="boolean" name="is_default_plan" nullable="false" default="false" comment="Is Default Plan"/>
+        <column xsi:type="boolean" name="is_active_plan" nullable="false" default="true" comment="Is Active Plan"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="managesubscription_id"/>
+        </constraint>
+    </table>
+    <table name="eav_attribute_option_value" resource="default" engine="innodb" comment="Eav Attribute Option Value">
+        <column xsi:type="varchar" name="value" nullable="true" length="1024" comment="Value"/>
+    </table>
+</schema>

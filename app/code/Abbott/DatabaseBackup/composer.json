@@ -1,0 +1,22 @@
+{
+    "name": "abbott/module-databasebackup",
+    "description": "Daily database dump from MCC to S3 bucker",
+    "type": "magento2-module",
+    "license": "OSL-3.0",
+    "authors": [
+        {
+            "email": "keyur.patel1@abbott.com",
+            "name": "Keyur Patel"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Abbott\\DatabaseBackup\\": ""
+        }
+    }
+}

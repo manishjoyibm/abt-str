@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="customer_account_navigation">
+            <block class="Abbott\CustomerTwoFactorAuth\Block\Customer\AuthNav" 
+            name="customer-account-two-factorauth"
+            after="customer-account-navigation-address-link">
+                <arguments>
+                    <argument name="path" xsi:type="string">customer/loginsecurity</argument>
+                    <argument name="label" xsi:type="string" translate="true">Account Security</argument>
+                    <argument name="sortOrder" xsi:type="number">250</argument>
+                </arguments>
+            </block>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,61 @@
+<?php /* @var \Magento\Framework\View\Element\Template $block */ ?>
+<?php
+  $_shipment = $block->getShipment();
+  $trackUrl = $this->helper(\Abbott\ShippingRestriction\Helper\Data::class)->getFedexTrackerUrl();
+  $shipment_date_time = $this->helper(\Abbott\ShippingRestriction\Helper\Data::class)->getShipmentDate($_shipment);
+  $fedexData = $this->helper(\Abbott\FedexDelay\Helper\Data::class);
+  $isShipped = false;
+ ?>
+<?php
+/* @var \Magento\Sales\Model\Order $_order */
+$_order = $block->getOrder() ?>
+<?php if ($_shipment && $_order) : ?>
+    <?php $trackCollection = $_order->getTracksCollection($_shipment->getId()) ?>
+    <?php if ($trackCollection) : ?>
+        <?php if($fedexData->getFedexValue() && strpos($_order->getShippingDescription(), "Federal Express") !== false){ ?>
+          <p class="mb25" style="font-size:11pt;font-family:Calibri,sans-serif;margin:0 0 18.75pt 0;"><b><span style="font-family: Georgia, serif, serif, EmojiFont;"><?php echo $fedexData->getFedaxMessage()?></span></b></p> 
+        <?php }?>
+        </td>
+        </tr>
+        <tr class="email-information bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 0 15px;display: block;">
+            <table class="order-details detail-table" border="1">
+              <tr>
+                <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('Order Number:')) ?></th>
+                <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?=  $_order->getIncrementId() ?></td>
+              </tr>
+            </table>
+        <table class="border-top-none detail-table mb25" border="1">
+          <tr>
+            <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('Order Shipped:')) ?></th>
+            <?php $shipment_date = date_format($shipment_date_time,"F d, Y").' at '.date_format($shipment_date_time,"H:i:s A"). ' ET'; ?>
+            <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?=  $shipment_date ?></td>
+          </tr>
+          <tr>
+            <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('Shipping Method:')) ?></th>
+            <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?=  $_order->getShippingDescription() ?></td>
+          </tr>
+          <?php if($_shipment->getAllTracks()) : ?>
+          <tr>
+            <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('order shipped via:')) ?></th>
+            <?php foreach ($trackCollection as $_item) : if(!$isShipped): ?>
+              <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml($_item->getTitle()) ?></td>
+            <?php $isShipped = true; endif; endforeach ?>
+          </tr>
+          <tr>
+            <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('tracking number(S):')) ?></th>           
+              <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">
+                <?php if($fedexData->getFedexValue()){ ?>
+                  <p style="font-size:11pt;font-family:Calibri,sans-serif;margin:0 0 18.75pt 0;"><b><span style="font-family: Georgia, serif, serif, EmojiFont;"><?php echo $fedexData->getFedaxMessage()?></span></b></p
+                <?php }?>
+              <?php foreach ($trackCollection as $_item) : ?>
+                <a href="<?= $trackUrl.$_item->getNumber() ?>" target="_blank">
+                    <?= $block->escapeHtml($_item->getNumber()) ?>
+                </a><br/>
+                <?php endforeach ?>
+              </td>          
+          </tr>
+          <?php endif;?>
+        </table>
+    <?php endif; ?>
+<?php endif; ?>

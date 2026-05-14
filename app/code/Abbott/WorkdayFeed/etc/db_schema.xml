@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="apollo_inbound_feed" resource="default" engine="innodb" comment="Inbound Feed">
+        <column xsi:type="bigint" name="feed_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Feed ID"/>
+        <column xsi:type="varchar" name="file_name" nullable="false" length="150" comment="File Name"/>
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" default="CURRENT_TIMESTAMP" on_update="true" nullable="false" comment="Updated At"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="32" comment="Status"/>
+        <column xsi:type="varchar" name="message" nullable="false" length="512" comment="Message"/>
+        <column xsi:type="varchar" name="type" nullable="false" length="32" comment="Type"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="feed_id"/>
+        </constraint>
+    </table>
+    <table name="apollo_inbound_workday_idx" resource="default" engine="innodb" comment="Employee Indexing">
+        <column xsi:type="int" name="row_id" padding="10" unsigned="true" nullable="false" identity="true"
+                comment="Row Id"/>
+        <column xsi:type="varchar" name="upi" nullable="false" length="252"
+                comment="UPI Id"/>
+        <column xsi:type="varchar" name="record_status" nullable="false" length="32"
+                comment="Record Status"/>
+        <column xsi:type="varchar" name="record" nullable="false" length="252" comment="Data"/>
+        <column xsi:type="varchar" name="status" nullable="false" length="32" comment="Status"/>
+        <column xsi:type="varchar" name="message" nullable="true" length="252" comment="Message"/>
+        <column xsi:type="bigint" name="feed_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Feed Id"/>
+        <column xsi:type="timestamp" name="created_at" default="CURRENT_TIMESTAMP" comment="Created At"/>
+        <column xsi:type="timestamp" name="updated_at" default="CURRENT_TIMESTAMP" on_update="true" nullable="false" comment="Updated At"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="row_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="APOLLO_INBOUND_WORKDAY_IDX_FEED_ID_APOLLO_INBOUND_FEED_FEED_ID"
+                    table="apollo_inbound_workday_idx" column="feed_id" referenceTable="apollo_inbound_feed" referenceColumn="feed_id"
+                    onDelete="CASCADE"/>
+    </table>
+
+</schema>

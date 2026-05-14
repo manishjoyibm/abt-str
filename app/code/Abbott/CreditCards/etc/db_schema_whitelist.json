@@ -1,0 +1,13 @@
+{
+    "payment_address_link": {
+        "column": {
+            "payment_token_id": true,
+            "address_id": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "PAYMENT_ADDR_LNK_PAYMENT_TOKEN_ID_VAULT_PAYMENT_TOKEN_ENTT_ID": true,
+            "PAYMENT_ADDR_LNK_ADDR_ID_CSTR_ADDR_ENTT_ENTT_ID": true
+        }
+    }
+}

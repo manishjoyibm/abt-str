@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <abbott_catalog>
+            <general>
+                <disable_sale>0</disable_sale>
+                <disable_sale_sort_order>0</disable_sale_sort_order>
+            </general>
+        </abbott_catalog>
+    </default>
+    <websites>
+        <new_similac_website>
+            <abbott_catalog>
+                <general>
+                    <disable_sale>1</disable_sale>
+                    <disable_sale_sort_order>0</disable_sale_sort_order>
+                </general>
+            </abbott_catalog>
+        </new_similac_website>
+    </websites>
+</config>

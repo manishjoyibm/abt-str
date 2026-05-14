@@ -1,0 +1,50 @@
+<!--@subject {{trans "Welcome to %store_name" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="text-block bg-white">
+        <td style="padding: 15px 20px;background-color: #484abe;">
+          <h1><b>{{trans "Welcome to %store_name.com" store_name=$store.frontend_name}}</b></h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="padding: 20px;">
+          <p class="mb25">{{trans "Dear %name," name=$customer.name}}</p>
+          <p class="mb25">{{trans "Welcome to %store_name.com" store_name=$store.frontend_name}}</p>
+          <p class="mb25">{{trans "Now that you've created a %store_name.com account, you will enjoy many benefits, including:" store_name=$store.frontend_name}}</p>
+          <ul class="ml30">
+            <li>{{trans "Free Ground shipping on all Glucerna subscriptions"}}</li>
+            <li>{{trans "Access to our Members area to manage your personal information, track orders, change your delivery address, and more!"}}</li>
+          </ul>
+          <p class="mb25">{{trans "We thank you for your interest in %store_name.com and we look forward to you visiting our site soon." store_name=$store.frontend_name}}</p>
+          <p class="mb25">{{trans 'For questions, please contact '}}<a href="{{customVar code=glucerna_contactus_url}}">{{trans "Customer Service"}}</a></p>
+          <p class="mb25">{{trans "Kind regards,"}}</p>
+          <p class="mb25">{{trans "%store_name.com " store_name=$store.frontend_name}}
+             <a href="{{customVar code=glucerna_contactus_url}}">{{trans "Customer Service Team"}}</a>
+             {{depend store_phone}} {{trans '<a href="tel:%store_phone">(%store_phone)</a>' store_phone=$store_phone |raw}}{{/depend}}
+          </p>
+        </td>
+    </tr>
+</table>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 20px solid #d5652c">
+    <tr>
+        <td class="pb0">
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="dark-red-bg">
+                        <a class="shop-now-btn border-none glucerna-block" href="{{customVar code=glucernastore_url}}" target="_blank">{{trans "SHOP NOW >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

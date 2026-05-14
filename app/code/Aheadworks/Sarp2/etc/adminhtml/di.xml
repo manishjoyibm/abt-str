@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+*/
+-->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <virtualType name="Magento\Catalog\Ui\DataProvider\Product\Form\Modifier\Pool">
+        <arguments>
+            <argument name="modifiers" xsi:type="array">
+                <item name="aw-sarp2-subscription-options" xsi:type="array">
+                    <item name="class" xsi:type="string">Aheadworks\Sarp2\Ui\DataProvider\Product\Form\Modifier\SubscriptionOptions</item>
+                    <item name="sortOrder" xsi:type="number">25</item>
+                </item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Catalog\Controller\Adminhtml\Product\Initialization\Helper">
+        <plugin name="awSarp2ProductSubOptions" type="Aheadworks\Sarp2\Model\Product\Type\Plugin\ProductSubOptions"/>
+    </type>
+    <type name="Magento\Sales\Block\Adminhtml\Order\Create\Search\Grid">
+        <plugin name="awSarp2OrderCreateSearchGrid" type="Aheadworks\Sarp2\Block\Adminhtml\Plugin\Order\Create\Search\Grid"/>
+    </type>
+    <type name="Magento\Framework\Data\Form\Element\Fieldset">
+        <plugin name="awSarp2OFieldset" type="Aheadworks\Sarp2\Plugin\Framework\Data\Form\Element\FieldsetPlugin"/>
+    </type>
+
+    <virtualType name="WebsiteOptionsRenderer" type="Aheadworks\Sarp2\Block\Adminhtml\Product\SubscriptionOptions\DynamicRows\Select">
+        <arguments>
+            <argument name="optionSource" xsi:type="object">Aheadworks\Sarp2\Model\Product\Attribute\Source\WebsiteId</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="PlanOptionsRenderer" type="Aheadworks\Sarp2\Block\Adminhtml\Product\SubscriptionOptions\DynamicRows\Select">
+        <arguments>
+            <argument name="optionSource" xsi:type="object">Aheadworks\Sarp2\Model\Product\Attribute\Source\ScopedPlan</argument>
+        </arguments>
+    </virtualType>
+</config>

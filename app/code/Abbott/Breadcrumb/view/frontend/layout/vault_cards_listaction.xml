@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="breadcrumbs_account"/>
+    <body>
+        <referenceBlock name="breadcrumbs">
+        <action method="setTemplate" ifconfig="my_account/breadcrumbs/breadcrumbs_enabled">
+                <argument name="template" xsi:type="string">Abbott_Breadcrumb::html/breadcrumbs.phtml</argument>
+            </action>
+            <action method="addCrumb" ifconfig="my_account/breadcrumbs/breadcrumbs_enabled">
+                <argument name="crumbName" xsi:type="string">account.vault.card.list</argument>
+                <argument name="crumbInfo" xsi:type="array">
+                    <item name="title" xsi:type="string" translate="true">Payment Methods</item>
+                    <item name="label" xsi:type="string" translate="true">Payment Methods</item>
+                    <item name="link" xsi:type="string">{{baseUrl}}vault/cards/listaction</item>
+                </argument>
+            </action>
+        </referenceBlock>
+    </body>
+</page>

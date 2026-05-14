@@ -1,0 +1,90 @@
+<?php
+
+use Magento\Framework\View\Element\Template;
+use Abbott\CookiePreferences\ViewModel\CookiePrefViewModel;
+use Abbott\OneTrust\ViewModel\OnetrustViewModel;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
+/** @var Template $block */
+/** @var CookiePrefViewModel $viewModelCookiePref*/
+/** @var OnetrustViewModel $viewModel */
+/** @var SecureHtmlRenderer $secureRenderer */
+
+$kountBlock = $this->getLayout()->createBlock('\Kount\Kount360\Block\Checkout\DataCollector');
+$viewModelCookiePref = $block->getData('cp_view_model');
+$cmId = $viewModelCookiePref->getCmId();
+
+//ONETRUST STARTS
+$viewModel = $block->getData('ot_view_model');
+$sdkJsUrl = $viewModel->getSdkJsUrl();
+$sdkSetting = $viewModel->getSdkSetting();
+$isSdkJsAvailable = $viewModel->isSdkJsAvailable();
+//ONETRUST ENDS
+
+?>
+
+<?= /* @noEscape */ $secureRenderer->renderTag(
+        'script',
+        [
+            'type' => 'text/javascript',
+            'src' => 'https://consent.trustarc.com/v2/autoblockasset/core.min.js?cmId='.$cmId
+        ],
+        null,
+        false
+    );
+?>
+
+<?= /* @noEscape */ $secureRenderer->renderTag(
+        'script',
+        [
+            'type' => 'text/javascript',
+            'src' => 'https://consent.trustarc.com/v2/autoblock?cmId='.$cmId
+        ],
+        null,
+        false
+    );
+?>
+
+<?= /* @noEscape */ $secureRenderer->renderTag(
+        'script',
+        [
+            'type' => "text/javascript",
+            'async' => 'async',
+            'src' => 'https://consent.trustarc.com/v2/notice/'.$cmId.'?pcookie'
+        ],
+        null,
+        false
+    );
+?>
+
+<?= /* @noEscape */ $secureRenderer->renderTag(
+        'script',
+        [
+            'type' => 'text/javascript',
+            'src' => $kountBlock->getJsDataCollectorUrl()
+        ],
+        null,
+        false
+    );
+?>
+
+<?php if ($isSdkJsAvailable) {
+    $scriptString = <<<script
+            settings = "$sdkSetting"
+    script;
+?>
+
+<?= /* @noEscape */ $secureRenderer->renderTag(
+        'script',
+        [
+            'type' => "text/javascript",
+            'src' => $sdkJsUrl,
+            'id' => 'otprivacy-notice-script'
+        ],
+        $scriptString,
+        false
+); ?>
+
+<?php } ?>
+
+<?= $block->getChildHtml() ?>

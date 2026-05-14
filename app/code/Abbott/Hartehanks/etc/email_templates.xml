@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:Magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="hartehanks_hartehank_email_template_email_template" label="HarteHanks Email template" file="hartehank_email_template.html" type="html" module="Abbott_Hartehanks" area="frontend"/>
+    <template id="hartehanks_hartehank_email_template_hartehank_placeorder_template" label="HarteHanks Place Order template" file="hartehank_placeorder_template.html" type="html" module="Abbott_Hartehanks" area="frontend"/>
+</config>

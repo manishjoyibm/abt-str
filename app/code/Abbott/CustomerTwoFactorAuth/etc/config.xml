@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <customertwofactorauth>
+            <general>
+                <enable>0</enable>
+                <template>customertwofactorauth_general_template</template>
+                <otp_expiry>1</otp_expiry>
+                <otp_limit>2</otp_limit>
+                <locked_until>5</locked_until>
+            </general>
+        </customertwofactorauth>
+    </default>
+</config>

@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+       <type name="Magento\Quote\Model\Quote">
+          <plugin name="abbott_rewrite_plugin_restrict" type="Abbott\StockManagement\Plugin\Catalog\Model\RestrictQuotePlugin"/>
+       </type>
+      <type name="Magento\CatalogInventory\Model\Quote\Item\QuantityValidator">
+         <plugin name="stock_plugin" type="Abbott\StockManagement\Plugin\QuantityValidatorPlugin"/>
+      </type>
+</config>

@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Abbott_WorkdayFeed::system_abbott" title="Abbott Feed" translate="title" module="Abbott_WorkdayFeed" sortOrder="20" parent="Magento_Backend::system" resource="Abbott_WorkdayFeed::abbott"/>
+        <add id="Abbott_WorkdayFeed::inboundFeed" title="Summary Report" translate="title" module="Abbott_WorkdayFeed" sortOrder="10" parent="Abbott_WorkdayFeed::system_abbott" action="abbott/inboundFeed" resource="Abbott_WorkdayFeed::inboundFeed"/>
+        <add id="Abbott_WorkdayFeed::inboundFeedLog" title="Workday Log" translate="title" module="Abbott_WorkdayFeed" sortOrder="20" parent="Abbott_WorkdayFeed::system_abbott" action="abbott/inboundFeedLog" resource="Abbott_WorkdayFeed::inboundFeedLog"/>
+    </menu>
+</config>

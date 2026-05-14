@@ -1,0 +1,69 @@
+<!--@subject {{trans "Your %store_name email has been changed" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var customer.name":"Customer Name",
+"var $this.getUrl($store,'contact-us/',[_nosid:1])":"Contact Us URL"
+} @-->
+{{template config_path="design/email/header_template"}}
+
+<table>
+     <tr>
+        <td class="esd-structure es-p20t es-p30r es-p30l" align="left"
+            style="background-color: #009cde;height: 30px;">
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="540" class="esd-container-frame" align="center"
+                            valign="top">
+                            <table cellpadding="0" cellspacing="0" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td align="left" class="esd-block-text"
+                                            style="padding: 10px 20px;">
+                                            <p
+                                                style="margin: 0;font-size: 13.5pt;
+                                                font-family: Arial, sans-serif, serif, EmojiFont;
+                                                text-transform: uppercase;font-weight: bold;">
+                                            </p>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td>
+            <p class="padding-left-right-20 pt25"><b>{{trans "Dear %name," name=$customer.name}}</b></p>
+            <p class="padding-left-right-20">
+                {{trans "We have received a request to change the following information associated with your account at %store_name: Email." store_name=$store.frontend_name}}
+            </p>
+            <p class="mb25 padding-left-right-20">
+               {{trans 'If you have not authorized this action, please contact '}} <a href="{{customVar code=newsimilac_contactus_url}}">{{trans "%store_name Customer Service" store_name=$store.frontend_name}}</a>
+               {{trans ' immediately at '}} <a href="{{customVar code=newsimilac_contactus_url}}">{{customVar code=newsimilac_contactus_url}}</a>
+               {{depend store_phone}} {{trans 'or by calling tel:<a href="tel:%store_phone">%store_phone</a>' store_phone=$store_phone |raw}}{{/depend}}
+               {{trans 'Our representatives are available Monday through Friday, 9 AM - 6 PM ET.'}}
+            </p>
+            <p class="mb25 padding-left-right-20">{{trans "Kind regards,"}}</p>
+            <p class="mb25 padding-left-right-20">{{trans "%store_name Customer Service Team." store_name=$store.frontend_name |raw}}</p>
+        </td>
+    </tr>
+</table>
+
+<table class="text-block" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td class="pb0">
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="green-bg">
+                        <a class="shop-now-btn border-none" href="{{customVar code=newsimilacstore_url}}" target="_blank">{{trans "SHOP NOW >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

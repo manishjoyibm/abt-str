@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../../../lib/internal/Magento/Framework/ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="orderexport" xsi:type="object">\Abbott\Targetbase\Model\ConsoleExport</item>
+                <item name="customerexport" xsi:type="object">\Abbott\Targetbase\Model\CustomerExport</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Magento\Customer\Api\AccountManagementInterface">
+        <plugin name="push_register_customer_targetbase_plugin" type="Abbott\Targetbase\Plugin\Model\CreateAccountPlugin" />
+    </type>
+</config>

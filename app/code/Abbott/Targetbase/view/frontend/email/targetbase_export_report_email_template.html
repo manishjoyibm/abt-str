@@ -1,0 +1,21 @@
+<!--@subject {{var sub}}@-->
+
+<!--@styles
+.wrapper .heading th, .wrapper .data td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+.wrapper {
+  width: 100%;
+}
+.report{
+  align:center;
+}
+@-->
+
+<h2 id="report" class = "report"> {{var sub|raw}} </h2>
+<table aria-describedby="report" class="wrapper">
+  <tr style="text-align:center;" class="data">
+    <td>{{var msg|raw}}</td>
+  </tr>
+</table>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+
+    <table name="abbott_backorder_email" resource="default" engine="innodb" comment="Abbott Backorder Email Log">
+        <column name="id" xsi:type="int" nullable="false" identity="true" unsigned="true" comment="ID"/>
+        <column name="order_id" xsi:type="int" nullable="false" unsigned="true" comment="Order ID"/>
+        <column name="sent_at" xsi:type="timestamp" nullable="false" default="CURRENT_TIMESTAMP" comment="Email Sent At"/>
+        
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="id"/>
+        </constraint>
+        
+        <constraint xsi:type="unique" referenceId="ABBOTT_BACKORDER_EMAIL_ORDER_ID_UNIQUE">
+            <column name="order_id"/>
+        </constraint>
+        
+        <constraint xsi:type="foreign" referenceId="ABBOTT_BACKORDER_EMAIL_ORDER_ID_SALES_ORDER_ENTITY_ID"
+                    table="abbott_backorder_email" column="order_id"
+                    referenceTable="sales_order" referenceColumn="entity_id"
+                    onDelete="CASCADE"/>
+    </table>
+</schema>

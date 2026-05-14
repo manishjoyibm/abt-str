@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <cancel_order_setting>
+            <general>
+                <module_enable>1</module_enable>
+                <cancel_buffer_time>7200</cancel_buffer_time>
+            </general>
+            <order_cancel_email>
+                <enabled>1</enabled>
+                <cancel_template>cancel_order_setting_order_cancel_email_cancel_template</cancel_template>
+                <sender>general</sender>
+            </order_cancel_email>
+            <cancel_order>
+                <enabled>1</enabled>
+                <allowed_statuses>holded,on_hold,review_kount,error</allowed_statuses>
+            </cancel_order>
+        </cancel_order_setting>
+        <sales>
+            <identity>
+                <sports_address>Abbott Laboratories
+75 Remittance Drive. STE 1310
+Chicago, IL 60675, 1310</sports_address>
+                <address_note>Please refer to your account number, invoice and order number in all communications regarding this invoice.</address_note>
+            </identity>
+        </sales>
+    </default>
+</config>

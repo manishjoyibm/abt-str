@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <websites>
+        <new_similac_website>
+            <my_account>
+                <impersonation>
+                    <impersonation_enabled>1</impersonation_enabled>
+                    <impersonation_request_url>https://dev.similac.com/api/system/profile/impersonate</impersonation_request_url>
+                </impersonation>
+            </my_account>
+        </new_similac_website>
+    </websites>
+     <stores>
+        <new_similac>
+            <my_account>
+                <impersonation>
+                    <impersonation_enabled>1</impersonation_enabled>
+                    <impersonation_request_url>https://dev.similac.com/api/system/profile/impersonate</impersonation_request_url>
+                </impersonation>
+            </my_account>
+        </new_similac>
+    </stores>
+</config>

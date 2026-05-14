@@ -1,0 +1,14 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Rma\Model\Rma">
+        <plugin name="after_return_submit_operation"
+                type="Abbott\GigyaIM\Plugin\Returnpagecookie"/>
+    </type>
+    <type name="Magento\Sales\Api\OrderManagementInterface">
+        <plugin name="after_place_order_operation"
+                type="Abbott\GigyaIM\Plugin\Orderpagecookie"/>
+    </type>
+    <preference for="Abbott\GigyaIM\Api\SsmCartRepositoryInterface" type="Abbott\GigyaIM\Model\SsmCartRepository"/>
+    <preference for="Abbott\GigyaIM\Api\Data\SsmCartInterface" type="Abbott\GigyaIM\Model\SsmCart"/>
+    <preference for="Abbott\GigyaIM\Api\Data\SsmCartSearchResultsInterface" type="Magento\Framework\Api\SearchResults"/>
+</config>

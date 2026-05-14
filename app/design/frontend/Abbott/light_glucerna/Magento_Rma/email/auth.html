@@ -1,0 +1,109 @@
+<!--@subject {{trans "%store_name : Update Return #%increment_id" store_name=$store.frontend_name increment_id=$rma.increment_id}} @-->
+<!--@vars {
+"store url=\"customer\/account\/\"":"Customer Account URL",
+"template config_path=\"design\/email\/footer_template\"":"Email Footer Template",
+"template config_path=\"design\/email\/header_template\"":"Email Header Template",
+"var logo_alt":"Email Logo Image Alt",
+"var logo_url":"Email Logo Image URL",
+"store url=\"sales\/guest\/form\/\"":"Guest Form URL",
+"var item_collection":"Items Collection",
+"var return_address|raw":"Return Address",
+"var rma.increment_id":"Return Id",
+"var created_at_formatted_1":"Return Created At (datetime)",
+"layout handle=\"magento_rma_email_rma_items\" collection=$item_collection":"Return Items Collection",
+"var rma_data.status_label":"Return Status",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var store.frontend_name":"Store Name",
+"var supportEmail": "Support Email",
+"var storePhone": "Store Phone",
+"var rma_id":"Rma Id",
+"store url=\"\"":"Store URL"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+  <tr class="bg-white">
+    <td style="padding: 15px 20px;background-color: #484abe;">
+      <h1 class="return-heading" style="margin-bottom: 0;"><b>Return Request</b></h1>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="padding: 20px;">
+      <p class="mb25"><b>{{trans "Dear %name," name=$order_data.customer_name}}</b></p>
+      <p class="mb25">
+          {{trans 'Your return request has been updated. Please see below'}}</p>
+      <p class="mb25">{{trans 'You can check the status of your return by <a class="link-underline" href="%customer_login">logging into your account</a>.'
+            customer_login="$this.getUrl($store,'customer/account/login/',[_query:[id:$customer.id,token:$customer.rp_token],_nosid:1])" |raw}}
+      </p>
+      <p class="mb25">
+          {{trans
+              "Your Return #%increment_id - %status_label"
+              increment_id=$rma.increment_id
+              status_label="$rma_data.status_label"
+          }}
+      </p>
+      <p class="mb25">{{trans "Requested on %created_at" created_at=$created_at_formatted_1}}</p>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="padding: 15px 20px;background-color: #484abe;">
+      <h1 class="return-heading" style="margin-bottom: 0;"><b>{{trans "Shipping and Return"}}</b></h1>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td>
+      <table class="order-details" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+              <td class="address-details padding-left20">
+                  <h3 class="light-blue"><b>{{trans "Shipping Info"}}</b></h3>
+                  <p>{{var formattedShippingAddress|raw}}</p>
+              </td>
+              <td class="address-details">
+                  <h3 class="light-blue"><b>{{trans "Return Info"}}</b></h3>
+                  <p>{{var return_address|raw}}</p>
+              </td>
+          </tr>
+      </table>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="padding: 15px 20px;background-color: #484abe;">
+      <h1 class="return-heading" style="margin-bottom: 0;"><b>{{trans "Item Details"}}</b></h1>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td>
+      {{layout handle="magento_rma_email_rma_items" rma_id=$rma_id}}
+    </td>
+  </tr>
+  <tr class="bg-white pb25">
+    <td>
+      <p class="mb25 padding-left20">
+      {{trans "If you have any questions about your return, please contact %store_name.com " store_name=$store.frontend_name}} <br>
+      {{trans "Customer Service at "}}
+      {{depend store_phone}}
+         {{trans '%store_phone.' store_phone=$store_phone |raw}}
+      {{/depend}}
+      {{trans "Our representatives are available Monday through Friday, 9AM - 6PM EST"}}
+      </p>
+    </td>
+  </tr>
+</table>
+
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0" style="border: 20px solid #d5652c">
+    <tr>
+        <td class="pb0">
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="dark-red-bg">
+                        <a class="shop-now-btn border-none glucerna-block" href="{{customVar code=glucernastore_url}}" target="_blank">{{trans "SHOP NOW >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

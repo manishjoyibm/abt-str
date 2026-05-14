@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="customer_account"/>
+    <head>
+        <css src="Abbott_OneTrust::css/onetrust.css"/>
+    </head>
+    <body>
+        <referenceBlock name="customer_newsletter" template="Magento_Customer::form/newsletter.phtml">
+            <arguments>
+                <argument name="api_view_model" xsi:type="object">Abbott\OneTrust\ViewModel\CallApi</argument>
+            </arguments>
+        </referenceBlock>
+    </body>
+</page>

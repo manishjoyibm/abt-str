@@ -1,0 +1,27 @@
+{
+    "name": "abbott/module-onetrust",
+    "description": "Integrate OneTrust",
+    "type": "magento2-module",
+    "version": "1.0",
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "Abbottstore",
+            "email": "vinay.singh@abbott.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "~8.1|~8.2",
+        "magento/framework": "2.0.0",
+        "magento/module-integration": "2.0.0"
+    },
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Abbott\\OneTrust\\": ""
+        }
+    }
+}

@@ -1,0 +1,18 @@
+{
+    "abbott_impersonation": {
+        "column": {
+            "login_id": true,
+            "customer_id": true,
+            "admin_id": true,
+            "created_at": true,
+            "secret": true
+        },
+        "index": {
+            "ABBOTT_IMPERSONATION_CUSTOMER_ID": true,
+            "ABBOTT_IMPERSONATION_ADMIN_ID": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

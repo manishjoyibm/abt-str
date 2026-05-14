@@ -1,0 +1,9 @@
+<form
+    class="form"
+    action="<?= $block->escapeUrl($block->getUrl('card/add/newcard')) ?>"
+    method="post"
+    >
+    <button type="submit" class="action addcard">
+        <span><?= $block->escapeHtml(__('Add New Card')) ?></span>
+    </button>
+</form>

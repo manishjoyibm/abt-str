@@ -1,0 +1,77 @@
+﻿<!--@subject {{trans "Welcome to %store_name.com" store_name=$store.frontend_name}} @-->
+<!--@vars {
+"var this.getUrl($store, 'customer/account/')":"Customer Account URL",
+"var customer.email":"Customer Email",
+"var customer.name":"Customer Name"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr>
+        <td class="esd-structure es-p20t es-p30r es-p30l" align="left"
+            style="background-color: #BFE6F7;height: 30px;">
+            <table cellpadding="0" cellspacing="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td width="540" class="esd-container-frame" align="center"
+                            valign="top">
+                            <table cellpadding="0" cellspacing="0" width="100%">
+                                <tbody>
+                                    <tr>
+                                        <td align="left" class="esd-block-text"
+                                            style="padding: 10px 20px;">
+											<p
+                                                style="margin: 0;font-size: 20px;
+                                                font-family: Arial, sans-serif, serif, EmojiFont;
+                                                text-transform: uppercase;font-weight: bold;">
+                                                {{trans "Welcome to %store_name.com" store_name=$store.frontend_name}}
+                                            </p>									 
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 20px;">
+            <p><b>{{trans "Dear %name," name=$customer.name}}</b></p>
+            <p class="mb25">{{trans "Welcome to %store_name.com" store_name=$store.frontend_name}}</p>
+            <p class="mb25">
+                {{trans "Now that you've created a %store_name.com account, you will enjoy many benefits, including:" store_name=$store.frontend_name}}
+            </p>
+            <ul class="ml30">
+                <li>{{trans "Additional savings on Schedule & Save orders for Similac® StrongMoms® Rewards members."}} 
+                    <a href="{{customVar code=newsimilacstore_url}}/how-to-save-money-on-baby-formula.html" style="text-decoration: underline;">Learn more</a>
+                </li>
+                <li>{{trans "Free ground shipping for online orders over $35"}}</li>
+                <li>{{trans "Access to our Members area to manage your personal information, track orders, and add alternative delivery addresses, and much, much more!"}}</li>
+            </ul>
+            <p class="mb25">{{trans "Once again thank you for your interest in %store_name.com and we look forward to you visiting our site soon." store_name=$store.frontend_name}}</p>
+            <p class="mb25">{{trans 'For questions, please contact '}}<a href="{{customVar code=newsimilac_contactus_url}}" style="color: #FE9E1F !important;">{{trans "Customer Service"}}</a></p>
+            <p class="mb25">{{trans "Kind regards,"}}</p>
+            <p style="font-size:15px;">{{trans "%store_name.com Customer Service Team." store_name=$store.frontend_name}}</p>
+        </td>
+    </tr>
+    <tr>
+      <td>
+        <table border="0" cellspacing="0" cellpadding="0" style="background-color:white;width:100%;border-collapse:collapse;">
+          <tbody>
+            <tr>
+                  <td valign="top" style="padding: 30pt 0px 30pt 0px;">
+                      <p align="center" style="font-size:11pt;font-family: Arial, Georgia, sans-serif, serif;text-align:center;margin:0;">
+                          <span style="font-size: 12pt; font-family: Arial,  Georgia, sans-serif, serif; line-height: 13.5pt;"><a href="{{customVar code=newsimilacstore_url}}" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="background-color:#FE9E1F;border: 20px solid #FE9E1F; color: #ffffff;text-decoration: none;"><b><span style="font-size: 13.5pt; font-family: Arial, Georgia, sans-serif, serif; text-transform: uppercase; color: #ffffff;">
+                                          {{trans "shop now >"}}</span></b></a></span></p>
+                  </td>
+              </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

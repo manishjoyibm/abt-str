@@ -1,0 +1,85 @@
+<?php
+
+/* @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions */
+
+?>
+<?php
+    $profiles = $block->getProfiles();
+    $productId = 'product_id';
+    $productName = 'name';
+?>
+<div class="subscription-wrapper">
+  <div class="block-title">
+      <p class="login-head">Subscriptions</p>
+  </div>
+  <?php if ($profiles && count($profiles)): ?>
+      <div class="table-wrapper aw-sarp2-customer-subscriptions">
+          <table class="data table">
+              <caption class="table-caption"><?php echo $block->escapeHtml(__('Subscriptions')) ?></caption>
+              <thead>
+                  <tr>
+                      <th scope="col" class="col profile-id"><?php echo $block->escapeHtml(__('Profile ID')) ?></th>
+                      <th scope="col" class="col status"><?php echo $block->escapeHtml(__('Status')) ?></th>
+                      <th scope="col" class="col products"><?php echo $block->escapeHtml(__('Product(s)')) ?></th>
+                      <th scope="col" class="col subscription-plan"><?php echo $block->escapeHtml(__('Subscription Plan')) ?></th>
+                      <th scope="col" class="col next-payment-date"><?php echo $block->escapeHtml(__('Next Payment Date')) ?></th>
+                      <th scope="col" class="col next-payment-amount"><?php echo $block->escapeHtml(__('Next Payment Amount*')) ?></th>
+                      <th scope="col" class="col actions"><?php echo $block->escapeHtml(__('Actions')) ?></th>
+                  </tr>
+              </thead>
+              <tbody>
+              <?php
+                  /* @var $profile \Aheadworks\Sarp2\Api\Data\ProfileInterface */
+              ?>
+              <?php foreach ($profiles as $profile): ?>
+                  <tr>
+                      <td style="border-bottom: 0px;"  data-th="<?php echo $block->escapeHtml(__('Profile ID')) ?>" class="col profile-id">
+                          <?php /* @noEscape */ echo $profile->getIncrementId() ?>
+                      </td>
+                      <td style="border-bottom: 0px;"  data-th="<?php echo $block->escapeHtml(__('Status')) ?>" class="col status">
+                          <?php echo $block->escapeHtml($block->getStatusLabel($profile->getStatus())) ?>
+                      </td>
+                      <td style="border-bottom: 0px;"  data-th="<?php echo $block->escapeHtml(__('Product(s)')) ?>" class="col products">
+                          <ul>
+                          <?php foreach ($profile->getItems() as $item): ?>
+                              <li>
+                                  <?php if ($block->isProductExists($item[$productId]) && $block->hasProductUrl($item[$productId])): ?>
+                                      <span><?php echo $block->escapeHtml($item[$productName]) ?></span>
+                                  <?php else: ?>
+                                      <?php echo $block->escapeHtml($item[$productName]) ?>
+                                  <?php endif; ?>
+                              </li>
+                          <?php endforeach; ?>
+                          </ul>
+                      </td>
+                      <td style="border-bottom: 0px;"  data-th="<?php echo $block->escapeHtml(__('Subscription Plan')) ?>" class="col subscription-plan">
+                          <?php echo $block->escapeHtml($block->getPlanName($profile)) ?>
+                      </td>
+                      <td data-th="<?php echo $block->escapeHtml(__('Next Payment Date')) ?>" class="col next-payment-date">
+                          <?php /* @noEscape */ echo $block->getNextPaymentDateInfo($profile) ?>
+                      </td>
+                      <td style="border-bottom: 0px;" data-th="<?php echo $block->escapeHtml(__('Next Payment Amount*')) ?>" class="col next-payment-amount">
+                          <?php /* @noEscape */ echo $block->getNextPaymentAmountHtml($profile) . ' (excl. tax) ' ?>
+                      </td>
+                      <td style="border-bottom: 0px;" data-th="<?php echo $block->escapeHtml(__('Actions')) ?>" class="col actions">
+                          <?php if ($block->isEditActionAvailable($profile->getProfileId())): ?>
+                              <a href="<?php echo $block->escapeUrl($block->getEditUrl($profile->getProfileId())) ?>" class="action edit">
+                                  <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                              </a>
+                          <?php endif; ?>
+                      </td>
+                  </tr>
+				  <tr><td style="border-bottom: 1px solid #999;padding: 0;font-size: 11px;border-top: 0px;" colspan="6" style="border: 0px solid; padding: 0px;"><?php echo $block->escapeHtml(__('* Tax, if applicable, is calculated at time of shipment.')) ?></tr>
+              <?php endforeach; ?>
+              </tbody>
+          </table>
+      </div>
+      <?php if ($block->getChildHtml('pager')): ?>
+          <div class="toolbar bottom"><?php /* @noEscape */ echo $block->getChildHtml('pager') ?></div>
+      <?php endif ?>
+  <?php else: ?>
+      <div class="message info empty">
+          <span><?php echo $block->escapeHtml(__('You have created no subscriptions.')) ?></span>
+      </div>
+  <?php endif ?>
+</div>

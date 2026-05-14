@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
+	<module name="Abbott_Hartehanks" setup_version="1.3.0"/>
+	<sequence>
+		<module name="Magento_Sales"/>
+		<module name="Abbott_WorkdayFeed"/>
+		<module name="Amasty_Orderattr"/>
+		<module name="Aheadworks_Sarp2"/>
+		<module name="Abbott_MyAccount"/>
+	</sequence>
+</config>

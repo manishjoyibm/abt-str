@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+    <acl>
+        <resources>
+            <resource id="Magento_Backend::admin">
+                    <resource id="Abbott_AbbottReport::abbott_reports" title="Abbott Report">
+                        <resource id="Abbott_AbbottReport::report_sales" title="Abbott Sales Report" translate="title" sortOrder="60" />
+                        <resource id="Abbott_AbbottReport::report_gratis" title="Abbott Gratis Report" translate="title" sortOrder="70" />
+                        <resource id="Abbott_AbbottReport::report_promo" title="Abbott Promo Report" translate="title" sortOrder="80" />
+                        <resource id="Abbott_AbbottReport::report_tax" title="Abbott Tax Report" translate="title" sortOrder="90" />
+                        <resource id="Abbott_AbbottReport::report_product_subscription" title="Product Subscription Report" translate="title" sortOrder="100" />
+                        <resource id="Abbott_AbbottReport::report_customer_subscription" title="Customer Subscription Report" translate="title" sortOrder="110" />
+                    </resource>
+            </resource>
+        </resources>
+    </acl>
+</config>

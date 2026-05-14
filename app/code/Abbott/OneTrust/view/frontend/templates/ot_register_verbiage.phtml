@@ -1,0 +1,29 @@
+<?php
+
+use Magento\Framework\View\Element\Template;
+use Abbott\OneTrust\ViewModel\OnetrustViewModel;
+use Magento\Framework\View\Helper\SecureHtmlRenderer;
+
+/** @var Template $block */
+/** @var $viewModel OnetrustViewModel */
+/** @var SecureHtmlRenderer $secureRenderer */
+
+$viewModel = $block->getData('ot_view_model');
+$sdkEndpoint = $viewModel->getSdkEndpoint();
+$sdkStorageContainer = $viewModel->getSdkStorageContainer();
+$newsletterNoticeId = $viewModel->getNoticeId('newsletter_notice');
+$isSdkJsAvailable = $viewModel->isSdkJsAvailable();
+
+if ($isSdkJsAvailable) {
+    $url = $sdkEndpoint."storage-container/".$sdkStorageContainer.
+        "/privacy-notices/".$newsletterNoticeId."/published/privacynotice.json";
+    $scriptString = <<<script
+            OneTrust.NoticeApi.Initialized.then(function () {
+            OneTrust.NoticeApi.LoadNotices(['$url']);
+        });
+    script;
+?>
+
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>
+
+<?php } ?>

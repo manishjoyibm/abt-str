@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+  <virtualType name="AwSarp2BraintreeRecurringCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+      <arguments>
+          <argument name="commands" xsi:type="array">
+              <item name="deny_payment" xsi:type="string">BraintreeVoidCommand</item>
+          </argument>
+      </arguments>
+  </virtualType>
+  <virtualType name="AwSarp2BraintreePayPalRecurringCommandPool" type="Magento\Payment\Gateway\Command\CommandPool">
+      <arguments>
+          <argument name="commands" xsi:type="array">
+              <item name="deny_payment" xsi:type="string">BraintreeVoidCommand</item>
+          </argument>
+      </arguments>
+  </virtualType>
+   <type name="Magento\Customer\Controller\Address\FormPost">
+    <plugin name="customer_save_formpost" type="Abbott\Sarp2\Plugin\CustomerSave" />
+  </type>
+  <type name="Magento\Payment\Helper\Data">
+        <plugin name="abbott_dataplugin" type="Abbott\Sarp2\Plugin\Payment\Helper\DataPlugin"/>
+   </type>
+  <preference for="Aheadworks\Sarp2\Cron\ProcessNotifications" type="Abbott\Sarp2\Cron\ProcessNotifications"/>
+  <preference for="Aheadworks\Sarp2\Cron\ProcessPayments" type="Abbott\Sarp2\Cron\ProcessPayments"/>
+  <preference for="Aheadworks\Sarp2\Cron\ProcessSamplePayments" type="Abbott\Sarp2\Cron\ProcessSamplePayments"/>
+  <preference for="Aheadworks\Sarp2\Model\Sales\Total\Quote\Shipping\Collector" type="Abbott\Sarp2\Model\Sales\Total\Quote\Shipping\Collector"/>
+  <preference for="Aheadworks\Sarp2\Engine\Profile\Action\Type\ChangePlan\Applier" type="Abbott\Sarp2\Engine\Profile\Action\Type\ChangePlan\Applier" />
+  <preference for="Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\CustomerDataBuilder" type="Abbott\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\CustomerDataBuilder"/>
+  <preference for="Aheadworks\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\PayPal\VaultDataBuilder" type="Abbott\Sarp2\Model\Payment\Sampler\Gateway\Braintree\Request\PayPal\VaultDataBuilder" />
+  <preference for="Aheadworks\Sarp2\Engine\Payment\Processor\Type\Actual" type="Abbott\Sarp2\Engine\Payment\Processor\Type\Actual" />
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <plugin name="awsarp_nextoderdate_column" type="Abbott\Sarp2\Plugin\NextOrderDateColumn"
+                sortOrder="100" disabled="false" />
+    </type>
+    <type name="Aheadworks\Sarp2\Observer\PaymentMethodAvailabilityObserver">
+        <plugin name="display_googlepay_applepay" type="Abbott\Sarp2\Plugin\Observer\PaymentMethodAvailabilityObserverPlugin" sortOrder="1"/>
+    </type>
+    <preference for="Aheadworks\Sarp2\Model\Quote\Management" type="Abbott\Sarp2\Model\Quote\Management" />
+    <virtualType name="BraintreeGooglePayAuthorizeRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="vault" xsi:type="string">Abbott\Sarp2\Gateway\Request\VaultDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2BraintreeGooglePayRecurringFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="string">aw_sarp_braintree_googlepay_recurring</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form\Cc</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AwSarp2BraintreeRecurringHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">BraintreeValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2BraintreeRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="AwSarp2BraintreeGooglePayRecurringHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">BraintreeGooglePayValueHandlerPool</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BraintreeGooglePayAuthorizationHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="payment_details" xsi:type="string">Abbott\Sarp2\Gateway\Response\PaymentDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+   <preference for="PayPal\Braintree\Gateway\Response\CardDetailsHandler" type="Abbott\Sarp2\Gateway\Response\CardDetailsHandler"/>
+
+    <virtualType name="AwSarp2BraintreeApplePayRecurringFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="string">aw_sarp_braintree_applepay_recurring</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form\Cc</argument>
+            <argument name="infoBlockType" xsi:type="string">Magento\Payment\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AwSarp2BraintreeRecurringHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">BraintreeValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2BraintreeRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="BraintreeApplePayAuthorizeRequest" type="Magento\Payment\Gateway\Request\BuilderComposite">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="vault" xsi:type="string">Abbott\Sarp2\Gateway\Request\VaultDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="AwSarp2BraintreeApplePayRecurringHandlerPool" type="Magento\Payment\Gateway\Config\ValueHandlerPool">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="default" xsi:type="string">BraintreeApplePayValueHandlerPool</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BraintreeApplePayAuthorizationHandler" type="Magento\Payment\Gateway\Response\HandlerChain">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="payment_details" xsi:type="string">Abbott\Sarp2\Gateway\Response\PaymentDetailsHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+   <type name="Aheadworks\Sarp2\Controller\Profile\Edit\Index">
+      <plugin name="Abbott_Sarp2::profile" type="Abbott\Sarp2\Plugin\Indextitle" sortOrder="10"/>
+   </type>
+    <preference for="Aheadworks\Sarp2\Engine\Notification\Scheduler\Type\UpcomingBilling" type="Abbott\Sarp2\Engine\Notification\Scheduler\Type\UpcomingBilling"/>
+
+    <preference for="Aheadworks\Sarp2\PaymentData\Braintree\PayPalDetails\ToToken" type="Abbott\Sarp2\PaymentData\Braintree\PayPalDetails\ToToken" />
+
+    <type name="Aheadworks\Sarp2\Engine\Profile\Action\Type\ChangePaymentInformation\Applier">
+        <plugin name="payment_change_validation_plugin" type="Abbott\Sarp2\Plugin\Engine\Profile\Action\Type\ChangePaymentInformation\ApplierPlugin" sortOrder="1"/>
+    </type>
+
+    <preference for="Aheadworks\Sarp2\Model\Payment\SamplerManagement" type="Abbott\Sarp2\Model\Payment\SamplerManagement" />
+
+     <type name="Magento\Sales\Model\Order\Address">
+        <plugin name="blank_telephone" type="Abbott\Sarp2\Plugin\Model\Order\AddressPlugin"/>
+   </type>
+
+    <type name="Aheadworks\Sarp2\Model\Profile\View\Edit\Payment\ConfigProvider\Composite">
+        <arguments>
+            <argument name="configProviders" xsi:type="array">
+                <item name="aw_sarp2_msp_recaptcha_config_provider_cc" xsi:type="object">Abbott\CheckoutCaptcha\Model\CheckoutConfigProvider</item>
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aheadworks\Sarp2\Model\Profile">
+        <plugin name="model_profile" type="Abbott\Sarp2\Plugin\Profile"/>
+   </type>
+
+    <preference for="Aheadworks\Sarp2\Model\Product\Subscription\Option\Validator" type="Abbott\Sarp2\Model\Product\Subscription\Option\Validator" />
+    <preference for="Aheadworks\Sarp2\Model\Payment\Token\Validator" type="Abbott\Sarp2\Model\Payment\Token\Validator" />
+    <preference for="Aheadworks\Sarp2\Model\Plan\Validator" type="Abbott\Sarp2\Model\Plan\Validator" />
+    <preference for="Aheadworks\Sarp2\Model\Profile\Validator" type="Abbott\Sarp2\Model\Profile\Validator" />
+    <preference for="Aheadworks\Sarp2\Engine\Profile\Action\Type\ChangeNextPaymentDate\Applier" type="Abbott\Sarp2\Engine\Profile\Action\Type\ChangeNextPaymentDate\Applier" />
+    <virtualType name="AwSarp2BraintreeRecurringFacade" type="Magento\Payment\Model\Method\Adapter">
+        <arguments>
+            <argument name="code" xsi:type="string">aw_sarp_braintree_recurring</argument>
+            <argument name="formBlockType" xsi:type="string">Magento\Payment\Block\Form\Cc</argument>
+            <argument name="infoBlockType" xsi:type="string">PayPal\Braintree\Block\Info</argument>
+            <argument name="valueHandlerPool" xsi:type="object">AwSarp2BraintreeRecurringHandlerPool</argument>
+            <argument name="validatorPool" xsi:type="object">BraintreeValidatorPool</argument>
+            <argument name="commandPool" xsi:type="object">AwSarp2BraintreeRecurringCommandPool</argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\Sarp2\Engine\Notification\DataResolver">
+        <plugin name="abbott_sarp2_add_totals"
+                type="Abbott\Sarp2\Plugin\Engine\Notification\DataResolverPlugin"
+                sortOrder="10"/>
+    </type>
+     <type name="Abbott\Sarp2\Model\Reminder\Sender">
+        <arguments>
+            <argument name="templateIdentifier" xsi:type="string">abbott_sarp2_annual_reminder_template</argument>
+        </arguments>
+    </type>
+    <type name="Abbott\Sarp2\Logger\Handler">
+        <arguments>
+            <argument name="filesystem" xsi:type="object">Magento\Framework\Filesystem\Driver\File</argument>
+        </arguments>
+    </type>
+    <type name="Abbott\Sarp2\Logger\Logger">
+        <arguments>
+            <argument name="name" xsi:type="string">Sarp2Logger</argument>
+            <argument name="handlers"  xsi:type="array">
+                <item name="system" xsi:type="object">Abbott\Sarp2\Logger\Handler</item>
+            </argument>
+        </arguments>
+    </type>
+    <preference for="Aheadworks\Sarp2\Model\ResourceModel\Engine\Notification" type="Abbott\Sarp2\Model\ResourceModel\Engine\Notification" />
+
+</config>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+            <telephone_validation>
+                <settings>
+                    <enable>1</enable>
+                </settings>        
+            </telephone_validation>
+    </default>
+    <stores>
+        <abbott>
+            <telephone_validation>
+                <settings>
+                    <enable>1</enable>
+                </settings>        
+            </telephone_validation>
+        </abbott>
+        <glucerna>
+            <telephone_validation>
+                <settings>
+                    <enable>1</enable>
+                </settings>        
+            </telephone_validation>
+        </glucerna>
+        <new_similac>
+            <telephone_validation>
+                <settings>
+                    <enable>0</enable>
+                </settings>        
+            </telephone_validation>
+        </new_similac>
+    </stores>    
+</config>

@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+ 
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:Magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="workday_feed_settings_workday_feed_workday_template" label="WorkdayFeed Email template" file="workday_email_template.html" type="html" module="Abbott_WorkdayFeed" area="frontend"/>
+    <template id="workday_feed_settings_workday_sftp_workday_customer_template" label="WorkdayFeed Customer Account Create Email template" file="workday_Customer_email_template.html" type="html" module="Abbott_WorkdayFeed" area="frontend"/>
+</config>

@@ -1,0 +1,238 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+ */
+
+/* @var $block \Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+$profile = $block->getProfile();
+$minQty = null;
+$maxQty = null;
+$shippingAddress = $profile->getShippingAddress();
+$productId = null;
+foreach ($profile->getItems() as $item) {
+    $productId = $item->getProductId();
+    break;
+}
+if ($productId) {
+    $productData = $block->getProfileProduct($productId);
+}
+if ($productData) {
+    $minQty = $productData->getData('cans_y_min_update');
+    $maxQty = $productData->getData('cans_x_max_update');
+}
+?>
+<div class="table-wrapper aw-sarp2-customer-subscriptions">
+    <table class="data table">
+        <tbody>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Product(s)')) ?></th>
+                <td class="col products">
+                    <ul>
+                        <?php foreach ($profile->getItems() as $item): ?>
+                            <?php if (!$item->getParentItemId()): ?>
+                                <li>
+                                    <?php if ($block->isProductExists($item->getProductId()) && $block->hasProductUrl($item->getProductId()) && $profile->getStoreId() == 1): ?>
+                                        <a href="<?php echo $this->helper(\Abbott\CustomerTransistion\Helper\Data::class)->getFailureUrl().''.$this->helper(\Abbott\MyAccount\Helper\Data::class)->getAemUrl($item->getProductId()); ?>">
+                                            <span><?php echo $block->escapeHtml($item->getName()) ?></span>
+                                        </a>
+                                    <?php else: ?>
+                                        <?php echo $block->escapeHtml($item->getName()) ?>                          
+                                    <?php endif;?>
+                                </li>
+                            <?php endif;?>
+                        <?php endforeach;?>
+                    </ul>
+                </td>
+                <td>
+                    <?php if ($block->isCancelActionAvailable($profile->getProfileId())): ?>
+                        <a data-role="aw-sarp2-cancel-button" href="#"
+                           class="action cancel">
+                            <span><?php echo $block->escapeHtml(__('Cancel Subscription')) ?></span>
+                        </a>
+                        <script type="text/x-magento-init">
+                        {
+                            "[data-role=aw-sarp2-cancel-button]": {
+                                "awSarp2ButtonControl": {
+                                    "newLocation": "<?php echo $block->escapeUrl($block->getCancelUrl($profile->getProfileId())) ?>",
+                                    "confirm": {
+                                        "enabled": true,
+                                        "message": "<?php echo $block->escapeHtml(
+                                            __('<strong>Are you sure you want to cancel this subscription?</strong> <br/>Cancelling this subscription will cancel all future subscription orders for this item.')
+                                        , ['strong','br']) ?>"
+                                    }
+                                }
+                            }
+                        }
+                        </script>
+                    <?php endif;?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Subscription Plan')) ?></th>
+                <td><?php echo $block->escapeHtml($block->getPlanName($profile)) ?></td>
+                <td>
+                    <?php if ($block->isEditPlanActionAvailable($profile->getProfileId()) && $profile->getStoreId() == 1 ): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getSubscriptionPlanEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__subscription-plan">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif;?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Next Payment Date')) ?></th>
+                <td><?php /* @noEscape */echo $block->getNextPaymentDateInfo($profile) ?></td>
+                <td>
+                    <?php if ($block->isEditNextPaymentDateActionAvailable($profile->getProfileId())): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getNextPaymentDateEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__next-payment-date">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif;?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Shipping Address')) ?></th>
+                <td>
+                    <?php if ($shippingAddress && !$profile->getIsVirtual()): ?>
+                        <?=/* @noEscape */$block->getFormattedAddress($shippingAddress)?>
+                    <?php endif;?>
+                </td>
+                <td>
+                    <?php if ($block->isEditAddressActionAvailable($profile)): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getShippingAddressEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__shipping-address">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif;?>
+                </td>
+            </tr>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Payment Details')) ?></th>
+                <td>
+                    <?=/* @noEscape */$block->getPaymentDetailsHtml($profile)?>
+                </td>
+                <td>
+                    <?php if ($block->isEditActionAvailable($profile->getProfileId())): ?>
+                        <a href="<?php echo $block->escapeUrl($block->getPaymentDetailsEditUrl($profile->getProfileId())) ?>"
+                           class="action aw-sarp2__payment-details">
+                            <span><?php echo $block->escapeHtml(__('Edit')) ?></span>
+                        </a>
+                    <?php endif;?>
+                </td>
+            </tr>
+            <?php if ($profile->getStoreId() == 3){
+             foreach($profile->getItems() as $item){
+                ?>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Qty')) ?></th>
+                <td>
+                    <a id="minus" href="#">-</a>
+                    <input type="text" class="taxtcansQtytxt" id="cansQtytxt_<?php echo $item->getItemId(); ?>" readonly="true" size="3" value="<?php echo floatval($profile->getItemsQty()) ?>" />
+                    <a id="plus" href="#">+</a>
+                    <br/>
+                    <span>
+                    <?php if ($minQty && $maxQty): ?>
+                        Min: <?=$minQty?>, Max: <?=$maxQty?>
+                    <?php endif;?>
+                    </span>
+                </td>
+                <td>
+                        <a href="javascript:void(0);" id="saveQtyLink_<?php echo $item->getItemId(); ?>"
+                           class="action edit_qty">
+                            <span><?php echo $block->escapeHtml(__('Save')) ?></span>
+                </td>
+            </tr>
+            <?php }  } else {
+
+            foreach($profile->getItems() as $item){
+            ?>
+            <tr>
+                <th><?php echo $block->escapeHtml(__('Qty')) ?></th>
+                <td>
+                <span><?php echo $item->getName(); ?></span>
+                    <input type="text" id="cansQtytxt_<?php echo $item->getItemId(); ?>" size="3" value="<?php echo floatval($item->getQty()) ?>" />
+
+                </td>
+                <td>
+                    <a href="javascript:void(0);" id="saveQtyLink_<?php echo $item->getItemId(); ?>"
+                           class="action edit_qty">
+                            <span><?php echo $block->escapeHtml(__('Save')) ?></span>
+                </td>
+            </tr>
+            <?php }  } ?>
+        </tbody>
+    </table>
+</div>
+<script type="text/javascript">
+require([ 'jquery', 'domReady!', 'mage/cookies'], function($){ 
+    var valueElement = $('.taxtcansQtytxt');
+    function incrementValue(e){
+        var canX = "<?php echo $minQty; ?>";
+        var canY = "<?php echo $maxQty; ?>";
+        var incremetnVal = Math.max(parseInt(valueElement.val()) + e.data.increment, 0);
+        if(parseInt(incremetnVal) < parseInt(canX)){
+            return false;
+        }
+        if(parseInt(incremetnVal) > parseInt(canY)){
+            return false;
+        }
+        valueElement.val(incremetnVal);
+        return false;
+    }
+    $('#plus').bind('click', {increment: 1}, incrementValue);
+    $('#minus').bind('click', {increment: -1}, incrementValue);
+    function isInt(value) {
+        if (isNaN(value)) {
+            return false;
+        }
+        var x = parseFloat(value);
+        return (x | 0) === x;
+    }
+    $(".edit_qty").click(function(){
+        var alink = $(this).attr('id');
+        var itemId = alink.split('_')[1];
+        var itemQty =  $('#cansQtytxt_' + itemId).val();
+        if(!isInt(itemQty) || itemQty <= 0)
+        {
+            alert('Please enter valid Qty'); return;
+        }
+        $('body').trigger('processStart');
+        $.ajax({
+            url: '<?php echo $block->getUrl("awsarp2/subscription/update"); ?>',
+            type: 'POST',
+            showLoader: true,
+            dataType: 'json',
+            data: {
+                profile_id: '<?php echo $profile->getProfileId(); ?>',
+                profileItemId: itemId,
+                qty: itemQty,
+                form_key: $.mage.cookies.get('form_key')
+            },
+            success: function (data) {
+                $('body').trigger('processStop');
+                $('.page.messages').empty();
+
+                if (data.success) {
+                    $('.page.messages').html(
+                        '<div class="message-success success message"><div>' +
+                        data.message +
+                        '</div></div>'
+                    );
+                } else {
+                    $('.page.messages').html(
+                        '<div class="message-error error message"><div>' +
+                        (data.message || 'Something went wrong.') +
+                        '</div></div>'
+                    );
+                }
+            }
+        });
+    });
+});
+</script>

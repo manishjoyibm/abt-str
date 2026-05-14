@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="subscription_email_setting_subscription_cancel_email_cancel_subscription_template" label="Cancel Subscription" file="cancelSubscription.html" type="html" module="Abbott_Sarp2" area="frontend"/>
+    <template id="subscription_email_setting_subscription_update_email_update_subscription_template" label="Update Subscription" file="updateSubscription.html" type="html" module="Abbott_Sarp2" area="frontend"/>
+     <template id="subscription_email_setting_subscription_out_of_stock_email_subscription_out_of_stock_template" label="Out of Stock Subscription" file="outofstock-notification.html" type="html" module="Abbott_Sarp2" area="frontend"/>
+     <template id="delay_customer_creation_failuare" label="Delay Customer Creation Failure" file="adminNotification.html" type="html" module="Abbott_Sarp2" area="frontend"/>
+
+    <template id="abbott_sarp2_annual_reminder_template"
+              label="Abbott - Annual Schedule &amp; Save Reminder"
+              file="annual_schedule_save_reminder.html"
+              type="html"
+              module="Abbott_Sarp2"
+              area="frontend"/>
+</config>

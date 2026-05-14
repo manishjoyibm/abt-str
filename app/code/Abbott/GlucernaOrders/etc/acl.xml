@@ -1,0 +1,22 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Acl/etc/acl.xsd">
+	<acl>
+            <resources>
+                <resource id="Magento_Backend::admin">
+                    <resource id="Abbott_GlucernaOrders::managesubscription" sortOrder="10" title="managesubscription">
+                        <resource id="Abbott_GlucernaOrders::managesubscription_save" sortOrder="10" title="Save managesubscription"/>
+                        <resource id="Abbott_GlucernaOrders::managesubscription_delete" sortOrder="20" title="Delete managesubscription"/>
+                        <resource id="Abbott_GlucernaOrders::managesubscription_update" sortOrder="30" title="Update managesubscription"/>
+                        <resource id="Abbott_GlucernaOrders::managesubscription_view" sortOrder="40" title="View managesubscription"/>
+                    </resource>
+                    <resource id="Magento_Backend::stores">
+                        <resource id="Magento_Backend::stores_settings">
+                            <resource id="Magento_Config::config">
+                                <resource id="Abbott_GlucernaOrders::config_glucernaorders" title="Glucerna Order" translate="title" sortOrder="50" />
+                            </resource>
+                        </resource>
+                    </resource>
+                </resource>
+            </resources>
+	</acl>
+</config>

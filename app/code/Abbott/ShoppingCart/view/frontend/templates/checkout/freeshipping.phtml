@@ -1,0 +1,26 @@
+<?php
+$viewModel = $block->getData('view_model');
+$values = $viewModel->getShippingDetails();
+$freeamount = $viewModel->getShippingAmount();
+?>
+<h1 class="free_message"><?= $values[0]['message']; ?></h1>
+<div id="myProgress">
+  <div id="myBar"></div>
+</div>
+<script>
+      window.free_percentage = <?= /* @noEscape */ $values[0]['percentage_value'] ?>;
+      window.setfreeShip = 0;
+      window.freetext = '<?= $values[0]['message'];  ?>';
+      window.color = '<?= $values[0]['color'];  ?>';
+      window.status = '<?= $values[0]['status'];  ?>';
+      window.freeamount = <?= $freeamount;  ?>;
+      window.is_subscription = <?= $values[0]['is_subscription'];  ?>;
+</script>
+<script type="text/x-magento-init">
+    {
+        "*": {
+            "Abbott_Checkout/js/shipping": {}
+        }
+    }
+</script>
+

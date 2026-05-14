@@ -1,0 +1,49 @@
+<!-- ko if: isVisible() -->
+<div class="abbott-subscription-consent" data-bind="visible: isVisible">
+   <!-- ko if: window.checkoutConfig
+            && window.checkoutConfig.abbott_subscription_consent
+            && window.checkoutConfig.abbott_subscription_consent.product_detail
+            && window.checkoutConfig.abbott_subscription_consent.product_detail.length -->
+    <div class="field choice subscription-consent">
+        <div class="label subscription-consent-checkbox" for="abbott-subscription-consent" style="display: flex;">
+                <input type="checkbox"
+                        name="subscription_consent_terms"
+                       id="abbott-subscription-consent"
+                       data-bind="checked: isChecked" />
+                       <label class="label"  for="abbott-subscription-consent" data-bind="html: getContent()"></label>     
+        </div>
+        <div id="abbott-subscription-consent-error" class="mage-error" data-bind="visible: showInlineError, text: errorText" style="margin-top: -2%;">
+        </div>
+            <div class="abbott-subscription-details">
+        <div class="title">Subscription Details</div>
+
+        <!-- ko foreach: window.checkoutConfig.abbott_subscription_consent.product_detail -->
+        <div class="sub-item">
+            <div class="product-name" data-bind="text: product_name"></div>
+
+            <div class="product-price"
+                data-bind="text: (function(){
+                    var p = row_total || 0;
+                    return '$' + parseFloat(p).toFixed(2);
+                })()"></div>
+
+            <div class="product-frequency" data-bind="text: frequency"></div>
+        </div>
+        <!-- /ko -->
+    </div>
+</div>
+
+<style>
+    .abbott-subscription-details { margin-top: 12px; padding: 10px 0; color:#000; border-top: 1px solid rgba(0, 0, 0, 0.14); }
+    .abbott-subscription-details .title { font-weight:700; font-size:14px; }
+    .abbott-subscription-details .sub-item {  padding: 10px 0 12px 0; border-bottom: 1px solid rgba(0,0,0,0.14); margin-top: -10px; }
+    .abbott-subscription-details .product-name,
+    .abbott-subscription-details .product-price,
+    .abbott-subscription-details .product-frequency { font-size:13px; }
+
+</style>
+
+<!-- /ko -->
+</div>
+
+

@@ -1,0 +1,92 @@
+<?php
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/** @var \Abbott\Strongmoms\Block\Checkssmuser $block */
+$customerAddressView = $block->getData('customer_address');
+$helper = $this->helper('Abbott\MyAccount\Helper\Data');
+$sessions = $helper->getGASession();
+if($sessions['add'] == 1)
+{ ?>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "ga-custom-events",
+    eventCategory: "add-address",
+    eventAction: "submit",
+    eventLabel: "add-address_submit"
+  });
+</script>
+<?php }
+if($sessions['edit'] == 1)
+{ ?>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "ga-custom-events",
+    eventCategory: "edit-address", 
+    eventAction: "submit", 
+    eventLabel: "edit-address_submit"
+  });
+</script>
+<?php }
+if($sessions['billingedit'] == 1)
+{ ?>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({event: "ga-custom-events",eventCategory: "edit-address",eventAction: "submit",eventLabel: "edit-address_change-billing-address_submit"});
+</script>
+<?php }
+if($sessions['shipingedit'] == 1)
+{ ?>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({event: "ga-custom-events",eventCategory: "edit-address",eventAction: "submit",eventLabel: "edit-address_change-shipping-address_submit"}); 
+</script>
+<?php }
+$helper->unsetSession();
+$_pAddssesCheck = $block->getAdditionalAddresses();
+?>
+
+<div class="block block-addresses-list">
+    <div class="block-title"><strong><?php if(!empty($_pAddssesCheck)){ echo $block->escapeHtml(__('Additional Addresses'));} ?></strong></div>
+    <div class="block-content">
+        <?php if ($_pAddsses = $block->getAdditionalAddresses()) : ?>
+            <?php foreach ($_pAddsses as $address) : ?>
+                <div class="box box-shipping-address">
+                   <div class="box-content">
+                        <address>
+                            <?= $block->_getAddressHtml($address) ?>
+                        </address>
+                    </div>
+                    <a id="ga-edit-address" class="action editaa" href="<?= $block->escapeUrl($block->getUrl('customer/address/edit', ['id' => $address->getId()])) ?>"><span><?= $block->escapeHtml(__('Edit Address')) ?></span></a>
+                    <a id="ga-delete-address" class="action delete" href="#" role="delete-address" data-address="<?= $block->escapeHtmlAttr($address->getId()) ?>"><span><?= $block->escapeHtml(__('Delete Address')) ?></span></a>
+                </div>
+            <?php endforeach; ?>           
+        
+        <?php endif; ?>
+    </div>
+</div>
+
+<div class="actions-toolbar">
+    <div class="primary">
+        <button type="button" role="add-address" title="<?= $block->escapeHtmlAttr(__('Add Address')) ?>" class="action primary add"><span><?= $block->escapeHtml(__('Add Address')) ?></span></button>
+    </div>
+    <div class="secondary">
+        <a class="action back" href="<?= $block->escapeUrl($block->getBackUrl()) ?>"><span><?= $block->escapeHtml(__('Back')) ?></span></a>
+    </div>
+</div>
+<script type="text/x-magento-init">
+    {
+        ".page-main": {
+            "address": {
+                "deleteAddress": "a[role='delete-address']",
+                "deleteUrlPrefix": "<?= $block->escapeJs($block->escapeUrl($block->getDeleteUrl())) ?>id/",
+                "addAddress": "button[role='add-address']",
+                "addAddressLocation": "<?= $block->escapeJs($block->escapeUrl($block->getAddAddressUrl())) ?>"
+            }
+        }
+    }
+</script>

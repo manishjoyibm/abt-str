@@ -1,0 +1,12 @@
+<?php
+$customerSession = $block->getCustomerSession();
+if ($customerSession->isLoggedIn()) {
+    ?>
+    <div class="page-title-wrapper">
+        <h1 class="page-title">
+            <span class="base" data-ui-id="page-title-wrapper">Welcome <?= /* @noEscape */
+            $customerSession->getCustomer()->getFirstname(); ?></span>
+        </h1>
+        <p class="info-text">You can view or edit your account  and order information below.</p>
+    </div>
+<?php } ?>

@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
+    <template id="deactivation_mbo_user_notification" label="Mbo User Deactivation Notification" file="deactivation_mbo_user_notification.phtml" type="html" module="Abbott_SecureAdmin" area="adminhtml"/>
+    <template id="deactivation_mbo_user" label="Mbo User Deactivation" file="deactivation_mbo_user.phtml" type="html" module="Abbott_SecureAdmin" area="adminhtml"/> 
+</config>

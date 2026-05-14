@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Abbott_Classfication::abbott_classfication"
+             title="Order Classfication"
+             module="Abbott_Classfication"
+             parent="Magento_CatalogRule::promo"
+             sortOrder="40"
+             action="abbott_classfication/rules_rule/index"
+             dependsOnModule="Magento_Sales"
+             resource="Abbott_Classfication::rule"
+        />        
+    </menu>
+</config>

@@ -1,0 +1,14 @@
+{
+    "apollo_webhook": {
+        "column": {
+            "webhook_id": true,
+            "event_name": true,
+            "path": true,
+            "created_at": true,
+            "updated_at": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    }
+}

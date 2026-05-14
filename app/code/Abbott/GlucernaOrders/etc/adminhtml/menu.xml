@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+      <add id="Abbott_GlucernaOrders::system_glucerna" title="Glucerna Order" translate="title" module="Abbott_GlucernaOrders" sortOrder="100" parent="Magento_Catalog::catalog" resource="Abbott_GlucernaOrders::glucerna"/>
+      <add id="Abbott_GlucernaOrders::manageSubscription" title="Manage Subscription Plan" translate="title" module="Abbott_GlucernaOrders" sortOrder="30" parent="Abbott_GlucernaOrders::system_glucerna" action="abbott_glucernaorders/managesubscription/index" resource="Abbott_GlucernaOrders::manageSubscription"/>
+    </menu>
+</config>

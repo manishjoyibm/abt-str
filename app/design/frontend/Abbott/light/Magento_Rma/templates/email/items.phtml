@@ -1,0 +1,37 @@
+<?php
+/** @var $block \Magento\Rma\Block\Email\Items */
+?>
+<table class="email-items rma-items padding-left20">
+    <thead>
+    <tr>
+        <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('Product')) ?></th>
+        <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('SKU')) ?></th>
+        <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('Condition')) ?></th>
+        <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('Ordered Qty')) ?></th>
+        <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('Qty to return')) ?></th>
+        <th style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml(__('Status')) ?></th>
+    </tr>
+    </thead>
+    <tbody>
+    <?php foreach ($block->getCollection() as $item) : ?>
+    <tr>
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">
+            <strong><?= $block->escapeHtml($item->getProductName()) ?></strong>
+            <?php if ($_options = $item->getOptions()) : ?>
+            <dl class="item-options">
+                <?php foreach ($_options as $_option) : ?>
+                <dt><?= $block->escapeHtml($_option['label']) ?></dt>
+                <dd><?= $block->escapeHtml($_option['value']) ?></dd>
+                <?php endforeach; ?>
+            </dl>
+            <?php endif; ?>
+        </td>
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml($item->getProductSku()) ?></td>
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml($block->getOptionAttributeStringValue($item->getCondition())) ?></td>
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;" ><?= $this->helper(Magento\Rma\Helper\Data::class)->parseQuantity($item->getQtyRequested(), $item) ?></td>
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $this->helper(Magento\Rma\Helper\Data::class)->getQty($item) ?></td>
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;"><?= $block->escapeHtml($item->getStatusLabel()) ?></td>
+    </tr>
+    <?php endforeach; ?>
+    </tbody>
+</table>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!--
+  DI configuration joining aggregated logoff time into admin customer grid collection
+  @category Abbott
+  @package  Abbott_Customerhistory
+-->
+<!-- Join core customer_log into admin customer grid -->
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <type name="Magento\Customer\Model\ResourceModel\Grid\Collection">
+        <plugin name="AbbottCustomerhistory_JoinCustomerLog"
+                type="Abbott\Customerhistory\Plugin\CustomerGridJoinCustomerLog"
+                sortOrder="10"/>
+    </type>
+
+    <type name="Magento\CustomerGraphQl\Model\Resolver\GenerateCustomerToken">
+        <plugin name="customer_log_sessionlogout"
+                type="Abbott\Customerhistory\Plugin\SessionLogoutByGraphql"
+                sortOrder="10"/>
+    </type>
+
+</config>
+

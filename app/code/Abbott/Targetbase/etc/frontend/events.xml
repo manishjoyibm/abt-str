@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="customer_register_success_custom">
+        <observer name="targetbase_customer_registration_logging" instance="Abbott\Targetbase\Observer\TargetbaseCustomerRegistration" />
+    </event>
+    <event name="controller_action_predispatch_newsletter_manage_save">
+		<observer instance="Abbott\Targetbase\Observer\TargetbaseNewsletter" name="abbott_targetbase_checknewsletter"/>
+	</event>
+	<event name="controller_action_postdispatch_customer_address_formpost">
+		<observer instance="Abbott\Targetbase\Observer\TargetbaseAddressChange" name="abbott_targetbase_checkaddresschange"/>
+	</event>
+	<event name="controller_action_postdispatch_customer_account_editpost">
+		<observer instance="Abbott\Targetbase\Observer\TargetbaseAccountChange" name="abbott_targetbase_checkaccountchange"/>
+	</event>
+</config>

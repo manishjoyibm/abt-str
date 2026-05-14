@@ -1,0 +1,49 @@
+{
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Aheadworks\\Sarp2\\": ""
+        }
+    },
+    "description": "N/A",
+    "license": [
+        "proprietary"
+    ],
+    "name": "aheadworks/module-sarp2",
+    "require": {
+        "magento/module-backend": ">100.0",
+        "magento/module-catalog": ">100.0",
+        "magento/module-checkout": ">100.0",
+        "magento/module-config": ">100.0",
+        "magento/module-configurable-product": ">100.0",
+        "magento/module-customer": ">100.0",
+        "magento/module-directory": ">100.0",
+        "magento/module-downloadable": ">100.0",
+        "magento/module-instant-purchase": ">100.0",
+        "magento/module-authorizenet-acceptjs": ">100.0",
+        "magento/module-multishipping": ">100.0",
+        "magento/module-payment": ">100.0",
+        "magento/module-paypal": ">100.0",
+        "magento/module-quote": ">100.0",
+        "magento/module-sales": ">100.0",
+        "magento/module-vault": ">100.0",
+        "magento/module-checkout-agreements": ">100.0",
+        "magento/module-sales-sequence": ">100.0",
+        "magento/module-tax": ">100.0",
+        "magento/module-theme": ">100.0",
+        "magento/module-ui": ">100.0",
+        "magento/module-weee": ">100.0",
+        "magento/framework": ">100.0"
+    },
+    "suggests": {
+        "gene/module-braintree": ">3.0.0"
+    },
+    "support": {
+        "email": "support@aheadworks.com",
+        "docs": "http://confluence.aheadworks.com/display/EUDOC/Documentation+Home"
+    },
+    "type": "magento2-module",
+    "version": "2.5.1"
+}

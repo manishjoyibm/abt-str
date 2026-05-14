@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="10">
+            <label>Abbott</label>
+        </tab>
+        <section id="abbott_csp" translate="label" sortOrder="132" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <label>CSP Whitelist</label>
+            <tab>abbott</tab>
+            <resource>Abbott_Configuration::Custom_configuration</resource>
+            <group id="general" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Configuration</label>
+                <field id="info" translate="label comment" type="label" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Important Information</label>
+                    <comment><![CDATA[<strong class="colorRed" style="font-size:13px;">When adding or changing whitelist, ensure to include
+                        only those domains that are recognised and
+                        trustworthy. This precaution is crucial because
+                        unauthorised or compromised domains may contain
+                        malicious scripts.</strong>]]></comment>
+                </field>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Module Enabled</label>
+                    <comment>This setting will be used to enable or disable module</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="report_only" translate="label comment" type="select" sortOrder="3" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Report Only Mode</label>
+                    <comment><![CDATA[This setting will be used to switch CSP mode <br/>
+                        YES - Report Only (Only report potential vulnerability) <br/>
+                        NO - Strict Mode (Refuse to execute code or load data to prevent vulnerability)]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <backend_model>Abbott\Csp\Model\Config\Backend\ReportOnly</backend_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="report_collection" translate="label comment" type="select" sortOrder="4" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Report Collection Enabled</label>
+                    <comment>Enable this setting to collect CSP reports</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="default_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Default Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for default-src <br/>
+                        The default policy.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="base_uri" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Base Uri</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for base-uri <br/>
+                        Defines which URLs can appear in a page’s base HTML element.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="child_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Child Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for child-src <br/>
+                        Defines the sources for workers and embedded frame contents.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="connect_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Connect Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for connect-src <br/>
+                        Defines the sources that can be loaded using script interfaces.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="font_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Font Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for font-src <br/>
+                        Defines which sources can serve fonts.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="form_action" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Form Action</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for form-action <br/>
+                        Defines valid endpoints for submission from form tags.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="frame_ancestors" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Form Ancestors</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for form-ancestors <br/>
+                        Defines the sources that can embed the current page.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="frame_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Frame Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for frame-src <br/>
+                        Defines the sources for HTML elements such as frame and iframe.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="image_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Image Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for image-src <br/>
+                        Defines the sources from which images can be loaded.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="manifest_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Manifest Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for manifest-src <br/>
+                        Defines the allowable contents of web app manifests.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="media_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Media Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for media-src <br/>
+                        Defines the sources from which images can be loaded.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="object_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Object Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for object-src <br/>
+                        Defines the sources for the object, embed, and applet HTML elements.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="script_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Script Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for script-src <br/>
+                        Defines the sources for JavaScript script HTML elements.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs or HASH that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="style_src" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Style Src</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enabled</label>
+                    <comment><![CDATA[This setting will be used to enable or disable csp whitelist for style-src <br/>
+                        Defines the sources for stylesheets.]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="whitelist_entries" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Whitelist entries</label>
+                    <comment><![CDATA[Please add URLs or HASH that you want to whitelist]]></comment>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                    <frontend_model>Abbott\Csp\Block\Adminhtml\Config\Form\Field\WhitelistEntries</frontend_model>
+                    <backend_model>Magento\Config\Model\Config\Backend\Serialized\ArraySerialized</backend_model>
+                </field>
+            </group>
+            <group id="critical_security_overrides" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Critical Security Overrides</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="2" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable unsafe inline for scripts</label>
+                    <comment><![CDATA[This setting permits the execution of unsafe inline scripts,
+                        which can be introduced by your developers / third party
+                        extensions / attackers. Make sure you assess these unsafe
+                        inline scripts before setting this to YES. <br />
+                        <strong class="colorRed" style="font-size:15px;">Enabling unsafe inline scripts is a temporary
+                        measure and should only be done under the guidance of your developer. You must ask
+                        your developers or third party extension
+                        providers to whitelist their inline scripts.
+                        This setting must NOT be left on 'YES' permanently,
+                        as it significantly increases the risk of security vulnerabilities,
+                        making your site an easy target for attackers.
+                        Always prioritise the security of your site and user data.</strong>]]></comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

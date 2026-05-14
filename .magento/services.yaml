@@ -1,0 +1,22 @@
+# The services of the project.
+#
+# Each service listed will be deployed to power your project.
+
+mysql:
+    type: mysql:10.11
+    disk: 20480
+
+redis:
+    type: redis:7.2
+
+rabbitmq:
+    type: rabbitmq:4.1
+    disk: 2048
+
+opensearch:
+    type: opensearch:2
+    disk: 2048
+    configuration:
+      plugins:
+          - analysis-icu
+          - analysis-phonetic

@@ -1,0 +1,69 @@
+<?php
+/**
+ * Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+ */
+
+/** @var $block \Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\Products */
+
+// @codingStandardsIgnoreFile
+?>
+<?php
+    $profile = $block->getProfile();
+    $planDefinition = $profile->getProfileDefinition();
+?>
+<section class="admin__page-section subscription-products">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo $block->escapeHtml(__('Products')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__table-wrapper">
+            <table class="data-table admin__table-primary">
+                <thead>
+                    <tr class="headings">
+                        <th class="col-product-name"><span><?php echo $block->escapeHtml(__('Product Name')) ?></span></th>
+                        <th class="col-sku"><span><?php echo $block->escapeHtml(__('SKU')) ?></span></th>
+                        <th class="col-qty"><span><?php echo $block->escapeHtml(__('Qty')) ?></span></th>
+                        <th class="col-regular-price"><span><?php echo $block->escapeHtml(__('Regular Iteration Price')) ?></span></th>
+                        <th class="col-initial-fee"><span><?php echo $block->escapeHtml(__('Initial Fee')) ?></span></th>
+                        <th class="col-trial-price"><span><?php echo $block->escapeHtml(__('Trial Price')) ?></span></th>
+                    </tr>
+                </thead>
+                <tbody class="even">
+                    <?php foreach ($profile->getItems() as $item): ?>
+                        <?php if ($block->isItemShouldBeDisplayed($item)): ?>
+                        <tr>
+                            <td class="col-product-name">
+                                <?php if ($block->isProductExists($item->getProductId())): ?>
+                                    <a href="<?php echo $block->escapeUrl($block->getProductEditUrl($item->getProductId())) ?>"><?php echo $block->escapeHtml($item->getName()) ?></a>
+                                <?php else: ?>
+                                    <?php echo $block->escapeHtml($item->getName()) ?>
+                                <?php endif;?>
+                            </td>
+                            <td class="col-sku"><?php echo $block->escapeHtml($item->getSku()) ?></td>
+                            <td class="col-qty"><?php /* @noEscape */ echo $item->getQty() ?></td>
+                            <td class="col-regular-price">
+                                <?php /* @noEscape */ echo $block->formatProfileItemAmount($item->getBaseRegularPrice(), $profile->getBaseCurrencyCode()) ?>
+                            </td>
+                            <td class="col-initial-fee">
+                                <?php if ($planDefinition->getIsInitialFeeEnabled()): ?>
+                                    <?php /* @noEscape */ echo $block->formatProfileItemAmount($item->getBaseInitialFee(), $profile->getBaseCurrencyCode()) ?>
+                                <?php else: ?>
+                                    <?php echo $block->escapeHtml(__('No')) ?>
+                                <?php endif; ?>
+                            </td>
+                            <td class="col-trial-price">
+                                <?php if ($planDefinition->getIsTrialPeriodEnabled()): ?>
+                                    <?php /* @noEscape */ echo $block->formatProfileItemAmount($item->getBaseTrialPrice(), $profile->getBaseCurrencyCode()) ?>
+                                <?php else: ?>
+                                    <?php echo $block->escapeHtml(__('No')) ?>
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

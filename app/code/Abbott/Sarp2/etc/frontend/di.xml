@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Aheadworks\Sarp2\Model\Product\Subscription\Option\Processor">
+        <plugin name="subprocessor" type="Abbott\Sarp2\Plugin\Model\Product\Subscription\Option\ProcessorPlugin"/>
+    </type>
+
+    <type name="Aheadworks\Sarp2\Block\Customer\Subscription">
+        <plugin name="SubscriptionBlockPlugin" type="Abbott\Sarp2\Plugin\Block\Customer\SubscriptionPlugin"/>
+    </type>
+    <preference for="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails" type="Abbott\Sarp2\Block\Customer\Subscriptions\Edit\View\PaymentDetails"/>
+    <preference for="Aheadworks\Sarp2\Block\Checkout\Onepage\Success" type="Abbott\Sarp2\Block\Checkout\Onepage\Success"/>
+    <preference for="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\Plan" type="Abbott\Sarp2\Block\Customer\Subscriptions\Edit\Plan"/>
+    <preference for="Aheadworks\Sarp2\Block\Customer\Subscriptions\Edit\NextPaymentDate" type="Abbott\Sarp2\Block\Customer\Subscriptions\Edit\NextPaymentDate"/>
+    <preference for="Aheadworks\Sarp2\Controller\Profile\Edit\SavePlan" type="Abbott\Sarp2\Controller\Profile\Edit\SavePlan"/>
+    <preference for="Aheadworks\Sarp2\Block\Customer\Subscriptions" type="Abbott\Sarp2\Block\Customer\Subscriptions"/>
+    <preference for="Aheadworks\Sarp2\Model\Sales\Order\Item\Plugin\ProductOptions" type="Abbott\Sarp2\Model\Sales\Order\Item\Plugin\ProductOptions"/>
+    <preference for="Aheadworks\Sarp2\Model\Sales\Order\Item\Option\Processor" type="Abbott\Sarp2\Model\Sales\Order\Item\Option\Processor"/>
+    <preference for="Aheadworks\Sarp2\Controller\Profile\Cancel" type="Abbott\Sarp2\Controller\Profile\Cancel" />
+     <preference for="Aheadworks\Sarp2\Controller\Profile\Edit\SaveNextPaymentDate" type="Abbott\Sarp2\Controller\Profile\Edit\SaveNextPaymentDate" />
+    <preference for="Aheadworks\Sarp2\Controller\Profile\Edit\SavePayment" type="Abbott\Sarp2\Controller\Profile\Edit\SavePayment" />
+    <preference for="Aheadworks\Sarp2\Controller\Profile\Edit\SaveAddress" type="Abbott\Sarp2\Controller\Profile\Edit\SaveAddress" />
+    <type name="PayPal\Braintree\Block\GooglePay\Shortcut\Button">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="template" xsi:type="null" />
+                <item name="alias" xsi:type="string">braintree.googlepay.mini-cart</item>
+                <item name="button_id" xsi:type="string">braintree-googlepay-mini-cart</item>
+            </argument>
+            <argument name="payment" xsi:type="object">BraintreeGooglePay</argument>
+        </arguments>
+    </type>
+    <type name="PayPal\Braintree\Block\ApplePay\Shortcut\Button">
+        <arguments>
+            <argument name="data" xsi:type="array">
+                <item name="template" xsi:type="null" />
+                <item name="alias" xsi:type="string">braintree.applepay.mini-cart</item>
+                <item name="button_id" xsi:type="string">braintree-applepay-mini-cart</item>
+            </argument>
+            <argument name="payment" xsi:type="object">BraintreeApplePay</argument>
+        </arguments>
+    </type>
+    <preference for="Aheadworks\Sarp2\Block\Product\SubscriptionOptions" type="Abbott\Sarp2\Block\Product\SubscriptionOptions"/>
+</config>
+

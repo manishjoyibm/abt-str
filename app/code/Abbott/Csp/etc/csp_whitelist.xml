@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<csp_whitelist xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Csp:etc/csp_whitelist.xsd">
+    <policies>
+        <policy id="font-src">
+            <values>
+                <value id="abbottstore" type="host">abbottstore.com</value>
+                <value id="*_abbottstore" type="host">*.abbottstore.com</value>
+                <value id="glucernastore" type="host">glucernastore.com</value>
+                <value id="*_glucernastore" type="host">*.glucernastore.com</value>
+                <value id="similac" type="host">similac.com</value>
+                <value id="*_similac" type="host">*.similac.com</value>
+                <value id="google_fonts" type="host">fonts.gstatic.com</value>
+                <value id="onetrust" type="host">*.onetrust.com</value>
+                <value id="trustarc" type="host">*.trustarc.com</value>
+            </values>
+        </policy>
+        <policy id="style-src">
+            <values>
+                <value id="abbottstore" type="host">abbottstore.com</value>
+                <value id="*_abbottstore" type="host">*.abbottstore.com</value>
+                <value id="glucernastore" type="host">glucernastore.com</value>
+                <value id="*_glucernastore" type="host">*.glucernastore.com</value>
+                <value id="similac" type="host">similac.com</value>
+                <value id="*_similac" type="host">*.similac.com</value>
+                <value id="googleapis" type="host">fonts.googleapis.com</value>
+                <value id="onetrust" type="host">*.onetrust.com</value>
+                <value id="gateway_zscloud" type="host">gateway.zscloud.net</value>
+            </values>
+        </policy>
+        <policy id="img-src">
+            <values>
+                <value id="abbottstore" type="host">abbottstore.com</value>
+                <value id="*_abbottstore" type="host">*.abbottstore.com</value>
+                <value id="glucernastore" type="host">glucernastore.com</value>
+                <value id="*_glucernastore" type="host">*.glucernastore.com</value>
+                <value id="similac" type="host">similac.com</value>
+                <value id="*_similac" type="host">*.similac.com</value>
+                <value id="bat_bing" type="host">bat.bing.com</value>
+                <value id="abbottlabs_112_2o7" type="host">abbottlabs.112.2o7.net</value>
+                <value id="www_gstatic" type="host">www.gstatic.com</value>
+                <value id="similac_www_facebook" type="host">www.facebook.com</value>
+                <value id="similac_yul1_qualtrics" type="host">*.qualtrics.com</value>
+                <value id="similac_trustarc" type="host">*.trustarc.com</value>
+                <value id="similac_truste" type="host">*.truste.com</value>
+                <value id="similac_www_google" type="host">www.google.co.in</value>
+                <value id="similac_bat_bing_net" type="host">bat.bing.net</value>
+                <value id="cm.everesttech.net" type="host">cm.everesttech.net</value>
+                <value id="www.google.co.in" type="host">www.google.co.in</value>
+                <value id="s.amazon-adsystem.com" type="host">s.amazon-adsystem.com</value>
+                <value id="alb.reddit.com" type="host">alb.reddit.com</value>
+            </values>
+        </policy>
+        <policy id="connect-src">
+            <values>
+                <value id="abbottstore" type="host">abbottstore.com</value>
+                <value id="*_abbottstore" type="host">*.abbottstore.com</value>
+                <value id="glucernastore" type="host">glucernastore.com</value>
+                <value id="*_glucernastore" type="host">*.glucernastore.com</value>
+                <value id="similac" type="host">similac.com</value>
+                <value id="*_similac" type="host">*.similac.com</value>
+                <value id="accessibe" type="host">*.acsbapp.com</value>
+                <value id="onetrust" type="host">*.onetrust.com</value>
+                <value id="doubleclick" type="host">stats.g.doubleclick.net</value>
+                <value id="trustarc" type="host">*.trustarc.com</value>
+                <value id="bat_bing" type="host">bat.bing.com</value>
+                <value id="similac_abbottlaboratories_tt_omtrdc" type="host">abbottlaboratories.tt.omtrdc.net</value>
+                <value id="similac_collection_decibelinsight" type="host">*.decibelinsight.net</value>
+                <value id="similac_siteintercept_qualtrics" type="host">*.qualtrics.com</value>
+                <value id="similac_www_facebook" type="host">www.facebook.com</value>
+                <value id="similac_google_analytics" type="host">*.google-analytics.com</value>
+                <value id="similac_bat_bing_net" type="host">bat.bing.net</value>
+                <value id="maps.googleapis.com" type="host">maps.googleapis.com</value>
+                <value id="gigya.com" type="host">*.gigya.com</value>
+                <value id="script.crazyegg.com" type="host">script.crazyegg.com</value>
+                <value id="logx.optimizely.com" type="host">logx.optimizely.com</value>
+                <value id="www.recaptcha.net" type="host">www.recaptcha.net</value>
+                <value id="accessibe_acsbapp" type="host">acsbapp.com</value>
+                <value id="accessibe_acsbap" type="host">acsbap.com</value>
+                <value id="www.google.co.in" type="host">www.google.co.in</value>
+                <value id="www.redditstatic.com" type="host">www.redditstatic.com</value>
+                <value id="pixel-config.reddit.com" type="host">pixel-config.reddit.com</value>
+                <value id="ct_pinterest_com" type="host">ct.pinterest.com</value>
+                <value id="static_cloudflareinsights_com" type="host">static.cloudflareinsights.com</value>
+            </values>
+        </policy>
+        <policy id="frame-src">
+            <values>
+                <value id="similac_recaptcha" type="host">www.recaptcha.net</value>
+                <value id="gigya.com" type="host">*.gigya.com</value>
+                <value id="trustarc.com" type="host">*.trustarc.com</value>
+                <value id="td.doubleclick.net" type="host">td.doubleclick.net</value>
+                <value id="2644366.fls.doubleclick.net" type="host">2644366.fls.doubleclick.net</value>
+                <value id="insight.adsrvr.org" type="host">insight.adsrvr.org</value>
+                <value id="a10444071869.cdn.optimizely.com" type="host">a10444071869.cdn.optimizely.com</value>
+                <value id="abbottlaboratories.demdex.net" type="host">abbottlaboratories.demdex.net</value>
+                <value id="similac_recaptcha2" type="host">*.google.com</value>
+                <value id="similac_recaptcha3" type="host">google.com</value>
+                <value id="onetrust.com" type="host">*.onetrust.com</value>
+                <value id="bcove.video" type="host">bcove.video</value>
+            </values>
+        </policy>
+        <policy id="frame-ancestors">
+            <values>
+                <value id="similac_recaptcha" type="host">www.recaptcha.net</value>
+                <value id="similac_recaptcha2" type="host">*.google.com</value>
+                <value id="similac_recaptcha3" type="host">google.com</value>
+            </values>
+        </policy>
+        <policy id="script-src">
+            <values>
+                <value id="abbottstore" type="host">abbottstore.com</value>
+                <value id="*_abbottstore" type="host">*.abbottstore.com</value>
+                <value id="glucernastore" type="host">glucernastore.com</value>
+                <value id="*_glucernastore" type="host">*.glucernastore.com</value>
+                <value id="similac" type="host">similac.com</value>
+                <value id="*_similac" type="host">*.similac.com</value>
+                <value id="accessibe_acsbapp" type="host">acsbapp.com</value>
+                <value id="accessibe_acsbap" type="host">acsbap.com</value>
+                <value id="accessibe" type="host">*.acsbapp.com</value>
+                <value id="trustarc" type="host">*.trustarc.com</value>
+                <value id="onetrust" type="host">*.onetrust.com</value>
+                <value id="bat_bing" type="host">bat.bing.com</value>
+                <value id="www_recaptcha" type="host">www.recaptcha.net</value>
+                <value id="static_abbottnutrition" type="host">static.abbottnutrition.com</value>
+                <value id="tags_bkrtx" type="host">tags.bkrtx.com</value>
+                <value id="www_google" type="host">www.google.com</value>
+                <value id="similac_connect_facebook" type="host">connect.facebook.net</value>
+                <value id="similac_cdn-akamai_mookie1" type="host">cdn-akamai.mookie1.com</value>
+                <value id="similac_decibelinsight" type="host">*.decibelinsight.net</value>
+                <value id="similac_analytics_tiktok" type="host">analytics.tiktok.com</value>
+                <value id="similac_abbottlaboratories_tt_omtrdc" type="host">abbottlaboratories.tt.omtrdc.net</value>
+                <value id="similac_qualtrics" type="host">*.qualtrics.com</value>
+                <value id="gtm_hash_1" type="hash" algorithm="sha256">DqQRTrU7X8BmqInEwm+zOyiwWFHBOTO/QjGYmzFG4CI=</value>
+                <value id="gtm_hash_2" type="hash" algorithm="sha256">naZVxjMei6sjkJuvEW3oATiOltYR54WrqzBao9ZFrOk=</value>
+                <value id="gtm_hash_3" type="hash" algorithm="sha256">uhBuU8a0KegQsd1Nyp43oUt0yONVYtV48+CoV7rsjEM=</value>
+                <value id="gtm_hash_4" type="hash" algorithm="sha256">tAJQxOxGzFGnt3AVOu9e0tUZnN6l7yyqmnxK7QGG/yU=</value>
+                <value id="acsb_hash" type="hash" algorithm="sha256">5quTC5HxkeDJogf1Sf9NBRzP+TJcsi0B0MTrkmqDuYM=</value>
+                <value id="amasty_calender" type="hash" algorithm="sha256">MH6jcPWEGiu3wIVhlwJtDzr89iIslb6F2XJ/9x2IJ6g=</value>
+                <value id="similac_gateway_zscloud" type="host">gateway.zscloud.net</value>
+                <value id="similac_js_adsrvr" type="host">js.adsrvr.org</value>
+                <value id="similac_gtm_hash_1" type="hash" algorithm="sha256">VI0jJsFgRjP4L+//iSfhl1DDfmVrICGXd2klMXWHEHE=</value>
+                <value id="similac_gtm_hash_2" type="hash" algorithm="sha256">mgb56EE9oxTLhFj6nuCbj20005Gq/l3ADErKamrEDQY=</value>
+                <value id="similac_gtm_hash_3" type="hash" algorithm="sha256">UBAmLDPh3d5TOAtIr4rD6PezJ2FHKNb3SXrR3JieFsM=</value>
+                <value id="similac_gtm_hash_4" type="hash" algorithm="sha256">yulgysT29RYwQhgb/XNEQSFvx7WLw9dzSoTPYdDjsc8=</value>
+                <value id="similac_gtm_hash_5" type="hash" algorithm="sha256">O6d6vZSVhfOGI6IWmhNGKAOMigzV+wKEUB3FNnZBOoI=</value>
+                <value id="similac_gtm_hash_6" type="hash" algorithm="sha256">uBzClCMLNd4cJofNq8Xk0RejXa4cvQfSSIAAH94DmT8=</value>
+                <value id="similac_gtm_hash_7" type="hash" algorithm="sha256">0LpAUDGVClIe9ePFMD7pWDkEfwNe0NeR02OSl64FkXU=</value>
+                <value id="similac_gtm_hash_8" type="hash" algorithm="sha256">BLKs9uJLj83WrKrCmib6Lttdl2K2GZ0YQKM9q881SnY=</value>
+                <value id="similac_gtm_hash_9" type="hash" algorithm="sha256">NB4+5fPDgTLzOwJMj8wreFYzmI7k0y14/YOnXucbtc8=</value>
+                <value id="similac_gtm_hash_10" type="hash" algorithm="sha256">DqQRTrU7X8BmqInEwm+zOyiwWFHBOTO/QjGYmzFG4CI=</value>
+                <value id="similac_gtm_hash_11" type="hash" algorithm="sha256">AMo4ZLC4+poEqus5e2VUxIWUCk0cbY73QJtRInWvT9g=</value>
+                <value id="similac_gtm_hash_12" type="hash" algorithm="sha256">asbM54cClJGfmcCRCkhi5vvyjrwlXSbxP05zWz9uzsQ=</value>
+                <value id="similac_gtm_hash_13" type="hash" algorithm="sha256">7MPDNW77LN4A1J7zT6z8caWCG0cM2OGKspFHWQH3ZA8=</value>
+                <value id="similac_gtm_hash_14" type="hash" algorithm="sha256">vRJPYrGW6SXYVObgZZEzVd6X+clfC1Qj91dVkmiDQBw=</value>
+                <value id="similac_gtm_hash_15" type="hash" algorithm="sha256">Wh022eB0TAu1rVTShp7KuyiCIJWzOa1QHKZRA5CwwFI=</value>
+                <value id="similac_gtm_hash_16" type="hash" algorithm="sha256">M8OXu0IbVTnJF0Vw7J9vF8w6bqdQ5jw2wJrqk1hxLhQ=</value>
+                <value id="similac_gtm_hash_17" type="hash" algorithm="sha256">IHOOFuwZGEdcJHluOmz7TQDhuHX+Ro96YJKp2IBE7rQ=</value>
+                <value id="similac_gtm_hash_18" type="hash" algorithm="sha256">14lWyyUrpegPDvHBLhOBs1Zo7jVVsY5aMVsZZ4m5xf8=</value>
+                <value id="similac_gtm_hash_19" type="hash" algorithm="sha256">TMV14vkT7NgAgTHs7oZJ35Pudn+UuA9O8NtKFzxbBkM=</value>
+                <value id="similac_gtm_hash_20" type="hash" algorithm="sha256">HaEXcQLZDUk8kdwukg+Ovi5wcB+NT8tMrMjKRwGOaN8=</value>
+                <value id="similac_gtm_hash_21" type="hash" algorithm="sha256">CaM0FeCxEhEddLPhZ1wQYmd08FTAZ8L/DgJLulrw4ns=</value>
+                <value id="similac_gtm_hash_22" type="hash" algorithm="sha256">JFZlN9zWJNCgdk4N2QySSLTHs/iSZzQmLPmJfLyWWPA=</value>
+                <value id="similac_gtm_hash_23" type="hash" algorithm="sha256">hDJ6ZDBSw48G+0MSi20iVoad+u11qxnpTpdJBy2+qzg=</value>
+                <value id="similac_gtm_hash_24" type="hash" algorithm="sha256">Tb2ZK8jz/RkgMoYrlWXTqhCmFFqEDXQfbZOfz9P5ZHs=</value>
+                <value id="similac_gtm_hash_25" type="hash" algorithm="sha256">WHEaUAHYoMPeaENhS4Kw/M6hiQiWRGmfE3VaGV6Q7kA=</value>
+                <value id="similac_gtm_hash_26" type="hash" algorithm="sha256">887CmWwYDHsvoUNIqSycZq93C0AlxaKBz8RqcSBP1SA=</value>
+                <value id="similac_gtm_hash_27" type="hash" algorithm="sha256">BVbBzaBRhAYY6mBMKcbRyQ5P0XeXZNynQZHLzCNAd8I=</value>
+                <value id="similac_gtm_hash_28" type="hash" algorithm="sha256">X5Tkg4Be0ePOT7qg8Pkhyeokx3tLxpLlNg0R8HpqDF4=</value>
+                <value id="similac_gtm_hash_29" type="hash" algorithm="sha256">nmG39QY7etsr0S9Pltsca4VmWHLjHWhKmquw2yDVaRo=</value>
+                <value id="similac_gtm_hash_30" type="hash" algorithm="sha256">ij0orwnLeeb+u6gvUv328wDpgql3qNEL4n9E6jrnOdE=</value>
+                <value id="similac_gtm_hash_31" type="hash" algorithm="sha256">AwxsAtS7g/TFXC+dhYYNH90s80Ac0CvBIeQo/b6J+Qs=</value>
+                <value id="similac_gtm_hash_32" type="hash" algorithm="sha256">Klqp8eJicf8N3KTf7kyWKUr/rDy/AIiYhWYbUkkAn/8=</value>
+                <value id="similac_gtm_hash_33" type="hash" algorithm="sha256">cv6521TaE+hGSNJOrTlX5kPs6dQfIeL5KJIqQa6z1Rw=</value>
+                <value id="similac_gtm_hash_34" type="hash" algorithm="sha256">y5bzxoyO3FEQfBmLzffWrwELknwz2hJ3/5epvFD9R4k=</value>
+                <value id="similac_gtm_hash_35" type="hash" algorithm="sha256">Yo57XKb8l/5fPIBU27q0ugBWDAUdtsGsIhEfIe2wcbI=</value>
+                <value id="similac_gtm_hash_35" type="hash" algorithm="sha256">wUVHn0b2F8aLwooA6IiqYPOClm7Hsc7oqvjYuHuXrKQ=</value>
+                <value id="similac_securityprotection_lb_abbott" type="host">*.abbott.com</value>
+                <value id="gtm_hash_5" type="hash" algorithm="sha256">rnldsjuwRWYNwaRs18VuFDSm0QySsU8somB3NV1Xbzo=</value>
+                <value id="gtm_hash_6" type="hash" algorithm="sha256">2yTOutenrtEHstff5EpNEutKhPL45kCaClokv/gk66w=</value>
+                <value id="gtm_hash_7" type="hash" algorithm="sha256">DqQRTrU7X8BmqInEwm+zOyiwWFHBOTO/QjGYmzFG4CI=</value>
+                <value id="gtm_hash_8" type="hash" algorithm="sha256">34zyfodpdvvr1wgtOr4MMIKBBP7sJdxxRs9Z2YvktP0=</value>
+                <value id="gtm_hash_9" type="hash" algorithm="sha256">QNJ26dQ4SBLHha8Y/r3VBeY6R/s+C+abo56jciuKA5o=</value>
+                <value id="gtm_hash_10" type="hash" algorithm="sha256">6qyMG2kvmL71Csbd051gl0mfPVoWgMbgyEmdXTz5esc=</value>
+                <value id="paypal_hash" type="hash" algorithm="sha256">1ozuCt5fPv779wJQEWXLF2gXag+V1bnu3hmAhDbY0Cg=</value>
+                <value id="similac_google_analytics" type="host">*.google-analytics.com</value>
+                <value id="similac_bat_bing_net" type="host">bat.bing.net</value>
+                <value id="maps.googleapis.com" type="host">maps.googleapis.com</value>
+                <value id="cdns.gigya.com" type="host">*.gigya.com</value>
+                <value id="script.crazyegg.com" type="host">script.crazyegg.com</value>
+                <value id="cdn.optimizely.com" type="host">cdn.optimizely.com</value>
+                <value id="paypal_hash2" type="hash" algorithm="sha256">+UfUaisl0XfDcP0MvSNaut3W8dYiSwmgJDfPvhQjo5c=</value>
+                <value id="gtm_hash_11" type="hash" algorithm="sha256">qlV+THSJdjzm5ZY8z8CwUx6OsHh6x0d8BVBkCHocEws=</value>
+                <value id="gtm_hash_12" type="hash" algorithm="sha256">2irPA9Ai7UJwxQnL50AnJIHPJ/saJTw8khoSODutiTQ=</value>
+                <value id="gtm_hash_13" type="hash" algorithm="sha256">lmLc2DEapT4UMcbnucNYDVSMT0gjqO8ZO7Yc8K7Rqxw=</value>
+                <value id="gtm_hash_14" type="hash" algorithm="sha256">ELOPfAaH01SZAD/H9+0xvwQGTQ9G9YYW9JMpwbzdi/s=</value>
+                <value id="gtm_hash_15" type="hash" algorithm="sha256">Z1WnEc2Eqa79Aq5rbY9NbM8mRyu3DOxxTp7y0w69+vI=</value>
+                <value id="gtm_hash_16" type="hash" algorithm="sha256">waQ4AK27uXn+o5EaAKcMApy/GHp5Q5+EcO2hBOBIaTE=</value>
+                <value id="gtm_hash_17" type="hash" algorithm="sha256">AkbEkajim1slLMFtmarirJ9i4t918Gd+IIWxnpm2ha8=</value>
+                <value id="gtm_hash_18" type="hash" algorithm="sha256">rIaB8a78CheruGED1Uu300GGjQMlmgbNprll4/ANaq0=</value>
+                <value id="gtm_hash_19" type="hash" algorithm="sha256">NXE9HV6iABooePCN8xcM2MPqR8F5c4tWZPt7hwTnazU=</value>
+                <value id="gtm_hash_20" type="hash" algorithm="sha256">MgbmkPTmlvAW8JlLVe7WR5IVO6bAGvVNgIgGJvZ0Xr4=</value>
+                <value id="www.redditstatic.com" type="host">www.redditstatic.com</value>
+                <value id="pedialyte_gtm_hash_1" type="hash" algorithm="sha256">KBuCWYidVVejlmt+z1k6ie6qxiqxkRVoXF2mymch140=</value>
+                <value id="pedialyte_gtm_hash_2" type="hash" algorithm="sha256">IBg09dxPD4GFtKDb3RT8yHnK/isMqO0E9Sz5VmaAMt0=</value>
+                <value id="pedialyte_gtm_hash_3" type="hash" algorithm="sha256">I6PmDeA4R0B8Rp08E44EhLIzj4QK3SB8l5OWk2aGkpA=</value>
+                <value id="pedialyte_gtm_hash_4" type="hash" algorithm="sha256">Zmwd+F7HCcDEHRId9n5GKRj6auA5ZtJ0FvyWtm8iq9U=</value>
+                <value id="pedialyte_gtm_hash_5" type="hash" algorithm="sha256">p1u1qLeDMZSBqS/7CJiNIXsRMzlSwFBCoEUbmxFkc8o=</value>
+                <value id="pedialyte_gtm_hash_6" type="hash" algorithm="sha256">MWVLwx5Bkfc27+HHna2NSXBSnaIYHn5qhI+kIc9soeM=</value>
+                <value id="pedialyte_gtm_hash_7" type="hash" algorithm="sha256">rZLJD7vJx8yPEooAhoXswWyfb23Gr5oM5mgcu6P5kdU=</value>
+                <value id="pedialyte_gtm_hash_8" type="hash" algorithm="sha256">chdOysRu7Vk5Ag1EhpFjyxeK2ZOwg+KfXQTXWOgYSTs=</value>
+                <value id="pedialyte_gtm_hash_9" type="hash" algorithm="sha256">ctDvWhkjgz/OTcK5lB7gkZxsaSRznJcaAkb9eZRCc/8=</value>
+                <value id="pedialyte_gtm_hash_10" type="hash" algorithm="sha256">T1H8+MDrPLb5ZAGyfHgGwm0w/383mU6TC0QeiGuZEv0=</value>
+                <value id="pedialyte_gtm_hash_11" type="hash" algorithm="sha256">9uvm9GTIhRIAlUYgaEF87Xd4/tUl+ZjyH59EwzFwHGE=</value>
+                <value id="pedialyte_gtm_hash_12" type="hash" algorithm="sha256">95StaqcEyxlaOcosYc3Ou7dc5EmNTjiHhodLRxtl+cI=</value>
+                <value id="pedialyte_gtm_hash_13" type="hash" algorithm="sha256">8UJRncw2ZqooH9G7k7PiuzVKqybGR0qQLDD16KqMt1g=</value>
+                <value id="s_pinimg_com" type="host">s.pinimg.com</value>
+                <value id="ct_pinterest_com" type="host">ct.pinterest.com</value>
+                <value id="static_cloudflareinsights_com" type="host">static.cloudflareinsights.com</value>
+                <value id="bcove.video" type="host">bcove.video</value>
+                <value id="gtm_hash_21" type="hash" algorithm="sha256">NbZ5SvwF1xpAn1eG+yiQneserAUG47Nf4aj02V1i9KQ=</value>
+            </values>
+        </policy>
+        <policy id="worker-src">
+            <values>
+                <value id="similac_worker" type="host">blob:</value>
+            </values>
+        </policy>
+    </policies>
+</csp_whitelist>

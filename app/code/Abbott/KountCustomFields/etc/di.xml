@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+
+    <virtualType name="BraintreeGooglePayAuthorizeRequest">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="device_data" xsi:type="string">Abbott\KountCustomFields\Gateway\Request\KountPaymentDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BraintreeApplePayAuthorizeRequest">
+        <arguments>
+            <argument name="builders" xsi:type="array">
+                <item name="device_data" xsi:type="string">Abbott\KountCustomFields\Gateway\Request\KountPaymentDataBuilder</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BraintreeApplePayAuthorizationHandler">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="risk_data" xsi:type="string">PayPal\Braintree\Gateway\Response\RiskDataHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <virtualType name="BraintreeGooglePayAuthorizationHandler">
+        <arguments>
+            <argument name="handlers" xsi:type="array">
+                <item name="risk_data" xsi:type="string">PayPal\Braintree\Gateway\Response\RiskDataHandler</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="BraintreeGooglePayCommandPool">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="deny_payment" xsi:type="string">BraintreeVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+
+    <virtualType name="BraintreeApplePayCommandPool" >
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="deny_payment" xsi:type="string">BraintreeVoidCommand</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Aheadworks\Sarp2\Gateway\Braintree\Request\PaymentDataBuilder">
+        <plugin name="paymentDataBuilderPlugin" type="Abbott\KountCustomFields\Plugin\Gateway\Braintree\Request\PaymentDataBuilder" />
+    </type>
+    <preference for="Kount\Kount360\Model\Ris\Inquiry\Builder" type="Abbott\KountCustomFields\Model\Ris\Inquiry\Builder" />
+    <preference for="Kount\Kount360\Model\Order\Action\Decline" type="Abbott\KountCustomFields\Model\Order\Action\Decline" />
+    <preference for="Abbott\KountCustomFields\Model\Ris\Base\Builder\Payment" type="Kount\Kount360\Model\Ris\Base\Builder\PaymentInterface" />
+    <virtualType name="Abbott\KountCustomFields\Model\Ris\Inquiry\Builder\Payment" type="Abbott\KountCustomFields\Model\Ris\Base\Builder\Payment">
+        <arguments>
+            <argument name="defaultPayment" xsi:type="string">Abbott\KountCustomFields\Model\Ris\Inquiry\Builder\Payment\NoPayment</argument>
+            <argument name="payments" xsi:type="array">
+                <item name="braintree" xsi:type="string">Abbott\KountCustomFields\Model\Ris\Inquiry\Builder\Payment\Braintree</item>
+                <item name="braintree_cc_vault" xsi:type="string">Abbott\KountCustomFields\Model\Ris\Inquiry\Builder\Payment\Braintree</item>
+                <item name="braintree_paypal" xsi:type="string">Abbott\KountCustomFields\Model\Ris\Inquiry\Builder\Payment\BraintreePayPal</item>
+                <item name="braintree_paypal_vault" xsi:type="string">Abbott\KountCustomFields\Model\Ris\Inquiry\Builder\Payment\BraintreePayPal</item>
+                <item name="braintree_applepay" xsi:type="string">Abbott\KountCustomFields\Model\Ris\Inquiry\Builder\Payment\BraintreeApplePay</item>
+                <item name="braintree_googlepay" xsi:type="string">Abbott\KountCustomFields\Model\Ris\Inquiry\Builder\Payment\BraintreeGooglePay</item>
+            </argument>
+        </arguments>
+    </virtualType>
+    <type name="Abbott\KountCustomFields\Model\Ris\Inquiry\Builder">
+        <arguments>
+            <argument name="paymentBuilder" xsi:type="object">Abbott\KountCustomFields\Model\Ris\Inquiry\Builder\Payment</argument>
+        </arguments>
+    </type>
+    <type name="Kount\Kount360\Model\Config\Source\PaymentMethods">
+        <plugin name="payment_config_model"
+                type="Abbott\KountCustomFields\Plugin\Config\SourcePlugin"/>
+    </type>
+    <type name="Kount\Kount360\Model\Ris\Sender">
+        <plugin name="before_send_set_anid_if_empty"
+                type="Abbott\KountCustomFields\Plugin\Model\Ris\Sender"/>
+    </type>
+</config>

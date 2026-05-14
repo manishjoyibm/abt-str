@@ -1,0 +1,22 @@
+--- a/app/code/Amasty/Orderattr/Model/Order/Pdf/Traits/AbstractPdfTrait.php	2022-11-17 17:02:08.287079962 +0530
++++ b/app/code/Amasty/Orderattr/Model/Order/Pdf/Traits/AbstractPdfTrait.php	2022-11-17 17:03:00.122571898 +0530
+@@ -41,6 +41,11 @@
+     private $isFirstItemDrawn;
+ 
+     /**
++    * @var \Magento\Framework\Locale\ResolverInterface
++    */
++   protected $_localeResolver;
++
++    /**
+      * @var bool
+      */
+     private $newPageHeader = false;
+@@ -92,6 +97,7 @@
+         $this->metadataFormFactory = $metadataFormFactory;
+         $this->entityResolver = $entityResolver;
+         $this->configProvider = $configProvider;
++        $this->_localeResolver = $localeResolver;
+     }
+ 
+     /**

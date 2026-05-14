@@ -1,0 +1,38 @@
+<?php /** @var $block \Magento\Checkout\Block\Onepage\Success */ ?>
+<div class="thankyou-wrapper">
+  <div class="checkout-page-title-wrapper thank-you-page">
+    <div class="icon_thank_you_01">
+      <img src="<?php echo $this->getViewFileUrl('Magento_Checkout::images/icon_01.svg'); ?>" />
+    </div>
+    <h1 class="page-title">Thank you for your purchase</h1>
+  </div>
+  <div class="checkout-success">
+      <?php if ($block->getOrderId()) :?>
+          <?php if ($block->getCanViewOrder()) :?>
+              <p><?= $block->escapeHtml(__('Your order number is: %1.', sprintf('<a href="%s" class="order-number"><strong>%s</strong></a>', $block->escapeUrl($block->getViewOrderUrl()), $block->getOrderId())), ['a', 'strong']) ?></p>
+          <?php  else :?>
+              <p><?= $block->escapeHtml(__('Your order number is: <span>%1</span>.', $block->getOrderId()), ['span']) ?></p>
+          <?php endif;?>
+              <p><?= $block->escapeHtml(__('We\'ll email you an order confirmation with details and tracking info')) ?></p>
+      <?php endif;?>
+
+      <div class="actions-toolbar">
+          <div class="primary">
+              <a class="action primary continue" href="<?= $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl() ?>"><span><?= $block->escapeHtml(__('Continue Shopping')) ?></span></a>
+          </div>
+      </div>
+  </div>
+  <?= $block->getAdditionalInfoHtml() ?>
+  <script>
+        window.orderItem = <?= /* @noEscape */ $block->getOrderedItems() ?>;
+        window.valuesConfig  = <?= /* @noEscape */ $block->getDoTagValue() ?>;
+  </script>
+  <script type="text/x-magento-init">
+    {
+        "*": {
+            "Abbott_Sarp2/js/checkoutsuccess": {}
+        }
+    }
+</script>
+</div>
+

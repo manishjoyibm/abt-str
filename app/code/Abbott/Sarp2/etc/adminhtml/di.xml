@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Magento\PricePermissions\Observer\AdminhtmlBlockHtmlBeforeObserver" type="Abbott\Sarp2\Observer\AdminhtmlBlockHtmlBeforeObserver"/>
+    <type name="Magento\Directory\Model\Currency">
+        <plugin name="subscreption_currency_issue" type="Abbott\Sarp2\Plugin\Model\Currency"/>
+    </type>
+    <preference for="Aheadworks\Sarp2\Model\ResourceModel\Profile\Collection" type="Abbott\Sarp2\Model\ResourceModel\Profile\Collection"/>
+    <preference for="Aheadworks\Sarp2\Model\ResourceModel\Profile\Grid\Collection" type="Abbott\Sarp2\Model\ResourceModel\Profile\Grid\Collection"/>
+    <preference for="Aheadworks\Sarp2\Controller\Adminhtml\Subscription\Cancel" type="Abbott\Sarp2\Controller\Adminhtml\Subscription\Cancel"/>
+    <preference for="Aheadworks\Sarp2\Controller\Adminhtml\Plan\Delete" type="Abbott\Sarp2\Controller\Adminhtml\Plan\Delete"/>
+    <type name="\Aheadworks\Sarp2\Api\PlanRepositoryInterface">
+        <plugin name="save_plan_extension_attributes" type="Abbott\Sarp2\Plugin\PlanRepositoryInterfacePugin"/>
+    </type>
+    <preference type="Abbott\Sarp2\Block\Adminhtml\Subscription\Info\NextOrderAndPlan" for="Aheadworks\Sarp2\Block\Adminhtml\Subscription\Info\NextOrderAndPlan"/>
+    <preference for="Aheadworks\Sarp2\Model\Product\Subscription\OptionRepository" type="Abbott\Sarp2\Model\Product\Subscription\OptionRepository"/>
+    <preference for="Aheadworks\Sarp2\Model\Product\Subscription\Option\Finder" type="Abbott\Sarp2\Model\Product\Subscription\Option\Finder"/>
+</config>

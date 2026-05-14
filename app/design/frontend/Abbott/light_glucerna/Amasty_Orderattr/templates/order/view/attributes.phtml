@@ -1,0 +1,37 @@
+<?php
+
+/**
+ * @var \Amasty\Orderattr\Block\Order\Attributes $block
+ */
+?>
+
+<?php if ($orderAttributeList = $block->getOrderAttributesData()): ?>
+<div class="block block-order-details-view">
+    <div class="block-title">
+        <strong><?= $escaper->escapeHtml(__('Additional Info')) ?></strong>
+    </div>
+    <div class="block-content">
+        <?php foreach ($orderAttributeList as $attribute): ?>
+            <?php if ($attribute['code'] != 'glucerna_terms') { ?>
+                <div class="box">
+                    <strong class="box-title">
+                        <span><?= $escaper->escapeHtml(__($attribute['label'])); ?></span>
+                    </strong>
+                    <div class="box-content">
+                        <?php if (is_array($attribute['value'])): ?>
+                            <a class="file-link"
+                            target="_blank"
+                            href="<?= /** @noEscape */ $attribute['value']['url'] ?? '' ?>">
+                                <?= /** @noEscape */ $attribute['value']['name'] ?? ''; ?>
+                            </a>
+                        <?php else: ?>
+                            <?= /** @noEscape */ $escaper->escapeHtml($attribute['value']); ?>
+                        <?php endif; ?>
+                    </div>
+                </div>
+            <?php } ?>
+        <?php endforeach; ?>
+    </div>
+</div>
+<?php endif; ?>
+

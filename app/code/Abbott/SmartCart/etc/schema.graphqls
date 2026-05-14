@@ -1,0 +1,10 @@
+type Mutation {
+    generateSmartCart(input: SmartCartInput!): SmartCart @resolver(class: "Abbott\\SmartCart\\Model\\Resolver\\ProcessSmartCart") @doc(description: "Process SmartCart Code")
+}
+input SmartCartInput {
+    code: String @doc(description: "SmartCart code")
+}
+type SmartCart @doc(description: "SmartCart will return cart mask id"){
+    cart_mask_id: String @doc(description: "Cart Mask Id")
+}
+

@@ -1,0 +1,22 @@
+{
+    "name": "abbott/module-subscriptionhistory",
+    "description": "Stores subscription profiles logs and display in MBO and frontend",
+    "type": "magento2-module",
+    "license": "GPL-3.0",
+    "authors": [
+        {
+            "name": "Rahul Hedaoo",
+            "email": "rahul.hedaoo@abbott.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {},
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Abbott\\Subscriptionhistory\\": ""
+        }
+    }
+}

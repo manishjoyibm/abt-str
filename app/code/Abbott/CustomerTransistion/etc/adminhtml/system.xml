@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="my_account" translate="label" sortOrder="130" showInDefault="1" showInWebsite="1" showInStore="1">
+            <resource>Abbott_CustomerTransition::config_myaccount</resource>
+            <group id="myAccount_redirect"  translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>My Account Redirects</label>
+                <field id="redirect_failure_url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Redirect Url</label>
+                </field>
+				<field id="js_version" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AEM Asset Files Version</label>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="payment_address_link" resource="default" engine="innodb"
+           comment="vault token links to address">
+        <column xsi:type="int" name="payment_token_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Payment token ID"/>
+        <column xsi:type="int" name="address_id" padding="10" unsigned="true" nullable="false" identity="false"
+                comment="Customer Address ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="payment_token_id"/>
+            <column name="address_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="PAYMENT_ADDRESS_LINK_PAYMENT_TOKEN_ID_VAULT_PAYMENT_TOKEN_ENTITY_ID"
+                    table="payment_address_link" column="payment_token_id"
+                    referenceTable="vault_payment_token" referenceColumn="entity_id" onDelete="CASCADE"/>
+        <constraint xsi:type="foreign" referenceId="PAYMENT_ADDRESS_LINK_ADDRESS_ID_CUSTOMER_ADDRESS_ENTITY_ENTITY_ID"
+                    table="payment_address_link" column="address_id"
+                    referenceTable="customer_address_entity" referenceColumn="entity_id" onDelete="CASCADE"/>
+    </table>
+</schema>

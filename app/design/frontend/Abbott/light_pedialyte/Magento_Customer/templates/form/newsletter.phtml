@@ -1,0 +1,54 @@
+<?php
+/** @var \Magento\Customer\Block\Newsletter $block */
+/** @var \Abbott\OneTrust\ViewModel\CallApi $viewModel*/
+/** @var \Magento\Framework\Escaper $escaper */
+
+$viewModel = $block->getData('api_view_model');
+?>
+<?= $block->getChildHtml('form_before') ?>
+    <form class="form form-newsletter-manage" action="<?= $escaper->escapeUrl($block->getAction()) ?>" method="post" id="form-validate">
+        <fieldset class="fieldset">
+            <?= $block->getBlockHtml('formkey') ?>
+            <?php if($viewModel->isModuleEnable()) { ?>
+                <legend><span><?= $block->escapeHtml(__('Update your contact preferences by selecting which communications you would like to receive.')) ?></span></legend><br>
+                <div class="ot-form-wrapper">
+                    <iframe title="ot-iframe"
+                        src="<?= $escaper->escapeUrl($viewModel->getPreferenceCenterUrl($block->getCustomer()->getEmail())) ?>">
+                    </iframe>
+                </div>
+            <?php } else { ?>
+                <legend class="legend"><span><?= $escaper->escapeHtml(__('Manage your contact preferences')) ?></span></legend><br>
+                <div id="previousContent">
+                    <div id="emailSection" class="prefSection">
+                        <div id="emailQuestionDiv" class="prefQuestion">
+                            <span id="emailLabel">E-mail</span>
+                        </div>
+                        <div id="emailAnswerDiv" class="prefAnswer">
+                            <?php if ($block->getIsSubscribed()) { ?>
+                                <span id="emailAnswer"><?= $block->escapeHtml(__('Yes')) ?></span>
+                            <?php } else { ?>
+                                <span id="emailAnswer"><?= $block->escapeHtml(__('No')) ?></span>
+                            <?php } ?>
+                        </div>
+                    </div>
+                    <div class="clr"></div>
+                </div>
+                <h2 class="changeContentTitle">Change Your Contact Information</h2>
+                <div class="field choice">
+                    <legend class="legend"><span><?= $escaper->escapeHtml(__('E-mail')) ?></span></legend>
+                    <input type="checkbox" name="is_subscribed" id="subscription" value="1" title="<?= $escaper->escapeHtmlAttr(__('General Subscription')) ?>"<?php if ($block->getIsSubscribed()) : ?> checked="checked"<?php endif; ?> class="checkbox">
+                    <label for="subscription" class="label"><span><?php echo $block->getLayout()->createBlock(\Magento\Cms\Block\Block::class)->setBlockId('pedialyte_contact_preference')->toHtml();?></span></label>
+                </div>
+            <?php } ?>
+            <?php /* Extensions placeholder */ ?>
+            <?= $block->getChildHtml('customer.form.newsletter.extra') ?>
+        </fieldset>
+        <?php if(!$viewModel->isModuleEnable()) { ?>
+            <div class="actions-toolbar">
+                <div class="primary"><button type="submit" title="<?= $escaper->escapeHtmlAttr(__('Save')) ?>" class="action save primary"><span><?= $escaper->escapeHtml(__('Save')) ?></span></button></div>
+                <div class="secondary"><a class="action back" href="<?= $escaper->escapeUrl($block->getBackUrl()) ?>"><span><?= $escaper->escapeHtml(__('Back')) ?></span></a></div>
+            </div>
+        <?php } ?>
+    </form>
+<?php /* Extensions placeholder */ ?>
+<?= $block->getChildHtml('customer.form.newsletter.extra2') ?>

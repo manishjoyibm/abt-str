@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/config.xsd">
+    <default>
+        <admin_session>
+            <timeout_warning>
+                <warning_time>60</warning_time>
+            </timeout_warning>
+        </admin_session>
+    </default>
+</config>

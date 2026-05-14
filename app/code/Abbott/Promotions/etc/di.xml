@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+<preference for="Magento\Quote\Model\CouponManagement" 
+     type="Abbott\Promotions\Model\CouponManagement" />  
+<preference for="Abbott\Promotions\Api\AdditionalCouponMessageInterface" type="Abbott\Promotions\Model\CouponManagement" />
+<preference for="Abbott\Promotions\Api\Data\MessageDataInterface" type="Abbott\Promotions\Model\Data\Message" /> 
+</config>
+
+    

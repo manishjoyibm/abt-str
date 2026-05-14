@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <section id="recaptcha_frontend">
+            <group id="type_for">
+                <field id="isaemloginuserkey" translate="label" type="text" sortOrder="200" showInDefault="1" showInWebsite="1" showInStore="0" canRestore="1">
+                    <label>IsAEMLoginUserKey</label>
+                    <comment>This key value use to verify that user is login from AEM page (Use for Abbott and Glucerna only).</comment>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

@@ -1,0 +1,31 @@
+<!-- GlucernaStore: HEADER-->
+<?php
+    $baseUrl = $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl();
+?>
+<header class="glucerna-header is-sticky">
+    <div class="container glucerna-header__container">
+        <div class="row">
+          <div class="col-3 col-md-6 align-self-center">
+              <div class="glucerna-header__logo float-left">
+                <div class="logo">
+                  <a href="<?= $baseUrl ?>" target="_self">
+          	        <img src="<?= $baseUrl.'content/dam/abbott/glucerna_logo.png'?>"/>
+                   </a>
+                </div>
+              </div>
+          </div>
+        </div>
+    </div>
+    <div class="glucerna-header__marketing-banner">
+      <div class="sticky-menu">
+        <!-- /* STICKY MENU */ -->
+        <!-- /*  */ -->
+        <span class="glucerna-header__marketing-banner-loggedin d-none" style="background-color: ;">
+                GET YOUR GLUCERNA HUNGER SMART® MONTHLY SUBSCRIPTION &amp; SAVE
+        </span>
+        <span class="glucerna-header__marketing-banner-loggedout" style="background-color: ;">
+                LIMITED TIME: GET A 1 WEEK INTRODUCTORY TRIAL!
+        </span>
+        </div>
+    </div>
+</header>

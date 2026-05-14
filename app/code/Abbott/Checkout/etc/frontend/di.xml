@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+        <type name="Magento\Checkout\Block\Checkout\AttributeMerger">
+            <plugin name="shippingAddress" type="Abbott\Checkout\Plugin\Checkout\Block\Checkout\AttributeMerger\Plugin"/>
+        </type>
+        <type name="Magento\Checkout\Model\DefaultConfigProvider">
+            <plugin name="AddAttPlug" type="Abbott\Checkout\Plugin\Checkout\Model\ConfigProviderPlugin" />
+        </type>
+        <type name="Magento\Checkout\Controller\Onepage\Success">
+            <plugin name="successPlugin" type="Abbott\Checkout\Plugin\SuccessPlugin" />
+        </type>
+        <type name="Abbott\Checkout\Controller\Index\Index">
+            <plugin name="indexPlugin" type="Abbott\Checkout\Plugin\Controller\Index\IndexPlugin" />
+        </type>
+        <type name="Magento\Checkout\Controller\Cart\Index">
+            <plugin name="cartIndexPlugin" type="Abbott\Checkout\Plugin\Controller\Cart\IndexPlugin" />
+        </type>
+        <type name="Magento\Eav\Model\Entity\Attribute\Frontend\AbstractFrontend">
+            <plugin name="abstractFrontendPlugin" type="Abbott\Checkout\Model\Entity\Attribute\Frontend\Plugin\FrontendPlugin" />
+        </type>
+        <preference for="Magento\Checkout\Controller\Index\Index" type="Abbott\Checkout\Controller\Index\Index" />
+        <preference for="PayPal\Braintree\Controller\Payment\GetNonce" type="Abbott\Checkout\Controller\Payment\GetNonce" />
+        <type name="Abbott\Checkout\Controller\Payment\GetNonce">
+            <arguments>
+                <argument name="session" xsi:type="object">Magento\Customer\Model\Session</argument>
+            </arguments>
+        </type>
+        <type name="Magento\CheckoutAgreements\Model\AgreementsConfigProvider">
+            <plugin name="checkoutagreementplugin" type="Abbott\Checkout\Plugin\Checkout\Model\AgreementsConfigProvider" />
+        </type>
+        <type name="Magento\Checkout\Model\CompositeConfigProvider">
+            <arguments>
+                <argument name="configProviders" xsi:type="array">
+                    <item name="abbott_checkout_contact_config" xsi:type="object">
+                    Abbott\Checkout\Model\Checkout\ConfigProvider
+                    </item>
+                </argument>
+            </arguments>
+        </type>
+        <preference for="Magento\Checkout\CustomerData\DirectoryData" type="Abbott\Checkout\CustomerData\DirectoryData" />
+        <preference for="Magento\Checkout\Controller\Cart\Addgroup" type="Abbott\Checkout\Controller\Cart\Addgroup" />
+</config>

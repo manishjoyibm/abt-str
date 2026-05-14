@@ -1,0 +1,113 @@
+<!--@subject {{trans "Your"}} {{var storeName}} {{trans "order Cancellation"}} @-->
+<!--@vars {
+"var orderIncrement_id":"Order Id",
+"var orderShipping":"Shipping Address",
+"var created_at_formatted":"Order Created At (datetime)",
+"var url": "url",
+"var store" : "Store",
+"var storePhone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var this.getUrl($store,'customer/account/',[_nosid:1])":"Customer Account URL",
+"var order":"Order",
+"var orderTax":"Tax",
+"var store.id":"Store ID",
+"var orderItems":"Order Items",
+"var orderSubTotal": "Order Subtotal",
+"var orderTax":"Order Tax",
+"var orderShippingAmount": "Order Shipping Amount"
+"var orderGrandTotal":"Order Grandtotal",
+"var orderBilling":"Billing Details",
+"var orderShipping":"Shipping Details"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+    <tr class="text-block bg-white">
+      <td style="background: #17b4ed;padding: 15px 20px;">
+          <h1>Order Cancellation</h1>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 20px;">
+          <p class="mb25"><b>{{trans 'Order #'}}<span class="no-link">{{var orderIncrement_id}}</span></b></p>
+          <p class="mb25">{{trans 'Order Date:' }}{{var created_at_formatted}}</p>
+          <p class="mb25">{{trans 'This order has been cancelled.'}}<br/>
+             {{trans 'Once again thank you for the interest in '}}{{var store.getFrontendName()}}{{trans '.com. We look forward to you visiting our site again soon.'}}</p>
+          <p class="mb25">{{var store.getFrontendName()}}{{trans '.com'}}
+             <a href="{{customVar code=similac_contactus_url}}">{{trans"Customer Service Team"}}</a>
+             {{depend store_phone}} {{trans '<a href="tel:%store_phone">(%store_phone)</a>' store_phone=$store_phone |raw}}{{/depend}}
+          </p>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="background: #17b4ed;padding: 15px 20px;">
+            <h1>{{trans "Shipping And Billing"}}</h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="padding: 20px;">
+            <table class="order-details">
+                <tr>
+                  <td class="address-details pb30">
+                    <h3 class="light-blue"><b>{{trans "Billing Info"}}</b></h3>
+                    <p>{{var orderBilling |raw}}</p>
+                  </td>
+                  <td class="address-details">
+                      <h3 class="light-blue"><b>{{trans "Shipping Info"}}</b></h3>
+                      <p>{{var orderShipping |raw}}</p>
+                  </td>
+                </tr>
+            </table>
+        </td>
+      </tr>
+      <tr class="text-block bg-white">
+        <td style="background: #17b4ed;padding: 15px 20px;">
+          <h1>{{trans "Order Details"}}</h1>
+        </td>
+      </tr>
+      <tr class="text-block bg-white">
+        <td style="padding: 20px;">
+          <table>
+            <tr>
+              <th class="light-blue pb10">{{trans "Item Details"}}</th>
+              <th class="light-blue pb10">{{trans "Qty"}}</th>
+              <th class="light-blue pb10">{{trans "Price"}}</th>
+            </tr>
+            <tr>{{var orderItems |raw}}</tr>
+            <tr>
+                <th colspan="2" class="text-right">{{trans "Subtotal "}}</th>
+                <td>{{var store.getBaseCurrency().getCurrencySymbol()}}{{var orderSubTotal}}</td>
+            </tr>
+            <tr>
+                <th colspan="2" class="text-right">{{trans "Shipping "}}</th>
+                <td>{{var store.getBaseCurrency().getCurrencySymbol()}}{{var orderShippingAmount}}</td>
+            </tr>
+            <tr>
+                <th colspan="2" class="text-right">{{trans "Tax "}}</th>
+                <td>{{var store.getBaseCurrency().getCurrencySymbol()}}{{var orderTax}}</td>
+            </tr>
+            <tr>
+                <th colspan="2" class="text-right"><b>{{trans "Grand Total "}}</b></th>
+                <td>{{var store.getBaseCurrency().getCurrencySymbol()}}{{var orderGrandTotal}}</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+</table>
+
+<table class="button" width="100%" border="0" cellspacing="0" cellpadding="0">
+    <tr>
+        <td class="pb0">
+            <table class="inner-wrapper" border="0" cellspacing="0" cellpadding="0" align="center">
+                <tr>
+                    <td align="center" class="action-btn-container">
+                        <a class="action-btn" href="{{var url}}" target="_blank">{{trans "shop now >"}}</a>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>
+</table>
+{{template config_path="design/email/footer_template"}}

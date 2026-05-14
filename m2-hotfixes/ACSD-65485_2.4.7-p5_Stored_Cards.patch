@@ -1,0 +1,33 @@
+diff --git a/vendor/magento/module-vault/Model/Ui/Adminhtml/TokensConfigProvider.php b/vendor/magento/module-vault/Model/Ui/Adminhtml/TokensConfigProvider.php
+index b1d53f7c19743..b54ae8fb8ff22 100644
+--- a/vendor/magento/module-vault/Model/Ui/Adminhtml/TokensConfigProvider.php
++++ b/vendor/magento/module-vault/Model/Ui/Adminhtml/TokensConfigProvider.php
+@@ -1,7 +1,7 @@
+ <?php
+ /**
+- * Copyright © Magento, Inc. All rights reserved.
+- * See COPYING.txt for license details.
++ * Copyright 2015 Adobe
++ * All Rights Reserved.
+  */
+ 
+ namespace Magento\Vault\Model\Ui\Adminhtml;
+@@ -200,15 +200,16 @@ public function getTokensComponents($vaultPaymentCode)
+         if ($quote) {
+             $websiteId = $quote->getStore()->getWebsite()->getId();
+         }
+-
+         $this->searchCriteriaBuilder->addFilters(
+             [
+                 $this->filterBuilder->setField(PaymentTokenInterface::WEBSITE_ID)
+                     ->setValue($websiteId)
+                     ->create(),
++                $this->filterBuilder->setField(PaymentTokenInterface::WEBSITE_ID)
++                    ->setConditionType('null')
++                    ->create(),
+             ]
+         );
+-
+         $searchCriteria = $this->searchCriteriaBuilder->create();
+ 
+         foreach ($this->paymentTokenRepository->getList($searchCriteria)->getItems() as $token) {

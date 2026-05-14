@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="catalog_product_save_commit_after">
+        <observer name="addproduct" instance="Abbott\Webhook\Observer\Transport" />
+    </event>
+    <event name="catalog_product_delete_before">
+        <observer name="deleteproduct" instance="Abbott\Webhook\Observer\Transport" />
+    </event>
+    <event name="catalog_product_import_bunch_save_after">
+        <observer name="importproductadd" instance="Abbott\Webhook\Observer\Transport" />
+    </event>
+    <event name="catalog_product_import_bunch_delete_commit_before">
+        <observer name="importproductdelete" instance="Abbott\Webhook\Observer\Transport" />
+    </event>
+    <event name="catalog_entity_attribute_save_commit_after">
+        <observer name="catalog_entity_attribute_save_after_observer" instance="Abbott\Webhook\Observer\AttributeSaveAfter"/>
+    </event>
+    <event name="catalog_category_save_commit_after">
+        <observer name="addupdatecategory" instance="Abbott\Webhook\Observer\CategorySaveAfter" />
+    </event>
+</config>

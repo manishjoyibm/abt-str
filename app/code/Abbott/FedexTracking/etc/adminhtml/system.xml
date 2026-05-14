@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="fedex_tracking" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>Fedex Tracking</label>
+            <resource>Abbott_FedexTracking::fedextracking_setting</resource>
+            <group id="fedex_tracking_configuration" sortOrder="10" type="text" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Fedex Tracking Configuration</label>
+                <field id="is_enabled" translate="label" type="select" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="api_url" translate="label" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Bearer Token API Endpoint</label>
+                </field>
+                <field id="track_api_url" translate="label" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Track API Endpoint</label>
+                </field>
+                <field id="username" translate="label" type="text" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>UserName</label>
+                </field>
+                <field id="password" showInDefault="1" showInStore="0" showInWebsite="0" translate="label" type="obscure">
+                    <label>Password</label>
+                    <backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>
+
+

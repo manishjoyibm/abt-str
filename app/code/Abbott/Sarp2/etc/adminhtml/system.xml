@@ -1,0 +1,343 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+	<section id="buy_now_tagging" translate="label" sortOrder="250" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Buy Now Reconnect</label>
+            <tab>abbott</tab>
+            <resource>Aheadworks_Sarp2::buynow</resource>
+            <group id="buy_now" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Buy Now Reconnect Configuration</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="javascript" translate="label comment" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Do Tag Number</label>
+                </field>
+                <field id="source_url" translate="label comment" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Source Url</label>
+                </field>
+            </group>
+        </section>
+        <section id="subscription_email_setting" translate="label" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Cancel Subscription</label>
+            <tab>abbott</tab>
+            <resource>Abbott_Sarp2::configuration</resource>
+            <group id="subscription_cancel_email" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Cancel Subscription Configuration Email</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cancel order Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>If enable, cancel subscription email is enabled.</comment>
+                </field>
+                <field id="cancel_subscription_template" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cancel Subscription Email template</label>
+                    <comment>Email template chosen.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+
+            <group id="subscription_update_email" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Update Subscription Configuration Email</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Update Subscription Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>If enable, update subscription email is enabled.</comment>
+                </field>
+                <field id="update_subscription_template" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Update Subscription Email template</label>
+                    <comment>Email template chosen.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+
+            <group id="subscription_out_of_stock_email" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Out Of Stock Subscription Configuration Email</label>
+                <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Out of stock Subscription Email</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>If enable, out of stock subscription email is enabled.</comment>
+                </field>
+                <field id="subscription_out_of_stock_template" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Out of stock Subscription Email template</label>
+                    <comment>Email template chosen.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Email\Template</source_model>
+                </field>
+            </group>
+
+            <group id="subscription_generate_messages" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Subscription Generate Order Messages</label>
+                <field id="message_one" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Message One</label>
+                </field>
+                <field id="message_two" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Message Two</label>
+                </field>
+            </group>
+        </section>
+        <section id="subscription_change_product_setting" translate="label" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Change Subscription Product</label>
+            <tab>abbott</tab>
+            <resource>Abbott_Sarp2::configuration</resource>
+            <group id="subscription_cancel_email" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Can Change Product</label>
+                <field id="can_change_product" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Can Change Product</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>If enable, change product subscription is enabled.</comment>
+                </field>
+		<field id="aem_product_listing_path" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>AEM Product Listing Path</label>
+                </field>
+                <field id="plan" translate="label comment" type="multiselect" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Plan List</label>
+                    <source_model>Abbott\Sarp2\Model\Config\Source\Plan</source_model>
+                </field>
+            </group>
+		</section>
+
+        <section id="abbott_subscription" translate="label" sortOrder="300" showInDefault="1" showInWebsite="1" showInStore="1">
+            <label>Subscription Settings</label>
+            <tab>abbott</tab>
+            <resource>Abbott_Sarp2::configuration</resource>
+            <group id="payment_change_limitations" translate="label" type="text" sortOrder="1" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Payment Change Limits</label>
+
+                <field id="limit_payment_change_per_profile" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Change Limit Per Profile</label>
+                </field>
+
+                <field id="time_limit_payment_change_per_profile" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Change Time Limit Per Profile</label>
+                    <comment>Enter in Minutes (24 hours - 1440)</comment>
+                </field>
+
+                <field id="limit_payment_change_per_profile_message" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Payment Change Limit Per Profile Error Message</label>
+                </field>
+
+                <field id="limit_payment_change_invalid" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Unsuccessful Payment Change Limit</label>
+                </field>
+
+                <field id="time_limit_payment_change_invalid" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Unsuccessful Payment Change Time Limit</label>
+                    <comment>Enter in Minutes (24 hours - 1440)</comment>
+                </field>
+
+                <field id="limit_payment_change_invalid_message" translate="label comment" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Unsuccessful Payment Change Limit Error Message</label>
+                </field>
+
+                <field id="test_unsuccessful_transaction" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Unsuccessful Payment Change Test</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Should Only be used for testing in Non-production environment</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="aw_sarp2">
+            <tab>aheadworks</tab>
+            <resource>Aheadworks_Sarp2::config_aw_sarp</resource>
+            <group id="aw_crons1" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Process Payment Cron Settings</label>
+                <field id="pp_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Process Payments Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>If enabled, Process Payments Cron starts.</comment>
+                </field>
+                <field id="payment_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Expression for Process Payments</label>
+                    <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                    <depends>
+                        <field id="pp_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="aw_crons2" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Process Notifications Cron Settings</label>
+                <field id="pn_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Process Notifications Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>If enabled, Notifications Cron starts.</comment>
+                </field>
+                <field id="notify_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Expression for Process Notifications</label>
+                    <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                    <depends>
+                        <field id="pn_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="aw_crons3" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Process Sample Payments Cron Settings</label>
+                <field id="psp_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Process Sample Payments Cron</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>If enabled, Sample Payments Cron starts.</comment>
+                </field>
+                <field id="sample_payment_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Expression for Process Sample Payments</label>
+                    <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                    <depends>
+                        <field id="psp_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="aw_crons_controlled" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Controlled Execution Settings</label>
+                <field id="control_enabled" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Control Execution</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>If enabled, Controlled execution starts.</comment>
+                </field>
+                <field id="profile_ids" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Profile Ids</label>
+                    <comment>Supply the comma seperated profile ids for which controlled executon should start</comment>
+                    <depends>
+                        <field id="control_enabled">1</field>
+                    </depends>
+                </field>
+            </group>
+            <group id="MBO_subscription_history" translate="label" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>MBO Subscription History Settings and Messages</label>
+                <field id="enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Enable Control Execution</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                    <comment>Subscrition history will be visible based on above setting (Store specific).</comment>
+                </field>
+                <field id="change_product_qty" translate="label" type="textarea" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Changed Product QTY Message</label>
+                    <comment>Changed Product QTY Message For Subscription History.</comment>
+                </field>
+                <field id="change_occurance_date" translate="label" type="textarea" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Changed Occurance Date Message</label>
+                    <comment>Changed Occurance Date Message For Subscription History.</comment>
+                </field>
+                <field id="change_shipping_address" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Changed Shipping Address Message</label>
+                    <comment>Changed Shipping Address Message For Subscription History.</comment>
+                </field>
+                <field id="change_billing_address" translate="label" type="textarea" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Changed Billing Address Message</label>
+                    <comment>Changed Billing Address Message For Subscription History.</comment>
+                </field>
+                <field id="change_card_data" translate="label" type="textarea" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Changed Card Message</label>
+                    <comment>Changed Card Message For Subscription History.</comment>
+                </field>
+                <field id="change_profile_to_pause_status" translate="label" type="textarea" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Changed Profile Status to Pause Message</label>
+                    <comment>Changed Profile Status to Pause Message For Subscription History.</comment>
+                </field>
+                <field id="change_profile_to_resume_status" translate="label" type="textarea" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Changed Profile Status to Resume Message</label>
+                    <comment>Changed Profile Status to Resume Message For Subscription History.</comment>
+                </field>
+                <field id="change_profile_to_cancelled_status" translate="label" type="textarea" sortOrder="80" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Changed Profile Status to Cancelled Message</label>
+                    <comment>Changed Profile Status to Cancelled Message For Subscription History.</comment>
+                </field>
+				<field id="change_profile_plan" translate="label" type="textarea" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Changed Profile Plan Message</label>
+                    <comment>Changed Profile Plan Message For Subscription History.</comment>
+                </field>
+                <field id="change_profile_to_cancelled_status_by_cron" translate="label" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Changed Profile Status to Cancelled Message By Cron</label>
+                    <comment>Changed Profile Status to Cancelled Message By Cron For Subscription History</comment>
+                </field>
+				<field id="profile_remove_product" translate="label" type="textarea" sortOrder="100" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Profile Remove Product Message</label>
+                    <comment>Profile Remove Product Message For Subscription History.</comment>
+                </field>
+				<field id="profile_change_product" translate="label" type="textarea" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Profile Chnage Product Message</label>
+                    <comment>Profile Chnage Product Message For Subscription History.</comment>
+                </field>
+                <field id="profile_create" translate="label" type="textarea" sortOrder="90" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Profile Create Message</label>
+                    <comment>Profile Create Message For Subscription History.</comment>
+                </field>
+            </group>
+        </section>
+
+        <section id="annual_reminder_section" translate="label" sortOrder="900" showInDefault="1" showInWebsite="0" showInStore="0">
+            <label>Subscription Annual Reminder</label>
+            <tab>abbott</tab>
+            <resource>Abbott_Sarp2::configuration</resource>
+            <group id="annual_reminder" translate="label" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="0">
+                <label>Annual Reminder</label>
+
+                <!-- Enable/Disable -->
+                <field id="enabled" translate="label" type="select" sortOrder="10"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Annual Reminder</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <!-- Cron Expression -->
+                 <field id="cron_expression" translate="label" type="text" sortOrder="15" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Cron Expression</label>
+                    <comment>e.g. "10 1 * * *" (minute hour day-of-month month day-of-week)</comment>
+                </field>
+
+                <!-- Email Template selector -->
+                <field id="annual_subscription_template" translate="label" type="text" sortOrder="20"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Annual Subscription Email template</label>
+                </field>
+
+                <!-- Days Before -->
+                <field id="days_before" translate="label" type="text" sortOrder="25"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Days Before Anniversary</label>
+                    <comment>0 = send on same day; 5 = five days before (recommended)</comment>
+                    <validate>validate-number validate-not-negative-number</validate>
+                </field>
+
+                <!-- BCC (Optional) Field -->
+                <field id="bcc" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1">
+                    <label>BCC (optional)</label>
+                    <comment>Comma-separated</comment>
+                </field>
+
+                <!-- Start Date Anchor Field -->
+                <field id="start_date_anchor" showInDefault="1" sortOrder="35" translate="label" type="date" showInWebsite="1" showInStore="0">
+                    <label>Start Date Anchor (UTC)</label>
+                    <frontend_model>Abbott\Sarp2\Block\Adminhtml\System\Config\Datetime</frontend_model>
+                    <comment>
+                        Profiles with start_date on/after this timestamp will be included.
+                        Recommended format: YYYY-MM-DD HH:MM:SS
+                    </comment>
+                </field>
+
+                <!-- Allowed Stores -->
+                <field id="allowed_store_views" translate="label" type="multiselect" sortOrder="40" showInDefault="1">
+                    <label>Select Store Views</label>
+                    <source_model>Magento\Store\Model\System\Store</source_model>
+                    <comment>Select one or more store views for Annual Reminder notifications.</comment>
+                </field>
+
+
+                <!-- Test Mode -->
+                <field id="test_mode" translate="label" type="select" sortOrder="50"
+                       showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable Test Mode</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+
+                <field id="test_date_time" showInDefault="1" sortOrder="60" translate="label" type="date" showInWebsite="1" showInStore="0">
+                    <label>Date &amp; Time for Testing</label>
+                    <frontend_model>Abbott\Sarp2\Block\Adminhtml\System\Config\Datetime</frontend_model>
+                    <comment>Orders from the 1 year prior to the selected date will be processed in test mode.</comment>
+                    <depends>
+                        <field id="annual_reminder_section/annual_reminder/test_mode">1</field>
+                    </depends>
+                </field>
+            </group>
+        </section>
+
+    </system>
+</config>

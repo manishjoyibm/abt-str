@@ -1,0 +1,31 @@
+<?php
+/**
+ *  @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+$viewModel = $block->getData('view_model');
+$values = $viewModel->getShippingDetails();
+$freeamount = $viewModel->getShippingAmount();
+?>
+<?php
+$freePercentage = $values[0]['percentage_value'];
+$scriptString = <<<script
+            window.free_percentage = $freePercentage;
+    script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+<?php
+$freetext = $values[0]['message'];
+$color = $values[0]['color'];
+$status = $values[0]['status'];
+$isSubscription = $values[0]['is_subscription'];
+$scriptString = <<<script
+    window.setfreeShip = 0;
+    window.freetext = '$freetext';
+    window.color = '$color';
+    window.status = '$status';
+    window.freeamount = $freeamount;
+    window.is_subscription = $isSubscription;
+    script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false) ?>
+

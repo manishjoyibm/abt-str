@@ -1,0 +1,12 @@
+.custom-cart-price .old-price .price{
+    text-decoration: line-through;
+    color: #888;
+    font-size: 14px;
+}
+.custom-cart-price .special-price .price{
+    color: #666666;
+    font-weight: bold;
+}
+.custom-cart-price{
+    align-items: center;
+}

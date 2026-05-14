@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Config:etc/system_file.xsd">
+    <system>
+        <tab id="abbott" translate="label" sortOrder="1">
+            <label>Abbott</label>
+        </tab>
+        <section id="abbott_dps" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+            <class>separator-top</class>
+            <tab>abbott</tab>
+            <label>DPS Integration</label>
+            <resource>Abbott_DPS::dps</resource>
+            <group id="general" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>General Settings</label>
+                <field id="enable" translate="label" type="select" sortOrder="45" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Enable</label>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="cron_enable" translate="label" type="select" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Enable DPS Cron Sync</label>
+                    <source_model>Magento\Config\Model\Config\Source\Enabledisable</source_model>
+                </field>
+                <field id="cron_expr" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>Cron Expression for DPS Sync</label>
+                    <comment>Ex(*/30 * * * *) Please make sure there is space between each star(*).</comment>
+                    <depends>
+                        <field id="cron_enable">1</field>
+                    </depends>
+                </field>
+                <field id="file_url" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="0" showInStore="0">
+                    <label>File Url</label>
+                </field>
+                <field id="error_message" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Error Message On Checkout</label>
+                </field>
+            </group>
+            <group id="percentage_match" showInDefault="1" showInWebsite="1" showInStore="1">
+                <label>Match Settings</label>
+                <field id="name" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Name %</label>
+                    <validate>integer validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="street" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Street %</label>
+                    <validate>integer validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="city" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>City %</label>
+                    <validate>integer validate-number validate-zero-or-greater</validate>
+                </field>
+                <field id="zip" translate="label" type="text" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Zip Code %</label>
+                    <validate>integer validate-number validate-zero-or-greater</validate>
+                </field>
+            </group>
+        </section>
+    </system>
+</config>

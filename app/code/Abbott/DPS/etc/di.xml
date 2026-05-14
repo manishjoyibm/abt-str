@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Abbott\DPS\Api\Data\DpsListItemInterface" type="Abbott\DPS\Model\DpsListItem"/>
+    <preference for="Abbott\DPS\Api\Data\DpsListItemAddressInterface" type="Abbott\DPS\Model\DpsListItemAddress"/>
+    <preference for="Abbott\DPS\Api\Data\DpsListLogInterface" type="Abbott\DPS\Model\DpsListLog"/>
+
+    <type name="Magento\Framework\Console\CommandList">
+        <arguments>
+            <argument name="commands" xsi:type="array">
+                <item name="dps_sync_command" xsi:type="object">Abbott\DPS\Console\DpsSyncCommand</item>
+            </argument>
+        </arguments>
+    </type>
+</config>

@@ -1,0 +1,69 @@
+<?xml version="1.0" ?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+	<default>
+		<hartehanks>
+			<hartehanks>
+				<days_saved>3</days_saved>
+				<time_limit>120</time_limit>
+				<retry_time_limit>720</retry_time_limit>
+				<retry_time_limit_1>20</retry_time_limit_1>
+				<retry_time_limit_2>60</retry_time_limit_2>
+				<retry_time_limit_3>360</retry_time_limit_3>
+				<time_limit_find_order>60</time_limit_find_order>
+				<days_limit_find_order>10</days_limit_find_order>
+				<is_debug_enabled>1</is_debug_enabled>
+				<order_collection_size>10</order_collection_size>
+				<findorder_collection_size>15</findorder_collection_size>
+				<endpoint>https://uatabbottecservice.hartehanks.com/XMLService?WSDL</endpoint>
+				<account_code>ABBN</account_code>
+				<braintree_cancel_order_message>Your payment could not be taken. Please try again or use a different payment method.</braintree_cancel_order_message>
+			</hartehanks>
+			<hartehanks_placeorder>
+				<is_test_enabled>0</is_test_enabled>
+                <default_username>hhwebservice@magento.com</default_username>
+                <default_email>hhwebservice@magento.com</default_email>
+                <default_phone>614-624-6208</default_phone>
+                <default_firstname>Magento</default_firstname>
+                <default_lastname>Webuser</default_lastname>
+                <default_company></default_company>
+                <default_address1>2900 Easton Square Place</default_address1>
+                <default_address2></default_address2>
+                <default_city>Columbus</default_city>
+                <default_state>OH</default_state>
+                <default_zip>43219</default_zip>
+                <default_country>US</default_country>
+                <lock_orders>0</lock_orders>
+                <process_via_queue>0</process_via_queue>
+			</hartehanks_placeorder>
+			<hartehanks_findorder>
+				<findOrder_test>0</findOrder_test>
+				<txn_check>0</txn_check>
+                <process_via_queue>0</process_via_queue>
+			</hartehanks_findorder>
+			<hartehank_email_template>
+				<sender>general</sender>
+				<is_enabled>0</is_enabled>
+				<email_template>hartehanks_hartehank_email_template_email_template</email_template>
+				<hartehank_placeorder_template>hartehanks_hartehank_email_template_hartehank_placeorder_template</hartehank_placeorder_template>
+			</hartehank_email_template>
+			<hh_cron>
+				<fo_cron_enable>1</fo_cron_enable>
+				<fo_cron_expr>*/30 * * * *</fo_cron_expr>
+			</hh_cron>
+			<hh_smartpost_skus>
+				<smart_post_sku>MAXPROTEINVC,COMPLETEVC,PLANTVC,CLEARFBP,ENLIVEVC</smart_post_sku>
+			</hh_smartpost_skus>
+		</hartehanks>
+		<tn_sample>
+			<general>
+				<enable>1</enable>
+			</general>
+		</tn_sample>
+		<hartehanks_inventory>
+			<general>
+				<enable>1</enable>
+				<days>7</days>
+			</general>
+		</hartehanks_inventory>
+	</default>
+</config>

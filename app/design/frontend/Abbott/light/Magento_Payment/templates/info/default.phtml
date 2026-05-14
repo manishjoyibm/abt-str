@@ -1,0 +1,52 @@
+<?php
+
+/**
+ * Copyright © Magento, Inc. All rights reserved.
+ * See COPYING.txt for license details.
+ */
+
+/**
+ * @var \Magento\Payment\Block\Info $block
+ * @see \Magento\Payment\Block\Info
+ */
+$specificInfo = $block->getSpecificInformation();
+$title = $block->escapeHtml($block->getMethod()->getTitle());
+if (empty($specificInfo)) {
+    $specificInfoNew = $block->getInfo()->getAdditionalInformation();
+    $paymentMethodCode = $block->getMethod()->getCode();
+    if (($paymentMethodCode == "aw_sarp_braintree_googlepay_recurring")) {
+        $title = 'Google Pay';
+    } elseif (($paymentMethodCode == "aw_sarp_braintree_applepay_recurring")) {
+        $title = 'Apple Pay';
+    } elseif (($paymentMethodCode == "aw_sarp_braintree_paypal_recurring")) {
+        $specificInfo['Payer Email'] = $specificInfoNew['payerEmail'];
+    } else {
+        if(isset($specificInfoNew['cc_type']) && isset($specificInfoNew['cc_number']))
+        {
+            $specificInfo['Credit Card Type'] = $specificInfoNew['cc_type'];
+            $specificInfo['Credit Card Number'] = $specificInfoNew['cc_number'];
+        }
+       
+    }
+}
+
+?>
+<dl class="payment-method">
+    <dt class="title"><?= /* @noEscape */ $title ?></dt>
+    <?php if (($specificInfo) && ($title != "Google Pay") &&  ($title != "Apple Pay")) : ?>
+        <dd class="content">
+            <table class="data table">
+                <caption class="table-caption"><?= /* @noEscape */ $title ?></caption>
+                <?php foreach ($specificInfo as $label => $value) : ?>
+                    <tr>
+                        <th scope="row"><?= $block->escapeHtml($label) ?></th>
+                        <td>
+                            <?= /* @noEscape */ nl2br($block->escapeHtml(implode("\n", $block->getValueAsArray($value, true)))) ?>
+                        </td>
+                    </tr>
+                <?php endforeach; ?>
+            </table>
+        </dd>
+    <?php endif; ?>
+</dl>
+<?= $block->getChildHtml() ?>

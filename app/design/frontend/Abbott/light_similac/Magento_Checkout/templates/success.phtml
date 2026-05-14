@@ -1,0 +1,118 @@
+<div class="thankyou-wrapper">
+  <div class="checkout-page-title-wrapper thank-you-page">
+    <div class="succes-circle">
+      <img src="<?php echo $this->getViewFileUrl('Magento_Checkout::images/success_circle.svg'); ?>" alt="success"/>
+    </div>
+    <h1 class="page-title">Thank you for your order!</h1>
+    <div class="thankyou-text"><p class="medium-text">Thank you for subscribing to the Similac Sisterhood of Motherhood Savings Club &#8482; !
+      <br>We're proud to be your convenient and cost-effective source for Similac &#174; formula.</p>
+        <p class="small-text">You will receive an email with your order confirmation shortly.</p>
+    </div>
+  </div>
+  <div class="checkout-success-container">
+    <div class="checkout-success-left">
+        <div class="checkout-success-left-inner">
+            <div class="mar-box-left">
+                <p class="login-head">Order Details</p><table class="data table order-table">
+                    <thead>
+                      <tr>
+                        <th class="col item" scope="col"><span>Order Number</span></th>
+                        <th class="col price" scope="col"><span>Order Total</span></th>
+                      </tr>
+                    </thead>
+                    <tbody class="cart item">
+                      <tr class="item-info">
+                        <td class="col item">
+                          <span class="product-item-photo">
+                            <?php if ($block->getOrderId()) :?>
+                                <?php if ($block->getCanViewOrder()) :?>
+                                    <p><?= $block->escapeHtml(__('%1', sprintf('<a href="%s" class="order-id"><strong>%s</strong></a>', $block->escapeUrl($block->getViewOrderUrl()), $block->getOrderId())), ['a', 'strong']) ?></p>
+                                <?php  else :?>
+                                    <p><?= $block->escapeHtml(__('<span>%1</span>', $block->getOrderId()), ['span']) ?></p>
+                                <?php endif;?>
+                            <?php endif;?>
+                          </span>
+                        </td>
+                        <td class="col qty">
+                          <div class="field qty"> <?= $block->formatValue($block->getOrderData()->getGrandTotal()) ?><span> has been paid <span>by credit card.</span></span></div>
+                        </td>
+                      </tr>
+                    </tbody>
+                </table>
+                <table class="cart items data table product-table">
+                    <thead>
+                        <tr>
+                            <th class="col item" scope="col"><span>Item</span></th>
+                            <th class="col price" scope="col"><span>Price</span></th>
+                            <th class="col qty" scope="col"><span>Qty</span></th>
+                            <th class="col qty right-th" scope="col"><span>Subtotal</span></th>
+                        </tr>
+                    </thead>
+                    <tbody class="cart item">
+                      <?php foreach ($block->getOrderItems() as $_code => $_item) : ?>
+                        <tr class="item-info">
+                            <td class="col item">
+                                <span class="product-item-photo">
+                                    <img class="product-image-photo" src="<?= $_item->getImage() ?>" width="110" height="110" alt="pimage">
+                                </span>
+                                <div class="product-item-details">
+                                    <strong class="product-item-name"><?= $block->escapeHtml($_item->getName()) ?></strong>
+                                    <div class="similac_sizeorweight">
+                                      <div class="product_flavors"><?= $block->escapeHtml($_item->getSizeWeight()) ?></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td class="col price pad-top">
+                                <span class="price-excluding-tax">
+                                    <span class="cart-price">
+                                        <span class="price"><?= $block->formatValue($_item->getPrice()) ?></span>
+                                    </span>
+                                </span>
+                            </td>
+                            <td class="col qty pad-top">
+                                <div class="field qty">
+                                    <div class="control qty pad-left"><?= $_item->getQty() ?></div>
+                                </div>
+                            </td>
+                            <td class="col subtotal right-th pad-top">
+                                <span class="price-excluding-tax">
+                                    <span class="cart-price"><span class="price color-price"><?= $block->formatValue($_item->getTotal()) ?></span></span>
+                                </span>
+                            </td>
+                        </tr>
+                        <?php endforeach?>
+                        <tr class="btn-account">
+                            <td class="btn-account"><div class="primary"><p><a href="<?= $block->getUrl('customer/account/index/') ?>">View Your Account &gt;</a></p></div></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="checkout-success-right">
+        <div class="checkout-success-right-inner">
+            <div class="mar-box-right">
+                <table id="shopping-cart-table-2" class="cart items data table">
+                    <thead>
+                        <tr>
+                          <th colspan="2" class="col item" scope="col"><p class="login-head">Order Summary</p></th>
+                        </tr>
+                    </thead>
+                    <tbody class="cart item">
+                      <?php foreach ($block->getOrderTotals() as $_code => $_total) : ?>
+                          <tr class="totals sub">
+                              <th class="mark" scope="row">
+                                  <?= $block->escapeHtml($_total->getLabel()) ?>
+                              </th>
+                              <td class="amount">
+                                <span class="price"><?= $block->formatValue($_total->getValue()) ?></span>
+                              </td>
+                          </tr>
+                      <?php endforeach?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

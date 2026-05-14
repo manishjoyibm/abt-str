@@ -1,0 +1,129 @@
+﻿<?php
+
+/** @var \Abbott\Strongmoms\Block\Checkssmuser $block */
+
+$blockObj = $block->getLayout()->createBlock('Abbott\Strongmoms\Block\Checkssmuser');
+$ssmUser = $blockObj->checkUserIsSsm();
+$ssmUserOrderCount =  $blockObj->getOrderCount();
+$ssmUserNote =  $blockObj->getSsmUserNotes();
+$subscriptionUserNote =  $blockObj->getSubscriptionUserNotes();
+
+?>
+<div class="block block-addresses-default">
+    <div class="block-title"><strong><?= $block->escapeHtml(__('Default Addresses')) ?></strong></div>
+    <div class="block-content">
+	
+	<?php if ($ssmUser == true ) : ?>
+	 
+        <?php if ($_pAddsses = $block->getDefaultBilling() && $ssmUserOrderCount == true) : ?>
+            <div class="box box-address-billing">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Billing Address')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <address>
+                        <?= $block->getAddressHtml($block->getAddressById($block->getDefaultBilling())) ?>
+                    </address>
+                </div>
+                <div class="box-actions">
+                    <a onClick="editBillingAddress()" class="action editbill" href="<?= $block->escapeUrl($block->getAddressEditUrl($block->getDefaultBilling())) ?>">
+                        <span><?= $block->escapeHtml(__('Change Billing Address')) ?></span>
+                    </a>
+                </div>
+            </div>
+        
+        <?php endif ?>
+		
+	 <?php else : ?>	
+	 
+	<!--For Ecommerce User-->
+	  <?php if ($_pAddsses = $block->getDefaultBilling() ) : ?>
+            <div class="box box-address-billing">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Billing Address')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <address>
+                        <?= $block->getAddressHtml($block->getAddressById($block->getDefaultBilling())) ?>
+                    </address>
+                </div>
+                <div class="box-actions">
+                    <a onClick="editBillingAddress()" class="action editbill" href="<?= $block->escapeUrl($block->getAddressEditUrl($block->getDefaultBilling())) ?>">
+                        <span><?= $block->escapeHtml(__('Change Billing Address')) ?></span>
+                    </a>
+                </div>
+            </div>
+        <?php else : ?>
+            <div class="box box-billing-address">
+                <strong class="box-title"><span><?= $block->escapeHtml(__('Billing Address')) ?></span></strong>
+                <div class="box-content">
+                    <p><?= $block->escapeHtml(__('You have no billing address in your address book.')) ?></p>
+                </div>
+            </div>
+        <?php endif ?>
+	 
+	 <!--For Ecommerce User-->
+	 
+	 <?php endif ?>
+		
+
+        <?php if ($_pAddsses = $block->getDefaultShipping()) : ?>
+            <div class="box box-address-shipping">
+                <strong class="box-title">
+                    <span><?= $block->escapeHtml(__('Shipping Address')) ?></span>
+                </strong>
+                <div class="box-content">
+                    <address>
+                        <?= $block->getAddressHtml($block->getAddressById($block->getDefaultShipping())) ?>
+                    </address>
+                </div>
+                <div class="box-actions">
+                    <a onClick="editShippingAddress()" class="action edit-shipping" href="<?= $block->escapeUrl($block->getAddressEditUrl($block->getDefaultShipping())) ?>">
+                        <span><?= $block->escapeHtml(__('Change Shipping Address')) ?></span>
+                    </a>
+                </div>
+				
+				<?php if ($ssmUser == true ) : ?>
+				<div class="address_note">
+				   <p>Please Note:</p>
+                   <?php if(isset($ssmUserNote)) { echo $ssmUserNote;}?>
+				</div>
+                <?php endif ?>
+                <?php if ($subscriptionUserNote == true ) : ?>
+				<div class="address_note">
+                   <?php if(isset($subscriptionUserNote)) { echo $subscriptionUserNote;}?>
+				</div>
+				<?php endif ?>
+            </div>
+        <?php else : ?>
+            <div class="box box-shipping-address">
+                <strong class="box-title"><span><?= $block->escapeHtml(__('Shipping Address')) ?></span></strong>
+                <div class="box-content">
+                    <p><?= $block->escapeHtml(__('You have no shipping address in your address book.')) ?></p>
+                </div>
+            </div>
+        <?php endif ?>
+    </div>
+</div>
+<script>
+function editShippingAddress()
+{
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ 
+            event: "ga-custom-events", 
+            eventCategory: "edit-address", 
+            eventAction: "click", 
+            eventLabel: "edit-address_change-shipping-address" 
+        });
+}
+function editBillingAddress()
+{
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({ 
+            event: "ga-custom-events", 
+            eventCategory: "edit-address", 
+            eventAction: "click", 
+            eventLabel: "edit-address_change-billing-address" 
+        });
+}
+</script>

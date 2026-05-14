@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">abbott_csp_report_listing.abbott_csp_report_listing_data_source</item>
+            <item name="deps" xsi:type="string">abbott_csp_report_listing.abbott_csp_report_listing_data_source</item>
+        </item>
+        <item name="spinner" xsi:type="string">report_columns</item>
+    </argument>
+
+    <dataSource name="abbott_csp_report_listing_data_source">
+        <argument name="dataProvider" xsi:type="configurableObject">
+            <argument name="class" xsi:type="string">Abbott\Csp\Ui\DataProvider\ReportDataProvider</argument>
+            <argument name="name" xsi:type="string">abbott_csp_report_listing_data_source</argument>
+            <argument name="primaryFieldName" xsi:type="string">report_id</argument>
+            <argument name="requestFieldName" xsi:type="string">id</argument>
+            <argument name="data" xsi:type="array">
+                <item name="config" xsi:type="array">
+                    <item name="update_url" xsi:type="url" path="mui/index/render"/>
+                    <item name="storageConfig" xsi:type="array">
+                        <item name="indexField" xsi:type="string">report_id</item>
+                    </item>
+                </item>
+            </argument>
+        </argument>
+        <argument name="data" xsi:type="array">
+            <item name="js_config" xsi:type="array">
+                <item name="component" xsi:type="string">Magento_Ui/js/grid/provider</item>
+            </item>
+        </argument>
+    </dataSource>
+
+    <listingToolbar name="listing_top">
+        <massaction name="listing_massaction"/>
+        <filters name="listing_filters"/>
+        <columnsControls name="columns_controls"/>
+        <exportButton name="export_button"/>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+
+    <columns name="report_columns">
+        <column name="report_id">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Report ID</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="document_uri">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Document URI</label>
+            </settings>
+        </column>
+        <column name="violated_directive">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Violated Directive</label>
+            </settings>
+        </column>
+        <column name="blocked_uri">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Blocked URI</label>
+            </settings>
+        </column>
+        <column name="source_file">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Source File</label>
+            </settings>
+        </column>
+        <column name="line_number">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Line Number</label>
+            </settings>
+        </column>
+        <column name="column_number">
+            <settings>
+                <filter>text</filter>
+                <label translate="true">Column Number</label>
+            </settings>
+        </column>
+        <column name="created_at">
+            <settings>
+                <filter>dateRange</filter>
+                <dataType>date</dataType>
+                <label translate="true">Created At</label>
+            </settings>
+        </column>
+    </columns>
+</listing>

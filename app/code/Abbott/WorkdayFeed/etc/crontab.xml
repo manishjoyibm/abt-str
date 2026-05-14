@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Cron:etc/crontab.xsd">
+    <group id="default">
+        <job name="workday_employee_sync" instance="Abbott\WorkdayFeed\Model\WorkdaySync" method="execute">
+            <config_path>workday_feed_settings/workday_crons/sync_expr</config_path>
+        </job>
+        <job name="workday_employee_process" instance="Abbott\WorkdayFeed\Model\WorkdaySync" method="processFeed">
+            <config_path>workday_feed_settings/workday_crons/process_expr</config_path>
+        </job>
+        <job name="workday_employee_delete" instance="Abbott\WorkdayFeed\Model\WorkdaySync" method="deleteWorkdayFeedData">
+            <config_path>workday_feed_settings/workday_crons/delete_expr</config_path>
+        </job>
+    </group>
+</config>

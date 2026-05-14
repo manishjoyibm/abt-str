@@ -1,0 +1,145 @@
+<!--@subject {{trans "Your"}} {{var storeName}} {{trans "order Cancellation"}} @-->
+<!--@vars {
+"var orderIncrement_id":"Order Id",
+"var orderShipping":"Shipping Address",
+"var created_at_formatted":"Order Created At (datetime)",
+"var url": "url",
+"var store" : "Store",
+"var storePhone":"Store Phone",
+"var store_email":"Store Email",
+"var store_hours":"Store Hours",
+"var this.getUrl($store,'customer/account/',[_nosid:1])":"Customer Account URL",
+"var order":"Order",
+"var orderTax":"Tax",
+"var store.id":"Store ID",
+"var orderItems":"Order Items",
+"var orderSubTotal": "Order Subtotal",
+"var orderTax":"Order Tax",
+"var orderShippingAmount": "Order Shipping Amount"
+"var orderGrandTotal":"Order Grandtotal",
+"var orderBilling":"Billing Details",
+"var orderShipping":"Shipping Details",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var formattedBillingAddress|raw":"Billing Address"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table aria-describedby="cancel">
+    <tr>
+      <td class="esd-structure es-p20t es-p30r es-p30l" align="left"
+          style="background-color: #BFE6F7;height: 30px;">
+          <table cellpadding="0" cellspacing="0" width="100%">
+              <tbody>
+                  <tr>
+                      <td width="540" class="esd-container-frame" align="center"
+                          valign="top">
+                          <table cellpadding="0" cellspacing="0" width="100%">
+                              <tbody>
+                                  <tr>
+                                      <td align="left" class="esd-block-text"
+                                          style="padding: 10px 20px;">
+                                          <p
+                                              style="margin: 0;font-size: 13.5pt;
+                                              font-family: Arial, sans-serif, serif, EmojiFont;
+                                              text-transform: uppercase;font-weight: bold;">
+                                          </p>
+                                      </td>
+                                  </tr>
+                              </tbody>
+                          </table>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+      </td>
+  </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 10px 15px;background: #BFE6F7;">
+          <h1 id="cancel" style="margin-bottom: 0; font-family: Arial, sans-serif, serif, EmojiFont;"><b>Order Cancellation</b></h1>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 20px;">
+          <p class="mb25"><strong>{{trans 'Order #'}}<span class="no-link">{{var orderIncrement_id}}</span></strong></p>
+          <p class="mb25">{{trans 'Order Date:' }}{{var created_at_formatted}}</p>
+          <p class="mb25">{{trans 'This order has been cancelled.'}}<br/>
+             {{trans 'Once again thank you for the interest in '}}{{var store.frontend_name}}{{trans '.com. We look forward to you visiting our site again soon.'}}</p>
+          <p class="mb25">{{var store.frontend_name}}{{trans '.com'}}
+             <a href="{{customVar code=abbott_contactus_url}}">{{trans"Customer Service Team"}}</a>
+             {{depend store_phone}} {{trans '<a href="tel:%store_phone">(%store_phone)</a>' store_phone=$store_phone |raw}}{{/depend}}
+          </p>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="padding: 10px 15px;background: #BFE6F7;">
+            <h1 id="shipping" style="margin-bottom: 0; font-family: Arial, sans-serif, serif, EmojiFont;"><b>{{trans "Shipping And Billing"}}</b></h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td style="padding: 20px;  font-family: Georgia, serif, sans-serif, Arial;">
+          <table class="order-details" aria-describedby="shipping">
+              <tr>
+                <td class="address-details">
+                  <h3 class="light-blue" style="font-family: Georgia, serif, sans-serif, Arial;"><strong>{{trans "Billing Info"}}</strong></h3>
+                  <p style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{var formattedBillingAddress|raw}}</p>
+                </td>
+                <td class="address-details">
+                    <h3 class="light-blue" style="font-family: Georgia, serif, sans-serif, Arial;"><strong>{{trans "Shipping Info"}}</strong></h3>
+                    <p style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;">{{var formattedShippingAddress |raw}}</p>
+                </td>
+              </tr>
+          </table>
+      </td>
+    </tr>
+    <tr class="text-block bg-white">
+        <td style="padding: 10px 15px;background: #BFE6F7;">
+            <h1 id="orderDetail" style="margin-bottom: 0; font-family: Arial, sans-serif, serif, EmojiFont;"><b>{{trans "Order Details"}}</b></h1>
+        </td>
+    </tr>
+    <tr class="text-block bg-white">
+      <td colspan="3" style="padding-top: 20px;">
+        <table class="order-totals" aria-describedby="orderDetail">
+          <tr>
+            <th scope="col" class="light-blue padding-left20 pb10">{{trans "Item Details"}}</th>
+            <th scope="col" class="light-blue pb10">{{trans "Qty"}}</th>
+            <th scope="col" class="light-blue pb10">{{trans "Price"}}</th>
+          </tr>
+          <tr>{{var orderItems |raw}}</tr>
+          <tr>
+              <th scope="col" colspan="2" class="text-right">{{trans "Subtotal "}}</th>
+              <td>{{var currency_symbol}}{{var orderSubTotal}}</td>
+          </tr>
+          <tr>
+              <th scope="col" colspan="2" class="text-right">{{trans "Shipping "}}</th>
+              <td>{{var currency_symbol}}{{var orderShippingAmount}}</td>
+          </tr>
+          <tr>
+              <th scope="col" colspan="2" class="text-right">{{trans "Tax "}}</th>
+              <td>{{var currency_symbol}}{{var orderTax}}</td>
+          </tr>
+          <tr>
+              <th scope="col" colspan="2" class="text-right"><strong>{{trans "Grand Total "}}</strong></th>
+              <td>{{var currency_symbol}}{{var orderGrandTotal}}</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+    <tr>
+        <td>
+          <table border="0" aria-describedby="shopNow" style="padding: 0;border-spacing:0;background-color:white;width:100%;border-collapse:collapse;">
+            <tbody>
+              <tr>
+                  <td style="padding: 30pt 0px 30pt 0px; vertical-align: top;">
+                      <p style="font-size:11pt;font-family:Calibri,sans-serif;text-align:center;margin:0;">
+                          <span style="font-size: 12pt; font-family: Helvetica Neue, serif, EmojiFont; line-height: 13.5pt;"><a id="shopNow" href="{{var url}}" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="background-color:rgb(0, 156, 222);border: 20px solid rgb(0, 156, 222); color: #ffffff;text-decoration: none;"><strong><span style="font-size: 13.5pt; line-height: 13.5pt; font-family: Arial, sans-serif, serif, EmojiFont; text-transform: uppercase;">
+                              {{trans "shop now >"}}</span></strong></a></span></p>
+                  </td>
+                </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

@@ -1,0 +1,31 @@
+<?php
+    $baseUrl = $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl();
+?>
+ <section class="header header__section">
+    <header class="abbott-header" id="top">
+        <!-- Mobile Menu -->
+        <section class="container abbott-header__navbar">
+            <div class="row align-items-center">
+                <div class="col-8 clearfix position-static">
+                    <div class="row">
+                        <div class="col-3 col-md-4 abbott-logo">
+                            <div class="logo">
+                                <a href="<?php echo $baseUrl ?>" target="_self">
+                                    <img src="<?php echo $baseUrl.'content/dam/abbott/abbott_logo%20(2).png'?>" alt="abbott-logo"/>
+				</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-4 text-right">
+                    <span class="abbott-header__life-text">
+                        <div class="image1 image">
+                            <img src="<?php echo $baseUrl.'content/dam/abbott/life-to-fullest.svg'?>"/>
+                        </div>
+                    </span>
+                </div>
+            </div>
+        </section>
+    </header>
+</section>

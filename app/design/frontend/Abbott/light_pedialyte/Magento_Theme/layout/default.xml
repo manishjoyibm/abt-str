@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+
+<page layout="3columns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <referenceBlock name="head.additional">
+      <block class="Magento\Framework\View\Element\Template" name="css-header" template="Magento_Theme::header/pedialyte_css.phtml"/>
+    </referenceBlock>
+    <referenceBlock name="logo">
+        <arguments>
+           <argument name="logo_file" xsi:type="string">images/abbott_logo.png</argument>
+           <argument name="logo_img_width" xsi:type="number">130</argument>
+           <argument name="logo_img_height" xsi:type="number">100</argument>
+        </arguments>
+    </referenceBlock>
+
+     <referenceContainer name="page.wrapper">
+        <container name="custom.header" htmlClass="headerSection" htmlTag="section" before="header.container" htmlId="custom_top_header">
+            <block
+              class="Magento\Framework\View\Element\Template"
+              name="cusotmheader" before="-"
+              template="Magento_Theme::header/pedialyte_header.phtml">
+            </block>
+        </container>
+    </referenceContainer>
+
+    <referenceContainer name="page.wrapper">
+        <container
+          name="custom.footer"
+          htmlTag="section"
+          htmlId="custom_footer"
+          after="-">
+        <block class="Magento\Framework\View\Element\Template"
+          name="customfooter"
+          template="Magento_Theme::footer/pedialyte_footer.phtml">
+          <arguments>
+                <argument name="cp_view_model" xsi:type="object">Abbott\CookiePreferences\ViewModel\CookiePrefViewModel</argument>
+          </arguments>
+        </block>
+        </container>
+    </referenceContainer>
+
+    <referenceBlock name="copyright" remove="true"/>
+    <referenceBlock name="report.bugs" remove="true"/>
+    <referenceBlock name="footer_links" remove="true"/>
+    <referenceBlock name="switcher-store" remove="true"/>
+    <referenceBlock name="catalog.compare.sidebar" remove="true"/>
+    <referenceBlock name="form.subscribe" remove="true"/>
+    <referenceBlock name="header.container" remove="true"/>
+    <referenceBlock name="navigation.sections" remove="true"/>
+    <referenceBlock name="navigatetop" remove="true"/>
+    <referenceContainer name="footer-container" remove="true"/>
+</page>

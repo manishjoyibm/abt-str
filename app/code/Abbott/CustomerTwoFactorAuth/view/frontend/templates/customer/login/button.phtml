@@ -1,0 +1,60 @@
+<div id="modal" class="display-none" style="display:none">
+    <div class="modal-body-content">
+        <div class="twofa_auth-modal-container">
+            <div class="otp-message-container display-none"></div>
+            <div class="otp-expiry-message-container display-none"></div>
+            <div class="otp-error-message-container display-none"></div>
+            <div class="verify-otp-wrapper display-none">
+<form id="otp-form">   
+    <input name="form_key" type="hidden" value="<?= $block->getFormKey() ?>" />
+            <label for="otp" class="otp-label "><?= $escaper->escapeHtml(__("6-Digit Auth Code")); ?><span class="otp-required">*</span></label>
+                    <div class="control">
+                        <input id="otp" name="otp" class="otp input-text required-entry" type="text" data-validate="{required:true}">
+                    </div>
+                    <div class="otp-btn-container">
+                        <div class="resend-link-class">
+                            <?= $escaper->escapeHtml(__('Didn\'t receive your code? Check your spam folder or')); ?>
+                            <a href="javascript:void(0)" class="resend-link-request disabledLink" id="resend-button" >
+                                <?= $escaper->escapeHtml(__('click here to resend a new code')); ?>
+                            </a>
+
+                            <div id="clockdiv">
+                                <span class="minutes" id="minute">00 :</span>
+                                <span class="seconds" id="second">00</span>
+                            </div>
+                        </div>
+                        <button name="verifyOtp" class="verify-otp-btn" type="button" disabled >
+                            <?= $escaper->escapeHtml(__("Submit")); ?>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/x-magento-init">
+    {
+         "*": {
+            "Abbott_CustomerTwoFactorAuth/js/expirytime": {},
+             "Abbott_CustomerTwoFactorAuth/js/login-otp":{
+                "expiryLimit" : <?= /* @noEscape */ json_encode($block->getEndTime()); ?>,
+                "loaderIcon" : "<?= $escaper->escapeUrl($block->getViewFileUrl('images/loader-1.gif')); ?>",
+                "modalTitle" : "<?= $escaper->escapeHtml($block->getText()); ?>"
+            }
+
+        },
+
+    "#modal" : {
+                "Magento_Ui/js/modal/modal":{
+                "type":"popup",
+                "tittle": "OTP POPUP",
+                "modalClass": "two-auth-modal",
+                "buttons":[]
+            }
+        }
+    }
+    
+</script>
+
+

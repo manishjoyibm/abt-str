@@ -1,0 +1,12 @@
+<div class="opc-block-summary" data-bind="blockLoader: isLoading">
+    <span data-bind="i18n: 'Order Summary'" class="title"></span>
+    <!--ko if: isShowShippingProgressBar() -->
+    <h2 class="free_message" data-bind="html: freetext"></h2>
+    <div id="myProgress">
+      <div id="myBar" data-bind="text: getShippingText()"></div>
+    </div>
+    <!-- /ko -->
+    <!-- ko foreach: elems() -->
+        <!-- ko template: getTemplate() --><!-- /ko -->
+    <!-- /ko -->
+</div>

@@ -1,0 +1,16 @@
+﻿<?php 
+/**
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ */
+echo $block->getLayout()->createBlock(\Magento\Cms\Block\Block::class)->setBlockId('similac_checkout_footer')->toHtml(); 
+$dataHelper = $this->helper('Abbott\CustomerTransistion\Helper\Data');
+$failureUrl = $this->helper('Abbott\CustomerTransistion\Helper\Data')->getFailureUrl() . "content/experience-fragments/an/similac/global/en/footer/checkout/jcr:content/root/footer.plain.html";
+$scriptString = <<<script
+require(["jquery","jquery/ui"],function(jQuery) {
+    jQuery(document).ready(function() {
+        jQuery("#footer_checkout").load("$failureUrl", function() { jQuery("#overlay").hide(); } );
+    });
+});
+script;
+?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', [], $scriptString, false); ?>

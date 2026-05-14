@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <remove src="css/abbottstore.css"/>
+        <remove src="css/clientlib-base.css"/>
+        <remove src="css/clientlib-abbottstore.js"/>
+        <remove src="css/clientlib-base.js"/>
+        <remove src="css/abbott-header.js"/>
+    </head>
+    <body>
+        <referenceBlock name="logo" remove="true"/>
+        <referenceBlock name="cusotmheader" remove="true"/>
+        <referenceBlock name="customfooter" remove="true"/>
+    </body>
+</page>

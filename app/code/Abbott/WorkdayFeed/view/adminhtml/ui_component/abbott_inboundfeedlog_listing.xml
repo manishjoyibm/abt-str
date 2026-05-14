@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+    <argument name="data" xsi:type="array">
+        <item name="js_config" xsi:type="array">
+            <item name="provider" xsi:type="string">abbott_inboundfeedlog_listing.abbott_inboundfeedlog_listing_data_source</item>
+        </item>
+    </argument>
+    <settings>
+        <spinner>abbott_inboundfeedlog_columns</spinner>
+        <deps>
+            <dep>abbott_inboundfeedlog_listing.abbott_inboundfeedlog_listing_data_source</dep>
+        </deps>
+    </settings>
+    <dataSource name="abbott_inboundfeedlog_listing_data_source" component="Magento_Ui/js/grid/provider">
+        <settings>
+            <storageConfig>
+                <param name="indexField" xsi:type="string">row_id</param>
+            </storageConfig>
+           <updateUrl path="mui/index/render"/>
+        </settings>
+        <aclResource>Abbott_WorkdayFeed::inboundFeedLog</aclResource>
+        <dataProvider class="Abbott\WorkdayFeed\Ui\Component\DataProvider" name="abbott_inboundfeedlog_listing_data_source">
+            <settings>
+                <requestFieldName>id</requestFieldName>
+                <primaryFieldName>row_id</primaryFieldName>
+            </settings>
+        </dataProvider>
+    </dataSource>
+    <listingToolbar name="listing_top">
+        <settings>
+            <sticky>true</sticky>
+        </settings>
+        <bookmark name="bookmarks"/>
+        <columnsControls name="columns_controls"/>
+        <filterSearch name="fulltext"/>
+        <filters name="listing_filters">
+            <argument name="data" xsi:type="array">
+                <item name="observers" xsi:type="array">
+                    <item name="column" xsi:type="string">column</item>
+                </item>
+            </argument>
+            <settings>
+                <templates>
+                    <filters>
+                        <select>
+                            <param name="template" xsi:type="string">ui/grid/filters/elements/ui-select</param>
+                            <param name="component" xsi:type="string">Magento_Ui/js/form/element/ui-select</param>
+                        </select>
+                    </filters>
+                </templates>
+            </settings>
+        </filters>
+        <massaction name="listing_massaction">
+            <action name="delete">
+                <settings>
+                    <confirm>
+                        <message translate="true">Are you sure you want to delete selected items?</message>
+                        <title translate="true">Delete items</title>
+                    </confirm>
+                    <url path="abbott/inboundfeedlog/massDelete"/>
+                    <type>delete</type>
+                    <label translate="true">Delete</label>
+                </settings>
+            </action>
+        </massaction>
+        <paging name="listing_paging"/>
+    </listingToolbar>
+    <columns name="abbott_inboundfeedlog_columns">
+        <selectionsColumn name="ids">
+          <settings>
+              <indexField>row_id</indexField>
+              <resizeEnabled>false</resizeEnabled>
+              <resizeDefaultWidth>55</resizeDefaultWidth>
+          </settings>
+        </selectionsColumn>
+        <column name="row_id">
+          <settings>
+              <filter>textRange</filter>
+              <label translate="true">ID</label>
+              <sorting>asc</sorting>
+          </settings>
+        </column>
+        <column name="upi">
+          <settings>
+              <filter>textRange</filter>
+              <label translate="true">UPI</label>
+              <sorting>asc</sorting>
+          </settings>
+        </column>
+        <column name="record_status">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Record Status</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="record">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Record</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="status">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Status</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="message">
+            <settings>
+                <filter>textRange</filter>
+                <label translate="true">Message</label>
+                <sorting>asc</sorting>
+            </settings>
+        </column>
+        <column name="created_at" class="Magento\Ui\Component\Listing\Columns\Date">
+          <settings>
+              <filter>dateRange</filter>
+              <dataType>date</dataType>
+              <label translate="true">Created</label>
+          </settings>
+        </column>
+        <column name="updated_at" class="Magento\Ui\Component\Listing\Columns\Date">
+          <settings>
+              <filter>dateRange</filter>
+              <dataType>date</dataType>
+              <label translate="true">Updated</label>
+          </settings>
+        </column>
+    </columns>
+</listing>

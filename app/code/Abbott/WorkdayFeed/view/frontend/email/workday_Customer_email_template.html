@@ -1,0 +1,36 @@
+<!--@subject {{trans "Welcome to AbbottStore"}}@-->
+
+<!--@vars {
+"var customer.name":"Customer Name",
+"var this.getUrl($store, 'customer/account/createPassword/', [_query:[id:$customer.id, token:$customer.rp_token]])":"Reset Password URL"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+  <tr class="text-block bg-white">
+        <td style="font-family: Georgia, Arial, sans-serif, serif, EmojiFont;padding: 20px;">
+            <p class="mb25">{{trans "Welcome to AbbottStore!" }}<p><br/>
+
+            <p class="mb25">{{trans "To sign in to our site and set a password, click on the link below and login with this email address."}}</p><br>
+
+            <p class="mb25"><u><a style="color: white;text-decoration: none;margin-bottom: 25px;background-color: #48a8ea;font-size: 20px;padding: 5px;font-weight: bolder;" class="mb25" href="{{var this.getUrl($store,'customer/account/createPassword/',[_query:[token:$customer.rp_token],_nosid:1])}}" target="_blank">{{trans "Set Password >"}}</a></u></p><br>
+
+            <p>{{trans "When you sign in to your account, you will be able to:"}}</p>
+    		<ul>
+			  <li>{{trans "Proceed through checkout" }}</li>
+			  <li>{{trans "Check the status of orders" }}</li>
+			  <li>{{trans "View past orders" }}</li>
+			  <li>{{trans "Store alternative addresses" }}</li>
+			</ul>  
+
+			<p style="margin-bottom: 0px">{{trans "Kind regards,"}}</p>
+            <p style="margin-bottom: 0px">{{trans "%store_name.com" store_name=$store.frontend_name |raw}}</p>
+            <p style="margin-bottom: 0px"><u><a href='{{customVar code=abbottstore_url}}/contact-us.html'>{{trans "Customer Service Team" }}</a></u></p>
+            <p style="margin-bottom: 0px">{{trans "1-800-258-7677" }}</p>
+
+        </td>
+    </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

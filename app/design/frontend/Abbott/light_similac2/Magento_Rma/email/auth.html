@@ -1,0 +1,108 @@
+<!--@subject {{trans "%store_name.com : Return #%increment_id Update" store_name=$store.frontend_name increment_id=$rma.increment_id}} @-->
+<!--@vars {
+"store url=\"customer\/account\/\"":"Customer Account URL",
+"template config_path=\"design\/email\/footer_template\"":"Email Footer Template",
+"template config_path=\"design\/email\/header_template\"":"Email Header Template",
+"var logo_alt":"Email Logo Image Alt",
+"var logo_url":"Email Logo Image URL",
+"store url=\"sales\/guest\/form\/\"":"Guest Form URL",
+"var item_collection":"Items Collection",
+"var return_address|raw":"Return Address",
+"var rma.increment_id":"Return Id",
+"var created_at_formatted_1":"Return Created At (datetime)",
+"layout handle=\"magento_rma_email_rma_items\" collection=$item_collection":"Return Items Collection",
+"var rma_data.status_label":"Return Status",
+"var formattedShippingAddress|raw":"Shipping Address",
+"var store.frontend_name":"Store Name",
+"var supportEmail": "Support Email",
+"var rma_id":"Rma Id",
+"var storePhone": "Store Phone",
+"store url=\"\"":"Store URL"
+} @-->
+
+{{template config_path="design/email/header_template"}}
+
+<table>
+  <tr class="bg-white">
+     <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 15px 20px;background: #BFE6F7;">
+      <h1 class="return-heading" style="margin-bottom: 0;padding: 0; text-align: left;"><b style="font-family: Arial, Georgia, sans-serif, serif;">Return Request</b></h1>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 20px;">
+      <p class="mb25"><b>{{trans "Dear %name," name=$order_data.customer_name}}</b></p>
+      <p class="mb25">
+          {{trans 'Your return request has been updated. Please find updated comments below.'}}</p>
+      <p class="mb25">You can check the status of your return by <a class="link-underline" href="{{customVar code=customer_account_login_aem}}" style="color: #FE9E1F !important;">logging into your account</a>.
+      </p>
+      <p class="mb25">
+          {{trans
+              "Your Return #%increment_id - %status_label"
+              increment_id=$rma.increment_id
+              status_label="$rma_data.status_label"
+          }}
+      </p>
+      <p class="mb25">{{trans "Requested on %created_at" created_at=$created_at_formatted_1}}</p>
+    </td>
+  </tr>
+  <tr class="bg-white">
+     <td style="font-family: Arial, sans-serif, serif;padding: 15px 20px;background: #BFE6F7;">
+      <h1 class="return-heading" style="font-family: Arial, Georgia, sans-serif, serif;margin-bottom: 0;padding: 0; font-size: 20px; text-align: left;"><b>{{trans "Shipping and Return"}}</b></h1>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 15px 20px;">
+      <table class="order-details" cellspacing="0" cellpadding="0" border="0">
+          <tr>
+              <td class="address-details" style="font-family: Georgia, Arial, sans-serif, serif;">
+                  <h3><b style="font-family: Georgia, Arial, sans-serif, serif;">{{trans "Shipping Info"}}</b></h3>
+                  <p style="color: #002F87;">{{var formattedShippingAddress|raw}}</p>
+              </td>
+              <td class="address-details" style="font-family: Georgia, Arial, sans-serif, serif;">
+                  <h3><b style="font-family: Georgia, Arial, sans-serif, serif;">{{trans "Return Info"}}</b></h3>
+                  <p style="color: #002F87;">{{var return_address|raw}}</p>
+              </td>
+          </tr>
+      </table>
+    </td>
+  </tr>
+  <tr class="bg-white">
+     <td style="font-family: Arial, sans-serif, serif;padding: 15px 20px;background: #BFE6F7;">
+      <h1 class="return-heading" style="font-family: Arial, sans-serif, serif;margin-bottom: 0;padding: 0; text-align: left;"><b>{{trans "Item Details"}}</b></h1>
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 20px;">
+        {{layout handle="magento_rma_email_rma_items" rma_id=$rma_id}}
+    </td>
+  </tr>
+  <tr class="bg-white">
+    <td style="font-family: Georgia, Arial, sans-serif, serif;padding: 20px;">
+      <p class="mb25">
+      {{trans "If you have any questions about your return, please contact %store_name.com " store_name=$store.frontend_name}} <br>
+      {{trans "Customer Service at "}}
+      {{depend store_phone}}
+         {{trans '%store_phone.' store_phone=$store_phone |raw}}
+      {{/depend}}
+      {{trans "Our representatives are available 9AM - 6PM ET. (Mon - Fri)"}}
+      </p>
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <table border="0" cellspacing="0" cellpadding="0" style="background-color:white;width:100%;border-collapse:collapse;">
+        <tbody>
+          <tr>
+                <td valign="top" style="padding: 30pt 0px 30pt 0px;">
+                     <p align="center" style="font-size:11pt;font-family: Arial, Georgia, sans-serif, serif;text-align:center;margin:0;">
+                        <span style="font-size: 12pt; font-family: Arial, Georgia, sans-serif, serif; line-height: 13.5pt;"><a href="{{customVar code=newsimilacstore_url}}" target="_blank" rel="noopener noreferrer" data-auth="NotApplicable" style="background-color:#FE9E1F;border: 20px solid #FE9E1F; color: #ffffff;text-decoration: none;"><b><span style="font-size: 18px; font-weight: 700; font-family: Arial, Georgia, sans-serif, serif; text-transform: uppercase; color: #ffffff;">
+                                        {{trans "shop now >"}}</span></b></a></span></p>
+                </td>
+            </tr>
+        </tbody>
+      </table>
+    </td>
+  </tr>
+</table>
+
+{{template config_path="design/email/footer_template"}}

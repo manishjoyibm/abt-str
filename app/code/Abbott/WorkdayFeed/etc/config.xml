@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <workday_feed_settings>
+            <workday_sftp>
+                <abbott_path>/abbott/</abbott_path>
+                <abbvie_path>/abbvie/</abbvie_path>
+                <alere_path>/alere/</alere_path>
+                <archive_path>/archive/</archive_path>
+                <emp_group_id>3</emp_group_id>
+                <host>qyzzcwjj2wjmq.ent.magento.cloud</host>
+                <port>2221</port>
+                <username>workday_ops1</username>
+                <workday_customer_template>workday_feed_settings_workday_sftp_workday_customer_template</workday_customer_template>
+            </workday_sftp>
+            <workday_feed>
+                <sender>general</sender>
+                <lifetime_idx>10</lifetime_idx>
+                <lifetime_feed>30</lifetime_feed>
+                <is_enabled_mail>0</is_enabled_mail>
+		<email_enabled>0</email_enabled>
+                <workday_template>workday_feed_settings_workday_feed_workday_template</workday_template>
+            </workday_feed>
+            <workday_crons>
+                <es_enabled>1</es_enabled>
+                <sync_expr>0 17 * * 5</sync_expr>
+                <process_expr>0 * * * *</process_expr>
+                <dl_enabled>1</dl_enabled>
+                <delete_expr>0 13 * * 5</delete_expr>
+            </workday_crons>
+        </workday_feed_settings>
+    </default>
+</config>

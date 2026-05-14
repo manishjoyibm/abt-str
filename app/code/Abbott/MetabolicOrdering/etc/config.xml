@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <metabolic_ordering>
+            <metabolic>
+                <enable>1</enable>
+                <enable_cron>1</enable_cron>
+                <default_days>365</default_days>
+                <cron_expression>0 0 * * *</cron_expression>
+            </metabolic>
+
+            <expiry_notifications>
+                <enabled>1</enabled>
+                <days_before_expiry>30</days_before_expiry>
+                <sender>general</sender>
+                <template>abbott_metabolic_expiry_template</template>
+                <cron_expression>0 0 * * *</cron_expression>
+            </expiry_notifications>
+            
+            <threshold_notifications>
+                <enabled>1</enabled>
+                <threshold_qty>1</threshold_qty>
+                <sender>general</sender>
+                <template>abbott_metabolic_threshold_template</template>
+                <cron_expression>0 0 * * *</cron_expression>
+            </threshold_notifications>
+        </metabolic_ordering>
+
+    </default>
+</config>

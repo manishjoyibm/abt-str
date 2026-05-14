@@ -1,0 +1,108 @@
+<?xml version="1.0" ?>
+<listing xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Ui:etc/ui_configuration.xsd">
+	<argument name="data" xsi:type="array">
+		<item name="js_config" xsi:type="array">
+			<item name="provider" xsi:type="string">abbott_webhook_webhook_listing.abbott_webhook_webhook_listing_data_source</item>
+		</item>
+	</argument>
+	<settings>
+		<spinner>abbott_webhook_webhook_columns</spinner>
+		<deps>
+			<dep>abbott_webhook_webhook_listing.abbott_webhook_webhook_listing_data_source</dep>
+		</deps>
+		<buttons>
+			<button class="Abbott\Webhook\Block\Adminhtml\Webhook\Edit\AddNewButton" name="Add new webhook"/>
+		</buttons>
+	</settings>
+	<dataSource component="Magento_Ui/js/grid/provider" name="abbott_webhook_webhook_listing_data_source">
+		<settings>
+			<updateUrl path="mui/index/render"/>
+		</settings>
+		<aclResource>Abbott_Webhook::webhook</aclResource>
+		<dataProvider class="Magento\Framework\View\Element\UiComponent\DataProvider\DataProvider" name="abbott_webhook_webhook_listing_data_source">
+			<settings>
+				<requestFieldName>id</requestFieldName>
+				<primaryFieldName>webhook_id</primaryFieldName>
+			</settings>
+		</dataProvider>
+	</dataSource>
+	<listingToolbar name="listing_top">
+		<settings>
+			<sticky>true</sticky>
+		</settings>
+		<massaction name="listing_massaction">
+			<action name="delete">
+				<settings>
+					<confirm>
+							<message translate="true">Are you sure you want to delete selected items?</message>
+							<title translate="true">Delete items</title>
+					</confirm>
+					<url path="abbott_webhook/webhook/massDelete"/>
+					<type>delete</type>
+					<label translate="true">Delete</label>
+				</settings>
+			</action>
+		</massaction>
+		<bookmark name="bookmarks"/>
+		<columnsControls name="columns_controls"/>
+		<filters name="listing_filters"/>
+		<paging name="listing_paging"/>
+	</listingToolbar>
+	<columns name="abbott_webhook_webhook_columns">
+		<selectionsColumn name="ids">
+			<settings>
+				<indexField>webhook_id</indexField>
+			</settings>
+		</selectionsColumn>
+		<column name="webhook_id">
+			<settings>
+				<filter>text</filter>
+				<sorting>asc</sorting>
+				<label translate="true">ID</label>
+			</settings>
+		</column>
+		<column name="event_name">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">event_name</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="path">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">path</label>
+				<editor>
+					<editorType>text</editorType>
+					<validation>
+						<rule name="required-entry" xsi:type="boolean">false</rule>
+					</validation>
+				</editor>
+			</settings>
+		</column>
+		<column name="created_at">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">created_at</label>
+			</settings>
+		</column>
+		<column name="updated_at">
+			<settings>
+				<filter>text</filter>
+				<label translate="true">updated_at</label>
+			</settings>
+		</column>
+		<actionsColumn class="Abbott\Webhook\Ui\Component\Listing\Column\WebhookActions" name="actions">
+			<settings>
+				<indexField>webhook_id</indexField>
+				<resizeEnabled>false</resizeEnabled>
+				<resizeDefaultWidth>107</resizeDefaultWidth>
+			</settings>
+		</actionsColumn>
+	</columns>
+</listing>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Event/etc/events.xsd">
+    <event name="sales_order_place_after">
+        <observer name="updateSoldToQtyAttribute" instance="Abbott\Checkout\Observer\UpdateSoldToQty" />
+    </event>
+
+    <event name="sales_order_place_before">
+        <observer name="setCardBillingAddress" instance="Abbott\Checkout\Observer\SetCardBillingAddress" />
+    </event>
+	<event name="checkout_cart_update_items_before">
+        <observer name="similacupdatecart" instance="Abbott\Checkout\Observer\CartUpdateBefore" />
+    </event>
+    <event name="checkout_submit_all_after">
+        <observer name="updateProductAvailabilityAttr" instance="Abbott\Checkout\Observer\UpdateProductAvailabilityAttr" />
+    </event>
+    <event name="sales_order_item_cancel">
+        <observer name="revertProductAvailabilityAttr" instance="Abbott\Checkout\Observer\RevertProductAvailabilityAttr"/>
+    </event>
+    <event name="catalog_product_import_bunch_save_after">
+        <observer
+            name="updateProductAvailabilityAttrOnImport"
+            instance="Abbott\Checkout\Observer\UpdateProductAvailabilityAttrOnImport"
+        />
+    </event>
+</config>

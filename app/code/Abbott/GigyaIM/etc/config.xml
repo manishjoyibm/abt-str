@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <gigya_integration>
+            <gigya_settings>
+                <is_gigya_fields_editable>0</is_gigya_fields_editable>
+            </gigya_settings>
+        </gigya_integration>
+    </default>
+</config>

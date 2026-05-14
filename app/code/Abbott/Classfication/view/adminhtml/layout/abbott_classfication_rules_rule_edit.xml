@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceContainer name="left">
+            <block class="Abbott\Classfication\Block\Adminhtml\Rules\Rule\Edit\Tabs" name="rules_rule_edit_tabs">
+                <block class="Abbott\Classfication\Block\Adminhtml\Rules\Rule\Edit\Tab\Main" name="rules_rule_edit_tab_main"/>
+                <block class="Abbott\Classfication\Block\Adminhtml\Rules\Rule\Edit\Tab\Conditions" name="rules_rule_edit_tab_conditions"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">main_section</argument>
+                    <argument name="block" xsi:type="string">rules_rule_edit_tab_main</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">conditions_section</argument>
+                    <argument name="block" xsi:type="string">rules_rule_edit_tab_conditions</argument>
+                </action>
+            </block>
+        </referenceContainer>
+        <referenceContainer name="content">
+            <block class="Abbott\Classfication\Block\Adminhtml\Rules\Rule\Edit" name="rules_rule_edit"/>
+        </referenceContainer>
+    </body>
+</page>

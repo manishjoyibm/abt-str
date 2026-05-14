@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!--
+/**
+* Copyright 2019 aheadWorks. All rights reserved.
+See LICENSE.txt for license details.
+*/
+-->
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="product.info.form.options">
+            <block class="Aheadworks\Sarp2\Block\Product\SubscriptionOptions" name="aw_sarp2.product.subscription-options" as="aw_sarp2_product_subscription_options" after="product_options_wrapper"/>
+            <container name="aw_sarp2.product.js" as="aw_sarp2_product_js" label="Product Page Custom Js Container" after="-">
+                <block class="Magento\Framework\View\Element\Template" name="aw_sarp2.product.braintree.paypal.button-adapter" as="aw_sarp2_product_braintree_paypal_button_adapter" template="Aheadworks_Sarp2::product/braintree/paypal/button_adapter.phtml">
+                    <arguments>
+                        <argument name="view_model" xsi:type="object">Aheadworks\Sarp2\ViewModel\Product\Braintree\PayPal\ButtonAdapter</argument>
+                    </arguments>
+                </block>
+            </container>
+        </referenceBlock>
+    </body>
+</page>

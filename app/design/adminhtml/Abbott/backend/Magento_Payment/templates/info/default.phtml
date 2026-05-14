@@ -1,0 +1,39 @@
+<?php
+$specificInfo = $block->getSpecificInformation();
+$paymentTitle = $block->getMethod()->getConfigData('title', $block->getInfo()->getOrder()->getStoreId());
+if (empty($specificInfo)) {
+    $specificInfoNew = $block->getInfo()->getAdditionalInformation();
+    $paymentMethodCode = $block->getMethod()->getCode();
+    if (($paymentMethodCode == "aw_sarp_braintree_googlepay_recurring")) {
+        $paymentTitle = 'Google Pay';
+    } elseif (($paymentMethodCode == "aw_sarp_braintree_applepay_recurring")) {
+        $paymentTitle = 'Apple Pay';
+    } elseif (($paymentMethodCode == "aw_sarp_braintree_paypal_recurring")) {
+        $specificInfo['Payer Email'] = $specificInfoNew['payerEmail'];
+    } else {
+        if(isset($specificInfoNew['cc_type']) && isset($specificInfoNew['cc_number']))
+        {
+            $specificInfo['Credit Card Type'] = $specificInfoNew['cc_type'];
+            $specificInfo['Credit Card Number'] = $specificInfoNew['cc_number'];
+        }
+
+    }
+}
+?>
+
+<?= $block->escapeHtml($paymentTitle) ?>
+
+<?php if ($specificInfo) : ?>
+    <table class="data-table admin__table-secondary">
+    <?php foreach ($specificInfo as $label => $value) : ?>
+        <tr>
+            <th><?= $block->escapeHtml($label) ?>:</th>
+            <td>
+                <?= /* @noEscape */ nl2br($block->escapeHtml(implode("\n", $block->getValueAsArray($value, true)))) ?>
+            </td>
+        </tr>
+    <?php endforeach; ?>
+    </table>
+<?php endif;?>
+
+<?= $block->getChildHtml() ?>

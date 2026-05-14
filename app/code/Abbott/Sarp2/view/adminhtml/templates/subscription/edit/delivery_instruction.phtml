@@ -1,0 +1,10 @@
+<section class="admin__page-section delivery-instruction">
+    <div class="admin__page-section-title">
+        <span class="title"><?php echo $block->escapeHtml(__('Delivery instruction')) ?></span>
+    </div>
+    <div class="admin__page-section-content">
+        <div class="admin__page-section-item-content">
+            <textarea cols="50"  id="delivery_instruction" name="delivery_instruction" placeholder="Enter Delivery Instruction"><?php echo $block->escapeHtml($block->getDeliveryInstruction()) ?></textarea>
+        </div>
+    </div>
+</section>

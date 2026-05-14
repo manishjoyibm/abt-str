@@ -1,0 +1,48 @@
+<?php
+$params = $block->getRequest()->getParams();
+$customer_id = $params['id'];
+$responseData = $block->getCustomerInfo($customer_id);
+if (isset($responseData)) {
+    $responseData = array_reverse($responseData);
+    $length = count($responseData);
+    if ($length > 0) { ?>
+      <ul class="note-list">
+        <?php
+        foreach ($responseData as $response) {
+            if ($response['flag']): ?>
+              <li class="note-list-item">
+                  <span class="note-list-date">
+                        <?=
+                        $escaper->escapeHtml($block->formatDate($response['created_at'], \IntlDateFormatter::MEDIUM))
+                        ?>
+                  </span>
+                  <span class="note-list-time">
+                        <?=
+                        $escaper->escapeHtml($block->formatTime($response['created_at'], \IntlDateFormatter::MEDIUM))
+                        ?>
+                  </span>
+                    <?php $info = $block->getFlagText($response['flag']); ?>
+                  <span>
+                      <strong>
+                            <?= /* @noEscape */ $info; ?>
+                      </strong>
+                  </span>
+                    <?php if ($response['admin_username']): ?>
+                        <span>
+                            <strong>
+                                <?=
+                                $escaper->escapeHtml(__('by %1', $response['admin_username']))
+                                ?>
+                            </strong>
+                        </span>
+                    <?php endif; ?>
+              </li>
+                <?php
+            endif; ?>
+        <?php } ?>
+      </ul>
+        <?php
+    } else {
+        /* @noEscape */ echo __('We couldn\'t find any records.');
+    }?>
+<?php } ?>

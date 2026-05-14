@@ -1,0 +1,26 @@
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="abbott_gpas_qrcode">
+        <column xsi:type="int" name="entity_id" padding="10" unsigned="true" identity="true" nullable="false" comment="Id"/>
+        <column xsi:type="datetime" name="created_at" nullable="true" comment="Created At"/>
+        <column xsi:type="datetime" name="updated_at" nullable="true" comment="Updated At"/>
+        <column xsi:type="int" name="store_id" padding="10" unsigned="true" nullable="false" comment="Store Id"/>
+        <column xsi:type="text" name="code" nullable="false" comment="QR Code"/>
+        <column xsi:type="text" name="ip" nullable="false" comment="IP"/>
+        <column xsi:type="text" name="lat" nullable="true" comment="Latitude"/>
+        <column xsi:type="text" name="long" nullable="true" comment="Longitude"/>
+        <column xsi:type="int" name="is_redeemed" nullable="false" default="0" padding="10" comment="Is code redeemed?"/>
+        <column xsi:type="int" name="sales_order_id" unsigned="true" nullable="true" comment="Sales Order ID"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entity_id"/>
+        </constraint>
+        <index referenceId="ABBOTT_GPAS_QRCODE_SALES_ORDER_ID" indexType="btree">
+            <column name="sales_order_id"/>
+        </index>
+        <index referenceId="ABBOTT_GPAS_QRCODE_CODE" indexType="btree">
+            <column name="code"/>
+        </index>
+        <index referenceId="ABBOTT_GPAS_QRCODE_IS_REDEEMED" indexType="btree">
+            <column name="is_redeemed"/>
+        </index>
+    </table>
+</schema>
