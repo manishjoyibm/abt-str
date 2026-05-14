@@ -17,13 +17,18 @@ define(['jquery','mage/url'], function ($, url) {
                 $("#form-validate").replaceWith(result);
 
                 require(['Magento_Checkout/js/action/get-totals',
-                    'Magento_Customer/js/customer-data'], function (getTotalsAction, customerData) {
+                    'Magento_Customer/js/customer-data',
+                    'uiRegistry'], function (getTotalsAction, customerData, registry) {
                     // The mini cart reloading
                     customerData.reload(sections, true);
 
                     // The totals summary block reloading
                     var deferred = $.Deferred();
                     getTotalsAction([], deferred);
+                    
+                    // Re-trigger UI component initialization after form replacement
+                    // This ensures knockout bindings are re-applied to the new DOM
+                    $('[data-bind]').trigger('contentUpdated');
 
                     //Display error if found after jquery
                     var messages = $.cookieStorage.get('mage-messages');
