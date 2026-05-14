@@ -74,7 +74,14 @@ define([
                 storage.post(
                     serviceUrl, payload, false
                 ).done(function (result) {
-                    rateRegistry.set(address.getCacheKey(), result);
+                    try {
+                        if (address.getCacheKey) {
+                            rateRegistry.set(address.getCacheKey(), result);
+                        }
+                    } catch (e) {
+                        console.warn('Failed to cache shipping rates:', e);
+                    }
+                    
                     if(result == "" && address.regionId !== undefined && address.regionId !== null && address.postcode != null){
                         shippingService.getRestrictedQuoteData(quote, address.regionId, address.street);
                     }
